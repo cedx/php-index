@@ -1,0 +1,19 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Chrome",
+			"request": "launch",
+			"type": "pwa-chrome",
+			"url": "http://dev.localhost/directory-index",
+			"webRoot": "${workspaceFolder}/www"
+		},
+		{
+			"name": "Edge",
+			"request": "launch",
+			"type": "pwa-msedge",
+			"url": "http://dev.localhost/directory-index",
+			"webRoot": "${workspaceFolder}/www"
+		}
+	]
+}
