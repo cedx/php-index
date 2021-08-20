@@ -1,0 +1,27 @@
+{
+	"bugs": "https://github.com/cedx/directory-index/issues",
+	"description": "TODO Directory Index",
+	"homepage": "https://github.com/cedx/directory-index",
+	"license": "MIT",
+	"name": "@cedx/directory-index",
+	"private": true,
+	"repository": "cedx/directory-index",
+	"type": "commonjs",
+	"version": "0.1.0",
+	"author": {
+		"email": "cedric@belin.io",
+		"name": "Cédric Belin",
+		"url": "https://belin.io"
+	},
+	"dependencies": {
+		"clean-css-cli": "^5.3.3",
+		"less": "^4.1.1",
+		"terser": "^5.7.1"
+	},
+	"devDependencies": {
+		"glob-watcher": "^5.0.5"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	}
+}
