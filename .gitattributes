@@ -1,0 +1,24 @@
+* text=auto
+.* text
+
+*.css text diff=css
+*.html text diff=html
+*.http text
+*.hx text
+*.hxml text
+*.js text
+*.json text
+*.less text diff=css
+*.md text
+*.php text diff=php
+*.svg text
+*.txt text
+*.xml text
+*.yaml text
+*.yml text
+
+*.gif binary
+*.ico binary
+*.jpg binary
+*.png binary
+*.woff2 binary

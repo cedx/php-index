@@ -1,0 +1,15 @@
+/lib/
+/node_modules/
+/res/
+/var/
+/vendor/
+/www/css/
+/www/fonts/
+/www/js/
+
+/*.code-workspace
+/*.iml
+/**/.DS_Store
+/index.php
+/npm-debug.log
+/src/**/*.g.json
