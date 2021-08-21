@@ -4,5 +4,6 @@
 --define no-deprecation-warnings
 --define real-position
 --library tink_url
+--library tink_web
 --main directory_index.server.Application
 --php .
