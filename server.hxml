@@ -1,0 +1,8 @@
+--class-path src
+--dce full
+--define analyzer-optimize
+--define no-deprecation-warnings
+--define real-position
+--library tink_url
+--main directory_index.server.Application
+--php .
