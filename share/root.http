@@ -1,0 +1,23 @@
+// Returns the HTML page.
+GET {{baseUrl}}
+Accept: text/html
+
+###
+
+// Returns a script.
+GET {{baseUrl}}?file=js/vendor.js
+Accept: application/javascript
+
+###
+
+// Returns a stylesheet.
+GET {{baseUrl}}?file=css/vendor.css
+Accept: text/css
+
+###
+
+// Returns the directory listing.
+GET {{baseUrl}}?index
+Accept: application/json
+
+###

@@ -1,0 +1,21 @@
+{
+	"classPath": "src/",
+	"contributors": ["cedx"],
+	"dependencies": {
+		"bootstrap_bundle": "",
+		"coconut.data": "",
+		"coconut.ui": "",
+		"coconut.vdom": "",
+		"tink_http": "",
+		"tink_json": "",
+		"tink_url": "",
+		"tink_web": ""
+	},
+	"description": "TODO Directory Index",
+	"license": "MIT",
+	"name": "directory_index",
+	"releasenote": "Initial release.",
+	"tags": ["php", "web"],
+	"url": "https://github.com/cedx/directory-index",
+	"version": "0.1.0"
+}

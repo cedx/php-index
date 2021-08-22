@@ -2,11 +2,13 @@ package directory_index.server;
 
 import directory_index.base.Application as BaseApplication;
 import haxe.Log;
-import haxe.http.HttpStatus;
 import php.Global;
-import php.SuperGlobal._GET;
+import php.SuperGlobal._SERVER;
+import tink.http.Response.OutgoingResponse;
+import tink.http.containers.PhpContainer;
+import tink.web.routing.Context;
+import tink.web.routing.Router;
 
-using StringTools;
 using haxe.io.Path;
 
 /** The server application. **/
@@ -16,7 +18,7 @@ class Application extends BaseApplication {
 	public static var instance(get, never): Application;
 
 	/** The root directory of this application. **/
-	public final basePath = Sys.programPath().directory();
+	public final basePath = Path.join([Sys.programPath().directory(), ".."]);
 
 	/** Creates a new server application. **/
 	function new() super("io.belin.directory_index", "Directory Index");
@@ -24,23 +26,19 @@ class Application extends BaseApplication {
 	/** Application entry point. **/
 	static function main() {
 		Log.trace = (value, ?infos) -> Global.error_log(Log.formatOutput(value, infos));
-
-		final httpStatus = new Application().run();
-		if (httpStatus != OK) Global.http_response_code(httpStatus);
+		new Application().run();
 	}
 
 	/** Gets the unique instance of this application. **/
 	static inline function get_instance() return cast BaseApplication.instance;
 
 	/** Runs this application. **/
-	public function run(): HttpStatus {
-		final path = Global.empty(_GET["file"]) ? "index.html" : _GET["file"].trim();
-		if (path.length == 0) return BadRequest;
-
-		final manager = get(FileManager);
-		if (!manager.exists(path)) return NotFound;
-
-		manager.sendFile(path);
-		return OK;
+	public function run() {
+		final mountLevel = Path.directory(_SERVER["PHP_SELF"]).split("/").length - 1;
+		final router = new Router<Root>(new Root());
+		PhpContainer.inst.run(request -> router.route(Context.ofRequest(request).sub(mountLevel)).recover(error -> {
+			if (error.code == InternalError) trace(error);
+			OutgoingResponse.reportError(error);
+		}));
 	}
 }

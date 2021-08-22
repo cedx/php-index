@@ -9,7 +9,7 @@ function main() {
 	measureCommand("lix Build --debug");
 
 	final srcDir = "src/directory_index";
-	for (app in ["client", "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
+	for (app in [/* TODO "client",*/ "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
 }
 
 /** Measures the time it takes to run the specified command. **/
