@@ -19,8 +19,8 @@ class Root {
 
 	/** Handles the requests. **/
 	@:get("/")
-	public function index(query: {?file: String, ?index: Bool}) {
-		if (query.index != null) return sendListing();
+	public function index(query: {?file: String, ?listing: Bool}) {
+		if (query.listing != null) return sendListing();
 		final path = query.file != null ? query.file.trim() : "main.html";
 		return path.length > 0 ? sendFile(path) : Failure(new Error(UnprocessableEntity, "The file path is required."));
 	}
@@ -41,6 +41,7 @@ class Root {
 		for (entity in FileSystem.readDirectory(Sys.getCwd()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
 			final type = FileSystem.isDirectory(entity) ? Directory: File;
 			entities.push(new FileSystemEntity({
+				modifiedAt: Date.fromTime(Global.filemtime(entity) * 1000),
 				path: entity,
 				size: type == File ? Global.filesize(entity) : -1,
 				type: type

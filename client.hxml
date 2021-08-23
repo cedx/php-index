@@ -1,0 +1,13 @@
+--class-path src
+--dce full
+--define analyzer-optimize
+--define js-es=6
+--define js-source-map
+--define no-deprecation-warnings
+--js www/js/main.js
+--library coconut.data
+--library coconut.ui
+--library coconut.vdom
+--library tink_http
+--library tink_json
+--main directory_index.client.Application

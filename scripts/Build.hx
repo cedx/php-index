@@ -12,5 +12,8 @@ function main() {
 
 	final bootstrapDir = captureCommand("lix run bootstrap_bundle libpath");
 	command('npx sass --load-path=$bootstrapDir src/directory_index/ui:www/css');
+
+	createDirectory("www/fonts");
+	copy('$bootstrapDir/fonts/bootstrap-icons.woff2', "www/fonts/icons.woff2");
 	copy('$bootstrapDir/js/bootstrap.bundle.min.js', "www/js/vendor.js");
 }

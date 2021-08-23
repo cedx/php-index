@@ -15,6 +15,7 @@ class Application extends BaseApplication {
 	/** Creates a new client application. **/
 	function new() {
 		super("io.belin.directory_index", "Directory Index");
+		set(new Http(Browser.location.href));
 
 		final parts = Browser.navigator.language.split("-");
 		if (parts.length > 0 && parts[0].length > 0) language = parts[0];

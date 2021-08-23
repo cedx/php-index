@@ -19,19 +19,19 @@ class Navbar extends View {
 	/** Renders this view. **/
 	function render() '
 		<nav class="bg-primary d-print-none navbar navbar-dark navbar-expand-lg fixed-top shadow user-select-none">
-			<div class="container-fluid">
+			<div class="d-flex align-items-center justify-content-between">
 				<div class="d-flex align-items-center">
-					<span class="navbar-brand">
+					<div class="navbar-brand">
 						<img alt="" height=${24} src="?file=img/logo_light.svg" width=${97}/>
-					</span>
-					<span class="navbar-brand">
+					</div>
+					<div class="navbar-brand">
 						${location.hostname}
-					</span>
+					</div>
 				</div>
 
-				<span class="ms-auto navbar-text text-capitalize-first d-none d-xl-inline-block">
+				<div class="d-none d-sm-block navbar-text text-capitalize-first">
 					${date}
-				</span>
+				</div>
 			</div>
 		</nav>
 	';

@@ -17,7 +17,7 @@ Accept: text/css
 ###
 
 // Returns the directory listing.
-GET {{baseUrl}}?index
+GET {{baseUrl}}?listing
 Accept: application/json
 
 ###
