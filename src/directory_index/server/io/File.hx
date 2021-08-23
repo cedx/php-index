@@ -34,7 +34,7 @@ class File {
 		case "html": TextHtml;
 		case "js": ApplicationJavascript;
 		case "svg": "image/svg+xml";
-		case "woff": "font/woff";
+		case "woff2": "font/woff2";
 		default: ApplicationOctetStream;
 	};
 
