@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../core/bootstrap" as *;
+
+main {
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	position: absolute;
+	right: 0;
+	top: var(--main-offset, var(--navbar-height));
+
+	@media print {
+		overflow: visible;
+	}
+
+	@if $enable-smooth-scroll {
+		@media (prefers-reduced-motion: no-preference) {
+			scroll-behavior: smooth;
+		}
+	}
+}
+
+article {
+	@include make-container;
+	max-width: map.get($container-max-widths, "lg");
+	padding-bottom: $spacer;
+	padding-top: $spacer;
+}

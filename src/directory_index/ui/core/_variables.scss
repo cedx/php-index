@@ -1,0 +1,32 @@
+// Color system.
+$gray-100: #f8f9fa;
+$primary: #165898;
+$white: white;
+
+// Options.
+$enable-rounded: false;
+$enable-shadows: true;
+$variable-prefix: "";
+
+// Spacing.
+$spacer: 1rem;
+
+// Links.
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+// Container padding.
+$container-padding-x: 1rem;
+
+// Typography.
+$font-family-monospace: Consolas, monospace;
+$font-family-sans-serif: "Segoe UI", sans-serif;
+$headings-margin-bottom: $spacer;
+
+// Navbar.
+$navbar-dark-color: rgba($white, 0.75);
+$navbar-dark-hover-color: rgba($white, 0.95);
+$navbar-nav-link-padding-x: 0.75rem;
+
+// List group.
+$list-group-item-padding-y: 0.5rem;

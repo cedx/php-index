@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "../core/bootstrap" as *;
+
+.loader {
+	margin-top: 30vh;
+
+	section {
+		margin: map.get($spacers, 4) 0;
+	}
+
+	.spinner-border {
+		border-width: 6px;
+		height: 100px;
+		width: 100px;
+	}
+}
