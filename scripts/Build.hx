@@ -3,8 +3,6 @@ import Tools.captureCommand;
 import sys.FileSystem.*;
 import sys.io.File.*;
 
-using haxe.io.Path;
-
 /** Runs the script. **/
 function main() {
 	final debug = args().contains("--debug") ? "--debug" : "";

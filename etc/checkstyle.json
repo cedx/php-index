@@ -1,7 +1,13 @@
 {
 	"defaultSeverity": "ERROR",
 	"exclude": {
-		"path": "RELATIVE_TO_PROJECT"
+		"path": "RELATIVE_TO_PROJECT",
+		"ConditionalCompilation": [
+			"src/directory_index/client/Http",
+			"src/directory_index/server/File"
+		],
+		"MemberName": ["src/directory_index/base/FileSystemEntity"],
+		"Trace": ["src/directory_index/server/Application"]
 	},
 	"checks": [
 		{"type": "BlockBreakingConditional"},

@@ -39,7 +39,7 @@ class Root {
 		final exclude = [Path.withoutDirectory(_SERVER["PHP_SELF"]), "index.phar", "web.config"];
 
 		for (entity in FileSystem.readDirectory(Sys.getCwd()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
-			final type = FileSystem.isDirectory(entity) ? Directory: File;
+			final type = FileSystem.isDirectory(entity) ? Directory : File;
 			entities.push(new FileSystemEntity({
 				modifiedAt: Date.fromTime(Global.filemtime(entity) * 1000),
 				path: entity,

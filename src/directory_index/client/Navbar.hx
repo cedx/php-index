@@ -1,7 +1,7 @@
 package directory_index.client;
 
 import haxe.Timer;
-import js.Browser.location;
+import js.Browser;
 import js.lib.Date;
 import js.lib.intl.DateTimeFormat;
 
@@ -25,7 +25,7 @@ class Navbar extends View {
 						<img alt="" height=${24} src="?file=img/logo_light.svg" width=${97}/>
 					</div>
 					<div class="navbar-brand">
-						${location.hostname}
+						${Browser.location.hostname}
 					</div>
 				</div>
 
