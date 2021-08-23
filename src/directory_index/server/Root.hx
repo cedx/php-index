@@ -1,7 +1,6 @@
 package directory_index.server;
 
-import directory_index.base.io.FileSystemEntity;
-import directory_index.server.io.File;
+import directory_index.base.FileSystemEntity;
 import haxe.io.Mime.ApplicationJson;
 import php.Global;
 import php.SuperGlobal._SERVER;

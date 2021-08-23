@@ -1,4 +1,4 @@
-package directory_index.base.io;
+package directory_index.base;
 
 import coconut.data.Model;
 using haxe.io.Path;

@@ -5,13 +5,13 @@ Accept: text/html
 ###
 
 // Returns a script.
-GET {{baseUrl}}?file=js/vendor.js
+GET {{baseUrl}}?file=js/main.js
 Accept: application/javascript
 
 ###
 
 // Returns a stylesheet.
-GET {{baseUrl}}?file=css/vendor.css
+GET {{baseUrl}}?file=css/main.css
 Accept: text/css
 
 ###
