@@ -24,6 +24,9 @@ class Root extends View {
 	/** The HTTP client. **/
 	final http = Application.instance.get(Http);
 
+	/** The current path. **/
+	final path = location.pathname.removeTrailingSlashes();
+
 	/** The formatter used to format the file sizes. **/
 	final sizeFormatter = new NumberFormat(Application.instance.language, {maximumFractionDigits: 2});
 
@@ -49,6 +52,8 @@ class Root extends View {
 			</header>
 
 			<main>
+				<Title appendAppName=${false} text=${location.hostname + " - " + (path.length == 0 ? "/" : path)}/>
+
 				<article id="listing">
 					<if ${title.length > 0}>
 						<h2 class="mb-2">${title}</h2>
