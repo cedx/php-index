@@ -1,7 +1,7 @@
 @font-face {
 	font-display: block;
 	font-family: "Bootstrap Icons";
-	src: url("../fonts/icons.woff2") format("woff2");
+	src: url("?file=fonts/icons.woff2") format("woff2");
 }
 
 .bi::before {
@@ -14,3 +14,16 @@
 	text-transform: none;
 	vertical-align: -0.125em;
 }
+
+.bi-file-earmark-code::before { content: "\f362"; }
+.bi-file-earmark-image::before { content: "\f36d"; }
+.bi-file-earmark-music::before { content: "\f377"; }
+.bi-file-earmark-pdf::before { content: "\f63e"; }
+.bi-file-earmark-play::before { content: "\f37b"; }
+.bi-file-earmark-richtext::before { content: "\f383"; }
+.bi-file-earmark-slides::before { content: "\f387"; }
+.bi-file-earmark-spreadsheet::before { content: "\f389"; }
+.bi-file-earmark-text::before { content: "\f38b"; }
+.bi-file-earmark-zip::before { content: "\f391"; }
+.bi-file-earmark::before { content: "\f392"; }
+.bi-folder-fill::before { content: "\f3d1"; }

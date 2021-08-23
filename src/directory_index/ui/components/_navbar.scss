@@ -1,3 +1,11 @@
+@use "sass:map";
+@use "../core/bootstrap" as *;
+
+.navbar > div {
+	@include make-container;
+	max-width: map.get($container-max-widths, "lg");
+}
+
 .navbar-brand {
 	img {
 		position: relative;
