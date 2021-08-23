@@ -32,4 +32,23 @@ class Root extends View {
 			</main>
 		</div>
 	';
+
+	/** Sorts the list of file system entities. **/
+	function sortList() {
+		// TODO
+		entities = entities.sort((x, y) -> {
+			final areDirectories = x.type == Directory && y.type == Directory;
+			final areFiles = x.type == File && y.type == File;
+			areDirectories || areFiles ? Reflect.compare(x.path, y.path) : x.type == Directory ? -1 : 1;
+		});
+	}
+
+	/** Method invoked after this view is mounted. **/
+	override function viewDidMount() http.get("?listing").handle(outcome -> switch outcome {
+		case Failure(error):
+			trace(error); // TODO
+		case Success(response):
+			entities = (Json.parse(response.body.toString()): Array<FileSystemEntity>);
+			sortList();
+	});
 }
