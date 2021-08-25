@@ -22,7 +22,7 @@ main {
 
 article {
 	@include make-container;
-	max-width: map.get($container-max-widths, "lg");
+	max-width: map.get($container-max-widths, "md");
 	padding-bottom: $spacer;
 	padding-top: $spacer;
 }
