@@ -1,10 +1,5 @@
---class-path src
---dce full
---define analyzer-optimize
---define no-deprecation-warnings
---define real-position
 --library coconut.data
 --library tink_url
 --library tink_web
---main directory_index.server.Application
---php .
+--main mc2it_shipping.cli.Program
+share/build/server.hxml

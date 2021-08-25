@@ -1,0 +1,6 @@
+--class-path src
+--dce no
+--define analyzer-optimize
+--define no-deprecation-warnings
+--define real-position
+--php .
