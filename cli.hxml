@@ -1,3 +1,3 @@
 --library tink_cli
---main mc2it_shipping.cli.Program
+--main directory_index.cli.Program
 share/build/server.hxml
