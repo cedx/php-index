@@ -7,6 +7,6 @@ using Lambda;
 /** Runs the script. **/
 function main() {
 	if (exists("index.php")) deleteFile("index.php");
-	for (directory in ["lib", "www/css", "www/fonts", "www/js"]) if (exists(directory)) removeDirectory(directory);
+	["lib", "www/css", "www/fonts", "www/js"].filter(exists).iter(removeDirectory);
 	cleanDirectory("var");
 }
