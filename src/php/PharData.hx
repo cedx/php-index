@@ -22,7 +22,18 @@
 
 package php;
 
+/**
+	The `PharData` class provides a high-level interface to accessing and creating non-executable TAR and ZIP archives.
+	@see https://www.php.net/manual/en/class.phardata.php
+**/
 @:native("PharData")
-extern class PharData {
+extern class PharData /* TODO extends RecursiveDirectoryIterator */ implements Countable implements php.ArrayAccess<String, PharFileInfo> {
+	function new(fname: String, ?flags: Int, ?alias: String, ?format: Int);
 
+	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
+	function count(): Int;
+	function offsetExists(offset: String): Bool;
+	function offsetGet(offset: String): PharFileInfo;
+	function offsetSet(offset: String, value: Dynamic): Void;
+	function offsetUnset(offset: String): Void;
 }

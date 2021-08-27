@@ -23,11 +23,11 @@
 package php;
 
 /**
-	The `Phar` class provides a high-level interface to accessing and creating phar archives.
+	The `Phar` class provides a high-level interface to accessing and creating PHAR archives.
 	@see https://www.php.net/manual/en/class.phar.php
 **/
 @:native("Phar")
-extern class Phar implements Countable implements php.ArrayAccess<String, PharFileInfo> {
+extern class Phar /* TODO extends RecursiveDirectoryIterator */ implements Countable implements php.ArrayAccess<String, PharFileInfo> {
 	@:phpClassConst static final BZ2: Int;
 	@:phpClassConst static final COMPRESSED: Int;
 	@:phpClassConst static final GZ: Int;
@@ -46,6 +46,7 @@ extern class Phar implements Countable implements php.ArrayAccess<String, PharFi
 	final static function apiVersion(): String;
 	final static function canCompress(type: Int = 0): Bool;
 	final static function canWrite(): Bool;
+	final static function createDefaultStub(?index: String, ?webIndex: String): String;
 
 	function new(fname: String, ?flags: Int, ?alias: String);
 
@@ -55,4 +56,5 @@ extern class Phar implements Countable implements php.ArrayAccess<String, PharFi
 	function offsetGet(offset: String): PharFileInfo;
 	function offsetSet(offset: String, value: Dynamic): Void;
 	function offsetUnset(offset: String): Void;
+	function setStub(stub: String, len: Int = -1): Bool;
 }
