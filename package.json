@@ -15,8 +15,8 @@
 	},
 	"dependencies": {
 		"clean-css-cli": "^5.3.3",
-		"sass": "^1.38.0",
-		"terser": "^5.7.1"
+		"sass": "^1.38.1",
+		"terser": "^5.7.2"
 	},
 	"devDependencies": {
 		"glob-watcher": "^5.0.5"
