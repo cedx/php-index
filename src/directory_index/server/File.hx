@@ -29,7 +29,7 @@ class File {
 	public function new(path: String) this.path = path;
 
 	/** Gets the MIME type of this file. **/
-	function get_mimeType() return switch path.extension() {
+	function get_mimeType() return switch path.extension().toLowerCase() {
 		case "css": TextCss;
 		case "html": TextHtml;
 		case "js": ApplicationJavascript;
