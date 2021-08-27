@@ -22,7 +22,11 @@
 
 package php;
 
+/**
+	The `PharFileInfo` class provides a high-level interface to the contents and attributes of a single file within a PHAR archive.
+	@see https://www.php.net/manual/en/class.pharfileinfo
+**/
 @:native("PharFileInfo")
-extern class PharFileInfo {
+extern class PharFileInfo extends SplFileInfo {
 
 }
