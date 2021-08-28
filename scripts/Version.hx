@@ -1,3 +1,4 @@
+//! --class-path src
 import Tools.replaceInFile;
 import directory_index.base.Version.*;
 

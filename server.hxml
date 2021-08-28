@@ -1,5 +1,5 @@
 --library coconut.data
 --library tink_url
 --library tink_web
---main mc2it_shipping.cli.Program
+--main directory_index.server.Application
 share/build/server.hxml
