@@ -31,6 +31,7 @@ extern class PharData extends RecursiveDirectoryIterator implements Countable im
 	function new(fname: String, ?flags: Int, ?alias: String, ?format: Int);
 
 	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
+	function compress(compression: Int, ?extension: String): PharData;
 	function count(): Int;
 	function offsetExists(offset: String): Bool;
 	function offsetGet(offset: String): PharFileInfo;

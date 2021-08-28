@@ -51,6 +51,7 @@ extern class Phar extends RecursiveDirectoryIterator implements Countable implem
 	function new(fname: String, ?flags: Int, ?alias: String);
 
 	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
+	function compress(compression: Int, ?extension: String): Phar;
 	function count(): Int;
 	function offsetExists(offset: String): Bool;
 	function offsetGet(offset: String): PharFileInfo;
