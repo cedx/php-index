@@ -23,17 +23,15 @@
 package php;
 
 /**
-	The `PharData` class provides a high-level interface to accessing and creating non-executable TAR and ZIP archives.
-	@see https://www.php.net/manual/en/class.phardata.php
+	The `RecursiveDirectoryIterator` provides an interface for iterating recursively over filesystem directories.
+	@see https://www.php.net/manual/en/class.recursivedirectoryiterator.php
 **/
-@:native("PharData")
-extern class PharData extends RecursiveDirectoryIterator implements Countable implements php.ArrayAccess<String, PharFileInfo> {
-	function new(fname: String, ?flags: Int, ?alias: String, ?format: Int);
+@:native("RecursiveDirectoryIterator")
+extern class RecursiveDirectoryIterator extends FilesystemIterator implements RecursiveIterator<String, Dynamic> implements SeekableIterator<String, Dynamic> {
+	function new(directory: String, ?flags: Int);
 
-	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
-	function count(): Int;
-	function offsetExists(offset: String): Bool;
-	function offsetGet(offset: String): PharFileInfo;
-	function offsetSet(offset: String, value: Dynamic): Void;
-	function offsetUnset(offset: String): Void;
+	function getChildren(): Null<RecursiveDirectoryIterator>;
+	function getSubPath(): String;
+	function getSubPathname(): String;
+	function hasChildren(allowLinks: Bool = false): Bool;
 }

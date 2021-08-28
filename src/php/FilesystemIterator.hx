@@ -22,18 +22,30 @@
 
 package php;
 
-/**
-	The `PharData` class provides a high-level interface to accessing and creating non-executable TAR and ZIP archives.
-	@see https://www.php.net/manual/en/class.phardata.php
-**/
-@:native("PharData")
-extern class PharData extends RecursiveDirectoryIterator implements Countable implements php.ArrayAccess<String, PharFileInfo> {
-	function new(fname: String, ?flags: Int, ?alias: String, ?format: Int);
+import haxe.extern.EitherType;
 
-	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
-	function count(): Int;
-	function offsetExists(offset: String): Bool;
-	function offsetGet(offset: String): PharFileInfo;
-	function offsetSet(offset: String, value: Dynamic): Void;
-	function offsetUnset(offset: String): Void;
+/**
+	The Filesystem iterator.
+	@see https://www.php.net/manual/en/class.filesystemiterator.php
+**/
+@:native("FilesystemIterator")
+extern class FilesystemIterator extends DirectoryIterator implements SeekableIterator<String, Dynamic> {
+	@:phpClassConst static final CURRENT_AS_FILEINFO: Int;
+	@:phpClassConst static final CURRENT_AS_PATHNAME: Int;
+	@:phpClassConst static final CURRENT_AS_SELF: Int;
+	@:phpClassConst static final CURRENT_MODE_MASK: Int;
+	@:phpClassConst static final FOLLOW_SYMLINKS: Int;
+	@:phpClassConst static final KEY_AS_FILENAME: Int;
+	@:phpClassConst static final KEY_AS_PATHNAME: Int;
+	@:phpClassConst static final KEY_MODE_MASK: Int;
+	@:phpClassConst static final NEW_CURRENT_AND_KEY: Int;
+	@:phpClassConst static final SKIP_DOTS: Int;
+	@:phpClassConst static final UNIX_PATHS: Int;
+
+	function new(directory: String, ?flags: Int);
+
+	function current(): EitherType<FilesystemIterator, EitherType<SplFileInfo, String>>;
+	function getFlags(): Int;
+	function key(): String;
+	function setFlags(flags: Int): Void;
 }

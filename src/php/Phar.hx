@@ -27,7 +27,7 @@ package php;
 	@see https://www.php.net/manual/en/class.phar.php
 **/
 @:native("Phar")
-extern class Phar /* TODO extends RecursiveDirectoryIterator */ implements Countable implements php.ArrayAccess<String, PharFileInfo> {
+extern class Phar extends RecursiveDirectoryIterator implements Countable implements php.ArrayAccess<String, PharFileInfo> {
 	@:phpClassConst static final BZ2: Int;
 	@:phpClassConst static final COMPRESSED: Int;
 	@:phpClassConst static final GZ: Int;
