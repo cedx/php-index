@@ -13,3 +13,4 @@
 /index.php
 /npm-debug.log
 /src/**/*.g.json
+/www/index.phar
