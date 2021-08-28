@@ -36,7 +36,7 @@ extern class SplFileInfo {
 	function getBasename(suffix: String = ""): String;
 	function getCTime(): EitherType<Int, Bool>;
 	function getExtension(): String;
-	function getFileInfo(class: Null<String> = null): SplFileInfo;
+	function getFileInfo(?className: String): SplFileInfo;
 	function getFilename(): String;
 	function getGroup(): EitherType<Int, Bool>;
 	function getInode(): EitherType<Int, Bool>;
@@ -44,19 +44,30 @@ extern class SplFileInfo {
 	function getMTime(): EitherType<Int, Bool>;
 	function getOwner(): EitherType<Int, Bool>;
 	function getPath(): String;
-	function getPathInfo(?class_name: String): SplFileInfo;
+	function getPathInfo(?className: String): Null<SplFileInfo>;
 	function getPathname(): String;
 	function getPerms(): EitherType<Int, Bool>;
 	function getRealPath(): EitherType<String, Bool>;
 	function getSize(): EitherType<Int, Bool>;
-	function getType(): EitherType<String, Bool>;
+	function getType(): EitherType<SplFileInfoType, Bool>;
 	function isDir(): Bool;
 	function isExecutable(): Bool;
 	function isFile(): Bool;
 	function isLink(): Bool;
 	function isReadable(): Bool;
 	function isWritable(): Bool;
-	function openFile(mode: String = "r", useIncludePath: Bool = false, context: Null<Resource> = null): SplFileObject;
-	function setFileClass(string $class = SplFileObject::class): Void;
-	function setInfoClass(string $class = SplFileInfo::class): Void;
+	function openFile(mode: String = "r", useIncludePath: Bool = false, ?context: Resource): SplFileObject;
+	function setFileClass(?className: String): Void;
+	function setInfoClass(?className: String): Void;
+}
+
+enum abstract SplFileInfoType(String) to String {
+	var Block = "block";
+	var Char = "char";
+	var Dir = "dir";
+	var Fifo = "fifo";
+	var File = "file";
+	var Link = "link";
+	var Socket = "socket";
+	var Unknown = "unknown";
 }
