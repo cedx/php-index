@@ -6,7 +6,10 @@
 			"src/directory_index/client/Http",
 			"src/directory_index/server/File"
 		],
-		"MemberName": ["src/directory_index/base/FileSystemEntity"],
+		"MemberName": [
+			"src/directory_index/base/FileSystemEntity",
+			"src/directory_index/base/Sort"
+		],
 		"Trace": ["src/directory_index/server/Application"]
 	},
 	"checks": [
