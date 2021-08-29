@@ -11,10 +11,8 @@ using haxe.io.Path;
 class File {
 
 	/** The base URI of the file system. **/
-	static final baseUri: Url = #if !debug "phar://index.phar/"; #else {
-		final basePath = Application.instance.basePath.replace("\\", "/");
-		'file:${Sys.systemName() == "Windows" ? "/" : ""}//$basePath/';
-	} #end
+	static final baseUri: Url =
+		#if !debug "phar://index.zip/" #else 'file:${Sys.systemName() == "Windows" ? "/" : ""}//${Application.instance.basePath}/' #end;
 
 	/** The MIME type of this file. **/
 	public var mimeType(get, never): Mime;
@@ -26,7 +24,7 @@ class File {
 	public var uri(get, never): Url;
 
 	/** Creates a new file. **/
-	public function new(path: String) this.path = path;
+	public function new(path: String) this.path = path.normalize();
 
 	/** Gets the MIME type of this file. **/
 	function get_mimeType() return switch path.extension().toLowerCase() {
