@@ -1,5 +1,5 @@
-import Tools.cleanDirectory;
-import Tools.removeDirectory;
+//! --class-path src
+import directory_index.cli.Tools.*;
 import sys.FileSystem.*;
 
 using Lambda;
@@ -8,5 +8,5 @@ using Lambda;
 function main() {
 	if (exists("index.php")) deleteFile("index.php");
 	["lib", "www/css", "www/fonts", "www/js"].filter(exists).iter(removeDirectory);
-	cleanDirectory("var");
+	cleanDirectory("var", ~/^\.gitkeep$/);
 }

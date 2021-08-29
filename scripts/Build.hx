@@ -1,5 +1,6 @@
+//! --class-path src
 import Sys.*;
-import Tools.captureCommand;
+import directory_index.cli.Tools.*;
 import sys.FileSystem.*;
 import sys.io.File.*;
 

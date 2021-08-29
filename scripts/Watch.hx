@@ -1,6 +1,6 @@
 //! --class-path src --define hxnodejs --library hxnodejs
 import Sys.*;
-import Tools.captureCommand;
+import directory_index.cli.Tools.*;
 import haxe.Timer;
 import js.glob_watcher.GlobWatcher.*;
 import js.lib.Error;
