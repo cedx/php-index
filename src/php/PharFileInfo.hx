@@ -28,5 +28,19 @@ package php;
 **/
 @:native("PharFileInfo")
 extern class PharFileInfo extends SplFileInfo {
+	function new(entry: String);
 
+	function chmod(permissions: Int): Void;
+	function compress(compression: Int): Bool;
+	function decompress(): Bool;
+	function delMetadata(): Bool;
+	function getCompressedSize(): Int;
+	function getContent(): String;
+	function getCRC32(): Int;
+	function getMetadata(): Dynamic;
+	function getPharFlags(): Int;
+	function hasMetadata(): Bool;
+	function isCompressed(?compression_type: Int): Bool;
+	function isCRCChecked(): Bool;
+	function setMetadata(metadata: Any): Void;
 }

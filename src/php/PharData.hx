@@ -30,8 +30,12 @@ package php;
 extern class PharData extends RecursiveDirectoryIterator implements Countable implements php.ArrayAccess<String, PharFileInfo> {
 	function new(fname: String, ?flags: Int, ?alias: String, ?format: Int);
 
+	function addEmptyDir(dirname: String): Void;
+	function addFile(file: String, ?localname: String): Void;
+	function addFromString(localname: String, contents: String): Void;
 	function buildFromDirectory(base_dir: String, ?regex: String): NativeAssocArray<String>;
 	function compress(compression: Int, ?extension: String): PharData;
+	function compressFiles(compression: Int): Void;
 	function count(): Int;
 	function offsetExists(offset: String): Bool;
 	function offsetGet(offset: String): PharFileInfo;
