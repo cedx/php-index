@@ -3,7 +3,6 @@ package directory_index.server;
 import directory_index.base.FileSystemEntity;
 import haxe.io.Mime.ApplicationJson;
 import php.Global;
-import php.SuperGlobal._SERVER;
 import sys.FileSystem;
 import tink.Json;
 import tink.http.Response.OutgoingResponse;
@@ -36,9 +35,9 @@ class Root {
 	/** Sends the directory listing to the client. **/
 	function sendListing() {
 		final entities = [];
-		final exclude = [Path.withoutDirectory(_SERVER["PHP_SELF"]), "index.zip", "web.config"];
+		final exclude = [Sys.programPath().withoutDirectory(), "index.zip", "web.config"];
 
-		for (entity in FileSystem.readDirectory(Sys.getCwd()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
+		for (entity in FileSystem.readDirectory(Sys.programPath().directory()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
 			final type = FileSystem.isDirectory(entity) ? Directory : File;
 			entities.push(new FileSystemEntity({
 				modifiedAt: Date.fromTime(Global.filemtime(entity) * 1000),

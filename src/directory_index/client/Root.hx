@@ -22,11 +22,14 @@ class Root extends View {
 	/** The list of file system entities. **/
 	@:state var entities: List<FileSystemEntity> = new List<FileSystemEntity>();
 
+	/** Value indicating whether an error occurred. **/
+	@:state var hasError = false;
+
 	/** The HTTP client. **/
 	final http = Application.instance.get(Http);
 
 	/** The current path. **/
-	final path = location.pathname.removeTrailingSlashes();
+	final path = location.pathname.length > 1 ? location.pathname.removeTrailingSlashes() : location.pathname;
 
 	/** The formatter used to format the file sizes. **/
 	final sizeFormatter = new NumberFormat(Application.instance.language, {maximumFractionDigits: 2});
@@ -53,63 +56,70 @@ class Root extends View {
 			</header>
 
 			<main>
-				<Title appendAppName=${false} text=${location.hostname + " - " + (path.length == 0 ? "/" : path)}/>
+				<Title appendAppName=${false} text=${location.hostname + " - " + path}/>
 
 				<article id="listing">
 					<if ${path.length > 0}>
 						<h2 class="mb-2">${path}</h2>
 					</if>
 
-					<table class="table table-hover table-sticky table-striped">
-						<thead>
-							<tr>
-								<th onclick=${sortList("path")} scope="col">
-									<span role="button">Name <i class="bi bi-${sort.getIcon('path')}"/></span>
-								</th>
-								<th class="text-end" onclick=${sortList("size")} scope="col">
-									<span role="button">Size <i class="bi bi-${sort.getIcon('size')}"/></span>
-								</th>
-								<th class="d-none d-sm-table-cell text-end" onclick=${sortList("modifiedAt")} scope="col">
-									<span role="button">Last modified <i class="bi bi-${sort.getIcon('modifiedAt')}"/></span>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<if ${path.length > 0}>
+					<if ${hasError}>
+						<div class="alert alert-danger d-flex align-items-center mt-3">
+							<i class="bi bi-exclamation-triangle-fill me-2"/>
+							<div>An error occurred while fetching the directory listing. Try to refresh the page.</div>
+						</div>
+					<else>
+						<table class="table table-hover table-sticky table-striped">
+							<thead>
 								<tr>
-									<td colSpan=${2}>
-										<div class="text-truncate">
-											<a href="..">
-												<i class="bi bi-arrow-90deg-up me-2"/>Parent directory
-											</a>
-										</div>
-									</td>
-									<td class="d-none d-sm-table-cell"></td>
+									<th onclick=${sortList("path")} scope="col">
+										<span role="button">Name <i class="bi bi-${sort.getIcon('path')}"/></span>
+									</th>
+									<th class="text-end" onclick=${sortList("size")} scope="col">
+										<span role="button">Size <i class="bi bi-${sort.getIcon('size')}"/></span>
+									</th>
+									<th class="d-none d-sm-table-cell text-end" onclick=${sortList("modifiedAt")} scope="col">
+										<span role="button">Last modified <i class="bi bi-${sort.getIcon('modifiedAt')}"/></span>
+									</th>
 								</tr>
-							</if>
-							<for ${entity in entities}>
-								<tr>
-									<td>
-										<div class="text-truncate">
-											<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
-												<i class="bi bi-${entity.icon} me-2"/>${entity.path}
-											</a>
-										</div>
-									</td>
-									<td class="text-end">
-										<if ${entity.type == Directory}>
-											&ndash;
-										<else>
-											${formatSize(entity.size)}
-										</if>
-									</td>
-									<td class="d-none d-sm-table-cell text-end">
-										${dateFormatter.format(entity.modifiedAt.fromHaxeDate())}
-									</td>
-								</tr>
-							</for>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<if ${path.length > 0}>
+									<tr>
+										<td colSpan=${2}>
+											<div class="text-truncate">
+												<a href="..">
+													<i class="bi bi-arrow-90deg-up me-2"/>Parent directory
+												</a>
+											</div>
+										</td>
+										<td class="d-none d-sm-table-cell"></td>
+									</tr>
+								</if>
+								<for ${entity in entities}>
+									<tr>
+										<td>
+											<div class="text-truncate">
+												<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
+													<i class="bi bi-${entity.icon} me-2"/>${entity.path}
+												</a>
+											</div>
+										</td>
+										<td class="text-end">
+											<if ${entity.type == Directory}>
+												&ndash;
+											<else>
+												${formatSize(entity.size)}
+											</if>
+										</td>
+										<td class="d-none d-sm-table-cell text-end">
+											${dateFormatter.format(entity.modifiedAt.fromHaxeDate())}
+										</td>
+									</tr>
+								</for>
+							</tbody>
+						</table>
+					</if>
 				</article>
 			</main>
 		</div>
@@ -140,7 +150,7 @@ class Root extends View {
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() http.get("?listing").handle(outcome -> switch outcome {
 		case Failure(error):
-			trace(error); // TODO
+			hasError = true;
 		case Success(response):
 			entities = (Json.parse(response.body.toString()): Array<FileSystemEntity>);
 			sortList("path");
