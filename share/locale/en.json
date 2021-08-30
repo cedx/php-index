@@ -1,0 +1,8 @@
+{
+	"error": "An error occurred while fetching the directory entries.",
+	"indexOf": "Index of ::directory::",
+	"modifiedAt": "Last modified",
+	"name": "Name",
+	"parentDirectory": "Parent directory",
+	"size": "Size"
+}

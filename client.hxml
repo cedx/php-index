@@ -9,4 +9,7 @@
 --library coconut.vdom
 --library tink_http
 --library tink_json
+--library turnwing
 --main php_index.client.Application
+--resource share/locale/en.json@locale.en.json
+--resource share/locale/fr.json@locale.fr.json

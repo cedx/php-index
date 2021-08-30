@@ -28,6 +28,9 @@ class Root extends View {
 	/** The HTTP client. **/
 	final http = Application.instance.get(Http);
 
+	/** The localization service. **/
+	final locale = Application.instance.locale;
+
 	/** The current path. **/
 	final path = location.pathname.length > 1 ? location.pathname.removeTrailingSlashes() : location.pathname;
 
@@ -59,35 +62,35 @@ class Root extends View {
 				<Title text=${location.hostname + " - " + path}/>
 
 				<article id="listing">
-					<h2>Index of ${path}</h2>
+					<h2>${locale.indexOf(path)}</h2>
 
 					<if ${hasError}>
 						<div class="alert alert-danger d-flex align-items-center">
 							<i class="bi bi-exclamation-triangle-fill me-2"/>
-							<div>An error occurred while fetching the directory listing. Try to refresh the page.</div>
+							<div>${locale.error()}</div>
 						</div>
 					<else>
 						<table class="table table-hover table-sticky table-striped">
 							<thead>
 								<tr>
 									<th onclick=${sortList("path")} scope="col">
-										<span role="button">Name <i class="bi bi-${sort.getIcon('path')}"/></span>
+										<span role="button">${locale.name()} <i class="bi bi-${sort.getIcon('path')}"/></span>
 									</th>
 									<th class="text-end" onclick=${sortList("size")} scope="col">
-										<span role="button">Size <i class="bi bi-${sort.getIcon('size')}"/></span>
+										<span role="button">${locale.size()} <i class="bi bi-${sort.getIcon('size')}"/></span>
 									</th>
 									<th class="d-none d-sm-table-cell text-end" onclick=${sortList("modifiedAt")} scope="col">
-										<span role="button">Last modified <i class="bi bi-${sort.getIcon('modifiedAt')}"/></span>
+										<span role="button">${locale.modifiedAt()} <i class="bi bi-${sort.getIcon('modifiedAt')}"/></span>
 									</th>
 								</tr>
 							</thead>
 							<tbody>
-								<if ${path.length > 0}>
+								<if ${path.length > 1}>
 									<tr>
 										<td colSpan=${2}>
 											<div class="text-truncate">
 												<a href="..">
-													<i class="bi bi-arrow-90deg-up me-2"/>Parent directory
+													<i class="bi bi-arrow-90deg-up me-2"/>${locale.parentDirectory()}
 												</a>
 											</div>
 										</td>
