@@ -3,11 +3,14 @@ import Sys.*;
 import haxe.Timer;
 import js.glob_watcher.GlobWatcher.*;
 import js.lib.Error;
+import js.node.ChildProcess;
 import php_index.cli.Tools.*;
 
 /** Runs the script. **/
 function main() {
 	measureCommand("lix Build --debug");
+	ChildProcess.spawn("php", ["-S", "localhost:8080", "-t", "www"], {stdio: Inherit});
+
 	final srcDir = "src/php_index";
 	for (app in ["client", "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
 
