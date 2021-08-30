@@ -38,12 +38,12 @@ abstract class Tools {
 		}
 
 	/** Creates a ZIP archive from the specified file system entities. **/
-	public static function compress(sources: Array<String>, destination: String) {
+	public static function compress(sources: Array<String>, destination: String, level = 9) {
 		final output = File.write(destination);
 		final writer = new Writer(output);
 
 		var entries: Array<Entry> = [];
-		for (source in sources) entries = entries.concat(FileSystem.isDirectory(source) ? compressDirectory(source) : [compressFile(source)]);
+		for (source in sources) entries = entries.concat(FileSystem.isDirectory(source) ? compressDirectory(source, level) : [compressFile(source, level)]);
 		writer.write(entries.list());
 		output.close();
 	}
@@ -94,18 +94,18 @@ abstract class Tools {
 		File.saveContent(file, pattern.replace(File.getContent(file), replacement));
 
 	/** Compresses the content of the specified `directory` in ZIP format. **/
-	static function compressDirectory(directory: String) {
+	static function compressDirectory(directory: String, level = 9) {
 		var entries: Array<Entry> = [];
 		for (entry in FileSystem.readDirectory(directory)) {
 			final path = Path.join([directory, entry]);
-			entries = entries.concat(FileSystem.isDirectory(path) ? compressDirectory(path) : [compressFile(path)]);
+			entries = entries.concat(FileSystem.isDirectory(path) ? compressDirectory(path, level) : [compressFile(path, level)]);
 		}
 
 		return entries;
 	}
 
 	/** Compresses the specified `file` in ZIP format. **/
-	static function compressFile(file: String) {
+	static function compressFile(file: String, level = 9) {
 		final bytes = File.getBytes(file);
 		final entry: Entry = {
 			compressed: false,
@@ -117,7 +117,7 @@ abstract class Tools {
 			fileTime: FileSystem.stat(file).mtime
 		};
 
-		entry.compress(9);
+		if (level > 0) entry.compress(level);
 		return entry;
 	}
 }

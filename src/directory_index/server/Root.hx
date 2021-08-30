@@ -36,7 +36,7 @@ class Root {
 	/** Sends the directory listing to the client. **/
 	function sendListing() {
 		final entities = [];
-		final exclude = [Path.withoutDirectory(_SERVER["PHP_SELF"]), "index.phar", "web.config"];
+		final exclude = [Path.withoutDirectory(_SERVER["PHP_SELF"]), "index.zip", "web.config"];
 
 		for (entity in FileSystem.readDirectory(Sys.getCwd()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
 			final type = FileSystem.isDirectory(entity) ? Directory : File;

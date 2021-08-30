@@ -1,3 +1,3 @@
 #!/usr/bin/env pwsh
 Set-StrictMode -Version Latest
-php "$PSScriptRoot/directory_index" @args
+neko "$(Split-Path $PSScriptRoot)/run.n" @args

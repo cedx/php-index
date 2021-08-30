@@ -1,8 +1,6 @@
 /lib/
 /node_modules/
-/res/
 /var/
-/vendor/
 /www/css/
 /www/fonts/
 /www/js/
@@ -12,5 +10,6 @@
 /**/.DS_Store
 /index.php
 /npm-debug.log
+/run.n
 /src/**/*.g.json
-/www/index.phar
+/www/index.zip

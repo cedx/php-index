@@ -1,3 +1,8 @@
+--class-path src
+--dce full
+--define analyzer-optimize
+--define no-deprecation-warnings
 --library tink_cli
+--library uuid
 --main directory_index.cli.Program
-share/build/server.hxml
+--neko run.n

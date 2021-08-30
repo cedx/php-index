@@ -1,15 +1,23 @@
 package directory_index.cli;
 
 import directory_index.base.Version;
-import php.Phar;
+// TODO import php.Phar;
+// TODO import php.PharData;
 import sys.FileSystem;
 import sys.io.File;
+import tink.Cli;
+import tink.cli.Rest;
+import uuid.Uuid;
 
 using Lambda;
 using haxe.io.Path;
+using tink.CoreApi;
 
 /** Build the PHP redistributable. **/
 class Program {
+
+	/** Compress the data file. **/
+	public var compress = false;
 
 	/** Output usage information. **/
 	public var help = false;
@@ -18,7 +26,7 @@ class Program {
 	public var version = false;
 
 	/** The root directory of this application. **/
-	final basePath = Path.join([Sys.programPath().directory(), ".."]);
+	final basePath = Sys.programPath().directory();
 
 	/** Creates a new program. **/
 	public function new() {}
@@ -32,20 +40,33 @@ class Program {
 		if (help) { Cli.getDoc(this); return Noise; }
 		if (version) { Version.getPackageVersion(); return Noise; }
 
-		if (!Phar.canWrite()) return new Error(MethodNotAllowed, "Phar extension does not support creating Phar archives.");
-		buildPhar();
+		// TODO if (!Phar.canWrite()) return new Error(MethodNotAllowed, "Phar extension does not support creating Phar archives.");
+		buildDataFile();
 		return Noise;
 	}
 
-	/** Builds the PHP archive. **/
+	/** Builds the data file. **/
+	function buildDataFile() {
+		final buildDir = Path.join([Tools.getTempDirectory(), Uuid.v4()]);
+		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([basePath, folder]), Path.join([buildDir, folder]));
+		["index.php", "index.zip"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+
+		final previousCwd = Sys.getCwd();
+		Sys.setCwd(buildDir);
+		Tools.compress(["lib", "www"], Path.join([basePath, 'www/index.zip']), compress ? 9 : 0);
+		Sys.setCwd(previousCwd);
+	}
+
+	/** Builds the data file. **/
+	/*
 	function buildPhar() {
 		final buildDir = Path.join([basePath, "var/build"]);
-		if (FileSystem.exists(buildDir)) removeDirectory(buildDir);
+		if (FileSystem.exists(buildDir)) Tools.removeDirectory(buildDir);
 		["index.phar", "index.phar.gz"].map(file -> Path.join([basePath, 'var/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
 
-		for (folder in ["lib", "www"]) copyDirectory(Path.join([basePath, folder]), Path.join([buildDir, folder]));
+		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([basePath, folder]), Path.join([buildDir, folder]));
 		["index.phar", "index.php"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
-		["directory_index/cli", "tink/cli"].map(folder -> Path.join([buildDir, 'lib/$folder'])).iter(removeDirectory);
+		["directory_index/cli", "tink/cli"].map(folder -> Path.join([buildDir, 'lib/$folder'])).iter(Tools.removeDirectory);
 
 		final phar = new Phar(Path.join([basePath, "var/index.phar"]));
 		phar.buildFromDirectory(buildDir);
@@ -56,27 +77,26 @@ class Program {
 			phar.compress(Phar.GZ);
 			File.copy(Path.join([basePath, "var/index.phar.gz"]), Path.join([basePath, "www/index.phar"]));
 		}
-	}
+	}*/
 
-	/** Recursively copies all files in the specified `source` directory to a given `destination` directory. **/
-	function copyDirectory(source: String, destination: String) for (entry in FileSystem.readDirectory(source)) {
-		final input = Path.join([source, entry]);
-		final output = Path.join([destination, entry]);
-		if (FileSystem.isDirectory(input)) copyDirectory(input, output);
+	/** Builds the data file. **/
+	/*
+	function buildPharData() {
+		final buildDir = Path.join([basePath, "var/build"]);
+		if (FileSystem.exists(buildDir)) Tools.removeDirectory(buildDir);
+		["index.phar", "index.phar.gz"].map(file -> Path.join([basePath, 'var/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+
+		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([basePath, folder]), Path.join([buildDir, folder]));
+		["index.phar", "index.php"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+		["directory_index/cli", "tink/cli"].map(folder -> Path.join([buildDir, 'lib/$folder'])).iter(Tools.removeDirectory);
+
+		final phar = new PharData(Path.join([basePath, "var/index.zip"]));
+		phar.buildFromDirectory(buildDir);
+
+		if (!Phar.canCompress()) File.copy(Path.join([basePath, "var/index.zip"]), Path.join([basePath, "www/index.phar"]));
 		else {
-			FileSystem.createDirectory(output.directory());
-			File.copy(input, output);
+			phar.compressFiles(Phar.GZ);
+			File.copy(Path.join([basePath, "var/index.zip"]), Path.join([basePath, "www/index.phar"]));
 		}
-	}
-
-	/** Recursively deletes the specified `directory`. **/
-	function removeDirectory(directory: String) {
-		for (entry in FileSystem.readDirectory(directory)) {
-			final path = Path.join([directory, entry]);
-			if (FileSystem.isDirectory(path)) removeDirectory(path);
-			else FileSystem.deleteFile(path);
-		}
-
-		FileSystem.deleteDirectory(directory);
-	}
+	}*/
 }

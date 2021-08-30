@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
 // Setup the class loader.
-const phpArchive = false;
-$rootPath = phpArchive ? "phar://index.phar" : (new SplFileInfo(__DIR__))->getPath();
+const useDataFile = false;
+$rootPath = useDataFile ? "phar://index.zip" : (new SplFileInfo(__DIR__))->getPath();
 spl_autoload_register(fn($class) => include "$rootPath/lib/".str_replace("\\", "/", $class).".php");
 
 // Start the application.
