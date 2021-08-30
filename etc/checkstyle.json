@@ -2,14 +2,10 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
-		"ConditionalCompilation": [
-			"src/directory_index/client/Http",
-			"src/directory_index/server/File"
-		],
-		"MemberName": [
-			"src/directory_index/base/FileSystemEntity",
-			"src/directory_index/base/Sort"
-		],
+		"ConditionalCompilation": ["src/directory_index/client/Http", "src/directory_index/server/File"],
+		"MemberName": ["src/directory_index/base/FileSystemEntity", "src/directory_index/base/Sort"],
+		"MethodLength": ["src/directory_index/client/Root"],
+		"ReturnCount": ["src/directory_index/cli/Program:run", "src/directory_index/cli/Tools:get_tempDirectory"],
 		"Trace": ["src/directory_index/server/Application"]
 	},
 	"checks": [
