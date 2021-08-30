@@ -29,8 +29,13 @@ class File {
 	/** Gets the MIME type of this file. **/
 	function get_mimeType() return switch path.extension().toLowerCase() {
 		case "css": TextCss;
+		case "gif": ImageGif;
+		case "htm": TextHtml;
 		case "html": TextHtml;
+		case "jpeg": ImageJpeg;
+		case "jpg": ImageJpeg;
 		case "js": ApplicationJavascript;
+		case "png": ImagePng;
 		case "svg": "image/svg+xml";
 		case "woff2": "font/woff2";
 		default: ApplicationOctetStream;

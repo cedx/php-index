@@ -22,7 +22,7 @@ class Navbar extends View {
 			<div class="container-fluid">
 				<div class="d-flex align-items-center">
 					<span class="navbar-brand">
-						<img alt="" height=${24} src="?file=img/logo_light.svg" width=${97}/>
+						<img alt="" src="?file=img/navbar_logo.svg"/>
 					</span>
 					<span class="navbar-brand">
 						${Browser.location.hostname}

@@ -74,5 +74,6 @@ abstract class Application {
 	public function remove<T>(type: Class<T>) services.remove(Type.getClassName(type));
 
 	/** Registers a service with this application. **/
-	public function set(value: Any) services.set(Type.getClassName(Type.getClass(value)), value);
+	public function set<T>(value: Any, ?type: Class<T>)
+		services.set(Type.getClassName(type != null ? type : Type.getClass(value)), value);
 }
