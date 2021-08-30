@@ -15,6 +15,33 @@ using haxe.zip.Tools;
 /** Provides helper methods for console applications. **/
 abstract class Tools {
 
+	/** The path to the system temporary directory. **/
+	public static var tempDirectory(get, never): String;
+
+	/** Gets the path to the system temporary directory. **/
+	static function get_tempDirectory() {
+		if (Sys.systemName() != "Windows") {
+			for (name in ["TMPDIR", "TMP", "TEMP"]) {
+				final path = Sys.getEnv(name);
+				if (path != null) return path.length > 1 ? path.removeTrailingSlashes() : path;
+			}
+
+			return "/tmp";
+		}
+
+		for (name in ["TEMP", "TMP"]) {
+			final path = Sys.getEnv(name);
+			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
+		}
+
+		for (name in ["SystemRoot", "windir"]) {
+			final path = Sys.getEnv(name);
+			if (path != null) return '$path\\Temp';
+		}
+
+		return "C:\\Windows\\Temp";
+	}
+
 	/** Captures the output of the specified `command`. **/
 	public static function captureCommand(command: String, ?arguments: Array<String>) {
 		#if nodejs
@@ -57,30 +84,6 @@ abstract class Tools {
 			FileSystem.createDirectory(output.directory());
 			File.copy(input, output);
 		}
-	}
-
-	/** Gets the path to the system temporary directory. **/
-	public static function getTempDirectory() {
-		if (Sys.systemName() != "Windows") {
-			for (name in ["TMPDIR", "TMP", "TEMP"]) {
-				final path = Sys.getEnv(name);
-				if (path != null) return path.length > 1 ? path.removeTrailingSlashes() : path;
-			}
-
-			return "/tmp";
-		}
-
-		for (name in ["TEMP", "TMP"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
-		}
-
-		for (name in ["SystemRoot", "windir"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return '$path\\Temp';
-		}
-
-		return "C:\\Windows\\Temp";
 	}
 
 	/** Recursively deletes the specified `directory`. **/
