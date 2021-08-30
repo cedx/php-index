@@ -1,14 +1,14 @@
 //! --class-path src --define hxnodejs --library hxnodejs
 import Sys.*;
-import directory_index.cli.Tools.*;
 import haxe.Timer;
 import js.glob_watcher.GlobWatcher.*;
 import js.lib.Error;
+import php_index.cli.Tools.*;
 
 /** Runs the script. **/
 function main() {
 	measureCommand("lix Build --debug");
-	final srcDir = "src/directory_index";
+	final srcDir = "src/php_index";
 	for (app in ["client", "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
 
 	final loadPath = captureCommand("lix run bootstrap_bundle libpath");

@@ -1,10 +1,10 @@
-package directory_index.client;
+package php_index.client;
 
 import js.Browser;
-import directory_index.base.Application as BaseApplication;
+import php_index.base.Application as BaseApplication;
 
 using coconut.ui.Renderer;
-using directory_index.client.ElementTools;
+using php_index.client.ElementTools;
 
 /** The client application. **/
 class Application extends BaseApplication {
@@ -14,7 +14,7 @@ class Application extends BaseApplication {
 
 	/** Creates a new client application. **/
 	function new() {
-		super("io.belin.directory_index", "Directory Index");
+		super("io.belin.php_index", "Directory Index");
 		set(new Http(Browser.location.href));
 
 		final parts = Browser.navigator.language.split("-");

@@ -1,4 +1,4 @@
-package directory_index.client;
+package php_index.client;
 
 import haxe.Timer;
 import js.Browser;

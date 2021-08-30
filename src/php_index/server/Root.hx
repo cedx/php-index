@@ -1,8 +1,8 @@
-package directory_index.server;
+package php_index.server;
 
-import directory_index.base.FileSystemEntity;
 import haxe.io.Mime.ApplicationJson;
 import php.Global;
+import php_index.base.FileSystemEntity;
 import sys.FileSystem;
 import tink.Json;
 import tink.http.Response.OutgoingResponse;

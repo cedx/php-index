@@ -1,10 +1,10 @@
-package directory_index.base;
+package php_index.base;
 
 import coconut.data.Model;
 using haxe.io.Path;
 
 /** A reference to an entity on the file system. **/
-@:jsonParse(json -> new directory_index.base.FileSystemEntity(json))
+@:jsonParse(json -> new php_index.base.FileSystemEntity(json))
 @:jsonStringify(entity -> {
 	modifiedAt: entity.modifiedAt,
 	path: entity.path,

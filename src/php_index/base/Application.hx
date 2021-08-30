@@ -1,4 +1,4 @@
-package directory_index.base;
+package php_index.base;
 
 #if js
 import js.Browser.document;

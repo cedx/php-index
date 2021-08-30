@@ -1,4 +1,4 @@
-package directory_index.client;
+package php_index.client;
 
 import haxe.io.Mime.ApplicationJson;
 import js.html.URLSearchParams;

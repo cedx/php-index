@@ -1,9 +1,9 @@
-package directory_index.server;
+package php_index.server;
 
-import directory_index.base.Application as BaseApplication;
 import haxe.Log;
 import php.Global;
 import php.SuperGlobal._SERVER;
+import php_index.base.Application as BaseApplication;
 import tink.http.Response.OutgoingResponse;
 import tink.http.containers.PhpContainer;
 import tink.web.routing.Context;
@@ -17,11 +17,8 @@ class Application extends BaseApplication {
 	/** The unique instance of this application. **/
 	public static var instance(get, never): Application;
 
-	/** The root directory of this application. **/
-	public final basePath = Path.join([Sys.programPath().directory(), ".."]);
-
 	/** Creates a new server application. **/
-	function new() super("io.belin.directory_index", "Directory Index");
+	function new() super("io.belin.php_index", "Directory Index");
 
 	/** Application entry point. **/
 	static function main() {

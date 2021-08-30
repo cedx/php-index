@@ -1,5 +1,5 @@
 //! --class-path src
-import directory_index.cli.Tools.*;
+import php_index.cli.Tools.*;
 import sys.FileSystem.*;
 
 using Lambda;

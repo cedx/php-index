@@ -1,6 +1,6 @@
-package directory_index.cli;
+package php_index.cli;
 
-import directory_index.base.Version;
+import php_index.base.Version;
 import sys.FileSystem;
 import sys.io.File;
 import tink.Cli;

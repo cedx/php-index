@@ -4,5 +4,5 @@
 --define no-deprecation-warnings
 --library tink_cli
 --library uuid
---main directory_index.cli.Program
+--main php_index.cli.Program
 --neko run.n

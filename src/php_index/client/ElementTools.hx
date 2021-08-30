@@ -1,4 +1,4 @@
-package directory_index.client;
+package php_index.client;
 
 import js.Browser.window;
 import js.html.Element;

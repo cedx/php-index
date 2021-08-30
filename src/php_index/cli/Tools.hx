@@ -1,4 +1,4 @@
-package directory_index.cli;
+package php_index.cli;
 
 import haxe.crypto.Crc32;
 import haxe.Exception;

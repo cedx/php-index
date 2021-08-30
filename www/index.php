@@ -7,5 +7,5 @@ spl_autoload_register(fn($class) => include "$rootPath/lib/".str_replace("\\", "
 
 // Start the application.
 \php\Boot::__hx__init();
-\directory_index\server\Application::main();
+\php_index\server\Application::main();
 \haxe\EntryPoint::run();

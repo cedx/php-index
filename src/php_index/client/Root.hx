@@ -1,10 +1,10 @@
-package directory_index.client;
+package php_index.client;
 
-import directory_index.base.FileSystemEntity;
-import directory_index.base.Sort;
 import js.Browser.location;
 import js.lib.intl.DateTimeFormat;
 import js.lib.intl.NumberFormat;
+import php_index.base.FileSystemEntity;
+import php_index.base.Sort;
 import tink.Json;
 
 using haxe.io.Path;
@@ -56,7 +56,7 @@ class Root extends View {
 			</header>
 
 			<main>
-				<Title appendAppName=${false} text=${location.hostname + " - " + path}/>
+				<Title text=${location.hostname + " - " + path}/>
 
 				<article id="listing">
 					<if ${path.length > 0}>

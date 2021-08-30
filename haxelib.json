@@ -13,7 +13,7 @@
 	},
 	"description": "TODO Directory Index",
 	"license": "MIT",
-	"name": "directory_index",
+	"name": "php_index",
 	"releasenote": "Initial release.",
 	"tags": ["php", "web"],
 	"url": "https://github.com/cedx/directory-index",

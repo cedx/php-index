@@ -9,4 +9,4 @@
 --library coconut.vdom
 --library tink_http
 --library tink_json
---main directory_index.client.Application
+--main php_index.client.Application

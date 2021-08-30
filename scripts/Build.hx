@@ -1,6 +1,6 @@
 //! --class-path src
 import Sys.*;
-import directory_index.cli.Tools.*;
+import php_index.cli.Tools.*;
 import sys.FileSystem.*;
 import sys.io.File.*;
 
@@ -10,7 +10,7 @@ function main() {
 	for (app in ["cli", "client", "server"]) command('haxe $debug $app.hxml');
 
 	final bootstrapDir = captureCommand("lix run bootstrap_bundle libpath");
-	command('npx sass --load-path=$bootstrapDir src/directory_index/ui:www/css');
+	command('npx sass --load-path=$bootstrapDir src/php_index/ui:www/css');
 
 	createDirectory("www/fonts");
 	copy('$bootstrapDir/fonts/bootstrap-icons.woff2', "www/fonts/icons.woff2");

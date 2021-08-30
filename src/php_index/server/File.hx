@@ -1,4 +1,4 @@
-package directory_index.server;
+package php_index.server;
 
 import haxe.io.Mime;
 import php.Global;
