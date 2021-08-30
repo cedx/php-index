@@ -14,7 +14,7 @@ class Application extends BaseApplication {
 
 	/** Creates a new client application. **/
 	function new() {
-		super("io.belin.php_index", "Directory Index");
+		super("io.belin.php_index", "PHP Index");
 		set(new Http(Browser.location.href));
 
 		final parts = Browser.navigator.language.split("-");

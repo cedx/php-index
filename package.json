@@ -1,11 +1,11 @@
 {
-	"bugs": "https://github.com/cedx/directory-index/issues",
-	"description": "TODO Directory Index",
-	"homepage": "https://github.com/cedx/directory-index",
+	"bugs": "https://github.com/cedx/php-index.hx/issues",
+	"description": "A PHP directory index generator.",
+	"homepage": "https://cedx.github.io/php-index.hx",
 	"license": "MIT",
-	"name": "@cedx/directory-index",
+	"name": "@cedx/php-index",
 	"private": true,
-	"repository": "cedx/directory-index",
+	"repository": "cedx/php-index.hx",
 	"type": "commonjs",
 	"version": "0.1.0",
 	"author": {

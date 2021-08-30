@@ -59,12 +59,10 @@ class Root extends View {
 				<Title text=${location.hostname + " - " + path}/>
 
 				<article id="listing">
-					<if ${path.length > 0}>
-						<h2 class="mb-2">${path}</h2>
-					</if>
+					<h2>Index of ${path}</h2>
 
 					<if ${hasError}>
-						<div class="alert alert-danger d-flex align-items-center mt-3">
+						<div class="alert alert-danger d-flex align-items-center">
 							<i class="bi bi-exclamation-triangle-fill me-2"/>
 							<div>An error occurred while fetching the directory listing. Try to refresh the page.</div>
 						</div>
@@ -149,7 +147,7 @@ class Root extends View {
 
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() http.get("?listing").handle(outcome -> switch outcome {
-		case Failure(error):
+		case Failure(_):
 			hasError = true;
 		case Success(response):
 			entities = (Json.parse(response.body.toString()): Array<FileSystemEntity>);

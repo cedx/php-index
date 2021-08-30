@@ -17,8 +17,11 @@ class Application extends BaseApplication {
 	/** The unique instance of this application. **/
 	public static var instance(get, never): Application;
 
+	/** The root directory of this application. **/
+	public final basePath = Path.join([Sys.programPath().directory(), ".."]);
+
 	/** Creates a new server application. **/
-	function new() super("io.belin.php_index", "Directory Index");
+	function new() super("io.belin.php_index", "PHP Index");
 
 	/** Application entry point. **/
 	static function main() {

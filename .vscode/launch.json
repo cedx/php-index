@@ -5,14 +5,14 @@
 			"name": "Chrome",
 			"request": "launch",
 			"type": "pwa-chrome",
-			"url": "http://dev.localhost/directory-index",
+			"url": "http://dev.localhost/php-index.hx",
 			"webRoot": "${workspaceFolder}/www"
 		},
 		{
 			"name": "Edge",
 			"request": "launch",
 			"type": "pwa-msedge",
-			"url": "http://dev.localhost/directory-index",
+			"url": "http://dev.localhost/php-index.hx",
 			"webRoot": "${workspaceFolder}/www"
 		}
 	]

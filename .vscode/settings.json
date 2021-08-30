@@ -7,7 +7,7 @@
 	"[markdown]": {"files.trimTrailingWhitespace": false},
 	"[yaml]": {"editor.insertSpaces": true},
 	"rest-client.environmentVariables": {
-		"development": {"baseUrl": "http://dev.localhost/directory-index"},
-		"production": {"baseUrl": "https://dev.belin.io/directory-index"}
+		"development": {"baseUrl": "http://dev.localhost/php-index.hx"},
+		"production": {"baseUrl": "https://dev.belin.io/php-index.hx"}
 	}
 }
