@@ -2,6 +2,7 @@ package php_index.server;
 
 import haxe.io.Mime.ApplicationJson;
 import php.Global;
+import php.Syntax;
 import php_index.base.FileSystemEntity;
 import sys.FileSystem;
 import tink.Json;
@@ -34,9 +35,11 @@ class Root {
 
 	/** Sends the directory listing to the client. **/
 	function sendListing() {
-		final entities = [];
-		final exclude = [Sys.programPath().withoutDirectory(), "index.zip", "web.config"];
+		final exclude = [Sys.programPath().withoutDirectory(), "web.config"];
+		final pharPath: String = Syntax.staticCall("Phar", "running", false);
+		if (pharPath.length > 0) exclude.push(pharPath.withoutDirectory());
 
+		final entities = [];
 		for (entity in FileSystem.readDirectory(Sys.programPath().directory()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
 			final type = FileSystem.isDirectory(entity) ? Directory : File;
 			entities.push(new FileSystemEntity({

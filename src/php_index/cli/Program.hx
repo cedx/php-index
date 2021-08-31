@@ -11,7 +11,7 @@ using Lambda;
 using haxe.io.Path;
 using tink.CoreApi;
 
-/** Build the PHP redistributable. **/
+/** Build the PHP Index redistributable. **/
 class Program {
 
 	/** Compress the data. **/
@@ -19,6 +19,9 @@ class Program {
 
 	/** Output usage information. **/
 	public var help = false;
+
+	/** Generate a PHAR archive. **/
+	public var phar = false;
 
 	/** Output the version number. **/
 	public var version = false;
@@ -42,24 +45,31 @@ class Program {
 
 		final output = rest[0].isAbsolute() ? rest[0] : Path.join([haxelibRun ? rest[rest.length - 1] : Sys.getCwd(), rest[0]]);
 		FileSystem.createDirectory(output);
-		buildDataFile(output);
-		return Noise;
+
+		final basePath = Sys.programPath().directory();
+		final input = Path.join([Tools.tempDirectory, Uuid.v4()]);
+		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([basePath, folder]), Path.join([input, folder]));
+		["index.phar", "index.php", "index.zip"].map(file -> Path.join([input, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+		return phar ? buildPharArchive(input, output) : buildZipArchive(input, output);
 	}
 
-	/** Builds the data file in the specified `destination` directory. **/
-	function buildDataFile(destination: String) {
-		final buildDir = Path.join([Tools.tempDirectory, Uuid.v4()]);
-		final rootDir = Sys.programPath().directory();
-		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([rootDir, folder]), Path.join([buildDir, folder]));
-		["index.phar", "index.php", "index.zip"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+	/** Builds the PHAR archive from the specified `input` directory to a given `output` directory. **/
+	function buildPharArchive(input: String, output: String) {
+		final arguments = [Path.join([Sys.programPath().directory(), "bin/directory_index.php"]), "--input", input, "--output", output];
+		if (compress) arguments.push("--compress");
+		return Sys.command("php", arguments) == 0 ? Success(Noise) : Failure(new Error("An error occurred while creating the PHAR archive."));
+	}
 
+	/** Builds the ZIP archive from the specified `input` directory to a given `output` directory. **/
+	function buildZipArchive(input: String, output: String) {
 		final workingDirectory = Sys.getCwd();
-		Sys.setCwd(buildDir);
-		Tools.compress(["lib", "www"], Path.join([destination, "index.zip"]), compress ? 9 : 0);
+		Sys.setCwd(input);
+		Tools.compress(["lib", "www"], Path.join([output, "index.zip"]), compress ? 9 : 0);
 		Sys.setCwd(workingDirectory);
 
-		final inputFile = Path.join([rootDir, "www/index.php"]);
-		final outputFile = Path.join([destination, "index.php"]);
+		final inputFile = Path.join([Sys.programPath().directory(), "www/index.php"]);
+		final outputFile = Path.join([output, "index.php"]);
 		File.saveContent(outputFile, ~/const useDataFile = false/.replace(File.getContent(inputFile), "const useDataFile = true"));
+		return Success(Noise);
 	}
 }

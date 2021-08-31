@@ -3,7 +3,7 @@
 
 // Check the requirements.
 if (!Phar::canWrite()) {
-	fwrite(STDERR, "Phar extension does not support creating Phar archives.");
+	echo "Phar extension does not support creating Phar archives.", PHP_EOL;
 	exit(1);
 }
 
@@ -12,22 +12,22 @@ $options = getopt("ci:o:", ["compress", "input:", "output:"], $index);
 
 $input = $options["i"] ?? ($options["input"] ?? null);
 if (!$input || !is_dir($input)) {
-	fwrite(STDERR, "You must provide the path of the input directory.");
+	echo "You must provide a valid path to the input directory.", PHP_EOL;
 	exit(2);
 }
 
 $output = $options["o"] ?? ($options["output"] ?? null);
 if (!$output || !is_dir($output)) {
-	fwrite(STDERR, "You must provide the path of the output directory.");
+	echo "You must provide a valid path to the output directory.", PHP_EOL;
 	exit(3);
 }
 
 // Create the PHAR archive.
-$stub = <<<'EOT'
+$stub = <<<'EOF'
 <?php declare(strict_types=1);
 
 // Setup the class loader.
-$rootPath = (new SplFileInfo(__DIR__))->getBasename();
+$rootPath = (new SplFileInfo(__FILE__))->getBasename();
 spl_autoload_register(fn($class) => include "phar://$rootPath/lib/".str_replace("\\", "/", $class).".php");
 
 // Start the application.
@@ -36,7 +36,7 @@ spl_autoload_register(fn($class) => include "phar://$rootPath/lib/".str_replace(
 \haxe\EntryPoint::run();
 
 __HALT_COMPILER();
-EOT;
+EOF;
 
 $phar = new Phar("$output/index.phar");
 $phar->buildFromDirectory($input);

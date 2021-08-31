@@ -2,6 +2,7 @@ package php_index.server;
 
 import haxe.io.Mime;
 import php.Global;
+import php.Syntax;
 import tink.Url;
 
 using StringTools;
@@ -12,7 +13,8 @@ class File {
 
 	/** The base URI of the file system. **/
 	static final baseUri: Url =
-		#if !debug "phar://index.zip/" #else 'file:${Sys.systemName() == "Windows" ? "/" : ""}//${Application.instance.basePath}/' #end;
+		#if !debug 'phar://${Path.withoutDirectory(Syntax.staticCall("Phar", "running", false))}/'
+		#else 'file:${Sys.systemName() == "Windows" ? "/" : ""}//${Application.instance.basePath}/' #end;
 
 	/** The MIME type of this file. **/
 	public var mimeType(get, never): Mime;

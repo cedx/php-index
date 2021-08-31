@@ -43,7 +43,7 @@ class Application extends BaseApplication {
 		final manager = new Manager<Locale>(new JsonProvider<Locale>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate()));
 		manager.prepare([lang]).next(_ -> locale = manager.language(lang)).handle(outcome -> switch outcome {
 			case Failure(error):
-				trace(error);
+				Browser.console.error(error.message);
 			case Success(_):
 				final body = Browser.document.body;
 				body.empty();

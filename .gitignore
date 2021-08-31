@@ -12,4 +12,5 @@
 /npm-debug.log
 /run.n
 /src/**/*.g.json
+/www/index.phar
 /www/index.zip

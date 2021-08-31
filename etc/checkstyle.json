@@ -3,6 +3,7 @@
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
 		"ConditionalCompilation": ["src/php_index/client/Http", "src/php_index/server/File"],
+		"EmptyLines": ["src/php_index/client/Locale"],
 		"MemberName": ["src/php_index/base/FileSystemEntity", "src/php_index/base/Sort"],
 		"MethodLength": ["src/php_index/client/Root"],
 		"ReturnCount": ["src/php_index/cli/Program:run", "src/php_index/cli/Tools:get_tempDirectory"],
