@@ -18,7 +18,7 @@ function main() {
 			"--define", "source-path", "https://github.com/cedx/php-index.hx/blob/main/src",
 			"--define", "themeColor", "0xffc105",
 			"--define", "version", version,
-			"--define", "website", "https://github.com/cedx/php-index.hx",
+			"--define", "website", "https://cedx.github.io/php-index.hx",
 			"--input-path", "var",
 			"--output-path", 'docs/api/$app',
 			"--title", "PHP Index",
