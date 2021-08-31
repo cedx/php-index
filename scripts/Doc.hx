@@ -25,6 +25,6 @@ function main() {
 			"--toplevel-package", 'php_index.$app'
 		]);
 
-		copy("www/favicon.ico", 'docs/api/$app/favicon.ico');
+		copy("docs/favicon.ico", 'docs/api/$app/favicon.ico');
 	}
 }
