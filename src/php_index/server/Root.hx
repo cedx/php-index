@@ -40,12 +40,15 @@ class Root {
 		if (pharPath.length > 0) exclude.push(pharPath.withoutDirectory());
 
 		final entities = [];
-		for (entity in FileSystem.readDirectory(Sys.programPath().directory()).filter(item -> item.charAt(0) != "." && !exclude.contains(item))) {
-			final type = FileSystem.isDirectory(entity) ? Directory : File;
+		final entries = FileSystem.readDirectory(Sys.programPath().directory())
+			.filter(entry -> entry.charAt(0) != "." && !exclude.contains(entry) && Global.is_readable(entry));
+
+		for (entry in entries) {
+			final type = FileSystem.isDirectory(entry) ? Directory : File;
 			entities.push(new FileSystemEntity({
-				modifiedAt: Date.fromTime(Global.filemtime(entity) * 1000),
-				path: entity,
-				size: type == File ? Global.filesize(entity) : -1,
+				modifiedAt: Date.fromTime(Global.filemtime(entry) * 1000),
+				path: entry,
+				size: type == File ? Global.filesize(entry) : -1,
 				type: type
 			}));
 		}
