@@ -1,22 +1,16 @@
-// Returns the HTML page.
+// Fetches the HTML page.
 GET {{baseUrl}}
 Accept: text/html
 
 ###
 
-// Returns a script.
+// Fetches a resource embedded in the data file.
 GET {{baseUrl}}?file=js/main.js
 Accept: application/javascript
 
 ###
 
-// Returns a stylesheet.
-GET {{baseUrl}}?file=css/main.css
-Accept: text/css
-
-###
-
-// Returns the directory listing.
+// Fetches the directory listing.
 GET {{baseUrl}}?listing
 Accept: application/json
 
