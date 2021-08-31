@@ -9,7 +9,7 @@ function main() {
 	for (action in ["tag", "push origin"]) command('git $action v${getPackageVersion()}');
 
 	command("lix Dist");
-	compress(["CHANGELOG.md", "LICENSE.md", "README.md", "haxelib.json", "run.n", "src", "www"], "var/haxelib.zip");
+	compress(["CHANGELOG.md", "LICENSE.md", "README.md", "haxelib.json", "lib", "run.n", "src", "www"], "var/haxelib.zip");
 	command("haxelib submit var/haxelib.zip");
 
 	final tag = 'v${getPackageVersion()}';

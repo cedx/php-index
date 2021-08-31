@@ -12,6 +12,7 @@ function main() {
 	ChildProcess.spawn("php", ["-S", "localhost:8080", "-t", "www"], {stdio: Inherit});
 
 	final srcDir = "src/php_index";
+	watch('$srcDir/cli/**/*.hx', done -> measureCommand("haxe --debug cli.hxml", done));
 	for (app in ["client", "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
 
 	final loadPath = captureCommand("lix run bootstrap_bundle libpath");
