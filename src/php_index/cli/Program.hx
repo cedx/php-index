@@ -14,7 +14,7 @@ using tink.CoreApi;
 /** Build the PHP redistributable. **/
 class Program {
 
-	/** Compress the data file. **/
+	/** Compress the data. **/
 	public var compress = false;
 
 	/** Output usage information. **/
@@ -51,7 +51,7 @@ class Program {
 		final buildDir = Path.join([Tools.tempDirectory, Uuid.v4()]);
 		final rootDir = Sys.programPath().directory();
 		for (folder in ["lib", "www"]) Tools.copyDirectory(Path.join([rootDir, folder]), Path.join([buildDir, folder]));
-		["index.php", "index.zip"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
+		["index.phar", "index.php", "index.zip"].map(file -> Path.join([buildDir, 'www/$file'])).filter(FileSystem.exists).iter(FileSystem.deleteFile);
 
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(buildDir);
