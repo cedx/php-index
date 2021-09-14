@@ -29,7 +29,7 @@ abstract class Tools {
 			return "/tmp";
 		}
 
-		for (name in ["TEMP", "TMP"]) {
+		for (name in ["TMP", "TEMP"]) {
 			final path = Sys.getEnv(name);
 			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
 		}
