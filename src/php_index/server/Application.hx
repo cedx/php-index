@@ -23,14 +23,14 @@ class Application extends BaseApplication {
 	/** Creates a new server application. **/
 	function new() super("io.belin.php_index", "PHP Index");
 
+	/** Gets the unique instance of this application. **/
+	static inline function get_instance() return cast BaseApplication.instance;
+
 	/** Application entry point. **/
 	static function main() {
 		Log.trace = (value, ?infos) -> Global.error_log(Log.formatOutput(value, infos));
 		new Application().run();
 	}
-
-	/** Gets the unique instance of this application. **/
-	static inline function get_instance() return cast BaseApplication.instance;
 
 	/** Runs this application. **/
 	public function run() {

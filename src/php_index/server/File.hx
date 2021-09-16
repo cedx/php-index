@@ -37,6 +37,7 @@ class File {
 		case "jpeg": ImageJpeg;
 		case "jpg": ImageJpeg;
 		case "js": ApplicationJavascript;
+		case "json": ApplicationJson;
 		case "png": ImagePng;
 		case "svg": "image/svg+xml";
 		case "woff2": "font/woff2";

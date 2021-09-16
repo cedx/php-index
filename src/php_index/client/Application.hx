@@ -28,14 +28,14 @@ class Application extends BaseApplication {
 		if (parts.length > 0 && parts[0].length > 0) language = parts[0];
 	}
 
+	/** Gets the unique instance of this application. **/
+	static inline function get_instance() return cast BaseApplication.instance;
+
 	/** Gets the localization component. **/
 	function get_locale() return locale;
 
 	/** Application entry point. **/
 	static function main() new Application().run();
-
-	/** Gets the unique instance of this application. **/
-	static inline function get_instance() return cast BaseApplication.instance;
 
 	/** Runs this application. **/
 	public function run() {

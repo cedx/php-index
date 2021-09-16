@@ -11,6 +11,9 @@ $variable-prefix: "";
 // Spacing.
 $spacer: 1rem;
 
+// Body.
+$body-text-align: start;
+
 // Links.
 $link-decoration: none;
 $link-hover-decoration: underline;
@@ -19,12 +22,9 @@ $link-hover-decoration: underline;
 $container-padding-x: 1rem;
 
 // Typography.
-$headings-margin-bottom: $spacer;
+$font-size-root: 14px;
 
 // Navbar.
 $navbar-dark-color: rgba($white, 0.75);
 $navbar-dark-hover-color: rgba($white, 0.95);
 $navbar-nav-link-padding-x: 0.75rem;
-
-// List group.
-$list-group-item-padding-y: 0.5rem;

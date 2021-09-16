@@ -7,7 +7,7 @@ main {
 	overflow: auto;
 	position: absolute;
 	right: 0;
-	top: var(--main-offset, var(--navbar-height));
+	top: var(--navbar-height);
 
 	@media print {
 		overflow: visible;
