@@ -114,7 +114,7 @@ class Root extends View {
 											</if>
 										</td>
 										<td class="d-none d-sm-table-cell text-end">
-											${dateFormatter.format(entity.modifiedAt.fromHaxeDate())}
+											<time dateTime=${entity.modifiedAt}>${dateFormatter.format(entity.modifiedAt.fromHaxeDate())}</time>
 										</td>
 									</tr>
 								</for>

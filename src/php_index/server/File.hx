@@ -40,6 +40,7 @@ class File {
 		case "json": ApplicationJson;
 		case "png": ImagePng;
 		case "svg": "image/svg+xml";
+		case "webmanifest": "application/manifest+json";
 		case "woff2": "font/woff2";
 		default: ApplicationOctetStream;
 	};
