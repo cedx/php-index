@@ -1,5 +1,6 @@
 package php_index.client;
 
+import haxe.Resource;
 import js.Browser;
 import php_index.base.Application as BaseApplication;
 import turnwing.Manager;
@@ -7,7 +8,9 @@ import turnwing.provider.JsonProvider;
 import turnwing.source.ResourceStringSource;
 import turnwing.template.HaxeTemplate;
 
+using StringTools;
 using coconut.ui.Renderer;
+using haxe.io.Path;
 using php_index.client.ElementTools;
 
 /** The client application. **/
@@ -38,16 +41,20 @@ class Application extends BaseApplication {
 	static function main() new Application().run();
 
 	/** Runs this application. **/
-	public function run() {
-		final lang = ["en", "fr"].contains(language) ? language : "en";
+	public function run() prepareLocales().handle(outcome -> switch outcome {
+		case Failure(error):
+			Browser.console.error(error.message);
+		case Success(_):
+			final body = Browser.document.body;
+			body.empty();
+			body.mount("<Root/>");
+	});
+
+	/** Initializes the localization. **/
+	function prepareLocales() {
+		final supportedLanguages = Resource.listNames().filter(res -> res.startsWith("locale.")).map(res -> res.substring(7).withoutExtension());
+		final targetLanguage = supportedLanguages.contains(language) ? language : "en";
 		final manager = new Manager<Locale>(new JsonProvider<Locale>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate()));
-		manager.prepare([lang]).next(_ -> locale = manager.language(lang)).handle(outcome -> switch outcome {
-			case Failure(error):
-				Browser.console.error(error.message);
-			case Success(_):
-				final body = Browser.document.body;
-				body.empty();
-				body.mount("<Root/>");
-		});
+		return manager.prepare([targetLanguage]).next(_ -> locale = manager.language(targetLanguage)).noise();
 	}
 }
