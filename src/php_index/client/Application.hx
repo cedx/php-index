@@ -48,6 +48,7 @@ class Application extends BaseApplication {
 			final body = Browser.document.body;
 			body.empty();
 			body.mount("<Root/>");
+			Browser.window.addEventListener("load", () -> Browser.navigator.serviceWorker.register("?file=worker.js"));
 	});
 
 	/** Initializes the localization. **/
