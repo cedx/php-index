@@ -3,13 +3,20 @@
 --define analyzer-optimize
 --define js-es=6
 --define no-deprecation-warnings
---js www/js/main.js
 --library coconut.data
 --library coconut.ui
 --library coconut.vdom
 --library tink_http
 --library tink_json
+--library tink_url
 --library turnwing
---main php_index.client.Application
 --resource share/locale/en.json@locale.en.json
 --resource share/locale/fr.json@locale.fr.json
+
+--each
+--js www/js/main.js
+--main php_index.client.Application
+
+--next
+--js www/worker.js
+--main php_index.client.ServiceWorker
