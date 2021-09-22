@@ -6,7 +6,6 @@ import js.html.FetchEvent;
 import js.html.ServiceWorkerGlobalScope;
 import js.lib.Promise;
 import php_index.base.Application as BaseApplication;
-import tink.Url;
 
 /** The service worker. **/
 class ServiceWorker extends BaseApplication {
