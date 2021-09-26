@@ -28,6 +28,9 @@ class Root extends View {
 	/** The HTTP client. **/
 	final http = Application.instance.get(Http);
 
+	/** Value indicating whether there is some network activity. **/
+	@:state var loading = false;
+
 	/** The localization service. **/
 	final locale = Application.instance.locale;
 
@@ -64,10 +67,20 @@ class Root extends View {
 				<article id="listing">
 					<h2>${locale.indexOf(path)}</h2>
 
-					<if ${hasError}>
+					<if ${loading}>
+						<div class="alert alert-info d-flex align-items-center">
+							<div class="spinner-border spinner-border-sm"/>
+							<div class="ms-2">${locale.loading()}</div>
+						</div>
+					<else if ${hasError}>
 						<div class="alert alert-danger d-flex align-items-center">
-							<i class="bi bi-exclamation-triangle-fill me-2"/>
-							<div>${locale.error()}</div>
+							<i class="bi bi-exclamation-circle-fill"/>
+							<div class="ms-2">${locale.error()}</div>
+						</div>
+					<else if ${entities.length == 0}>
+						<div class="alert alert-warning d-flex align-items-center">
+							<i class="bi bi-exclamation-triangle-fill"/>
+							<div class="ms-2">${locale.emptyDirectory()}</div>
 						</div>
 					<else>
 						<table class="table table-hover table-sticky table-striped">
@@ -94,7 +107,7 @@ class Root extends View {
 												</a>
 											</div>
 										</td>
-										<td class="d-none d-sm-table-cell"></td>
+										<td class="d-none d-sm-table-cell"/>
 									</tr>
 								</if>
 								<for ${entity in entities}>
@@ -149,11 +162,17 @@ class Root extends View {
 	}
 
 	/** Method invoked after this view is mounted. **/
-	override function viewDidMount() http.get("?listing").handle(outcome -> switch outcome {
-		case Failure(_):
-			hasError = true;
-		case Success(response):
-			entities = (Json.parse(response.body.toString()): Array<FileSystemEntity>);
-			sortList("path");
-	});
+	override function viewDidMount() {
+		loading = true;
+		http.get("?listing").handle(outcome -> {
+			loading = false;
+			switch outcome {
+				case Failure(_):
+					hasError = true;
+				case Success(response):
+					entities = (Json.parse(response.body.toString()): Array<FileSystemEntity>);
+					sortList("path");
+			}
+		});
+	}
 }
