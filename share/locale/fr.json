@@ -1,6 +1,8 @@
 {
+	"emptyDirectory": "Ce répertoire est vide.",
 	"error": "Une erreur s'est produite lors de la récupération des entrées du répertoire.",
 	"indexOf": "Index de ::directory::",
+	"loading": "Chargement des entrées du répertoire...",
 	"modifiedAt": "Modifié le",
 	"name": "Nom",
 	"parentDirectory": "Dossier parent",

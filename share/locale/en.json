@@ -1,6 +1,8 @@
 {
+	"emptyDirectory": "This directory is empty.",
 	"error": "An error occurred while fetching the directory entries.",
 	"indexOf": "Index of ::directory::",
+	"loading": "Loading the directory entries...",
 	"modifiedAt": "Last modified",
 	"name": "Name",
 	"parentDirectory": "Parent directory",
