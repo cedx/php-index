@@ -14,7 +14,7 @@
 		"url": "https://belin.io"
 	},
 	"dependencies": {
-		"clean-css-cli": "^5.3.3",
+		"clean-css-cli": "^5.4.1",
 		"sass": "^1.42.1",
 		"terser": "^5.9.0"
 	},
