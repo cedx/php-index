@@ -7,13 +7,6 @@
 			"type": "pwa-chrome",
 			"url": "http://localhost:8080/",
 			"webRoot": "${workspaceFolder}/www"
-		},
-		{
-			"name": "Edge",
-			"request": "launch",
-			"type": "pwa-msedge",
-			"url": "http://localhost:8080/",
-			"webRoot": "${workspaceFolder}/www"
 		}
 	]
 }
