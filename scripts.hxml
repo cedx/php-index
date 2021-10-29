@@ -1,4 +1,5 @@
 --class-path scripts
 --class-path src
+--define js-global=global
 --js var/scripts.js
 --library hxnodejs
