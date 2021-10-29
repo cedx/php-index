@@ -9,12 +9,12 @@
 --library tink_http
 --library tink_json
 --library turnwing
---resource share/locale/en.json@locale.en.json
---resource share/locale/fr.json@locale.fr.json
 
 --each
 --js www/js/main.js
 --main php_index.client.Application
+--resource share/locale/en.json@locale.en.json
+--resource share/locale/fr.json@locale.fr.json
 
 --next
 --js www/worker.js
