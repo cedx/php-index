@@ -4,7 +4,6 @@
 		"path": "RELATIVE_TO_PROJECT",
 		"ConditionalCompilation": ["src/php_index/client/Http", "src/php_index/server/File"],
 		"EmptyLines": ["src/php_index/client/Locale"],
-		"MemberName": ["src/php_index/base/FileSystemEntity", "src/php_index/base/Sort"],
 		"MethodLength": ["src/php_index/client/Root"],
 		"ReturnCount": ["src/php_index/cli/Program:run", "src/php_index/cli/Tools:get_tempDirectory"],
 		"Trace": ["src/php_index/server/Application"]
@@ -55,8 +54,9 @@
 		{"type": "CatchParameterName"},
 		{"type": "ListenerName"},
 		{"type": "LocalVariableName"},
-		{"type": "MemberName"},
-		{"type": "MethodName", "props": {"format": "^([a-z][a-zA-Z0-9]*|__init__)$"}},
+		{"type": "MemberName", "props": {"format": "^[a-z][a-zA-Z0-9]*$", "tokens": ["CLASS", "TYPEDEF"]}},
+		{"type": "MemberName", "props": {"format": "^[A-Z][a-zA-Z0-9]*$", "tokens": ["ENUM"]}},
+		{"type": "MethodName"},
 		{"type": "ParameterName"},
 		{"type": "TypeName"},
 
