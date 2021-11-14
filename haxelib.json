@@ -6,6 +6,6 @@
 	"name": "php_index",
 	"releasenote": "Initial release.",
 	"tags": ["cli", "directory", "index", "php", "web"],
-	"url": "https://cedx.github.io/php-index.hx",
+	"url": "https://bitbucket.org/cedx/php-index.hx",
 	"version": "0.1.0"
 }

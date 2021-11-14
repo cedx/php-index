@@ -1,7 +1,7 @@
 {
-	"bugs": "https://github.com/cedx/php-index.hx/issues",
+	"bugs": "https://bitbucket.org/cedx/php-index.hx/issues",
 	"description": "A PHP directory index generator.",
-	"homepage": "https://cedx.github.io/php-index.hx",
+	"homepage": "https://bitbucket.org/cedx/php-index.hx",
 	"license": "MIT",
 	"name": "@cedx/php-index",
 	"private": true,
