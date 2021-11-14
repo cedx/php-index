@@ -7,7 +7,7 @@ import sys.io.File.*;
 
 /** Runs the script. **/
 function main() {
-	if (exists("docs/api")) removeDirectory("docs/api");
+	if (exists("docs")) removeDirectory("docs");
 
 	final version = getPackageVersion();
 	for (app in ["cli", "client", "server"]) {
@@ -15,16 +15,16 @@ function main() {
 		command("lix", [
 			"run", "dox",
 			"--define", "description", "A PHP directory index generator, implemented in Haxe.",
-			"--define", "source-path", "https://github.com/cedx/php-index.hx/blob/main/src",
+			"--define", "source-path", "https://bitbucket.org/cedx/php-index.hx/src/main/src",
 			"--define", "themeColor", "0xffc105",
 			"--define", "version", version,
-			"--define", "website", "https://cedx.github.io/php-index.hx",
+			"--define", "website", "https://bitbucket.org/cedx/php-index.hx",
 			"--input-path", "var",
-			"--output-path", 'docs/api/$app',
+			"--output-path", 'docs/$app',
 			"--title", "PHP Index",
 			"--toplevel-package", 'php_index.$app'
 		]);
 
-		copy("docs/favicon.ico", 'docs/api/$app/favicon.ico');
+		copy("www/favicon.ico", 'docs/$app/favicon.ico');
 	}
 }
