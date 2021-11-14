@@ -11,13 +11,13 @@
 --library turnwing
 
 --each
+--define js-global=self
+--js www/worker.js
+--main php_index.client.ServiceWorker
+
+--next
 --define js-global=window
 --js www/js/main.js
 --main php_index.client.Application
 --resource share/locale/en.json@locale.en.json
 --resource share/locale/fr.json@locale.fr.json
-
---next
---define js-global=self
---js www/worker.js
---main php_index.client.ServiceWorker
