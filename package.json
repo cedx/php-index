@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"name": "@cedx/php-index",
 	"private": true,
-	"repository": "cedx/php-index.hx",
+	"repository": "bitbucket:cedx/php-index.hx",
 	"type": "commonjs",
 	"version": "0.1.0",
 	"author": {
@@ -16,7 +16,7 @@
 	"dependencies": {
 		"clean-css-cli": "^5.4.2",
 		"sass": "^1.43.4",
-		"terser": "^5.9.0"
+		"terser": "^5.10.0"
 	},
 	"devDependencies": {
 		"glob-watcher": "^5.0.5"
