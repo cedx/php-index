@@ -13,5 +13,6 @@
 /run.n
 /src/**/*.g.json
 /www/**/*.map
-/www/index.*
+/www/index.phar
+/www/index.zip
 /www/worker.js
