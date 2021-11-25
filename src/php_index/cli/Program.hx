@@ -55,7 +55,7 @@ class Program {
 
 	/** Builds the PHAR archive from the specified `input` directory to a given `output` directory. **/
 	function buildPharArchive(input: String, output: String) {
-		final arguments = [Path.join([Sys.programPath().directory(), "bin/directory_index.php"]), "--input", input, "--output", output];
+		final arguments = [Path.join([Sys.programPath().directory(), "bin/php_index.php"]), "--input", input, "--output", output];
 		if (compress) arguments.push("--compress");
 		return Sys.command("php", arguments) == 0 ? Success(Noise) : Failure(new Error("An error occurred while creating the PHAR archive."));
 	}
