@@ -1,13 +1,23 @@
 @use "../core/bootstrap" as *;
 
 .table-sticky {
-	border-collapse: separate;
-	border-spacing: 0;
-
-	thead th {
-		background-color: $body-bg;
+	> thead {
+		background-color: var(--body-bg);
 		position: sticky;
 		top: 0;
 		z-index: 1;
+
+		&::after {
+			border-bottom: (2 * $table-border-width) solid $table-group-separator-color;
+			bottom: 0;
+			content: "";
+			left: 0;
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	> tbody {
+		border-top: none !important;
 	}
 }
