@@ -22,7 +22,7 @@ class ServiceWorker extends BaseApplication {
 	];
 
 	/** Creates a new service worker. **/
-	function new() super("io.belin.php_index", "PHP Index");
+	function new() super("io.belin.phpIndex", "PHP Index");
 
 	/** Application entry point. **/
 	static function main() new ServiceWorker().run();

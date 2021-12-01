@@ -1,6 +1,7 @@
 package php_index.server;
 
 import haxe.Log;
+import php.Const;
 import php.Global;
 import php.SuperGlobal._SERVER;
 import php_index.base.Application as BaseApplication;
@@ -21,13 +22,14 @@ class Application extends BaseApplication {
 	public final basePath = Path.join([Sys.programPath().directory(), ".."]);
 
 	/** Creates a new server application. **/
-	function new() super("io.belin.php_index", "PHP Index");
+	function new() super("io.belin.phpIndex", "PHP Index");
 
 	/** Gets the unique instance of this application. **/
 	static inline function get_instance() return cast BaseApplication.instance;
 
 	/** Application entry point. **/
 	static function main() {
+		Global.error_reporting(Global.error_reporting() & ~Const.E_DEPRECATED);
 		Log.trace = (value, ?infos) -> Global.error_log(Log.formatOutput(value, infos));
 		new Application().run();
 	}
