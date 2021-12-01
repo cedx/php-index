@@ -3,6 +3,7 @@
 --define analyzer-optimize
 --define js-es=6
 --define no-deprecation-warnings
+--define watch.excludeRoot
 --library coconut.data
 --library coconut.ui
 --library coconut.vdom

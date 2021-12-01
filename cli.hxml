@@ -2,6 +2,7 @@
 --dce full
 --define analyzer-optimize
 --define no-deprecation-warnings
+--define watch.excludeRoot
 --library tink_cli
 --library uuid
 --main php_index.cli.Program

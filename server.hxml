@@ -3,6 +3,7 @@
 --define analyzer-optimize
 --define no-deprecation-warnings
 --define real-position
+--define watch.excludeRoot
 --library coconut.data
 --library tink_url
 --library tink_web
