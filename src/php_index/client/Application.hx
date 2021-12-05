@@ -22,13 +22,17 @@ class Application extends BaseApplication {
 	/** The localization component. **/
 	public var locale(get, null): Locale;
 
+	/** The languages supported by this application. **/
+	public final supportedLanguages =
+		Resource.listNames().filter(res -> res.startsWith("locale.")).map(res -> res.substring(7).withoutExtension());
+
 	/** Creates a new client application. **/
 	function new() {
 		super("io.belin.phpIndex", "PHP Index");
 		set(new Http(Browser.location.href));
 
 		final parts = Browser.navigator.language.split("-");
-		if (parts.length > 0 && parts[0].length > 0) language = parts[0];
+		if (parts.length > 0 && parts[0].length > 0 && supportedLanguages.contains(parts[0])) language = parts[0];
 	}
 
 	/** Gets the unique instance of this application. **/
@@ -53,9 +57,7 @@ class Application extends BaseApplication {
 
 	/** Initializes the localization. **/
 	function prepareLocales() {
-		final supportedLanguages = Resource.listNames().filter(res -> res.startsWith("locale.")).map(res -> res.substring(7).withoutExtension());
-		final targetLanguage = supportedLanguages.contains(language) ? language : "en";
 		final manager = new Manager<Locale>(new JsonProvider<Locale>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate()));
-		return manager.prepare([targetLanguage]).next(_ -> locale = manager.language(targetLanguage)).noise();
+		return manager.prepare([language]).next(_ -> locale = manager.language(language)).noise();
 	}
 }
