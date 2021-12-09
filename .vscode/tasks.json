@@ -33,6 +33,12 @@
 			"type": "shell", "command": "lix", "args": ["Lint"]
 		},
 		{
+			"label": "Observe",
+			"group": "build",
+			"isBackground": true,
+			"type": "shell", "command": "lix", "args": ["Observe"]
+		},
+		{
 			"label": "Publish",
 			"group": "build",
 			"type": "shell", "command": "lix", "args": ["Publish"]
@@ -41,12 +47,6 @@
 			"label": "Version",
 			"group": "build",
 			"type": "shell", "command": "lix", "args": ["Version"]
-		},
-		{
-			"label": "Watch",
-			"group": "build",
-			"isBackground": true,
-			"type": "shell", "command": "lix", "args": ["Watch"]
 		}
 	]
 }
