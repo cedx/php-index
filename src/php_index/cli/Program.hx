@@ -35,8 +35,10 @@ class Program {
 	/** <directory> : The path to the output directory. **/
 	@:defaultCommand
 	public function run(rest: Rest<String>): Promise<Noise> {
-		if (help) return { Sys.println(Cli.getDoc(this)); Noise; };
-		if (version) return { Sys.println(Version.getPackageVersion()); Noise; }
+		if (help || version) {
+			Sys.println(help ? Cli.getDoc(this) : Version.packageVersion);
+			return Noise;
+		}
 
 		final haxelibRun = Sys.getEnv("HAXELIB_RUN") == "1";
 		final requiredArgs = 1;

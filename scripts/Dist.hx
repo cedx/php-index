@@ -15,6 +15,6 @@ function main() {
 	for (file in ["js/main.js", "worker.js"]) command('npx terser --comments=false --config-file=etc/terser.json --output=www/$file www/$file');
 
 	final output = append("www/worker.js");
-	output.writeString('\n// ${getGitCommitHash()}');
+	output.writeString('\n// $gitCommitHash');
 	output.close();
 }

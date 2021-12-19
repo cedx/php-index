@@ -4,4 +4,4 @@ import php_index.cli.Tools.*;
 
 /** Runs the script. **/
 function main()
-	replaceInFile("package.json", ~/"version": "\d+(\.\d+){2}"/, '"version": "${getPackageVersion()}"');
+	replaceInFile("package.json", ~/"version": "\d+(\.\d+){2}"/, '"version": "$packageVersion"');

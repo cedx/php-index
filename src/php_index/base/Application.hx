@@ -34,11 +34,11 @@ abstract class Application {
 	final services: Map<String, Any> = [];
 
 	/** Creates a new application. **/
-	function new(id: String, name: String, version = Version.getPackageVersion()) {
+	function new(id: String, name: String, ?version: String) {
 		instance = this;
 		this.id = id;
 		this.name = name;
-		this.version = version;
+		this.version = version != null ? version : Version.packageVersion;
 	}
 
 	/** Gets the unique instance of this application. **/
