@@ -7,12 +7,7 @@ import tink.http.Client;
 import tink.http.Fetch.CompleteResponse;
 import tink.http.Header;
 import tink.http.Method;
-
-#if tink_json
-import tink.Json;
-#else
-import haxe.Json;
-#end
+import #if tink_json tink.Json #else haxe.Json #end;
 
 #if tink_multipart
 import haxe.extern.EitherType;
