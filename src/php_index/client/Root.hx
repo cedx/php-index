@@ -140,8 +140,9 @@ class Root extends View {
 	';
 
 	/** Sorts the list of file system entities. **/
-	function sortList(attribute: String) {
-		sort = sort.exists(attribute) ? [attribute => (sort[attribute] == Asc ? Desc : Asc)] : [attribute => Asc];
+	function sortList(attribute: String, ?direction: SortDirection) {
+		if (direction == null) direction = if (sort.exists(attribute)) sort[attribute] == Asc ? Desc : Asc else Asc;
+		sort = [attribute => direction];
 		entities = entities.sort((x, y) -> {
 			final field1 = Reflect.getProperty(x, attribute);
 			final field2 = Reflect.getProperty(y, attribute);
@@ -152,12 +153,12 @@ class Root extends View {
 				case "path":
 					final areDirectories = x.type == Directory && y.type == Directory;
 					final areFiles = x.type == File && y.type == File;
-					areDirectories || areFiles ? Reflect.compare(x.path, y.path) : x.type == Directory ? -1 : 1;
+					if (areDirectories || areFiles) Reflect.compare(field1, field2) else x.type == Directory ? -1 : 1;
 				default:
 					Reflect.compare(field1, field2);
 			}
 
-			sort[attribute] == Asc ? value : -value;
+			direction == Asc ? value : -value;
 		});
 	}
 
