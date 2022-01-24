@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"clean-css-cli": "^5.5.0",
-		"sass": "^1.48.0",
+		"sass": "^1.49.0",
 		"terser": "^5.10.0"
 	},
 	"devDependencies": {
