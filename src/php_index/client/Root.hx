@@ -6,7 +6,6 @@ import js.lib.intl.NumberFormat;
 import php_index.base.FileSystemEntity;
 import php_index.base.Sort;
 import tink.Json;
-
 using haxe.io.Path;
 using js.lib.Date;
 

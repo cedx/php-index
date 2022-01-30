@@ -4,7 +4,6 @@ import haxe.io.Mime;
 import php.Global;
 import php.Syntax;
 import tink.Url;
-
 using StringTools;
 using haxe.io.Path;
 

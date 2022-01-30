@@ -6,7 +6,6 @@ import sys.io.File;
 import tink.Cli;
 import tink.cli.Rest;
 import uuid.Uuid;
-
 using Lambda;
 using haxe.io.Path;
 using tink.CoreApi;

@@ -7,7 +7,6 @@ import turnwing.Manager;
 import turnwing.provider.JsonProvider;
 import turnwing.source.ResourceStringSource;
 import turnwing.template.HaxeTemplate;
-
 using StringTools;
 using coconut.ui.Renderer;
 using haxe.io.Path;

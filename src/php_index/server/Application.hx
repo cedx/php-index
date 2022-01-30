@@ -9,7 +9,6 @@ import tink.http.Response.OutgoingResponse;
 import tink.http.containers.PhpContainer;
 import tink.web.routing.Context;
 import tink.web.routing.Router;
-
 using haxe.io.Path;
 
 /** The server application. **/

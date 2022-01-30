@@ -1,7 +1,6 @@
 //! --class-path src
 import php_index.cli.Tools.*;
 import sys.FileSystem.*;
-
 using Lambda;
 
 /** Runs the script. **/

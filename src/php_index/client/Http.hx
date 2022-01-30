@@ -8,6 +8,8 @@ import tink.http.Fetch.CompleteResponse;
 import tink.http.Header;
 import tink.http.Method;
 import #if tink_json tink.Json #else haxe.Json #end;
+using tink.CoreApi;
+using tink.io.Source;
 
 #if tink_multipart
 import haxe.extern.EitherType;
@@ -15,9 +17,6 @@ import js.html.File;
 import js.html.FormData;
 import tink.multipart.Multipart;
 #end
-
-using tink.CoreApi;
-using tink.io.Source;
 
 /** Performs HTTP requests. **/
 class Http {

@@ -4,7 +4,6 @@ import haxe.Timer;
 import js.Browser;
 import js.lib.Date;
 import js.lib.intl.DateTimeFormat;
-
 using DateTools;
 
 /** The navigation bar. **/
