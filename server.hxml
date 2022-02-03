@@ -5,7 +5,6 @@
 --define real-position
 --define watch.excludeRoot
 --library coconut.data
---library tink_url
 --library tink_web
 --main php_index.server.Application
 --php .

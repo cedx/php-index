@@ -1,9 +1,10 @@
 package php_index.server;
 
-import haxe.io.Mime.ApplicationJson;
+import haxe.io.Mime;
 import php.Global;
 import php.Syntax;
 import php_index.base.FileSystemEntity;
+import php_index.base.RemoteApi;
 import sys.FileSystem;
 import tink.Json;
 import tink.http.Response.OutgoingResponse;
@@ -11,12 +12,12 @@ using StringTools;
 using haxe.io.Path;
 
 /** The root controller. **/
-class Root {
+class Root implements RemoteApi {
 
 	/** Creates a new root controller. **/
 	public function new() {}
 
-	/** Handles the requests. **/
+	/** Fetches the directory listing or a resource embedded in the data file. **/
 	@:get("/")
 	public function index(query: {?file: String, ?listing: Bool}) {
 		if (query.listing != null) return sendListing();
@@ -52,6 +53,6 @@ class Root {
 			}));
 		}
 
-		return Success(OutgoingResponse.blob(Json.stringify(entities), ApplicationJson));
+		return Success(OutgoingResponse.blob(Json.stringify(entities), Mime.ApplicationJson));
 	}
 }
