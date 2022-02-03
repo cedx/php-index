@@ -27,7 +27,7 @@ $stub = <<<'EOF'
 <?php declare(strict_types=1);
 
 // Setup the class loader.
-$rootPath = (new SplFileInfo(__FILE__))->getBasename();
+$rootPath = basename(__FILE__);
 spl_autoload_register(fn($class) => include "phar://$rootPath/lib/".str_replace("\\", "/", $class).".php");
 
 // Start the application.

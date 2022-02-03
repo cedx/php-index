@@ -2,10 +2,10 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
-		"ConditionalCompilation": ["src/php_index/client/Http", "src/php_index/server/File"],
+		"ConditionalCompilation": ["src/php_index/server/File"],
 		"EmptyLines": ["src/php_index/client/Locale"],
 		"MethodLength": ["src/php_index/client/Root"],
-		"ReturnCount": ["src/php_index/cli/Program:run", "src/php_index/cli/Tools:get_tempDirectory"],
+		"ReturnCount": ["src/php_index/cli/Program:run", "src/php_index/cli/Tools:getTempDirectory"],
 		"Trace": ["src/php_index/server/Application"]
 	},
 	"checks": [

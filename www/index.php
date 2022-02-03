@@ -2,7 +2,7 @@
 
 // Setup the class loader.
 const useDataFile = false;
-$rootPath = useDataFile ? "phar://index.zip" : (new SplFileInfo(__DIR__))->getPath();
+$rootPath = useDataFile ? "phar://index.zip" : dirname(__DIR__);
 spl_autoload_register(fn($class) => include "$rootPath/lib/".str_replace("\\", "/", $class).".php");
 
 // Start the application.
