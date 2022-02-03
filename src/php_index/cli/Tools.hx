@@ -11,6 +11,10 @@ using StringTools;
 using haxe.io.Path;
 using haxe.zip.Tools;
 
+#if nodejs
+import js.node.ChildProcess;
+#end
+
 /** Provides helper methods for console applications. **/
 abstract class Tools {
 
@@ -44,7 +48,7 @@ abstract class Tools {
 	/** Captures the output of the specified `command`. **/
 	public static function captureCommand(command: String, ?arguments: Array<String>) {
 		#if nodejs
-			final process = js.node.ChildProcess.spawnSync(command, arguments, {encoding: "utf8", shell: arguments == null});
+			final process = ChildProcess.spawnSync(command, arguments, {encoding: "utf8", shell: arguments == null});
 			return process.status == 0 ? process.stdout.trim() : throw new Exception(process.stderr.trim());
 		#else
 			final process = new sys.io.Process(command, arguments);

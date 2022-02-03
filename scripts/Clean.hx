@@ -5,7 +5,7 @@ using Lambda;
 
 /** Runs the script. **/
 function main() {
-	if (exists("index.php")) deleteFile("index.php");
-	["lib", "www/css", "www/fonts", "www/js"].filter(exists).iter(Tools.removeDirectory);
-	FileSystem.cleanDirectory("var", ~/^\.gitkeep$/);
+	if (FileSystem.exists("index.php")) FileSystem.deleteFile("index.php");
+	["lib", "www/css", "www/fonts", "www/js"].filter(FileSystem.exists).iter(Tools.removeDirectory);
+	Tools.cleanDirectory("var", ~/^\.gitkeep$/);
 }
