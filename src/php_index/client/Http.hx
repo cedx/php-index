@@ -24,6 +24,12 @@ class Http {
 	/** The base URL of the remote API endpoint. **/
 	final baseUrl: Url;
 
+	/** Function invoked before the HTTP request is made. **/
+	final onFetch: Callback<Noise> = function() {};
+
+	/** Function invoked after the HTTP response has been received. **/
+	final onFetched: Callback<Noise> = function() {};
+
 	/** Creates a new HTTP client. **/
 	public function new(baseUrl: Url, ?options: HttpOptions) {
 		this.baseUrl = baseUrl;
@@ -38,12 +44,6 @@ class Http {
 
 	/** Performs a `GET` request. **/
 	public inline function get(url: String, ?headers: Array<HeaderField>) return fetch(GET, url, headers);
-
-	/** Method invoked before the HTTP request is made. **/
-	public dynamic function onFetch() {}
-
-	/** Method invoked after the HTTP response has been received. **/
-	public dynamic function onFetched() {}
 
 	/** Performs a `PATCH` request. **/
 	public inline function patch(url: String, ?body: Any, ?headers: Array<HeaderField>) return fetch(PATCH, url, body, headers);
@@ -75,10 +75,10 @@ class Http {
 				source = Std.isOfType(data, String) ? (data: String) : Json.stringify(data);
 		}
 
-		onFetch();
+		onFetch.invoke(Noise);
 		final options = {body: source, headers: [for (item in header) item], method: method};
 		return Client.fetch(baseUrl.resolve(url), options).all().map(outcome -> {
-			onFetched();
+			onFetched.invoke(Noise);
 			outcome;
 		});
 	}
@@ -101,8 +101,8 @@ class Http {
 typedef HttpOptions = {
 
 	/** Method invoked before the HTTP request is made. **/
-	var ?onFetch: () -> Void;
+	var ?onFetch: Callback<Noise>;
 
 	/** Method invoked after the HTTP response has been received. **/
-	var ?onFetched: () -> Void;
+	var ?onFetched: Callback<Noise>;
 }

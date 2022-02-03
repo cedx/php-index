@@ -22,8 +22,9 @@ class Application extends BaseApplication {
 	public var locale(get, null): Locale;
 
 	/** The languages supported by this application. **/
-	public final supportedLanguages =
-		Resource.listNames().filter(res -> res.startsWith("locale.")).map(res -> res.substring(7).withoutExtension());
+	public final supportedLanguages = Resource.listNames()
+		.filter(res -> res.startsWith("locale."))
+		.map(res -> res.substring(7).withoutExtension());
 
 	/** Creates a new client application. **/
 	function new() {

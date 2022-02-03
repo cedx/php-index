@@ -51,8 +51,10 @@ class File {
 	public inline function exists() return Global.is_file(uri);
 
 	/** Gets the content of this file. **/
-	public inline function getContent(): String return Global.file_get_contents(uri);
+	public inline function getContent(): String
+		return Global.file_get_contents(uri);
 
 	/** Gets the size of this file. **/
-	public inline function getSize(): Int return Global.filesize(uri);
+	public inline function getSize(): Int
+		return Global.filesize(uri);
 }

@@ -145,7 +145,6 @@ class Root extends View {
 		entities = entities.sort((x, y) -> {
 			final field1 = Reflect.getProperty(x, attribute);
 			final field2 = Reflect.getProperty(y, attribute);
-
 			final value = switch attribute {
 				case "modifiedAt":
 					Reflect.compare((field1: Date).getTime(), (field2: Date).getTime());
