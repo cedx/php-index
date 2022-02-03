@@ -3,3 +3,4 @@
 --define js-global=global
 --js var/scripts.js
 --library hxnodejs
+--library tink_core

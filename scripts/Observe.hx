@@ -1,9 +1,10 @@
-//! --class-path src --define hxnodejs --library hxnodejs
+//! --class-path src --define hxnodejs --library hxnodejs --library tink_core
 import haxe.Timer;
 import js.glob_watcher.GlobWatcher.watch;
 import js.lib.Error;
 import js.node.ChildProcess;
 import php_index.cli.Tools;
+import tink.core.Callback;
 
 /** Runs the script. **/
 function main() {
@@ -19,10 +20,10 @@ function main() {
 }
 
 /** Measures the time it takes to run the specified command. **/
-private function measureCommand(cmd: String, ?callback: ?Error -> Void) {
+private function measureCommand(cmd: String, ?callback: Callback<Null<Error>>) {
 	Sys.print('$cmd ');
 	final timestamp = Timer.stamp();
 	final exitCode = Sys.command(cmd);
 	Sys.println('> ${Math.ceil(Timer.stamp() - timestamp)}s');
-	if (callback != null) callback(exitCode == 0 ? null : new Error('The command exited with code $exitCode.'));
+	if (callback != null) callback.invoke(exitCode == 0 ? null : new Error('The command exited with code $exitCode.'));
 }
