@@ -18,31 +18,13 @@ import js.node.ChildProcess;
 /** Provides helper methods for console applications. **/
 abstract class Tools {
 
-	/** The path to the system temporary directory. **/
-	public static var tempDirectory(get, never): String;
+	/** The path to the operating system directory for temporary files. **/
+	public static var tempDirectory(get, null): String;
 
-	/** Gets the path to the system temporary directory. **/
+	/** Gets the path to the operating system directory for temporary files. **/
 	static function get_tempDirectory() {
-		if (Sys.systemName() != "Windows") {
-			for (name in ["TMPDIR", "TMP", "TEMP"]) {
-				final path = Sys.getEnv(name);
-				if (path != null) return path.length > 1 ? path.removeTrailingSlashes() : path;
-			}
-
-			return "/tmp";
-		}
-
-		for (name in ["TMP", "TEMP"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
-		}
-
-		for (name in ["SystemRoot", "windir"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return '$path\\Temp';
-		}
-
-		return "C:\\Windows\\Temp";
+		if (tempDirectory == null) tempDirectory = getTempDirectory();
+		return tempDirectory;
 	}
 
 	/** Captures the output of the specified `command`. **/
@@ -125,5 +107,29 @@ abstract class Tools {
 
 		if (level > 0) entry.compress(level);
 		return entry;
+	}
+
+	/** Gets the path to the operating system directory for temporary files. **/
+	static function getTempDirectory() {
+		if (Sys.systemName() != "Windows") {
+			for (name in ["TMPDIR", "TMP", "TEMP"]) {
+				final path = Sys.getEnv(name);
+				if (path != null) return path.length > 1 ? path.removeTrailingSlashes() : path;
+			}
+
+			return "/tmp";
+		}
+
+		for (name in ["TMP", "TEMP"]) {
+			final path = Sys.getEnv(name);
+			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
+		}
+
+		for (name in ["SystemRoot", "windir"]) {
+			final path = Sys.getEnv(name);
+			if (path != null) return '$path\\Temp';
+		}
+
+		return "C:\\Windows\\Temp";
 	}
 }
