@@ -1,6 +1,6 @@
-package php_index.base;
+package php_index.client;
 
-import tink.http.Response.OutgoingResponse;
+import php_index.base.FileSystemEntity;
 using tink.CoreApi;
 
 /** Defines the interface of the remote API. **/
@@ -8,5 +8,5 @@ interface RemoteApi {
 
 	/** Fetches the directory listing or a resource embedded in the data file. **/
 	@:get("/")
-	function index(query: {?file: String, ?listing: Bool}): Outcome<OutgoingResponse, Error>;
+	function index(query: {?listing: Bool}): Promise<List<FileSystemEntity>>;
 }

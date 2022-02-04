@@ -4,7 +4,6 @@ import haxe.io.Mime;
 import php.Global;
 import php.Syntax;
 import php_index.base.FileSystemEntity;
-import php_index.base.RemoteApi;
 import sys.FileSystem;
 import tink.Json;
 import tink.http.Response.OutgoingResponse;
@@ -12,7 +11,7 @@ using StringTools;
 using haxe.io.Path;
 
 /** The root controller. **/
-class Root implements RemoteApi {
+class Root {
 
 	/** Creates a new root controller. **/
 	public function new() {}

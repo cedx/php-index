@@ -3,7 +3,6 @@ package php_index.client;
 import haxe.Resource;
 import js.Browser;
 import php_index.base.Application as BaseApplication;
-import php_index.base.RemoteApi;
 import tink.Web;
 import tink.web.proxy.Remote;
 import turnwing.Manager;
