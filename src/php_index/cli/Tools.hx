@@ -1,7 +1,6 @@
 package php_index.cli;
 
 import haxe.crypto.Crc32;
-import haxe.Exception;
 import haxe.zip.Entry;
 import haxe.zip.Writer;
 import sys.FileSystem;
@@ -11,10 +10,9 @@ using StringTools;
 using haxe.io.Path;
 using haxe.zip.Tools;
 
-#if nodejs
-import js.node.ChildProcess;
-#else
-import sys.io.Process;
+#if tink_core
+import #if nodejs js.node.ChildProcess #else sys.io.Process #end;
+using tink.CoreApi;
 #end
 
 /** Provides helper methods for console applications. **/
@@ -29,19 +27,23 @@ abstract class Tools {
 		return tempDirectory;
 	}
 
+	#if tink_core
 	/** Captures the output of the specified `command`. **/
 	public static function captureCommand(command: String, ?arguments: Array<String>) {
 		#if nodejs
 			final process = ChildProcess.spawnSync(command, arguments, {encoding: "utf8", shell: arguments == null});
-			return process.status == 0 ? process.stdout.trim() : throw new Exception(process.stderr.trim());
+			return process.status == 0 ? Success(process.stdout.trim()) : Failure(new Error(process.stderr));
 		#else
 			final process = new Process(command, arguments);
-			final success = process.exitCode() == 0;
-			final output = (success ? process.stdout.readAll() : process.stderr.readAll()).toString().trim();
+			final outcome = process.exitCode() == 0
+				? Success(process.stdout.readAll().toString().trim())
+				: Failure(new Error(process.stderr.readAll().toString()));
+
 			process.close();
-			return success ? output : throw new Exception(output);
+			return outcome;
 		#end
 	}
+	#end
 
 	/** Recursively deletes all files in the specified `directory`. **/
 	public static function cleanDirectory(directory: String, ?exclude: EReg)

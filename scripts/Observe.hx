@@ -15,7 +15,7 @@ function main() {
 	watch('$srcDir/cli/**/*.hx', done -> measureCommand("haxe --debug cli.hxml", done));
 	for (app in ["client", "server"]) watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand('haxe --debug $app.hxml', done));
 
-	final loadPath = Tools.captureCommand("lix run bootstrap_bundle libpath");
+	final loadPath = Tools.captureCommand("lix run bootstrap_bundle libpath").sure();
 	watch('$srcDir/ui/**/*.scss', done -> measureCommand('npx sass --load-path=$loadPath $srcDir/ui:www/css', done));
 }
 
