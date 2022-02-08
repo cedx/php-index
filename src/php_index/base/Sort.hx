@@ -39,8 +39,11 @@ abstract Sort(Map<String, SortDirection>) from Map<String, SortDirection> to Map
 }
 
 /** Specifies the direction of a sort parameter. **/
-#if tink_sql
-typedef SortDirection = tink.sql.OrderBy.Order;
-#else
-enum SortDirection { Asc; Desc; }
-#end
+enum SortDirection {
+
+	/** The sort is ascending. **/
+	Asc;
+
+	/** The sort is descending. **/
+	Desc;
+}

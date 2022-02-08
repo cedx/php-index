@@ -13,6 +13,8 @@ using haxe.zip.Tools;
 
 #if nodejs
 import js.node.ChildProcess;
+#else
+import sys.io.Process;
 #end
 
 /** Provides helper methods for console applications. **/
@@ -33,7 +35,7 @@ abstract class Tools {
 			final process = ChildProcess.spawnSync(command, arguments, {encoding: "utf8", shell: arguments == null});
 			return process.status == 0 ? process.stdout.trim() : throw new Exception(process.stderr.trim());
 		#else
-			final process = new sys.io.Process(command, arguments);
+			final process = new Process(command, arguments);
 			final success = process.exitCode() == 0;
 			final output = (success ? process.stdout.readAll() : process.stderr.readAll()).toString().trim();
 			process.close();
