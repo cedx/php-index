@@ -46,7 +46,7 @@ abstract class Application {
 
 	#if (js || php)
 	/** Gets the application language. **/
-	inline function get_language() return #if js document.documentElement.lang #else Locale.getDefault() #end;
+	function get_language() return #if js document.documentElement.lang #else Locale.getDefault() #end;
 
 	/** Sets the application language. **/
 	function set_language(value: String) {

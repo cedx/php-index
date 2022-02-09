@@ -32,7 +32,7 @@ abstract Sort(Map<String, SortDirection>) from Map<String, SortDirection> to Map
 		return [for (attribute => direction in this) (direction == Asc ? "" : "-") + attribute.urlEncode()].join(",");
 
 	/** Sets the direction of the specified attribute. **/
-	@:arrayAccess inline function write(attribute: String, direction: SortDirection) {
+	@:arrayAccess function write(attribute: String, direction: SortDirection) {
 		this.set(attribute, direction);
 		return direction;
 	}
