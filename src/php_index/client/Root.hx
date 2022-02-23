@@ -10,7 +10,7 @@ using js.lib.Date;
 class Root extends View {
 
 	/** The byte units. **/
-	final byteMapping = ["", "K", "M", "G", "T", "P", "E"];
+	final byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
 	/** The formatter used to format the modification dates. **/
 	final dateFormatter = new DateTimeFormat(Application.instance.language, cast {dateStyle: "medium", timeStyle: "short"});
@@ -30,12 +30,12 @@ class Root extends View {
 	/** Formats the specified size. **/
 	function formatSize(bytes: Float) {
 		var index = 0;
-		while (bytes > 1024) {
+		while (bytes > 1024 && index < byteUnits.length) {
 			bytes /= 1024;
 			index++;
 		}
 
-		return sizeFormatter.format(bytes) + byteMapping[index];
+		return sizeFormatter.format(bytes) + byteUnits[index];
 	}
 
 	/** Renders this view. **/
