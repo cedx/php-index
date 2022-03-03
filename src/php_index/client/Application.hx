@@ -4,6 +4,7 @@ import haxe.Resource;
 import js.Browser;
 import php_index.base.Application as BaseApplication;
 import tink.Web;
+import tink.http.clients.JsFetchClient;
 import tink.web.proxy.Remote;
 import turnwing.Manager;
 import turnwing.provider.JsonProvider;
@@ -24,7 +25,8 @@ class Application extends BaseApplication {
 	public var locale(get, null): Locale;
 
 	/** The remote API client. **/
-	public final remote: Remote<RemoteApi> = Web.connect((Browser.location.href: RemoteApi));
+	public final remote: Remote<RemoteApi> =
+		Web.connect((Browser.location.href: RemoteApi), {client: new JsFetchClient()});
 
 	/** The languages supported by this application. **/
 	public final supportedLanguages = Resource.listNames()
