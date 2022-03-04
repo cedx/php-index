@@ -14,7 +14,7 @@ using StringTools;
 abstract class Application {
 
 	/** The unique instance of this application. **/
-	public static var instance(get, null): Application;
+	public static var instance(default, null): Application;
 
 	/** The application identifier. **/
 	public final id: String;
@@ -40,9 +40,6 @@ abstract class Application {
 		this.name = name;
 		this.version = version != null ? version : Version.packageVersion;
 	}
-
-	/** Gets the unique instance of this application. **/
-	static inline function get_instance() return instance;
 
 	#if (js || php)
 	/** Gets the application language. **/

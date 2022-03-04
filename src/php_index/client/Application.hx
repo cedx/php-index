@@ -22,7 +22,7 @@ class Application extends BaseApplication {
 	public static var instance(get, never): Application;
 
 	/** The localization component. **/
-	public var locale(get, null): Locale;
+	public var locale(default, null): Locale;
 
 	/** The remote API client. **/
 	public final remote: Remote<RemoteApi> =
@@ -42,9 +42,6 @@ class Application extends BaseApplication {
 
 	/** Gets the unique instance of this application. **/
 	static inline function get_instance() return cast BaseApplication.instance;
-
-	/** Gets the localization component. **/
-	function get_locale() return locale;
 
 	/** Application entry point. **/
 	static function main() new Application().run();
