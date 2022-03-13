@@ -1,7 +1,6 @@
 package php_index.server;
 
 import haxe.Log;
-import php.Const;
 import php.Global;
 import php.SuperGlobal._SERVER;
 import php_index.base.Application as BaseApplication;
@@ -28,7 +27,6 @@ class Application extends BaseApplication {
 
 	/** Application entry point. **/
 	static function main() {
-		Global.error_reporting(Global.error_reporting() & ~Const.E_DEPRECATED);
 		Log.trace = (value, ?infos) -> Global.error_log(Log.formatOutput(value, infos));
 		new Application().run();
 	}
