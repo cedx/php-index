@@ -1,5 +1,5 @@
 # PHP Index
-![Haxe](https://flat.badgen.net/badge/haxe/%3E%3D4.2.0/green) ![Haxelib](https://flat.badgen.net/haxelib/v/php_index) ![License](https://flat.badgen.net/haxelib/license/php_index) ![Downloads](https://flat.badgen.net/haxelib/d/php_index)
+![Haxe](https://badgen.net/badge/haxe/%3E%3D4.2.0/green) ![Haxelib](https://badgen.net/haxelib/v/php_index) ![License](https://badgen.net/haxelib/license/php_index) ![Downloads](https://badgen.net/haxelib/d/php_index)
 
 A [PHP](https://www.php.net) directory index generator, implemented in [Haxe](https://haxe.org).
 
