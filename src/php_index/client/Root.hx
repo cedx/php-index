@@ -10,7 +10,7 @@ using js.lib.Date;
 class Root extends View {
 
 	/** The byte units. **/
-	final byteUnits = ["", "K", "M", "G", "T", "P", "E"];
+	static final byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
 	/** The formatter used to format the modification dates. **/
 	final dateFormatter = new DateTimeFormat(Application.instance.language, cast {dateStyle: "medium", timeStyle: "short"});
