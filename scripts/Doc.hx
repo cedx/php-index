@@ -13,10 +13,10 @@ function main() {
 		Sys.command("lix", [
 			"run", "dox",
 			"--define", "description", "A PHP directory index generator, implemented in Haxe.",
-			"--define", "source-path", "https://bitbucket.org/cedx/php-index.hx/src/main/src",
+			"--define", "source-path", "https://github.com/cedx/php-index.hx/blob/main/src",
 			"--define", "themeColor", "0xffc105",
 			"--define", "version", Version.packageVersion,
-			"--define", "website", "https://bitbucket.org/cedx/php-index.hx",
+			"--define", "website", "https://github.com/cedx/php-index.hx",
 			"--input-path", "var",
 			"--output-path", 'docs/$app',
 			"--title", "PHP Index",

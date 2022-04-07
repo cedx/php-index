@@ -4,13 +4,13 @@
 A [PHP](https://www.php.net) directory index generator, implemented in [Haxe](https://haxe.org).
 
 ## Documentation
-- [User guide](https://bitbucket.org/cedx/php-index.hx/wiki)
+- [User guide](https://github.com/cedx/php-index.hx/wiki)
 - [API reference](https://cedx.github.io/php-index.hx)
 
 ## Development
-- [Git repository](https://bitbucket.org/cedx/php-index.hx)
+- [Git repository](https://github.com/cedx/php-index.hx)
 - [Haxelib package](https://lib.haxe.org/p/php_index)
-- [Submit an issue](https://bitbucket.org/cedx/php-index.hx/issues)
+- [Submit an issue](https://github.com/cedx/php-index.hx/issues)
 
 ## Licence
-[PHP Index](https://bitbucket.org/cedx/php-index.hx) est distribué sous une licence propriétaire.
+[PHP Index](https://github.com/cedx/php-index.hx) est distribué sous une licence propriétaire.
