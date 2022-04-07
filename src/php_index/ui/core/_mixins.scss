@@ -1,0 +1,18 @@
+@mixin scrollbar($foreground, $background, $width: auto) {
+	scrollbar-color: $foreground $background;
+	scrollbar-width: $width;
+
+	&::-webkit-scrollbar {
+		height: if($width == thin, 8px, 17px);
+		width: if($width == thin, 8px, 17px);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $foreground;
+		border: 1px solid rgba($background, 0.4);
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: $background;
+	}
+}

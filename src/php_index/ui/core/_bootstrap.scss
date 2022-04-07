@@ -1,11 +1,5 @@
-// Configuration.
-@forward "variables";
-@use "variables" as *;
-
-@import "scss/functions";
-@import "scss/variables";
-@import "scss/mixins";
-@import "scss/utilities";
+// Configuration
+@use "../theme" as *;
 
 // Layout and components.
 @import "scss/root";

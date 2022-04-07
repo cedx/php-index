@@ -1,10 +1,8 @@
 @use "sass:map";
-@use "../core/bootstrap" as *;
+@use "../theme" as *;
 
-.navbar-brand {
-	img {
-		height: 24px;
-		position: relative;
-		top: -1px;
-	}
+.navbar-brand img {
+	height: 24px;
+	position: relative;
+	top: -1px;
 }
