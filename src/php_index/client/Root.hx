@@ -12,6 +12,9 @@ class Root extends View {
 	/** The byte units. **/
 	static final byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
+	/** The formatter used to format the file sizes. **/
+	final byteFormatter = new NumberFormat(Application.instance.language, {maximumFractionDigits: 2});
+
 	/** The formatter used to format the modification dates. **/
 	final dateFormatter = new DateTimeFormat(Application.instance.language, cast {dateStyle: "medium", timeStyle: "short"});
 
@@ -24,18 +27,15 @@ class Root extends View {
 	/** The current path. **/
 	final path = location.pathname.length > 1 ? location.pathname.removeTrailingSlashes() : location.pathname;
 
-	/** The formatter used to format the file sizes. **/
-	final sizeFormatter = new NumberFormat(Application.instance.language, {maximumFractionDigits: 2});
-
 	/** Formats the specified size. **/
-	function formatSize(bytes: Float) {
+	function formatBytes(bytes: Float) {
 		var index = 0;
 		while (bytes > 1024 && index < byteUnits.length) {
 			bytes /= 1024;
 			index++;
 		}
 
-		return sizeFormatter.format(bytes) + byteUnits[index];
+		return byteFormatter.format(bytes) + byteUnits[index];
 	}
 
 	/** Renders this view. **/
@@ -111,7 +111,7 @@ class Root extends View {
 													<if ${entity.type == Directory}>
 														&ndash;
 													<else>
-														${formatSize(entity.size)}
+														${formatBytes(entity.size)}
 													</if>
 												</td>
 												<td class="d-none d-sm-table-cell text-end">
