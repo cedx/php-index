@@ -16,7 +16,7 @@ using haxe.io.Path;
 using php_index.client.ElementTools;
 
 /** The client application. **/
-class Application extends BaseApplication {
+final class Application extends BaseApplication {
 
 	/** The unique instance of this application. **/
 	public static var instance(get, never): Application;

@@ -11,7 +11,7 @@ using haxe.io.Path;
 using tink.CoreApi;
 
 /** Build the PHP Index redistributable. **/
-class Program {
+final class Program {
 
 	/** Compress the data. **/
 	public var compress = false;

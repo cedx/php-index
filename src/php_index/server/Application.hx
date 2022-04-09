@@ -11,7 +11,7 @@ import tink.web.routing.Router;
 using haxe.io.Path;
 
 /** The server application. **/
-class Application extends BaseApplication {
+final class Application extends BaseApplication {
 
 	/** The unique instance of this application. **/
 	public static var instance(get, never): Application;

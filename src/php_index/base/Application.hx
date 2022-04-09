@@ -1,13 +1,14 @@
 package php_index.base;
 
 #if js
-import js.Browser.document;
+import js.Browser;
+import js.lib.intl.NumberFormat as NumberFormatter;
 #elseif php
-import php.Const;
-import php.Global;
 import php.Locale;
+import php.NumberFormatter;
 #end
 
+using Lambda;
 using StringTools;
 
 /** The base class for applications. **/
@@ -16,8 +17,22 @@ abstract class Application {
 	/** The unique instance of this application. **/
 	public static var instance(default, null): Application;
 
+	#if (js || php)
+	/** The component providing data formatting methods. **/
+	public var formatter(get, null): {
+		currency: NumberFormatter,
+		decimal: NumberFormatter,
+		percent: NumberFormatter
+	};
+	#end
+
 	/** The application identifier. **/
 	public final id: String;
+
+	#if js
+	/** Value indicating whether this application is standalone. **/
+	public var isStandalone(get, never): Bool;
+	#end
 
 	#if (js || php)
 	/** The application language. **/
@@ -42,19 +57,33 @@ abstract class Application {
 	}
 
 	#if (js || php)
+	/** Gets the component providing data formatting methods. **/
+	function get_formatter() {
+		if (formatter == null) formatter = {
+			currency: new NumberFormatter(language, #if js {currency: "EUR", style: Currency} #else NumberFormatter.CURRENCY #end),
+			decimal: new NumberFormatter(language, #if js {style: Decimal} #else NumberFormatter.DECIMAL #end),
+			percent: new NumberFormatter(language, #if js {style: Percent} #else NumberFormatter.PERCENT #end)
+		};
+
+		return formatter;
+	}
+	#end
+
+	#if js
+	/** Gets a value indicating whether this application is standalone. **/
+	function get_isStandalone() return ["fullscreen", "minimal-ui", "standalone"]
+		.exists(displayMode -> Browser.window.matchMedia('(display-mode: $displayMode)').matches);
+	#end
+
+	#if (js || php)
 	/** Gets the application language. **/
-	function get_language() return #if js document.documentElement.lang #else Locale.getDefault() #end;
+	function get_language()
+		return #if js Browser.document.documentElement.lang #else Locale.getDefault() #end;
 
 	/** Sets the application language. **/
 	function set_language(value: String) {
-		#if js
-			return document.documentElement.lang = value;
-		#else
-			final locale = value.replace("-", "_");
-			Global.setlocale(Const.LC_ALL, '$locale.UTF-8', locale, locale.split("_")[0]);
-			Locale.setDefault(value);
-			return value;
-		#end
+		formatter = null;
+		#if js return Browser.document.documentElement.lang = value; #else Locale.setDefault(value); return value; #end
 	}
 	#end
 
@@ -71,6 +100,6 @@ abstract class Application {
 	public function remove<T>(type: Class<T>) services.remove(Type.getClassName(type));
 
 	/** Registers a service with this application. **/
-	public function set<T>(value: Any, ?type: Class<T>)
+	public function set<T>(?type: Class<T>, value: Any)
 		services.set(Type.getClassName(type != null ? type : Type.getClass(value)), value);
 }
