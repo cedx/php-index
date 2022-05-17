@@ -18,5 +18,5 @@
 --define js-global=window
 --js www/js/main.js
 --main php_index.client.Application
---resource share/locale/en.json@locale.en.json
---resource share/locale/fr.json@locale.fr.json
+--resource res/locale/en.json@locale.en.json
+--resource res/locale/fr.json@locale.fr.json
