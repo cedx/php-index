@@ -1,0 +1,10 @@
+// Base.
+@forward "core/variables";
+@forward "core/mixins";
+
+// Bootstrap.
+@use "core/variables" as *;
+@import "scss/functions";
+@import "scss/variables";
+@import "scss/mixins";
+@import "scss/utilities";

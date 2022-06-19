@@ -1,0 +1,29 @@
+// Color system.
+$gray-100: #f8f9fa;
+$primary: #165898;
+$white: white;
+
+// Options.
+$enable-shadows: true;
+$variable-prefix: "";
+
+// Spacing.
+$spacer: 1rem;
+
+// Body.
+$body-text-align: start;
+
+// Links.
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+// Container padding.
+$container-padding-x: 1rem;
+
+// Typography.
+$font-size-root: 14px;
+
+// Navbar.
+$navbar-dark-color: rgba($white, 0.75);
+$navbar-dark-hover-color: rgba($white, 0.95);
+$navbar-nav-link-padding-x: 0.75rem;
