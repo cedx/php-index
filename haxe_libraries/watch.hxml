@@ -1,5 +1,0 @@
-# @install: lix --silent download "haxelib:/watch#0.0.6" into watch/0.0.6/haxelib
-# @run: haxelib run-dir watch ${HAXE_LIBCACHE}/watch/0.0.6/haxelib
--cp ${HAXE_LIBCACHE}/watch/0.0.6/haxelib/src
--D watch=0.0.6
---macro watch.Watch.register()

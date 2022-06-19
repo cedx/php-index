@@ -1,4 +1,0 @@
-# @install: lix --silent download "haxelib:/turnwing#2.0.0" into turnwing/2.0.0/haxelib
--lib tink_core
--cp ${HAXE_LIBCACHE}/turnwing/2.0.0/haxelib/src
--D turnwing=2.0.0
