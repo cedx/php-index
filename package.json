@@ -4,7 +4,6 @@
 	"homepage": "https://github.com/cedx/php-index",
 	"license": "MIT",
 	"name": "@cedx/php-index",
-	"private": true,
 	"repository": "github:cedx/php-index",
 	"type": "module",
 	"version": "0.2.0",
@@ -17,6 +16,7 @@
 		"php_index": "./bin/php_index.js"
 	},
 	"dependencies": {
+		"archiver": "^5.3.1",
 		"commander": "^9.3.0"
 	},
 	"devDependencies": {
