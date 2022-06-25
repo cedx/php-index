@@ -1,16 +1,13 @@
 /node_modules/
 /var/
-/vendor/
 /www/css/
 /www/fonts/
 /www/js/
 
 /*.code-workspace
-/*.iml
 /**/.DS_Store
 /index.php
 /npm-debug.log
-/run.n
 /src/**/*.g.json
 /www/**/*.map
 /www/index.phar
