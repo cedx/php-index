@@ -12,8 +12,8 @@ if (!Phar::canWrite()) {
 	exit(2);
 }
 
-// Check the command line arguments.
-$options = getopt("ci:o:", ["compress", "input:", "output:"], $index);
+// Parse the command line arguments.
+$options = getopt("i:o:", ["input:", "output:"], $index);
 
 $input = $options["i"] ?? ($options["input"] ?? null);
 if (!$input || !is_dir($input)) {
@@ -39,7 +39,3 @@ EOF;
 $phar = new Phar("$output/index.phar");
 $phar->buildFromDirectory($input);
 $phar->setStub($stub);
-
-// Compress the PHAR archive.
-$compress = $options["c"] ?? ($options["compress"] ?? null);
-if ($compress !== null && Phar::canCompress(Phar::GZ)) $phar->compressFiles(Phar::GZ);
