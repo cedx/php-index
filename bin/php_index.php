@@ -30,16 +30,9 @@ if (!$output || !is_dir($output)) {
 // Create the PHAR archive.
 $stub = <<<'EOF'
 <?php declare(strict_types=1);
-
-// Setup the class loader.
 $rootPath = basename(__FILE__);
-spl_autoload_register(fn($class) => include "phar://$rootPath/lib/".str_replace("\\", "/", $class).".php");
-
-// Start the application.
-\php\Boot::__hx__init();
-\php_index\server\Application::main();
-\haxe\EntryPoint::run();
-
+require "phar://$rootPath/lib/server/index.php";
+\PhpIndex\main();
 __HALT_COMPILER();
 EOF;
 

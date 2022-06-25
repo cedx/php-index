@@ -7,6 +7,6 @@
 	"[markdown]": {"files.trimTrailingWhitespace": false},
 	"[yaml]": {"editor.insertSpaces": true},
 	"rest-client.environmentVariables": {
-		"$shared": {"baseUrl": "http://localhost:8080"}
+		"development": {"baseUrl": "http://localhost:8080"}
 	}
 }
