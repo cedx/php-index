@@ -1,50 +1,49 @@
-import {appendFile, cp, readFile} from "node:fs/promises";
-import os from "node:os";
-import {resolve} from "node:path";
-import process from "node:process";
+import {cp, readFile} from "node:fs/promises";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
 
-// Value indicating whether the application runs in debug mode.
-const debug = process.env.NODE_ENV != "production";
-
 /** Builds the project. */
-export const build = gulp.series(
+export const build = gulp.parallel(
+	buildApp,
 	buildTheme
 );
 
-/** Builds the application theme. */
-async function buildTheme() {
-	/*
-	const cssDir = resolve("www/css");
-	const sourcemap = !debug ? [] : [
-		"--sourcemap",
-		"--sourcemap-root",
-		encodeURI(`file:///${process.platform == "win32" ? cssDir.replaceAll("\\", "/") : cssDir.slice(1)}`)
-	];
+/** Builds the application. */
+function buildApp() {
+	return Promise.all([
+		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.js", "www/js/bootstrap.js"),
+		exec("rollup", ["--config=etc/rollup.js", "--silent"])
+	]);
+}
 
-	/*await exec("stylus", ["--out", "www/css", "--quiet", ...sourcemap, "lib/ui/theme/theme.styl"]);*/
-	await cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css");
-	await cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js");
-	return cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2");
+/** Builds the theme. */
+function buildTheme() {
+	return Promise.all([
+		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2"),
+		exec("sass", ["--load-path=node_modules", "--no-source-map", "lib/ui/bootstrap:www/css"]),
+		exec("stylus", ["--out", "www/css", "--quiet", "lib/ui/theme/theme.styl"])
+	]);
 }
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return del(["var/**/*", "www/*.{js,phar}", "www/css", "www/fonts", "www/js"]);
+	return del(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
 
 /** Builds the redistributable package. */
 export async function dist() {
-	for (const script of ["www/js/main.js", "www/worker.js"])
-		await exec("terser", ["--comments=false", "--config-file=etc/terser.json", `--output=${script}`, script]);
+	process.env.NODE_ENV = "production";
+	await Promise.all([buildApp(), buildTheme()]);
 
-	await exec("cleancss", ["-O2", "--output=www/css/main.css", "www/css/main.css"]);
-	await del("www/**/*.map");
+	const args = ["--comments=false", "--config-file=etc/terser.json"];
+	const css = ["bootstrap", "theme"].map(file => exec("cleancss", ["-O2", `--output=www/css/${file}.css`, `www/css/${file}.css`]));
+	const js = ["js/bootstrap", "js/main" /*, "worker" */].map(file => exec("terser", [...args, `--output=www/${file}.js`, `www/${file}.js`]));
+	return Promise.all([...css, ...js]);
 
-	const {stdout: gitCommitHash} = await exec("git", ["rev-parse", "HEAD"], {stdio: "pipe"});
-	return appendFile("www/worker.js", `${os.EOL}// ${new Date().toISOString()} ${gitCommitHash}`);
+	// TODO Worker
+	//const {stdout} = await exec("git", ["rev-parse", "HEAD"], {stdio: "pipe"});
+	//return appendFile("www/worker.js", `${os.EOL}// ${new Date().toISOString()} ${stdout}`);
 }
 
 /** Performs the static analysis of source code. */
@@ -61,17 +60,33 @@ export async function publish() {
 	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${version}`]);
 }
 
+/** Starts the development server. */
+export function serve() {
+	return exec("php", ["-S", "localhost:8080", "-t", "www"]);
+}
+
 /** Watches for file changes. */
-/*
 export const watch = gulp.series(
-	// TODO
-);*/
+	build,
+	gulp.parallel(serve, watchApp, watchTheme)
+);
+
+/** Watches for file changes in the application. */
+function watchApp() {
+	const compileApp = () => exec("rollup", ["--config=etc/rollup.js", "--silent"]);
+	gulp.watch("lib/client/**/*.js", compileApp);
+}
+
+/** Watches for file changes in the theme. */
+function watchTheme() {
+	const compileTheme = () => exec("stylus", ["--out", "www/css", "--quiet", "lib/ui/theme/theme.styl"]);
+	gulp.watch("lib/ui/**/*.styl", compileTheme);
+}
 
 /** The default task. */
 export default gulp.series(
 	clean,
-	build,
-	//dist
+	dist
 );
 
 /**

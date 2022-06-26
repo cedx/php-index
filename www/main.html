@@ -11,14 +11,32 @@
 		<meta name="viewport" content="initial-scale=1, width=device-width"/>
 
 		<link rel="icon" href="?file=favicon.svg"/>
-		<link rel="stylesheet" href="?file=css/vendor.css"/>
-		<!--TODO <link rel="stylesheet" href="?file=css/main.css"/>-->
+		<link rel="stylesheet" href="?file=css/bootstrap.css"/>
+		<link rel="stylesheet" href="?file=css/theme.css"/>
 
-		<script defer src="?file=js/vendor.js"></script>
-		<!--TODO <script defer src="?file=js/main.js"></script>-->
+		<script defer src="?file=js/bootstrap.js"></script>
+		<script src="?file=js/main.js" type="module"></script>
+
+		<style>
+			@font-face {
+				font-display: block;
+				font-family: "Bootstrap Icons";
+				src: url("?file=fonts/icons.woff2") format("woff2");
+			}
+		</style>
 	</head>
 
 	<body>
+		<nav class="bg-primary d-print-none navbar navbar-dark navbar-expand-lg fixed-top shadow user-select-none">
+			<div class="container-fluid">
+				<div class="d-flex align-items-center">
+					<span class="navbar-brand">
+						<img alt="" src="?file=img/navbar_logo.svg"/>
+					</span>
+				</div>
+			</div>
+		</nav>
+
 		<div class="loader text-center">
 			<section>
 				<div class="spinner-border text-secondary"></div>

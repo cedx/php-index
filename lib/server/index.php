@@ -44,9 +44,9 @@ function sendFile(string $path): void {
 		$baseUri = "phar://$basePath";
 	}
 	else {
-		$basePath = str_replace(DIRECTORY_SEPARATOR, "/", realpath(dirname($_SERVER["SCRIPT_FILENAME"])."/.."));
+		$basePath = str_replace("\\", "/", realpath(dirname($_SERVER["SCRIPT_FILENAME"])."/.."));
 		$prefix = PHP_OS_FAMILY == "Windows" ? "/" : "";
-		$baseUri = "file:$prefix//$basePath";
+		$baseUri = "file://$prefix$basePath";
 	}
 
 	$file = "$baseUri/www/$path";
