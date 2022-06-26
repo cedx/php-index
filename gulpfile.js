@@ -1,14 +1,34 @@
-import {appendFile, readFile} from "node:fs/promises";
+import {appendFile, cp, readFile} from "node:fs/promises";
 import os from "node:os";
+import {resolve} from "node:path";
+import process from "node:process";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
 
+// Value indicating whether the application runs in debug mode.
+const debug = process.env.NODE_ENV != "production";
+
 /** Builds the project. */
-/*
 export const build = gulp.series(
-	// TODO
-);*/
+	buildTheme
+);
+
+/** Builds the application theme. */
+async function buildTheme() {
+	/*
+	const cssDir = resolve("www/css");
+	const sourcemap = !debug ? [] : [
+		"--sourcemap",
+		"--sourcemap-root",
+		encodeURI(`file:///${process.platform == "win32" ? cssDir.replaceAll("\\", "/") : cssDir.slice(1)}`)
+	];
+
+	/*await exec("stylus", ["--out", "www/css", "--quiet", ...sourcemap, "lib/ui/theme/theme.styl"]);*/
+	await cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css");
+	await cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js");
+	return cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2");
+}
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
@@ -50,8 +70,8 @@ export const watch = gulp.series(
 /** The default task. */
 export default gulp.series(
 	clean,
-	//build,
-	dist
+	build,
+	//dist
 );
 
 /**
