@@ -1,4 +1,5 @@
 import {cp, readFile} from "node:fs/promises";
+import {env} from "node:process";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
@@ -33,7 +34,7 @@ export function clean() {
 
 /** Builds the redistributable package. */
 export async function dist() {
-	process.env.NODE_ENV = "production";
+	env.NODE_ENV = "production";
 	await Promise.all([buildApp(), buildTheme()]);
 
 	const args = ["--comments=false", "--config-file=etc/terser.json"];
