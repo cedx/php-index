@@ -1,5 +1,6 @@
 import {cp, readFile} from "node:fs/promises";
 import {env} from "node:process";
+import {promisify} from "node:util";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
@@ -35,7 +36,7 @@ export function clean() {
 /** Builds the redistributable package. */
 export async function dist() {
 	env.NODE_ENV = "production";
-	await Promise.all([buildApp(), buildTheme()]);
+	await promisify(build)();
 
 	const args = ["--comments=false", "--config-file=etc/terser.json"];
 	const css = ["bootstrap", "theme"].map(file => exec("cleancss", ["-O2", `--output=www/css/${file}.css`, `www/css/${file}.css`]));
