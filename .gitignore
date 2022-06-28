@@ -6,10 +6,7 @@
 
 /*.code-workspace
 /**/.DS_Store
-/index.php
 /npm-debug.log
-/src/**/*.g.json
+/www/*.phar
 /www/**/*.map
-/www/index.phar
-/www/index.zip
 /www/worker.js
