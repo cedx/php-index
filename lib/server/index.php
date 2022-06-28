@@ -30,7 +30,7 @@ function main(): void {
 	else {
 		$path = trim($_GET["file"] ?? "main.html");
 		if ($path) sendFile($path);
-		else sendResponse("The file path is required.", status: 422);
+		else sendResponse("The file path is required.", mimeType: "text/plain", status: 422);
 	}
 }
 
@@ -50,7 +50,7 @@ function sendFile(string $path): void {
 	}
 
 	$file = "$baseUri/www/$path";
-	if (!is_file($file)) sendResponse("The file '$path' is not found.", status: 404);
+	if (!is_file($file)) sendResponse("The file '$path' is not found.", mimeType: "text/plain", status: 404);
 	else sendResponse(file_get_contents($file), mimeType: getMimeType($file));
 }
 
@@ -78,7 +78,7 @@ function sendListing(): void {
 		];
 	}, $entries);
 
-	sendResponse(json_encode($entities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), mimeType: "application/json");
+	sendResponse(json_encode($entities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 }
 
 /**
@@ -87,7 +87,7 @@ function sendListing(): void {
  * @param string $mimeType The response MIME type.
  * @param int $status The status code of the response.
  */
-function sendResponse(string $body, string $mimeType = "text/plain", int $status = 200): void {
+function sendResponse(string $body, string $mimeType = "application/json", int $status = 200): void {
 	http_response_code($status);
 	header("Content-Length: ".strlen($body));
 	header("Content-Type: $mimeType");

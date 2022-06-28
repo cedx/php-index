@@ -15,5 +15,5 @@ export default {
 	},
 	plugins: production
 		? [nodeResolve(), minifyHtmlLiterals()]
-		: [nodeResolve({exportConditions: ["development"]})]
+		: nodeResolve({exportConditions: ["development"]})
 };
