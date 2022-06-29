@@ -1,5 +1,5 @@
 import {env} from "node:process";
-import {nodeResolve} from "@rollup/plugin-node-resolve";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import minifyHtmlLiterals from "rollup-plugin-minify-html-literals";
 
 // Value indicating whether the application runs in production mode.
