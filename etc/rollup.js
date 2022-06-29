@@ -11,7 +11,7 @@ export default {
 	input: "lib/client/index.js",
 	output: {
 		file: "www/js/main.js",
-		format: "es",
+		format: "esm",
 	},
 	plugins: production
 		? [nodeResolve(), minifyHtmlLiterals()]
