@@ -5,8 +5,11 @@
 		"node": true
 	},
 	"extends": "eslint:recommended",
+	"parser": "@babel/eslint-parser",
 	"parserOptions": {
+		"babelOptions": {"plugins": ["@babel/plugin-syntax-import-assertions"]},
 		"ecmaVersion": "latest",
+		"requireConfigFile": false,
 		"sourceType": "module"
 	},
 	"root": true,
@@ -87,7 +90,7 @@
 		"no-multi-str": "error",
 		"no-negated-condition": "off",
 		"no-nested-ternary": "off",
-		"no-new": "error",
+		"no-new": "off",
 		"no-new-func": "error",
 		"no-new-object": "error",
 		"no-new-wrappers": "error",
@@ -177,7 +180,7 @@
 		"lines-between-class-members": "error",
 		"max-len": ["error", {"code": 160}],
 		"max-statements-per-line": ["error", {"max": 3}],
-		"multiline-ternary": ["error", "always-multiline"],
+		"multiline-ternary": "off",
 		"new-parens": "off",
 		"newline-per-chained-call": ["error", {"ignoreChainWithDepth": 4}],
 		"no-extra-parens": "off",
