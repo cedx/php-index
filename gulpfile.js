@@ -1,9 +1,11 @@
-import {cp, readFile} from "node:fs/promises";
+import {cp} from "node:fs/promises";
 import {env} from "node:process";
 import {promisify} from "node:util";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
+import config from "./jsconfig.json" assert {type: "json"};
+import pkg from "./package.json" assert {type: "json"};
 
 /** Builds the project. */
 export const build = gulp.parallel(
@@ -40,26 +42,20 @@ export async function dist() {
 
 	const args = ["--comments=false", "--config-file=etc/terser.json"];
 	const css = ["bootstrap", "theme"].map(file => exec("cleancss", ["-O2", `--output=www/css/${file}.css`, `www/css/${file}.css`]));
-	const js = ["js/bootstrap", "js/main" /*, "worker" */].map(file => exec("terser", [...args, `--output=www/${file}.js`, `www/${file}.js`]));
+	const js = ["js/bootstrap", "js/main"].map(file => exec("terser", [...args, `--output=www/${file}.js`, `www/${file}.js`]));
 	return Promise.all([...css, ...js]);
-
-	// TODO Worker
-	//const {stdout} = await exec("git", ["rev-parse", "HEAD"], {stdio: "pipe"});
-	//return appendFile("www/worker.js", `${os.EOL}// ${new Date().toISOString()} ${stdout}`);
 }
 
 /** Performs the static analysis of source code. */
 export async function lint() {
-	const {include} = JSON.parse(await readFile("jsconfig.json", "utf8"));
-	await exec("eslint", ["--config=etc/eslint.json", ...include]);
+	await exec("eslint", ["--config=etc/eslint.json", ...config.include]);
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
 /** Publishes the package in the registry. */
 export async function publish() {
-	const {version} = JSON.parse(await readFile("package.json", "utf8"));
 	for (const registry of ["https://registry.npmjs.org", "https://npm.pkg.github.com"]) await exec("npm", ["publish", `--registry=${registry}`]);
-	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${version}`]);
+	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
 }
 
 /** Starts the development server. */

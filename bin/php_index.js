@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 import {randomUUID} from "node:crypto";
-import {cpSync, mkdirSync, readFileSync, rmSync} from "node:fs";
+import {cpSync, mkdirSync, rmSync} from "node:fs";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {fileURLToPath} from "node:url";
 import {program} from "commander";
 import {execaSync} from "execa";
+import pkg from "../package.json" assert {type: "json"};
 
 // Parse the command line arguments.
-const {version} = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 program.name("php_index")
 	.description("Build the PHP Index redistributable.")
-	.version(version, "-v, --version")
+	.version(pkg.version, "-v, --version")
 	.argument("<directory>", "the path to the output directory")
 	.parse();
 
