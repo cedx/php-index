@@ -7,12 +7,9 @@ const production = env.NODE_ENV == "production";
 
 /** @type {import("rollup").RollupOptions} */
 export default {
-	treeshake: production,
 	input: "lib/client/index.js",
-	output: {
-		file: "www/js/main.js",
-		format: "esm",
-	},
+	output: {file: "www/js/main.js", format: "es"},
+	treeshake: production,
 	plugins: production
 		? [nodeResolve(), minifyHtmlLiterals()]
 		: nodeResolve({exportConditions: ["development"]})
