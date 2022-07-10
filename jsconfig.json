@@ -4,9 +4,9 @@
 		"checkJs": true,
 		"esModuleInterop": true,
 		"module": "esnext",
-		"moduleResolution": "nodenext",
+		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"strict": true,
-		"target": "es2022"
+		"target": "esnext"
 	}
 }
