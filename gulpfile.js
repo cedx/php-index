@@ -1,7 +1,7 @@
 import {cp} from "node:fs/promises";
 import {env} from "node:process";
 import {promisify} from "node:util";
-import del from "del";
+import {deleteAsync} from "del";
 import {execa} from "execa";
 import gulp from "gulp";
 import config from "./jsconfig.json" assert {type: "json"};
@@ -32,7 +32,7 @@ function buildTheme() {
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return del(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
+	return deleteAsync(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
 
 /** Builds the redistributable package. */
