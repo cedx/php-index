@@ -3,48 +3,53 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<title>PHP Index</title>
+		<link rel="icon" href="?file=favicon.svg"/>
 
 		<meta name="application-name" content="PHP Index"/>
+		<meta name="author" content="Cédric Belin - cedric@belin.io"/>
 		<meta name="color-scheme" content="light"/>
 		<meta name="format-detection" content="telephone=no"/>
 		<meta name="referrer" content="same-origin"/>
 		<meta name="theme-color" content="#165898"/>
 		<meta name="viewport" content="initial-scale=1, width=device-width"/>
 
-		<link rel="icon" href="?file=favicon.svg"/>
-		<link rel="stylesheet" href="?file=css/bootstrap.css"/>
-		<link rel="stylesheet" href="?file=css/theme.css"/>
+		<script type="module">
+			import vendor from "./?file=css/vendor.css" assert {type: "css"};
+			import main from "./?file=css/main.css" assert {type: "css"};
+			document.adoptedStyleSheets = [vendor, main];
+		</script>
 
-		<script defer src="?file=js/bootstrap.js"></script>
+		<script src="?file=js/vendor.js" defer></script>
 		<script src="?file=js/main.js" type="module"></script>
 
 		<style>
-			@font-face {
-				font-display: block;
-				font-family: "Bootstrap Icons";
-				src: url("?file=fonts/icons.woff2") format("woff2");
+			@keyframes loader-circle {
+				0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+				50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+				100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
 			}
+
+			@keyframes loader-svg {
+				100% { transform: rotate(360deg); }
+			}
+
+			#loader { left: 0; line-height: 1; padding-top: 30vh; position: fixed; right: 0; text-align: center; top: 0; }
+			#loader circle { animation: loader-circle 1.5s ease-in-out infinite; stroke: #696969; stroke-linecap: round; }
+			#loader section { margin: 10px 0; }
+			#loader svg { animation: loader-svg 2s linear infinite; }
 		</style>
 	</head>
 
 	<body>
-		<nav class="bg-primary d-print-none navbar navbar-dark navbar-expand-lg fixed-top shadow user-select-none">
-			<div class="container-fluid">
-				<div class="d-flex align-items-center">
-					<span class="navbar-brand">
-						<img alt="" src="?file=img/navbar_logo.svg"/>
-					</span>
-				</div>
-			</div>
-		</nav>
-
-		<div class="loader text-center">
+		<div id="loader">
 			<section>
-				<div class="spinner-border text-secondary"></div>
+				<svg height="100" viewBox="0 0 50 50" width="100">
+					<circle cx="25" cy="25" fill="none" r="20" stroke-width="3"/>
+				</svg>
 			</section>
 
 			<section>
-				<img alt="" src="?file=img/loader_logo.svg"/>
+				<img alt="MC2IT" height="50" src="?file=img/loader_logo.svg" width="200"/>
 			</section>
 		</div>
 	</body>
