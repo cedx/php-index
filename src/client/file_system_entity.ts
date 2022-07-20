@@ -1,15 +1,14 @@
 /**
  * Defines the type of a file system entity.
- * @enum {string}
  */
-export const FileSystemEntityType = Object.freeze({
+export enum FileSystemEntityType {
 
 	/** The file system entity is a directory. */
-	directory: "directory",
+	directory = "directory",
 
 	/** The file system entity is a file. */
-	file: "file"
-});
+	file = "file"
+}
 
 /**
  * A reference to an entity on the file system.
@@ -18,9 +17,8 @@ export class FileSystemEntity {
 
 	/**
 	 * The icon mapping.
-	 * @type {Map<string, string>}
 	 */
-	static #iconMapping = new Map([
+	static #iconMapping: Map<string, string> = new Map([
 		["avi", "play"],
 		["bat", "binary"],
 		["bin", "binary"],
@@ -79,47 +77,59 @@ export class FileSystemEntity {
 
 	/**
 	 * The date of last modification.
-	 * @type {Date}
 	 */
-	modifiedAt;
+	readonly modifiedAt: Date;
 
 	/**
 	 * The path of this file system entity.
-	 * @type {string}
 	 */
-	path = "";
+	readonly path: string;
 
 	/**
 	 * The size of this file system entity.
-	 * @type {number}
 	 */
-	size = -1;
+	readonly size: number;
 
 	/**
 	 * The type of this file system entity.
-	 * @type {string}
 	 */
-	type = FileSystemEntityType.file;
+	readonly type: FileSystemEntityType;
 
 	/**
 	 * Creates a new file system entity.
-	 * @param {Record<string, any>} [options] An object providing values to initialize this instance.
+	 * @param options An object providing values to initialize this instance.
 	 */
-	constructor(options = {}) {
-		const {modifiedAt, path, size, type} = options;
-		this.modifiedAt = typeof modifiedAt == "string" ? new Date(modifiedAt) : new Date;
-		this.path = typeof path == "string" ? path : "";
-		this.size = typeof size == "number" ? size : -1;
-		this.type = Object.values(FileSystemEntityType).includes(type) ? type : FileSystemEntityType.file;
+	constructor(options: FileSystemEntityOptions = {}) {
+		this.modifiedAt = new Date(options.modifiedAt ?? Date.now());
+		this.path = options.path ?? "";
+		this.size = options.size ?? -1;
+		this.type = options.type ?? FileSystemEntityType.file;
 	}
 
 	/**
 	 * The icon corresponding to this file system entity.
-	 * @type {string}
 	 */
-	get icon() {
+	get icon(): string {
 		if (this.type == FileSystemEntityType.directory) return "folder-fill";
 		const extension = this.path.split(".").pop()?.toLocaleLowerCase() ?? "";
 		return FileSystemEntity.#iconMapping.has(extension) ? `file-earmark-${FileSystemEntity.#iconMapping.get(extension)}` : "file-earmark";
 	}
 }
+
+/**
+ * Defines the options of a {@link FileSystemEntity} instance.
+ */
+export interface FileSystemEntityOptions {
+
+	/** The date of last modification. */
+	modifiedAt?: string;
+
+	/** The path of this file system entity. */
+	path?: string;
+
+	/** The size of this file system entity. */
+	size?: number;
+
+	/** The type of this file system entity. */
+	type?: FileSystemEntityType;
+ }
