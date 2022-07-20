@@ -132,4 +132,4 @@ export interface FileSystemEntityOptions {
 
 	/** The type of this file system entity. */
 	type?: FileSystemEntityType;
- }
+}

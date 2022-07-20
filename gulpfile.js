@@ -6,7 +6,7 @@ import {execa} from "execa";
 import gulp from "gulp";
 import config from "./jsconfig.json" assert {type: "json"};
 import pkg from "./package.json" assert {type: "json"};
-import {tsOptions} from "./etc/esbuild.js";
+import {cssOptions, tsOptions} from "./etc/esbuild.js";
 
 /** Builds the project. */
 export const build = gulp.parallel(buildApp, buildAssets, buildTheme);
@@ -18,16 +18,16 @@ function buildApp() {
 
 /** Builds the assets. */
 function buildAssets() {
-	return cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js")
+	return Promise.all([
+		cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css"),
+		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js"),
+		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2")
+	]);
 }
 
 /** Builds the theme. */
 function buildTheme() {
-	return Promise.all([
-		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2"),
-		cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css"),
-		exec("stylus", ["--out", "www/css", "--quiet", "src/ui/theme/theme.styl"])
-	]);
+	return esbuild(cssOptions());
 }
 
 /** Deletes all generated files and reset any saved state. */
@@ -43,7 +43,7 @@ export function dist(/** @type {gulp.TaskFunctionCallback} */ done) {
 
 /** Performs the static analysis of source code. */
 export async function lint() {
-	await exec("eslint", ["--config=etc/eslint.json", ...config.include]);
+	await exec("eslint", ["--config=etc/eslint.json", ...config.include.filter(item => item.endsWith(".ts"))]);
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
@@ -60,20 +60,22 @@ export function serve() {
 
 /** Watches for file changes. */
 export const watch = gulp.series(
-	build,
-	gulp.parallel(serve, watchApp, watchTheme)
+	gulp.parallel(buildAssets, serve),
+	gulp.parallel(watchApp, watchTheme)
 );
 
 /** Watches for file changes in the application. */
-function watchApp() {
-	const compileApp = () => exec("rollup", ["--config=etc/rollup.js", "--silent"]);
-	gulp.watch("src/client/**/*.js", compileApp);
+async function watchApp() {
+	const result = await esbuild(Object.assign(tsOptions(), {incremental: true}));
+	const compileApp = () => result.rebuild?.();
+	gulp.watch("src/client/**/*.ts", compileApp);
 }
 
 /** Watches for file changes in the theme. */
-function watchTheme() {
-	const compileTheme = () => exec("stylus", ["--out", "www/css", "--quiet", "src/ui/theme/theme.styl"]);
-	gulp.watch("src/ui/**/*.styl", compileTheme);
+async function watchTheme() {
+	const result = await esbuild(Object.assign(cssOptions(), {incremental: true}));
+	const compileTheme = () => result.rebuild?.();
+	gulp.watch("src/ui/**/*.css", compileTheme);
 }
 
 /** The default task. */
