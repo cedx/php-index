@@ -1,32 +1,32 @@
 import {cp} from "node:fs/promises";
 import {env} from "node:process";
-import {promisify} from "node:util";
 import {deleteAsync} from "del";
+import {build as esbuild} from "esbuild";
 import {execa} from "execa";
 import gulp from "gulp";
 import config from "./jsconfig.json" assert {type: "json"};
 import pkg from "./package.json" assert {type: "json"};
+import {tsOptions} from "./etc/esbuild.js";
 
 /** Builds the project. */
-export const build = gulp.parallel(
-	buildApp,
-	buildTheme
-);
+export const build = gulp.parallel(buildApp, buildAssets, buildTheme);
 
 /** Builds the application. */
 function buildApp() {
-	return Promise.all([
-		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.js", "www/js/bootstrap.js"),
-		exec("rollup", ["--config=etc/rollup.js", "--silent"])
-	]);
+	return esbuild(tsOptions());
+}
+
+/** Builds the assets. */
+function buildAssets() {
+	return cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js")
 }
 
 /** Builds the theme. */
 function buildTheme() {
 	return Promise.all([
 		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2"),
-		exec("sass", ["--load-path=node_modules", "--no-source-map", "lib/ui/bootstrap:www/css"]),
-		exec("stylus", ["--out", "www/css", "--quiet", "lib/ui/theme/theme.styl"])
+		cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css"),
+		exec("stylus", ["--out", "www/css", "--quiet", "src/ui/theme/theme.styl"])
 	]);
 }
 
@@ -36,14 +36,9 @@ export function clean() {
 }
 
 /** Builds the redistributable package. */
-export async function dist() {
+export function dist(/** @type {gulp.TaskFunctionCallback} */ done) {
 	env.NODE_ENV = "production";
-	await promisify(build)();
-
-	const args = ["--comments=false", "--config-file=etc/terser.json"];
-	const css = ["bootstrap", "theme"].map(file => exec("cleancss", ["-O2", `--output=www/css/${file}.css`, `www/css/${file}.css`]));
-	const js = ["js/bootstrap", "js/main"].map(file => exec("terser", [...args, `--output=www/${file}.js`, `www/${file}.js`]));
-	return Promise.all([...css, ...js]);
+	return build(done);
 }
 
 /** Performs the static analysis of source code. */
@@ -72,13 +67,13 @@ export const watch = gulp.series(
 /** Watches for file changes in the application. */
 function watchApp() {
 	const compileApp = () => exec("rollup", ["--config=etc/rollup.js", "--silent"]);
-	gulp.watch("lib/client/**/*.js", compileApp);
+	gulp.watch("src/client/**/*.js", compileApp);
 }
 
 /** Watches for file changes in the theme. */
 function watchTheme() {
-	const compileTheme = () => exec("stylus", ["--out", "www/css", "--quiet", "lib/ui/theme/theme.styl"]);
-	gulp.watch("lib/ui/**/*.styl", compileTheme);
+	const compileTheme = () => exec("stylus", ["--out", "www/css", "--quiet", "src/ui/theme/theme.styl"]);
+	gulp.watch("src/ui/**/*.styl", compileTheme);
 }
 
 /** The default task. */

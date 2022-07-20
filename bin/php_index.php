@@ -31,7 +31,7 @@ if (!$output || !is_dir($output)) {
 $stub = <<<'EOF'
 <?php
 $rootPath = basename(__FILE__);
-require "phar://$rootPath/lib/server/index.php";
+require "phar://$rootPath/src/server/index.php";
 \PhpIndex\main();
 __HALT_COMPILER();
 EOF;

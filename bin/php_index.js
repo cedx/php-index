@@ -18,7 +18,7 @@ program.name("php_index")
 // Populate the input folder.
 const basePath = fileURLToPath(new URL("..", import.meta.url));
 const input = join(tmpdir(), randomUUID());
-["lib/server", "www"].forEach(folder => cpSync(join(basePath, folder), join(input, folder), {recursive: true}));
+["src/server", "www"].forEach(folder => cpSync(join(basePath, folder), join(input, folder), {recursive: true}));
 ["index.phar", "index.php"].forEach(file => rmSync(join(input, `www/${file}`), {force: true}));
 
 // Build the PHAR archive.

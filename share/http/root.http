@@ -13,5 +13,3 @@ Accept: application/javascript
 // Fetches the directory listing.
 GET {{baseUrl}}?listing
 Accept: application/json
-
-###

@@ -1,8 +1,9 @@
 {
-	"include": ["*.js", "bin/*.js", "lib/**/*.js"],
+	"include": ["*.js", "bin/*.js", "src/**/*.ts"],
 	"compilerOptions": {
 		"checkJs": true,
 		"esModuleInterop": true,
+		"experimentalDecorators": true,
 		"module": "esnext",
 		"moduleResolution": "nodenext",
 		"resolveJsonModule": true,
