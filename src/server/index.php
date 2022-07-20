@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-namespace PhpIndex;
+<?php namespace PhpIndex;
 
 /**
  * Returns the MIME type corresponding to the specified path.

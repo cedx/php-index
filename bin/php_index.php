@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
 
 // Check the requirements.
 if (!extension_loaded("phar")) {
@@ -29,7 +29,7 @@ if (!$output || !is_dir($output)) {
 
 // Create the PHAR archive.
 $stub = <<<'EOF'
-<?php declare(strict_types=1);
+<?php
 $rootPath = basename(__FILE__);
 require "phar://$rootPath/lib/server/index.php";
 \PhpIndex\main();
