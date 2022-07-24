@@ -1,0 +1,3 @@
+#listing table { table-layout: fixed; }
+#listing table th:nth-child(2) { width: 80px; }
+#listing table th:nth-child(3) { width: 150px; }

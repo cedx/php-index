@@ -1,3 +1,9 @@
+@font-face {
+  font-display: block;
+  font-family: "Bootstrap Icons";
+  src: url("../fonts/icons.woff2") format("woff2");
+}
+
 .bi::before {
 	display: inline-block;
 	font-family: "Bootstrap Icons" !important;

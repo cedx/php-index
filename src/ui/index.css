@@ -1,7 +1,3 @@
 @charset "UTF-8";
-
-/* Application. */
-@import "app/icons.css";
-
-/* Utilities. */
-@import "utilities/text.css";
+@import "icons.css";
+@import "views.css";
