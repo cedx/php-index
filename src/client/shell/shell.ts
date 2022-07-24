@@ -1,6 +1,6 @@
 import {html, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
-import {Component} from "./component.js";
+import {Component} from "../component.js";
 
 /**
  * The application shell.
@@ -14,7 +14,7 @@ export class Shell extends Component {
 	connectedCallback(): void {
 		super.connectedCallback();
 		const {hostname, pathname} = location;
-		document.title = `${hostname} - ${pathname.length > 1 ? pathname.slice(-1) : pathname}`;
+		document.title = `${hostname} - ${pathname.length > 1 ? pathname.slice(0, -1) : pathname}`;
 	}
 
 	/**
@@ -28,7 +28,7 @@ export class Shell extends Component {
 			</header>
 
 			<main>
-				TODO
+				<article class="rounded-1 shadow-sm">TODO</article>
 			</main>
 		`;
 	}

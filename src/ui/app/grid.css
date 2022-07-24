@@ -16,7 +16,7 @@ main {
 }
 
 article {
-	background-color: white;
+	background-color: var(--bs-white);
 	margin: 1.5rem auto;
 	max-width: 720px;
 	padding: 1rem;

@@ -1,7 +1,7 @@
 import {html, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
 import {ClockController} from "./clock_controller.js";
-import {Component} from "./component.js";
+import {Component} from "../component.js";
 
 /**
  * The navigation bar.
@@ -17,7 +17,7 @@ export class Navbar extends Component {
 	/**
 	 * The date format.
 	 */
-	#dateFormatter = new Intl.DateTimeFormat(document.documentElement.lang, {dateStyle: "full"});
+	#dateFormatter = new Intl.DateTimeFormat(navigator.language, {dateStyle: "full"});
 
 	/**
 	 * Renders this component.
@@ -28,7 +28,7 @@ export class Navbar extends Component {
 			<nav class="bg-primary d-print-none navbar navbar-dark fixed-top shadow user-select-none">
 				<div class="container-fluid">
 					<div class="navbar-brand d-flex align-items-center">
-						<span><img alt="MC2IT" height="24" src="?file=img/navbar_logo.svg width="97"/></span>
+						<span><i class="bi bi-card-list"></i></span>
 						<span class="ms-2">${location.hostname}</span>
 					</div>
 

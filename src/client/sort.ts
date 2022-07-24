@@ -89,12 +89,9 @@ export class Sort {
 	 */
 	compare(x: object, y: object): number {
 		for (const [attribute, order] of this.#attributes) {
-			const attributeOfX = Reflect.get(x, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
-			const attributeOfY = Reflect.get(y, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
-
-			let value = 0;
-			if (typeof attributeOfX == "string" && typeof attributeOfY == "string") value = attributeOfX.localeCompare(attributeOfY);
-			else value = attributeOfX == attributeOfY ? 0 : (attributeOfX > attributeOfY ? 1 : -1);
+			const xAttr = Reflect.get(x, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+			const yAttr = Reflect.get(y, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+			const value = xAttr > yAttr ? 1 : (xAttr < yAttr ? -1 : 0);
 			if (value) return order == SortOrder.asc ? value : -value;
 		}
 

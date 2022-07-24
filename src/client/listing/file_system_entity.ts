@@ -18,7 +18,7 @@ export class FileSystemEntity {
 	/**
 	 * The icon mapping.
 	 */
-	static #iconMapping: Map<string, string> = new Map([
+	static #iconMapping = new Map([
 		["avi", "play"],
 		["bat", "binary"],
 		["bin", "binary"],
