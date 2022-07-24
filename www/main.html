@@ -33,24 +33,17 @@
 				100% { transform: rotate(360deg); }
 			}
 
-			#loader { left: 0; line-height: 1; padding-top: 30vh; position: fixed; right: 0; text-align: center; top: 0; }
+			#loader { left: 0; padding-top: calc(50vh - 50px); position: fixed; right: 0; text-align: center; top: 0; }
 			#loader circle { animation: loader-circle 1.5s ease-in-out infinite; stroke: #696969; stroke-linecap: round; }
-			#loader section { margin: 10px 0; }
 			#loader svg { animation: loader-svg 2s linear infinite; }
 		</style>
 	</head>
 
 	<body>
 		<div id="loader">
-			<section>
-				<svg height="100" viewBox="0 0 50 50" width="100">
-					<circle cx="25" cy="25" fill="none" r="20" stroke-width="3"/>
-				</svg>
-			</section>
-
-			<section>
-				<img alt="MC2IT" height="50" src="?file=img/loader_logo.svg" width="200"/>
-			</section>
+			<svg height="100" viewBox="0 0 50 50" width="100">
+				<circle cx="25" cy="25" fill="none" r="20" stroke-width="3"/>
+			</svg>
 		</div>
 	</body>
 </html>
