@@ -1,7 +1,7 @@
 @font-face {
   font-display: block;
   font-family: "Bootstrap Icons";
-  src: url("../fonts/icons.woff2") format("woff2");
+  src: url("?file=fonts/icons.woff2") format("woff2");
 }
 
 .bi::before {
@@ -16,6 +16,7 @@
 }
 
 .bi-arrow-90deg-up::before { content: "\f111"; }
+.bi-card-list::before { content: "\f227"; }
 .bi-exclamation-circle-fill::before { content: "\f332"; }
 .bi-exclamation-triangle-fill::before { content: "\f33a"; }
 .bi-file-earmark-binary::before { content: "\f35c"; }

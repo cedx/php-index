@@ -1,0 +1,14 @@
+:root {
+	--bs-body-bg: var(--bs-gray-200);
+	--bs-body-text-align: start;
+	--bs-primary: #165898;
+	--bs-primary-rgb: 22, 88, 152;
+	--bs-secondary: #696969;
+	--bs-secondary-rgb: 105, 105, 105;
+	--navbar-height: 50px;
+	font-size: 14px;
+}
+
+body {
+	overflow: hidden;
+}

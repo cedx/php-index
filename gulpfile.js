@@ -1,6 +1,5 @@
 import {cp} from "node:fs/promises";
 import {env} from "node:process";
-import {copyAssets, getAssetPath} from "@mc2it/theme";
 import {deleteAsync} from "del";
 import {build as esbuild} from "esbuild";
 import {execa} from "execa";
@@ -20,9 +19,9 @@ function buildApp() {
 /** Builds the assets. */
 function buildAssets() {
 	return Promise.all([
-		Promise.resolve(copyAssets("www", {fonts: true, img: true})),
-		cp(`${getAssetPath()}/css/mc2it.css`, "www/css/vendor.css"),
-		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js")
+		cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css"),
+		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js"),
+		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2")
 	]);
 }
 
@@ -33,7 +32,7 @@ function buildTheme() {
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return deleteAsync(["lib", "var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
+	return deleteAsync(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
 
 /** Builds the redistributable package. */

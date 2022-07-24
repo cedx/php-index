@@ -1,0 +1,19 @@
+.table-sticky > thead {
+	background-color: var(--body-bg);
+	position: sticky;
+	top: 0;
+	z-index: 50;
+}
+
+.table-sticky > thead::after {
+	border-bottom: 2px solid currentColor;
+	bottom: 0;
+	content: "";
+	left: 0;
+	position: absolute;
+	right: 0;
+}
+
+.table-sticky > tbody {
+	border-top: none !important;
+}

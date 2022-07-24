@@ -1,8 +1,8 @@
 import fetchProxy from "./fetch_proxy.js";
-import {Shell} from "./shell.js";
 
 // Load the components.
-import "./navbar.js";
+import "./shell/navbar.js";
+import {Shell} from "./shell/shell.js";
 
 // Start the application.
 window.fetch = fetchProxy;

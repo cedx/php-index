@@ -1,0 +1,8 @@
+.navbar {
+  --bs-navbar-nav-link-padding-x: 0.75rem;
+}
+
+.navbar-dark {
+	--bs-navbar-color: rgb(255 255 255 / 0.75);
+	--bs-navbar-hover-color: rgb(255 255 255 / 0.95);
+}

@@ -10,4 +10,3 @@
 /npm-debug.log
 /www/*.phar
 /www/**/*.map
-/www/worker.js
