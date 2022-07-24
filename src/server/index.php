@@ -26,11 +26,8 @@ function getMimeType(string $path): string {
  */
 function main(): void {
 	if (isset($_GET["listing"])) sendListing();
-	else {
-		$path = trim($_GET["file"] ?? "main.html");
-		if ($path) sendFile($path);
-		else sendResponse("The file path is required.", mimeType: "text/plain", status: 422);
-	}
+	else if ($path = trim($_GET["file"] ?? "main.html")) sendFile($path);
+	else sendResponse("The file path is required.", mimeType: "text/plain", status: 422);
 }
 
 /**

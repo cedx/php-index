@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
 // Check the requirements.
 if (!extension_loaded("phar")) {
 	echo "Phar extension is not loaded.", PHP_EOL;

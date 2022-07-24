@@ -9,10 +9,10 @@ export type SortEntry = [string, SortOrder];
 export enum SortOrder {
 
 	/** The sort is ascending. */
-	asc,
+	asc = "ASC",
 
 	/** The sort is descending. */
-	desc
+	desc = "DESC"
 }
 
 /**

@@ -11,6 +11,7 @@ const isProduction = () => env.NODE_ENV == "production";
 export function cssOptions() {
 	return Object.assign(sharedOptions(isProduction()), {
 		entryPoints: ["src/ui/index.css"],
+		external: ["*.woff2"],
 		outfile: "www/css/main.css",
 		sourceRoot: new URL("../www/css/", import.meta.url).href
 	});

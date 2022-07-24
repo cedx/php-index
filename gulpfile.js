@@ -1,5 +1,6 @@
 import {cp} from "node:fs/promises";
 import {env} from "node:process";
+import {copyAssets, getAssetPath} from "@mc2it/theme";
 import {deleteAsync} from "del";
 import {build as esbuild} from "esbuild";
 import {execa} from "execa";
@@ -19,9 +20,9 @@ function buildApp() {
 /** Builds the assets. */
 function buildAssets() {
 	return Promise.all([
-		cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "www/css/vendor.css"),
-		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js"),
-		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2")
+		Promise.resolve(copyAssets("www", {fonts: true, img: true})),
+		cp(`${getAssetPath()}/css/mc2it.css`, "www/css/vendor.css"),
+		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js")
 	]);
 }
 
@@ -32,7 +33,7 @@ function buildTheme() {
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return deleteAsync(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
+	return deleteAsync(["lib", "var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
 
 /** Builds the redistributable package. */
@@ -55,13 +56,13 @@ export async function publish() {
 
 /** Starts the development server. */
 export function serve() {
-	return exec("php", ["-S", "localhost:8080", "-t", "www"]);
+	return exec("php", ["-S", "127.0.0.1:8080", "-t", "www"]);
 }
 
 /** Watches for file changes. */
 export const watch = gulp.series(
-	gulp.parallel(buildAssets, serve),
-	gulp.parallel(watchApp, watchTheme)
+	gulp.parallel(buildAssets, watchApp, watchTheme),
+	serve
 );
 
 /** Watches for file changes in the application. */

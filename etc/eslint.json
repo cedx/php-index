@@ -203,7 +203,7 @@
 		"padding-line-between-statements": "off",
 		"quotes": "off",
 		"rest-spread-spacing": "error",
-		"semi": "error",
+		"semi": "off",
 		"semi-spacing": "error",
 		"semi-style": "error",
 		"space-before-blocks": "error",
