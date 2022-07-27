@@ -9,6 +9,12 @@
 	font-size: 14px;
 }
 
+::selection {
+	background-color: var(--bs-primary);
+	color: var(--bs-white);
+}
+
 body {
+	accent-color: var(--bs-primary);
 	overflow: hidden;
 }
