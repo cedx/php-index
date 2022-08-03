@@ -1,10 +1,10 @@
 {
-	"bugs": "https://github.com/cedx/php-index/issues",
+	"bugs": "https://github.com/mc2it/php-index/issues",
 	"description": "A PHP directory index generator.",
-	"homepage": "https://github.com/cedx/php-index",
+	"homepage": "https://github.com/mc2it/php-index",
 	"license": "MIT",
-	"name": "@cedx/php-index",
-	"repository": "github:cedx/php-index",
+	"name": "@mc2it/php-index",
+	"repository": "github:mc2it/php-index",
 	"type": "module",
 	"version": "0.2.0",
 	"author": {
