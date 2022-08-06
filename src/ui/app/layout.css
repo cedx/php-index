@@ -1,14 +1,15 @@
+body {
+	accent-color: var(--bs-primary);
+	overflow: hidden;
+}
+
 main {
 	bottom: 0;
 	left: 0;
 	overflow: auto;
 	position: absolute;
 	right: 0;
-	top: var(--navbar-height);
-}
-
-@media print {
-	main { overflow: visible; }
+	top: var(--main-offset, var(--navbar-height));
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -17,8 +18,14 @@ main {
 
 article {
 	background-color: var(--bs-white);
+	border-radius: var(--bs-border-radius-sm);
+	box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
 	margin: 1.5rem auto;
 	max-width: 720px;
-	padding: 1rem;
+	overflow: clip;
 	width: 100%;
+}
+
+article > section {
+	padding: 1rem;
 }

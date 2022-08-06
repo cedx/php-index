@@ -1,16 +1,16 @@
-@charset "UTF-8";
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 /* Application. */
 @import "app/root.css";
-@import "app/grid.css";
+@import "app/layout.css";
 @import "app/icons.css";
+
+/* Utilities. */
+@import "utilities/text.css";
 
 /* Components. */
 @import "components/navbar.css";
 @import "components/tables.css";
-
-/* Utilities. */
-@import "utilities/text.css";
 
 /* Views. */
 @import "views/listing.css";

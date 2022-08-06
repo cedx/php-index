@@ -1,8 +1,25 @@
 .navbar {
-  --bs-navbar-nav-link-padding-x: 0.75rem;
+	--bs-navbar-nav-link-padding-x: 0.75rem;
+	background-color: var(--bs-primary);
+	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.15);
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	user-select: none;
+	z-index: 1030;
+}
+
+@media print {
+	.navbar { display: none; }
+}
+
+.navbar-brand img {
+	position: relative;
+	top: -1px;
 }
 
 .navbar-dark {
-	--bs-navbar-color: rgb(255 255 255 / 0.75);
-	--bs-navbar-hover-color: rgb(255 255 255 / 0.95);
+	--bs-navbar-color: #ffffffbc;
+	--bs-navbar-hover-color: #fffffff2;
 }
