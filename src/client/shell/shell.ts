@@ -28,7 +28,7 @@ export class Shell extends Component {
 			</header>
 
 			<main>
-				<article class="rounded-1 shadow-sm">TODO</article>
+				<app-entitylist></app-entitylist>
 			</main>
 		`;
 	}

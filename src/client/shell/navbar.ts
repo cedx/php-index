@@ -12,7 +12,7 @@ export class Navbar extends Component {
 	/**
 	 * The clock controller.
 	 */
-	#clock = new ClockController(this, 3_600);
+	#clock = new ClockController(this, 60);
 
 	/**
 	 * The date format.
@@ -25,7 +25,7 @@ export class Navbar extends Component {
 	 */
 	render(): TemplateResult {
 		return html`
-			<nav class="bg-primary d-print-none navbar navbar-dark fixed-top shadow user-select-none">
+			<nav class="navbar navbar-dark">
 				<div class="container-fluid">
 					<div class="navbar-brand d-flex align-items-center">
 						<span><i class="bi bi-card-list"></i></span>

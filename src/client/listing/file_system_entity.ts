@@ -111,7 +111,7 @@ export class FileSystemEntity {
 	 */
 	get icon(): string {
 		if (this.type == FileSystemEntityType.directory) return "folder-fill";
-		const extension = this.path.split(".").pop()?.toLocaleLowerCase() ?? "";
+		const extension = this.path.split(".").pop()?.toLowerCase() ?? "";
 		return FileSystemEntity.#iconMapping.has(extension) ? `file-earmark-${FileSystemEntity.#iconMapping.get(extension)}` : "file-earmark";
 	}
 }

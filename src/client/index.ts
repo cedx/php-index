@@ -1,6 +1,7 @@
 import fetchProxy from "./fetch_proxy.js";
 
 // Load the components.
+import "./listing/entity_list_view.js";
 import "./shell/navbar.js";
 import {Shell} from "./shell/shell.js";
 
