@@ -20,6 +20,7 @@ export class EntityListView extends Component {
 	 */
 	connectedCallback(): void {
 		super.connectedCallback();
+		document.title = `${location.hostname} - ${this.#path}`;
 		// TODO fetch
 	}
 

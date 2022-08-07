@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="lit-localize-inputs" source-language="en" target-language="fr">
+		<body>
+			<trans-unit id="s559797e1e0e6b7a6">
+				<source>Index of <x id="0" equiv-text="${this.#path}"/></source>
+				<target>Index de <x id="0" equiv-text="${this.#path}"/></target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

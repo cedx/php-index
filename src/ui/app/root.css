@@ -2,8 +2,6 @@
 	--bs-body-bg: var(--bs-gray-200);
 	--bs-body-bg-rgb: 233, 236, 239;
 	--bs-body-text-align: start;
-	--bs-font-monospace: Consolas, monospace;
-	--bs-font-sans-serif: "Segoe UI", sans-serif;
 	--bs-link-color: var(--bs-primary);
 	--bs-link-hover-color: #12467a;
 	--bs-primary: #165898;

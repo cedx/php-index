@@ -9,15 +9,6 @@ import {Component} from "../component.js";
 export class Shell extends Component {
 
 	/**
-	 * Method invoked when this component is mounted.
-	 */
-	connectedCallback(): void {
-		super.connectedCallback();
-		const {hostname, pathname} = location;
-		document.title = `${hostname} - ${pathname.length > 1 ? pathname.slice(0, -1) : pathname}`;
-	}
-
-	/**
 	 * Renders this component.
 	 * @returns The view template.
 	 */

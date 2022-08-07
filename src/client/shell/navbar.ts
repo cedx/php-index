@@ -2,6 +2,7 @@ import {html, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
 import {ClockController} from "./clock_controller.js";
 import {Component} from "../component.js";
+import {getLocale} from "../locale.js";
 
 /**
  * The navigation bar.
@@ -17,7 +18,7 @@ export class Navbar extends Component {
 	/**
 	 * The date format.
 	 */
-	#dateFormatter = new Intl.DateTimeFormat(navigator.language, {dateStyle: "full"});
+	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "full"});
 
 	/**
 	 * Renders this component.

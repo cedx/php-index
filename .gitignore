@@ -1,12 +1,11 @@
+/**/.DS_Store
 /lib/
 /node_modules/
+/npm-debug.log
+/src/client/i18n/
 /var/
+/www/*.phar
 /www/css/
 /www/fonts/
+/www/i18n/
 /www/js/
-
-/*.code-workspace
-/**/.DS_Store
-/npm-debug.log
-/www/*.phar
-/www/**/*.map

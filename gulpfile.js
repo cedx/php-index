@@ -13,7 +13,10 @@ export const build = gulp.parallel(buildApp, buildAssets, buildTheme);
 
 /** Builds the application. */
 function buildApp() {
-	return esbuild(tsOptions());
+	return Promise.all([
+		exec("lit-localize", ["--config=etc/locale.json", "build"]),
+		esbuild(tsOptions())
+	]);
 }
 
 /** Builds the assets. */
@@ -38,6 +41,11 @@ export function clean() {
 export function dist(/** @type {gulp.TaskFunctionCallback} */ done) {
 	env.NODE_ENV = "production";
 	return build(done);
+}
+
+/** Extracts the localized messages. */
+export function i18n() {
+	return exec("lit-localize", ["--config=etc/locale.json", "extract"]);
 }
 
 /** Performs the static analysis of source code. */
@@ -65,6 +73,7 @@ export const watch = gulp.series(
 
 /** Watches for file changes in the application. */
 async function watchApp() {
+	await exec("lit-localize", ["--config=etc/locale.json", "build"]);
 	const result = await esbuild(Object.assign(tsOptions(), {incremental: true}));
 	const compileApp = () => result.rebuild?.();
 	gulp.watch("src/client/**/*.ts", compileApp);
