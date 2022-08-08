@@ -18,12 +18,18 @@ main {
 
 article {
 	background-color: var(--bs-white);
-	border-radius: var(--bs-border-radius-sm);
 	box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
-	margin: 1.5rem auto;
-	max-width: 720px;
+	margin: 0 auto;
 	overflow: clip;
 	width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	article {
+		border-radius: var(--bs-border-radius-sm);
+		margin: 1.5rem auto;
+		max-width: 720px;
+	}
 }
 
 article > section {
