@@ -39,6 +39,11 @@
 	"engines": {
 		"node": ">=18.0.0"
 	},
+	"files": [
+		"bin/"
+		"src/",
+		"www/"
+	],
 	"keywords": [
 		"cli",
 		"directory",
