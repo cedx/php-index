@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file target-language="fr" source-language="en" original="lit-localize-inputs" datatype="plaintext">
-		<body>
-			<trans-unit id="s559797e1e0e6b7a6">
-				<source>Index of <x id="0" equiv-text="${this.#path}"/></source>
-				<target>Index de <x id="0" equiv-text="${this.#path}"/></target>
-			</trans-unit>
-			<trans-unit id="sef49aec68fd1dc66">
-				<source>Name</source>
-				<target>Nom</target>
-			</trans-unit>
-			<trans-unit id="s78789724e789221c">
-				<source>Size</source>
-				<target>Taille</target>
-			</trans-unit>
-			<trans-unit id="s774579de958b42d8">
-				<source>Last modified</source>
-				<target>Modifié le</target>
-			</trans-unit>
-			<trans-unit id="s0f3f0b422c753cde">
-				<source>Parent directory</source>
-				<target>Dossier parent</target>
-			</trans-unit>
-		</body>
-	</file>
+<file target-language="fr" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sef49aec68fd1dc66">
+	<source>Name</source>
+	<target>Nom</target>
+</trans-unit>
+<trans-unit id="s78789724e789221c">
+	<source>Size</source>
+	<target>Taille</target>
+</trans-unit>
+<trans-unit id="s774579de958b42d8">
+	<source>Last modified</source>
+	<target>Modifié le</target>
+</trans-unit>
+<trans-unit id="s0f3f0b422c753cde">
+	<source>Parent directory</source>
+	<target>Dossier parent</target>
+</trans-unit>
+<trans-unit id="s559797e1e0e6b7a6">
+	<source>Index of <x id="0" equiv-text="${this.#path}"/></source>
+	<target>Index de <x id="0" equiv-text="${this.#path}"/></target>
+</trans-unit>
+<trans-unit id="sd3b129c4caa14c07">
+	<source>Loading the directory entries...</source>
+	<target>Chargement des entrées du répertoire...</target>
+</trans-unit>
+<trans-unit id="s336e76bdc26d0b40">
+	<source>An error occurred while fetching the directory entries.</source>
+	<target>Une erreur s'est produite lors de la récupération des entrées du répertoire.</target>
+</trans-unit>
+<trans-unit id="s08c277af7c6c05d7">
+	<source>This directory is empty.</source>
+	<target>Ce répertoire est vide.</target>
+</trans-unit>
+</body>
+</file>
 </xliff>
