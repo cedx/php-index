@@ -4,12 +4,12 @@ import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {getLocale} from "../locale.js";
 import {EntityList} from "./entity_list.js";
-import {FileSystemEntityType} from "./file_system_entity.js";
+import {EntityType} from "./entity.js";
 
 /**
  * Displays the list of file system entities.
  */
-export class EntityListView extends Component {
+export class Listing extends Component {
 
 	/**
 	 * The reactive properties.
@@ -109,13 +109,13 @@ export class EntityListView extends Component {
 							<tr>
 								<td>
 									<div class="text-truncate">
-										<a href=${entity.type == FileSystemEntityType.file ? entity.path : `${entity.path}/`}>
+										<a href=${entity.type == EntityType.file ? entity.path : `${entity.path}/`}>
 											<i class="bi bi-${entity.icon} me-1"></i> ${entity.path}
 										</a>
 									</div>
 								</td>
 								<td class="text-end">
-									${entity.type == FileSystemEntityType.directory ? "&ndash;" : this.#formatBytes(entity.size)}
+									${entity.type == EntityType.directory ? "&ndash;" : this.#formatBytes(entity.size)}
 								</td>
 								<td class="d-none d-sm-table-cell text-end">
 									<time datetime=${entity.modifiedAt.toISOString()}>${this.#dateFormatter.format(entity.modifiedAt)}</time>
@@ -135,14 +135,14 @@ export class EntityListView extends Component {
 	 */
 	#formatBytes(bytes) {
 		let index = 0;
-		while (bytes > 1024 && index < EntityListView.#byteUnits.length) {
+		while (bytes > 1024 && index < Listing.#byteUnits.length) {
 			bytes /= 1024;
 			index++;
 		}
 
-		return this.#byteFormatter.format(bytes) + EntityListView.#byteUnits[index];
+		return this.#byteFormatter.format(bytes) + Listing.#byteUnits[index];
 	}
 }
 
 // Register the component.
-customElements.define("app-entitylist", EntityListView);
+customElements.define("app-entitylist", Listing);

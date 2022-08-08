@@ -2,7 +2,7 @@ import fetchProxy from "./fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 
 // Load the components.
-import "./listing/entity_list_view.js";
+import "./file_system/listing.js";
 import "./shell/navbar.js";
 import {Shell} from "./shell/shell.js";
 

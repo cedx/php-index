@@ -1,19 +1,19 @@
 package php_index.client;
 
-import php_index.base.FileSystemEntity;
+import php_index.base.Entity;
 import php_index.base.Sort;
 
 /** Represents a list of file system entities. */
 class EntityList implements Model {
 
 	/** The list items. */
-	@:editable var items: List<FileSystemEntity> = new List();
+	@:editable var items: List<Entity> = new List();
 
 	/** The current sort. */
 	@:editable var sort: Sort = new Sort();
 
 	/** The loading status. */
-	@:loaded var status: List<FileSystemEntity> = Application.instance.remote.index({listing: true}).next(list -> {
+	@:loaded var status: List<Entity> = Application.instance.remote.index({listing: true}).next(list -> {
 		items = list;
 		orderBy("path");
 		items;
