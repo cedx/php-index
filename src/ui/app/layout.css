@@ -19,7 +19,6 @@ main {
 article {
 	background-color: var(--bs-white);
 	box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
-	margin: 0 auto;
 	overflow: clip;
 	width: 100%;
 }
