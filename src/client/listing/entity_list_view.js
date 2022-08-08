@@ -21,21 +21,26 @@ export class EntityListView extends Component {
 
 	/**
 	 * The byte units.
+	 * @type {string[]}
+	 * @readonly
 	 */
 	static #byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
 	/**
 	 * The formatter used to format the file sizes.
+	 * @type {Intl.NumberFormat}
 	 */
 	#byteFormatter = new Intl.NumberFormat(getLocale(), {maximumFractionDigits: 2});
 
 	/**
 	 * The formatter used to format the modification dates.
+	 * @type {Intl.DateTimeFormat}
 	 */
 	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "medium", timeStyle: "short"});
 
 	/**
 	 * The current path.
+	 * @type {string}
 	 */
 	#path = location.pathname.length > 1 ? location.pathname.slice(0, -1) : location.pathname;
 
@@ -77,13 +82,13 @@ export class EntityListView extends Component {
 					<thead>
 						<tr>
 							<th @onclick=${() => this.entities.orderBy("path")} scope="col">
-								<span role="button">${msg("Name")} <i class="bi bi-${this.entities.sort.getIcon('path')}"></i></span>
+								<span role="button">${msg("Name")} <i class="bi bi-${this.entities.sort.getIcon("path")}"></i></span>
 							</th>
 							<th class="text-end" @onclick=${() => this.entities.orderBy("size")} scope="col">
-								<span role="button">${msg("Size")} <i class="bi bi-${this.entities.sort.getIcon('size')}"></i></span>
+								<span role="button">${msg("Size")} <i class="bi bi-${this.entities.sort.getIcon("size")}"></i></span>
 							</th>
 							<th class="d-none d-sm-table-cell text-end" @onclick=${() => this.entities.orderBy("modifiedAt")} scope="col">
-								<span role="button">${msg("Last modified")} <i class="bi bi-${this.entities.sort.getIcon('modifiedAt')}"></i></span>
+								<span role="button">${msg("Last modified")} <i class="bi bi-${this.entities.sort.getIcon("modifiedAt")}"></i></span>
 							</th>
 						</tr>
 					</thead>

@@ -1,4 +1,0 @@
-{
-	"extends": "../jsconfig",
-	"include": ["**/*.js", "**/*.d.ts"]
-}

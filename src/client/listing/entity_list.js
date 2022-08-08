@@ -49,7 +49,8 @@ export class EntityList {
 		const response = await fetch("?listing");
 		if (!response.ok) this.status = LoadingStatus.failed;
 		else {
-			const items = /** @type {import("./file_system_entity.js").FileSystemEntityOptions[]} */ (await response.json()); // TODO try catch
+			// TODO try catch
+			const items = /** @type {import("./file_system_entity.js").FileSystemEntityOptions[]} */ (await response.json());
 			this.items = items.map(item => new FileSystemEntity(item));
 			this.status = LoadingStatus.done;
 			this.orderBy("path");
@@ -66,12 +67,13 @@ export class EntityList {
 		this.sort = new Sort([[attribute, direction]]);
 		this.items = this.items.sort((x, y) => {
 			switch (attribute) {
-				case "path":
+				case "path": {
 					const areDirectories = x.type == FileSystemEntityType.directory && y.type == FileSystemEntityType.directory;
 					const areFiles = x.type == FileSystemEntityType.file && y.type == FileSystemEntityType.file;
 					return areDirectories || areFiles
 						? Reflect.get(x, attribute).localeCompare(Reflect.get(y, attribute))
 						: x.type == FileSystemEntityType.directory ? -1 : 1;
+				}
 				default:
 					return this.sort.compare(x, y);
 			}

@@ -48,7 +48,7 @@ export function i18n() {
 
 /** Performs the static analysis of source code. */
 export async function lint() {
-	await exec("eslint", ["--config=etc/eslint.json", ...config.include.filter(item => item.endsWith(".ts"))]);
+	await exec("eslint", ["--config=etc/eslint.json", ...config.include.filter(item => item.endsWith(".js"))]);
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
