@@ -19,10 +19,7 @@ async function buildApp() {
 
 /** Builds the assets. */
 function buildAssets() {
-	return Promise.all([
-		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js"),
-		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2")
-	]);
+	return cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2");
 }
 
 /** Builds the theme. */
