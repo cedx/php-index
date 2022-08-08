@@ -1,13 +1,14 @@
 {
 	"$schema": "https://raw.githubusercontent.com/lit/lit/main/packages/localize-tools/config.schema.json",
+	"inputFiles": ["../src/client/**/*.js"],
 	"sourceLocale": "en",
 	"targetLocales": ["fr"],
-	"tsConfig": "../src/tsconfig.json",
 	"interchange": {
 		"format": "xliff",
 		"xliffDir": "../share/locale"
 	},
 	"output": {
+		"language": "js",
 		"mode": "runtime",
 		"outputDir": "../src/client/i18n"
 	}

@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file datatype="plaintext" original="lit-localize-inputs" source-language="en" target-language="fr">
+	<file target-language="fr" source-language="en" original="lit-localize-inputs" datatype="plaintext">
 		<body>
 			<trans-unit id="s559797e1e0e6b7a6">
 				<source>Index of <x id="0" equiv-text="${this.#path}"/></source>
 				<target>Index de <x id="0" equiv-text="${this.#path}"/></target>
+			</trans-unit>
+			<trans-unit id="sef49aec68fd1dc66">
+				<source>Name</source>
+				<target>Nom</target>
+			</trans-unit>
+			<trans-unit id="s78789724e789221c">
+				<source>Size</source>
+				<target>Taille</target>
+			</trans-unit>
+			<trans-unit id="s774579de958b42d8">
+				<source>Last modified</source>
+				<target>Modifié le</target>
+			</trans-unit>
+			<trans-unit id="s0f3f0b422c753cde">
+				<source>Parent directory</source>
+				<target>Dossier parent</target>
 			</trans-unit>
 		</body>
 	</file>
