@@ -146,7 +146,7 @@ export class Listing extends Component {
 		return html`
 			<article id="listing">
 				<section class=${classMap({"border-bottom": this.entities.length})}>
-					<h2 class="mb-0">${msg(str`Index of ${this.#path}`)}</h2>
+					<h3 class="mb-0">${msg(str`Index of ${this.#path}`)}</h3>
 				</section>
 
 				${choose(this.loading, [

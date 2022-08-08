@@ -29,7 +29,7 @@ export class Navbar extends Component {
 			<nav class="navbar navbar-dark">
 				<div class="container-fluid">
 					<div class="navbar-brand d-flex align-items-center">
-						<span><i class="bi bi-card-list"></i></span>
+						<span><img alt="" height="24" src="?file=favicon.svg" width="24"/></span>
 						<span class="ms-2">${location.hostname}</span>
 					</div>
 
