@@ -6,28 +6,28 @@ import js.lib.intl.NumberFormat;
 using haxe.io.Path;
 using js.lib.Date;
 
-/** The root view. **/
+/** The root view. */
 class Root extends View {
 
-	/** The byte units. **/
+	/** The byte units. */
 	static final byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
-	/** The formatter used to format the file sizes. **/
+	/** The formatter used to format the file sizes. */
 	final byteFormatter = new NumberFormat(Application.instance.language, {maximumFractionDigits: 2});
 
-	/** The formatter used to format the modification dates. **/
+	/** The formatter used to format the modification dates. */
 	final dateFormatter = new DateTimeFormat(Application.instance.language, cast {dateStyle: "medium", timeStyle: "short"});
 
-	/** The list of file system entities. **/
+	/** The list of file system entities. */
 	@:state var entities: EntityList = new EntityList();
 
-	/** The localization service. **/
+	/** The localization service. */
 	final locale = Application.instance.locale;
 
-	/** The current path. **/
+	/** The current path. */
 	final path = location.pathname.length > 1 ? location.pathname.removeTrailingSlashes() : location.pathname;
 
-	/** Formats the specified size. **/
+	/** Formats the specified size. */
 	function formatBytes(bytes: Float) {
 		var index = 0;
 		while (bytes > 1024 && index < byteUnits.length) {
@@ -38,7 +38,7 @@ class Root extends View {
 		return byteFormatter.format(bytes) + byteUnits[index];
 	}
 
-	/** Renders this view. **/
+	/** Renders this view. */
 	function render() '
 		<div>
 			<header>

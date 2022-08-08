@@ -1,18 +1,16 @@
-import {html, type TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
+import {html} from "lit";
 import {Component} from "../component.js";
 
 /**
  * The application shell.
  */
-@customElement("app-shell")
 export class Shell extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
 	 */
-	render(): TemplateResult {
+	render() {
 		return html`
 			<header>
 				<app-navbar></app-navbar>
@@ -24,3 +22,6 @@ export class Shell extends Component {
 		`;
 	}
 }
+
+// Register the component.
+customElements.define("app-shell", Shell);

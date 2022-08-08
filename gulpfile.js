@@ -6,17 +6,15 @@ import {execa} from "execa";
 import gulp from "gulp";
 import config from "./jsconfig.json" assert {type: "json"};
 import pkg from "./package.json" assert {type: "json"};
-import {cssOptions, tsOptions} from "./etc/esbuild.js";
+import {cssOptions, jsOptions} from "./etc/esbuild.js";
 
 /** Builds the project. */
 export const build = gulp.parallel(buildApp, buildAssets, buildTheme);
 
 /** Builds the application. */
-function buildApp() {
-	return Promise.all([
-		exec("lit-localize", ["--config=etc/locale.json", "build"]),
-		esbuild(tsOptions())
-	]);
+async function buildApp() {
+	await exec("lit-localize", ["--config=etc/locale.json", "build"]);
+	return esbuild(jsOptions());
 }
 
 /** Builds the assets. */
@@ -34,7 +32,7 @@ function buildTheme() {
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return deleteAsync(["var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
+	return deleteAsync(["src/client/i18n", "var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
 
 /** Builds the redistributable package. */
@@ -74,9 +72,9 @@ export const watch = gulp.series(
 /** Watches for file changes in the application. */
 async function watchApp() {
 	await exec("lit-localize", ["--config=etc/locale.json", "build"]);
-	const result = await esbuild(Object.assign(tsOptions(), {incremental: true}));
+	const result = await esbuild(Object.assign(jsOptions(), {incremental: true}));
 	const compileApp = () => result.rebuild?.();
-	gulp.watch("src/client/**/*.ts", compileApp);
+	gulp.watch("src/client/**/*.js", compileApp);
 }
 
 /** Watches for file changes in the theme. */

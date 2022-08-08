@@ -1,5 +1,4 @@
-import {html, type TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
+import {html} from "lit";
 import {ClockController} from "./clock_controller.js";
 import {Component} from "../component.js";
 import {getLocale} from "../locale.js";
@@ -7,24 +6,25 @@ import {getLocale} from "../locale.js";
 /**
  * The navigation bar.
  */
-@customElement("app-navbar")
 export class Navbar extends Component {
 
 	/**
 	 * The clock controller.
+	 * @type {ClockController}
 	 */
 	#clock = new ClockController(this, 60);
 
 	/**
 	 * The date format.
+	 * @type {Intl.DateTimeFormat}
 	 */
 	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "full"});
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
 	 */
-	render(): TemplateResult {
+	render() {
 		return html`
 			<nav class="navbar navbar-dark">
 				<div class="container-fluid">
@@ -41,3 +41,6 @@ export class Navbar extends Component {
 		`;
 	}
 }
+
+// Register the component.
+customElements.define("app-navbar", Navbar);

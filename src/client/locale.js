@@ -1,10 +1,11 @@
-import {configureLocalization, type LocaleModule} from "@lit/localize";
+import {configureLocalization} from "@lit/localize";
 import * as french from "./i18n/fr.js";
 
 /**
  * The map of supported locales.
+ * @type {Map<string, import("@lit/localize").LocaleModule>}
  */
-export const locales = new Map<string, LocaleModule>([
+export const locales = new Map([
 	["fr", french]
 ]);
 
@@ -12,7 +13,7 @@ export const locales = new Map<string, LocaleModule>([
  * Gets or sets the active locale.
  */
 export const {getLocale, setLocale} = configureLocalization({
-	loadLocale: async locale => locales.get(locale)!,
+	loadLocale: async locale => /** @type {import("@lit/localize").LocaleModule} */ (locales.get(locale)),
 	sourceLocale: "en",
 	targetLocales: ["fr"]
 });

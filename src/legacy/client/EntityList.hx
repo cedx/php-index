@@ -3,23 +3,23 @@ package php_index.client;
 import php_index.base.FileSystemEntity;
 import php_index.base.Sort;
 
-/** Represents a list of file system entities. **/
+/** Represents a list of file system entities. */
 class EntityList implements Model {
 
-	/** The list items. **/
+	/** The list items. */
 	@:editable var items: List<FileSystemEntity> = new List();
 
-	/** The current sort. **/
+	/** The current sort. */
 	@:editable var sort: Sort = new Sort();
 
-	/** The loading status. **/
+	/** The loading status. */
 	@:loaded var status: List<FileSystemEntity> = Application.instance.remote.index({listing: true}).next(list -> {
 		items = list;
 		orderBy("path");
 		items;
 	});
 
-	/** Sorts the list of file system entities. **/
+	/** Sorts the list of file system entities. */
 	public function orderBy(attribute: String, ?direction: SortDirection) {
 		if (direction == null) direction = if (sort.exists(attribute)) sort[attribute] == Asc ? Desc : Asc else Asc;
 		sort = [attribute => direction];

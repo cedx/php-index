@@ -1,9 +1,0 @@
-{
-	"extends": "../jsconfig",
-	"include": ["**/*.ts"],
-	"compilerOptions": {
-		"importHelpers": true,
-		"isolatedModules": true,
-		"useDefineForClassFields": false
-	}
-}

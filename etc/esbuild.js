@@ -18,14 +18,14 @@ export function cssOptions() {
 }
 
 /**
- * Returns the TypeScript settings.
- * @returns {import("esbuild").BuildOptions} The TypeScript settings.
+ * Returns the JavaScript settings.
+ * @returns {import("esbuild").BuildOptions} The JavaScript settings.
  */
-export function tsOptions() {
+export function jsOptions() {
 	const production = isProduction();
 	return Object.assign(sharedOptions(production), {
 		drop: production ? ["debugger"] : [],
-		entryPoints: ["src/client/index.ts"],
+		entryPoints: ["src/client/index.js"],
 		format: "esm",
 		outfile: "www/js/main.js",
 		plugins: production ? [minifyHtml()] : [],
