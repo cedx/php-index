@@ -54,7 +54,7 @@ function sendFile(string $path): void {
  * Sends the directory listing to the client.
  */
 function sendListing(): void {
-	$exclude = [basename($_SERVER["SCRIPT_FILENAME"]), "web.config"];
+	$exclude = [basename($_SERVER["SCRIPT_FILENAME"]), "desktop.ini", "web.config"];
 	if ($pharPath = \Phar::running(false)) $exclude[] = basename($pharPath);
 
 	$basePath = dirname($_SERVER["SCRIPT_FILENAME"]);
