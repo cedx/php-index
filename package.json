@@ -6,7 +6,7 @@
 	"name": "@cedx/php-index",
 	"repository": "github:cedx/php-index",
 	"type": "module",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -22,18 +22,18 @@
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.18.9",
 		"@babel/plugin-syntax-import-assertions": "^7.18.6",
-		"@lit/localize": "^0.11.3",
+		"@lit/localize": "^0.11.4",
 		"@lit/localize-tools": "^0.6.5",
 		"@types/gulp": "^4.0.9",
-		"@types/node": "^18.6.5",
+		"@types/node": "^18.7.2",
 		"bootstrap": "^5.2.0",
 		"bootstrap-icons": "^1.9.1",
 		"del": "^7.0.0",
-		"esbuild": "^0.15.0",
+		"esbuild": "^0.15.1",
 		"esbuild-plugin-minify-html-literals": "^1.0.1",
 		"eslint": "^8.21.0",
 		"gulp": "^4.0.2",
-		"lit": "^2.2.8",
+		"lit": "^2.3.0",
 		"typescript": "^4.7.4"
 	},
 	"engines": {
