@@ -63,18 +63,12 @@ function sendListing(): void {
 		fn(string $entry) => $entry[0] != "." && !in_array($entry, $exclude) && is_readable("$basePath/$entry")
 	));
 
-	$entities = array_map(function(string $entry) use ($basePath) {
-		$path = "$basePath/$entry";
-		$isDirectory = is_dir($path);
-		return (object) [
-			"modifiedAt" => (new \DateTime("@".filemtime($path)))->format("c"),
-			"path" => $entry,
-			"size" => $isDirectory ? -1 : filesize($path),
-			"type" => $isDirectory ? "directory" : "file",
-		];
-	}, $entries);
-
-	sendResponse(json_encode($entities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+	sendResponse(json_encode(array_map(fn($entry) => [
+		"modifiedAt" => (new \DateTime("@".filemtime($path = "$basePath/$entry")))->format("c"),
+		"path" => $entry,
+		"size" => ($isDirectory = is_dir($path)) ? -1 : filesize($path),
+		"type" => $isDirectory ? "directory" : "file",
+	], $entries)));
 }
 
 /**
