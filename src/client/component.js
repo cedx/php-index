@@ -15,7 +15,6 @@ export class Component extends LitElement {
 	/**
 	 * Value indicating whether this component uses a shadow root.
 	 * @type {boolean}
-	 * @readonly
 	 */
 	#useShadowRoot;
 

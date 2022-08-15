@@ -27,7 +27,6 @@ export class Listing extends Component {
 	/**
 	 * The byte units.
 	 * @type {string[]}
-	 * @readonly
 	 */
 	static #byteUnits = ["", "K", "M", "G", "T", "P", "E"];
 
