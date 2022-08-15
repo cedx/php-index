@@ -135,7 +135,7 @@ export class Listing extends Component {
 	connectedCallback() {
 		super.connectedCallback();
 		document.title = `${location.hostname} - ${this.#path}`;
-		this.#fetch();
+		this.#fetchEntities();
 	}
 
 	/**
@@ -183,7 +183,7 @@ export class Listing extends Component {
 	 * Fetches the list items.
 	 * @returns {Promise<void>} Resolves when the list items have been loaded.
 	 */
-	async #fetch() {
+	async #fetchEntities() {
 		this.loading = LoadingStatus.loading;
 
 		try {
