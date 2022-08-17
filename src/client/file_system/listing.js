@@ -180,7 +180,7 @@ export class Listing extends Component {
 
 	/**
 	 * Fetches the list items.
-	 * @returns {Promise<void>} Resolves when the list items have been loaded.
+	 * @returns {Promise<void>} Resolves when the list items have been fetched.
 	 */
 	async #fetchEntities() {
 		this.loading = LoadingStatus.loading;
