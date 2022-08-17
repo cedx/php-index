@@ -187,13 +187,10 @@ export class Listing extends Component {
 
 		try {
 			const response = await fetch("?listing");
-			if (!response.ok) this.loading = LoadingStatus.failed;
-			else {
-				const items = /** @type {import("./entity.js").EntityOptions[]} */ (await response.json());
-				this.entities = items.map(item => new Entity(item));
-				this.#orderBy("path");
-				this.loading = LoadingStatus.done;
-			}
+			const items = /** @type {import("./entity.js").EntityOptions[]} */ (await response.json());
+			this.entities = items.map(item => new Entity(item));
+			this.#orderBy("path");
+			this.loading = LoadingStatus.done;
 		}
 		catch {
 			this.loading = LoadingStatus.failed;
