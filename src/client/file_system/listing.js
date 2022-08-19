@@ -234,4 +234,4 @@ export class Listing extends Component {
 }
 
 // Register the component.
-customElements.define("app-entitylist", Listing);
+customElements.define("app-listing", Listing);

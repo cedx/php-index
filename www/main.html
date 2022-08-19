@@ -12,11 +12,20 @@
 		<meta name="theme-color" content="#165898"/>
 		<meta name="viewport" content="initial-scale=1, width=device-width"/>
 
+		<!-- https://bugzilla.mozilla.org/show_bug.cgi?id=1736059
 		<script type="module">
 			import main from "./?file=css/main.css" assert {type: "css"};
 			document.adoptedStyleSheets = [main];
 		</script>
 		<script src="?file=js/main.js" type="module"></script>
+		-->
+
+		<script type="module">
+			const styleSheet = new CSSStyleSheet;
+			styleSheet.replaceSync(await fetch("?file=css/main.css", {headers: {Accept: "text/css"}}).then(response => response.text()));
+			document.adoptedStyleSheets = [styleSheet];
+			await import("./?file=js/main.js");
+		</script>
 
 		<style>
 			@keyframes loader-circle {

@@ -17,7 +17,7 @@ export class Shell extends Component {
 			</header>
 
 			<main>
-				<app-entitylist></app-entitylist>
+				<app-listing></app-listing>
 			</main>
 		`;
 	}
