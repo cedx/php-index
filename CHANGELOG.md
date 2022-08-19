@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.2.2](https://github.com/cedx/php-index/compare/v0.2.1...v0.2.2)
+- Improved compatibility with [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/browsers).
+
 ## Version [0.2.1](https://github.com/cedx/php-index/compare/v0.2.0...v0.2.1)
 - Excluded the `desktop.ini` files from the listing.
 - Updated the package dependencies.
