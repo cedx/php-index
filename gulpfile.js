@@ -69,14 +69,14 @@ export const watch = gulp.series(
 /** Watches for file changes in the application. */
 async function watchApp() {
 	await exec("lit-localize", ["--config=etc/locale.json", "build"]);
-	const result = await esbuild(Object.assign(jsOptions(), {incremental: true}));
+	const result = await esbuild({...jsOptions(), incremental: true});
 	const compileApp = () => result.rebuild?.();
 	gulp.watch("src/client/**/*.js", compileApp);
 }
 
 /** Watches for file changes in the theme. */
 async function watchTheme() {
-	const result = await esbuild(Object.assign(cssOptions(), {incremental: true}));
+	const result = await esbuild({...cssOptions(), incremental: true});
 	const compileTheme = () => result.rebuild?.();
 	gulp.watch("src/ui/**/*.css", compileTheme);
 }
