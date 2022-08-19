@@ -9,12 +9,13 @@ const isProduction = () => env.NODE_ENV == "production";
  * @returns {import("esbuild").BuildOptions} The CSS settings.
  */
 export function cssOptions() {
-	return Object.assign(sharedOptions(isProduction()), {
+	return {
+		...sharedOptions(isProduction()),
 		entryPoints: ["src/ui/index.css"],
 		external: ["*.woff2"],
 		outfile: "www/css/main.css",
 		sourceRoot: new URL("../www/css/", import.meta.url).href
-	});
+	};
 }
 
 /**
@@ -23,7 +24,8 @@ export function cssOptions() {
  */
 export function jsOptions() {
 	const production = isProduction();
-	return Object.assign(sharedOptions(production), {
+	return {
+		...sharedOptions(production),
 		drop: production ? ["debugger"] : [],
 		entryPoints: ["src/client/index.js"],
 		format: "esm",
@@ -31,7 +33,7 @@ export function jsOptions() {
 		plugins: production ? [minifyHtml()] : [],
 		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		treeShaking: production
-	});
+	};
 }
 
 /**
