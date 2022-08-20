@@ -11,10 +11,13 @@ export default new Proxy(fetch, {
 	 * @returns {Promise<Response>} The server response.
 	 */
 	async apply(target, thisArg, args) {
-		const [input, init] = args;
-		const request = new Request(input, init);
+		const request = new Request(...args);
 		if (!request.headers.has("Accept")) request.headers.set("Accept", "application/json");
-		if (request.body && !request.headers.has("Content-Type")) request.headers.set("Content-Type", "application/json");
+
+		if (["PATCH", "POST", "PUT"].includes(request.method)) {
+			const [mimeType] = (request.headers.get("Content-Type") ?? "").split(";");
+			if (!mimeType || mimeType == "text/plain") request.headers.set("Content-Type", "application/json");
+		}
 
 		const response = /** @type {Response} */ (await Reflect.apply(target, thisArg, [request]));
 		if (!response.ok) throw Object.assign(new Error(`${response.status} ${response.statusText}`), {name: "HttpError"});
