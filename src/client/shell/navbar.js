@@ -15,7 +15,7 @@ export class Navbar extends Component {
 	#clock = new ClockController(this, 60);
 
 	/**
-	 * The date format.
+	 * The date formatter.
 	 * @type {Intl.DateTimeFormat}
 	 */
 	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "full"});
