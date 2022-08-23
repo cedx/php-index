@@ -19,9 +19,9 @@ export class Listing extends Component {
 	 * @type {import("lit").PropertyDeclarations}
 	 */
 	static properties = {
-		entities: {state: true},
-		loading: {state: true},
-		sort: {state: true}
+		_entities: {state: true},
+		_loading: {state: true},
+		_sort: {state: true}
 	};
 
 	/**
@@ -57,20 +57,23 @@ export class Listing extends Component {
 		/**
 		 * The list of file system entities.
 		 * @type {Entity[]}
+		 * @private
 		 */
-		this.entities = [];
+		this._entities = [];
 
 		/**
 		 * The loading status.
 		 * @type {LoadingStatus}
+		 * @private
 		 */
-		this.loading = LoadingStatus.loading;
+		this._loading = LoadingStatus.loading;
 
 		/**
 		 * The current sort.
 		 * @type {Sort}
+		 * @private
 		 */
-		this.sort = new Sort;
+		this._sort = new Sort;
 	}
 
 	/**
@@ -83,13 +86,13 @@ export class Listing extends Component {
 				<thead>
 					<tr>
 						<th @click=${() => this.#orderBy("path")} scope="col">
-							<span role="button">${msg("Name")} <i class="bi bi-${this.sort.getIcon("path")}"></i></span>
+							<span role="button">${msg("Name")} <i class="bi bi-${this._sort.getIcon("path")}"></i></span>
 						</th>
 						<th class="text-end" @click=${() => this.#orderBy("size")} scope="col">
-							<span role="button">${msg("Size")} <i class="bi bi-${this.sort.getIcon("size")}"></i></span>
+							<span role="button">${msg("Size")} <i class="bi bi-${this._sort.getIcon("size")}"></i></span>
 						</th>
 						<th class="d-none d-sm-table-cell text-end" @click=${() => this.#orderBy("modifiedAt")} scope="col">
-							<span role="button">${msg("Last modified")} <i class="bi bi-${this.sort.getIcon("modifiedAt")}"></i></span>
+							<span role="button">${msg("Last modified")} <i class="bi bi-${this._sort.getIcon("modifiedAt")}"></i></span>
 						</th>
 					</tr>
 				</thead>
@@ -106,7 +109,7 @@ export class Listing extends Component {
 							<td class="d-none d-sm-table-cell"></td>
 						</tr>
 					`)}
-					${this.entities.map(entity => html`
+					${this._entities.map(entity => html`
 						<tr>
 							<td>
 								<div class="text-truncate">
@@ -144,7 +147,7 @@ export class Listing extends Component {
 	render() {
 		return html`
 			<article id="listing">
-				<section class=${classMap({"border-bottom": this.entities.length})}>
+				<section class=${classMap({"border-bottom": this._entities.length})}>
 					<h3 class="mb-0">${msg(str`Index of ${this.#path}`)}</h3>
 				</section>
 
@@ -165,7 +168,7 @@ export class Listing extends Component {
 							</div>
 						</section>
 					`],
-					[LoadingStatus.done, () => this.entities.length ? this.listing : html`
+					[LoadingStatus.done, () => this._entities.length ? this.listing : html`
 						<section class="pt-0">
 							<div class="alert alert-warning d-flex align-items-center mb-0">
 								<i class="bi bi-exclamation-triangle-fill"></i>
@@ -218,16 +221,16 @@ export class Listing extends Component {
 	 * @param {SortOrder} [order] The sort order.
 	 */
 	#orderBy(attribute, order) {
-		if (!order) order = this.sort.get(attribute) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
-		this.sort = new Sort([[attribute, order]]);
-		this.entities = this.entities.sort((x, y) => {
+		order ??= this._sort.get(attribute) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
+		this._sort = new Sort([[attribute, order]]);
+		this._entities = this._entities.sort((x, y) => {
 			switch (attribute) {
 				case "path": {
 					const value = x.type == y.type ? x.path.localeCompare(y.path) : x.type == EntityType.directory ? -1 : 1;
 					return order == SortOrder.asc ? value : -value;
 				}
 				default:
-					return this.sort.compare(x, y);
+					return this._sort.compare(x, y);
 			}
 		});
 	}
