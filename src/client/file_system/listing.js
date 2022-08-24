@@ -151,7 +151,7 @@ export class Listing extends Component {
 					<h3 class="mb-0">${msg(str`Index of ${this.#path}`)}</h3>
 				</section>
 
-				${choose(this.loading, [
+				${choose(this._loading, [
 					[LoadingStatus.loading, () => html`
 						<section class="pt-0">
 							<div class="alert alert-info d-flex align-items-center mb-0">
@@ -186,17 +186,17 @@ export class Listing extends Component {
 	 * @returns {Promise<void>} Resolves when the list items have been fetched.
 	 */
 	async #fetchEntities() {
-		this.loading = LoadingStatus.loading;
+		this._loading = LoadingStatus.loading;
 
 		try {
 			const response = await fetch("?listing");
 			const items = /** @type {import("./entity.js").EntityOptions[]} */ (await response.json());
-			this.entities = items.map(item => new Entity(item));
+			this._entities = items.map(item => new Entity(item));
 			this.#orderBy("path");
-			this.loading = LoadingStatus.done;
+			this._loading = LoadingStatus.done;
 		}
 		catch {
-			this.loading = LoadingStatus.failed;
+			this._loading = LoadingStatus.failed;
 		}
 	}
 
@@ -223,7 +223,7 @@ export class Listing extends Component {
 	#orderBy(attribute, order) {
 		order ??= this._sort.get(attribute) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
 		this._sort = new Sort([[attribute, order]]);
-		this._entities = this._entities.sort((x, y) => {
+		this._entities.sort((x, y) => {
 			switch (attribute) {
 				case "path": {
 					const value = x.type == y.type ? x.path.localeCompare(y.path) : x.type == EntityType.directory ? -1 : 1;
