@@ -225,10 +225,9 @@ export class Listing extends Component {
 		this._sort = new Sort([[attribute, order]]);
 		this._entities.sort((x, y) => {
 			switch (attribute) {
-				case "path": {
+				case "path":
 					const value = x.type == y.type ? x.path.localeCompare(y.path) : x.type == EntityType.directory ? -1 : 1;
 					return order == SortOrder.asc ? value : -value;
-				}
 				default:
 					return this._sort.compare(x, y);
 			}
