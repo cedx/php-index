@@ -2,9 +2,9 @@ import {html} from "lit";
 import {Component} from "../component.js";
 
 /**
- * The application shell.
+ * The root component.
  */
-export class Shell extends Component {
+export class Root extends Component {
 
 	/**
 	 * Renders this component.
@@ -24,4 +24,4 @@ export class Shell extends Component {
 }
 
 // Register the component.
-customElements.define("app-shell", Shell);
+customElements.define("app-root", Root);
