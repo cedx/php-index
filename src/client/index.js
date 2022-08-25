@@ -1,4 +1,4 @@
-import fetchProxy from "./fetch_proxy.js";
+import fetchProxy from "./fetch.js";
 import {locales, setLocale} from "./locale.js";
 
 // Load the components.
