@@ -20,7 +20,7 @@ export default new Proxy(fetch, {
 		}
 
 		const response = /** @type {Response} */ (await Reflect.apply(target, thisArg, [request]));
-		if (!response.ok) throw Object.assign(new Error(`${response.status} ${response.statusText}`), {name: "HttpError"});
+		if (!response.ok) throw Object.assign(new Error(response.status.toString()), {name: "HttpError"});
 		return response;
 	}
 });
