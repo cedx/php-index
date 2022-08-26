@@ -33,7 +33,7 @@ export class Navbar extends Component {
 						<span class="ms-2">${location.hostname}</span>
 					</div>
 
-					<span class="d-none d-sm-block navbar-text text-capitalize-first">
+					<span class="d-none d-sm-block navbar-text text-capitalize-first text-end">
 						${this.#dateFormatter.format(this.#clock.value)}
 					</span>
 				</div>
