@@ -1,4 +1,4 @@
-import {LitElement} from "lit";
+import {css, LitElement} from "lit";
 
 /**
  * The base class for custom elements.
@@ -10,7 +10,9 @@ export class Component extends LitElement {
 	 * The component styles.
 	 * @type {import("lit").CSSResultGroup}
 	 */
-	static styles = document.adoptedStyleSheets;
+	static styles = [document.adoptedStyleSheets, css`
+		:host { contain: content; }
+	`];
 
 	/**
 	 * Value indicating whether this component uses a shadow root.
