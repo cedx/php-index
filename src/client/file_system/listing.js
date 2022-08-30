@@ -4,7 +4,7 @@ import {classMap} from "lit/directives/class-map.js";
 import {choose} from "lit/directives/choose.js";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
-import {LoadingStatus} from "../data/loading_status.js";
+import {LoadingState} from "../data/loading_state.js";
 import {Sort, SortOrder} from "../data/sort.js";
 import {getLocale} from "../locale.js";
 import {Entity, EntityType} from "./entity.js";
@@ -63,10 +63,10 @@ export class Listing extends Component {
 
 		/**
 		 * The loading status.
-		 * @type {LoadingStatus}
+		 * @type {LoadingState}
 		 * @private
 		 */
-		this._loading = LoadingStatus.loading;
+		this._loading = LoadingState.loading;
 
 		/**
 		 * The current sort.
@@ -152,7 +152,7 @@ export class Listing extends Component {
 				</section>
 
 				${choose(this._loading, [
-					[LoadingStatus.loading, () => html`
+					[LoadingState.loading, () => html`
 						<section class="pt-0">
 							<div class="alert alert-info d-flex align-items-center mb-0">
 								<div class="spinner-border spinner-border-sm"></div>
@@ -160,7 +160,7 @@ export class Listing extends Component {
 							</div>
 						</section>
 					`],
-					[LoadingStatus.failed, () => html`
+					[LoadingState.failed, () => html`
 						<section class="pt-0">
 							<div class="alert alert-danger d-flex align-items-center mb-0">
 								<i class="bi bi-exclamation-circle-fill"></i>
@@ -168,7 +168,7 @@ export class Listing extends Component {
 							</div>
 						</section>
 					`],
-					[LoadingStatus.done, () => this._entities.length ? this.listing : html`
+					[LoadingState.done, () => this._entities.length ? this.listing : html`
 						<section class="pt-0">
 							<div class="alert alert-warning d-flex align-items-center mb-0">
 								<i class="bi bi-exclamation-triangle-fill"></i>
@@ -186,17 +186,17 @@ export class Listing extends Component {
 	 * @returns {Promise<void>} Resolves when the list items have been fetched.
 	 */
 	async #fetchEntities() {
-		this._loading = LoadingStatus.loading;
+		this._loading = LoadingState.loading;
 
 		try {
 			const response = await fetch("?listing");
 			const items = /** @type {import("./entity.js").EntityOptions[]} */ (await response.json());
 			this._entities = items.map(item => new Entity(item));
 			this.#orderBy("path");
-			this._loading = LoadingStatus.done;
+			this._loading = LoadingState.done;
 		}
 		catch {
-			this._loading = LoadingStatus.failed;
+			this._loading = LoadingState.failed;
 		}
 	}
 

@@ -1,8 +1,8 @@
 /**
- * Defines the status of a loading.
+ * Defines the state of a loading.
  * @enum {number}
  */
-export const LoadingStatus = Object.freeze({
+export const LoadingState = Object.freeze({
 
 	/** The loading is in progress. */
 	loading: 0,
