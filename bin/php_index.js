@@ -24,6 +24,7 @@ Options:
   -v, --version  Output the version number.
 `;
 
+// Start the application.
 try {
 	// Parse the command line arguments.
 	const {positionals, values} = parseArgs({
@@ -34,15 +35,9 @@ try {
 		}
 	});
 
-	// Print the help.
-	if (values.help) {
-		console.log(usage.trim());
-		process.exit();
-	}
-
-	// Print the version.
-	if (values.version) {
-		console.log(pkg.version);
+	// Print the usage.
+	if (values.help || values.version) {
+		console.log(values.version ? pkg.version : usage.trim());
 		process.exit();
 	}
 
