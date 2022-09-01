@@ -16,7 +16,6 @@
 		"php_index": "./bin/php_index.js"
 	},
 	"dependencies": {
-		"commander": "^9.4.0",
 		"execa": "^6.1.0"
 	},
 	"devDependencies": {

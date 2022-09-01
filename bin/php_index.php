@@ -12,7 +12,7 @@ if (!Phar::canWrite()) {
 }
 
 // Parse the command line arguments.
-$options = getopt("i:o:", ["input:", "output:"], $index);
+$options = getopt("i:o:", ["input:", "output:"], $index) ?: [];
 
 $input = $options["i"] ?? ($options["input"] ?? null);
 if (!$input || !is_dir($input)) {
@@ -38,3 +38,4 @@ EOF;
 $phar = new Phar("$output/index.phar");
 $phar->buildFromDirectory($input);
 $phar->setStub($stub);
+exit(0);
