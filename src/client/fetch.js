@@ -1,5 +1,6 @@
 /**
  * Fetches a resource from the network, returning a promise which is fulfilled once the response is available.
+ * @type {typeof fetch}
  */
 export default new Proxy(fetch, {
 
