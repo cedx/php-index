@@ -12,9 +12,10 @@ import pkg from "../package.json" assert {type: "json"};
 
 // The usage information.
 const usage = `
-Usage: php_index [options] <directory>
-
 Build the PHP Index redistributable.
+
+Usage:
+  php_index [options] <directory>
 
 Arguments:
   directory      The path to the output directory.
