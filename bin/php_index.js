@@ -35,7 +35,7 @@ try {
 
 	// Print the usage.
 	if (values.help || values.version) {
-		console.log(values.help ? usage.trim(): pkg.version);
+		console.log(values.help ? usage.trim() : pkg.version);
 		process.exit();
 	}
 

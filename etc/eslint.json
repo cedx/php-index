@@ -111,7 +111,7 @@
 		"no-sequences": "error",
 		"no-shadow": "error",
 		"no-ternary": "off",
-		"no-throw-literal": "error",
+		"no-throw-literal": "off",
 		"no-undef-init": "error",
 		"no-undefined": "error",
 		"no-underscore-dangle": "off",
