@@ -28,13 +28,10 @@ Options:
 // Start the application.
 try {
 	// Parse the command line arguments.
-	const {positionals, values} = parseArgs({
-		allowPositionals: true,
-		options: {
-			help: {short: "h", type: "boolean"},
-			version: {short: "v", type: "boolean"}
-		}
-	});
+	const {positionals, values} = parseArgs({allowPositionals: true, options: {
+		help: {short: "h", type: "boolean"},
+		version: {short: "v", type: "boolean"}
+	}});
 
 	// Print the usage.
 	if (values.help || values.version) {
