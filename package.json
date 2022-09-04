@@ -28,7 +28,7 @@
 		"bootstrap": "^5.2.0",
 		"bootstrap-icons": "^1.9.1",
 		"del": "^7.0.0",
-		"esbuild": "^0.15.6",
+		"esbuild": "^0.15.7",
 		"esbuild-plugin-minify-html-literals": "^1.0.1",
 		"eslint": "^8.23.0",
 		"gulp": "^4.0.2",
