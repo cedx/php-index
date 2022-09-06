@@ -24,7 +24,7 @@
 			const styleSheet = new CSSStyleSheet;
 			styleSheet.replaceSync(await fetch("?file=css/main.css", {headers: {Accept: "text/css"}}).then(response => response.text()));
 			document.adoptedStyleSheets = [styleSheet];
-			await import("./?file=js/main.js");
+			import("./?file=js/main.js");
 		</script>
 
 		<style>
