@@ -1,5 +1,5 @@
 import {html} from "lit";
-import {ClockController} from "./clock_controller.js";
+import {Clock} from "./clock.js";
 import {Component} from "../component.js";
 import {getLocale} from "../locale.js";
 
@@ -10,9 +10,9 @@ export class Navbar extends Component {
 
 	/**
 	 * The clock controller.
-	 * @type {ClockController}
+	 * @type {Clock}
 	 */
-	#clock = new ClockController(this, 60);
+	#clock = new Clock(this, 60);
 
 	/**
 	 * The date formatter.

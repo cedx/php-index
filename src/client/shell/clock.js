@@ -1,7 +1,7 @@
 /**
  * Controller managing a clock.
  */
-export class ClockController {
+export class Clock {
 
 	/**
 	 * The clock value.
@@ -25,7 +25,7 @@ export class ClockController {
 	 * The timer identifier.
 	 * @type {number}
 	 */
-	#timerId = 0;
+	#timer = 0;
 
 	/**
 	 * Creates a new clock controller.
@@ -38,19 +38,19 @@ export class ClockController {
 	}
 
 	/**
-	 * Method invoked when the host element is mounted.
+	 * Method invoked when the host element is connected.
 	 */
 	hostConnected() {
-		this.#timerId = window.setInterval(() => {
+		this.#timer = window.setInterval(() => {
 			this.value = new Date();
 			this.#host.requestUpdate();
 		}, this.#timeout);
 	}
 
 	/**
-	 * Method invoked when the host element is unmounted.
+	 * Method invoked when the host element is disconnected.
 	 */
 	hostDisconnected() {
-		clearInterval(this.#timerId);
+		clearInterval(this.#timer);
 	}
 }
