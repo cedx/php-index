@@ -12,7 +12,7 @@ export function cssOptions() {
 	return {
 		...sharedOptions(isProduction()),
 		entryPoints: ["src/ui/index.css"],
-		external: ["*.woff2"],
+		external: ["*.gif", "*.jpg", "*.png", "*.webp", "*.woff2"],
 		outfile: "www/css/main.css",
 		sourceRoot: new URL("../www/css/", import.meta.url).href
 	};
@@ -31,8 +31,7 @@ export function jsOptions() {
 		format: "esm",
 		outfile: "www/js/main.js",
 		plugins: production ? [minifyHtml()] : [],
-		sourceRoot: new URL("../www/js/", import.meta.url).href,
-		treeShaking: production
+		sourceRoot: new URL("../www/js/", import.meta.url).href
 	};
 }
 
@@ -46,7 +45,6 @@ function sharedOptions(production) {
 		bundle: true,
 		legalComments: "none",
 		minify: production,
-		sourcemap: !production,
-		sourcesContent: false
+		sourcemap: !production
 	};
 }
