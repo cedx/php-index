@@ -26,6 +26,7 @@ export function jsOptions() {
 	const production = isProduction();
 	return {
 		...sharedOptions(production),
+		conditions: production ? [] : ["development"],
 		drop: production ? ["debugger"] : [],
 		entryPoints: ["src/client/index.js"],
 		format: "esm",
