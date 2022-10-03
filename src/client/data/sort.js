@@ -81,7 +81,7 @@ export class Sort {
 	 * @returns {SortEntry|null} The attribute/order pair at the specified index, or `null` if it doesn't exist.
 	 */
 	at(index) {
-		return this.#attributes[index] ?? null;
+		return this.#attributes.at(index) ?? null;
 	}
 
 	/**
@@ -179,10 +179,18 @@ export class Sort {
 	}
 
 	/**
+	 * Converts this object to a string in JSON format.
+	 * @returns {string} The string in JSON format corresponding to this object.
+	 */
+	toJSON() {
+		return this.toString();
+	}
+
+	/**
 	 * Returns a string representation of this object.
 	 * @returns {string} The string representation of this object.
 	 */
 	toString() {
-		return this.#attributes.map(item => `${item[1] == SortOrder.asc ? "" : "-"}${item[0]}`).join(",");
+		return this.#attributes.map(item => `${item.at(1) == SortOrder.asc ? "" : "-"}${item.at(0)}`).join(",");
 	}
 }

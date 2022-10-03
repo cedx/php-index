@@ -143,6 +143,7 @@ export class Listing extends Component {
 	/**
 	 * Renders this component.
 	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
 	 */
 	render() {
 		return html`
