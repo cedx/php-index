@@ -28,19 +28,7 @@ export class Listing extends Component {
 	 * The byte units.
 	 * @type {string[]}
 	 */
-	static #byteUnits = ["", "K", "M", "G", "T", "P", "E"];
-
-	/**
-	 * The formatter used to format the file sizes.
-	 * @type {Intl.NumberFormat}
-	 */
-	#byteFormatter = new Intl.NumberFormat(getLocale(), {maximumFractionDigits: 2});
-
-	/**
-	 * The formatter used to format the modification dates.
-	 * @type {Intl.DateTimeFormat}
-	 */
-	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "medium", timeStyle: "short"});
+	static #byteUnits = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte", "petabyte"];
 
 	/**
 	 * The current path.
@@ -122,7 +110,9 @@ export class Listing extends Component {
 								${entity.type == EntityType.directory ? html`&ndash;` : this.#formatBytes(entity.size)}
 							</td>
 							<td class="d-none d-sm-table-cell text-end">
-								<time datetime=${entity.modifiedAt.toISOString()}>${this.#dateFormatter.format(entity.modifiedAt)}</time>
+								<time datetime=${entity.modifiedAt.toISOString()}>
+									${entity.modifiedAt.toLocaleString(getLocale(), {dateStyle: "medium", timeStyle: "short"})}
+								</time>
 							</td>
 						</tr>
 					`)}
@@ -213,7 +203,7 @@ export class Listing extends Component {
 			index++;
 		}
 
-		return this.#byteFormatter.format(bytes) + Listing.#byteUnits[index];
+		return bytes.toLocaleString(getLocale(), {maximumFractionDigits: 2, style: "unit", unit: Listing.#byteUnits[index]});
 	}
 
 	/**

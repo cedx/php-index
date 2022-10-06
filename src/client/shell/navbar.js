@@ -15,12 +15,6 @@ export class Navbar extends Component {
 	#clock = new Clock(this, 60);
 
 	/**
-	 * The date formatter.
-	 * @type {Intl.DateTimeFormat}
-	 */
-	#dateFormatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "full"});
-
-	/**
 	 * Renders this component.
 	 * @returns {import("lit").TemplateResult} The view template.
 	 * @protected
@@ -37,7 +31,7 @@ export class Navbar extends Component {
 					<ul class="navbar-nav d-none d-sm-block">
 						<li class="nav-item">
 							<span class="navbar-text text-capitalize-first">
-								${this.#dateFormatter.format(this.#clock.value)}
+								${this.#clock.value.toLocaleString(getLocale(), {dateStyle: "full"})}
 							</span>
 						</li>
 					</ul>
