@@ -198,7 +198,7 @@ export class Listing extends Component {
 	 */
 	#formatBytes(bytes) {
 		let index = 0;
-		while (bytes > 1024 && index < Listing.#byteUnits.length) {
+		while (bytes >= 1024 && index < Listing.#byteUnits.length) {
 			bytes /= 1024;
 			index++;
 		}
