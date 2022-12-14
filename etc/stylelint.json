@@ -1,0 +1,9 @@
+{
+	"extends": "stylelint-config-standard",
+	"rules": {
+		"declaration-empty-line-before": "never",
+		"import-notation": "string",
+		"indentation": "tab",
+		"media-feature-range-notation": "context"
+	}
+}

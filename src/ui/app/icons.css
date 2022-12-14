@@ -1,12 +1,12 @@
 @font-face {
-  font-display: block;
-  font-family: "Bootstrap Icons";
-  src: url("?file=fonts/icons.woff2") format("woff2");
+	font-display: block;
+	font-family: "Bootstrap Icons";
+	src: url("?file=fonts/icons.woff2") format("woff2");
 }
 
 .bi::before {
 	display: inline-block;
-	font-family: "Bootstrap Icons" !important;
+	font-family: "Bootstrap Icons" !important; /* stylelint-disable-line font-family-no-missing-generic-family-keyword */
 	font-style: normal;
 	font-variant: normal;
 	font-weight: normal !important;

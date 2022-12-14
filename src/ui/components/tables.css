@@ -10,7 +10,7 @@
 }
 
 .table-sticky > thead::after {
-	border-bottom: var(--bs-border-width) solid currentColor;
+	border-bottom: var(--bs-border-width) solid currentcolor;
 	bottom: 0;
 	content: "";
 	left: 0;
