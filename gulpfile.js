@@ -19,7 +19,10 @@ async function buildApp() {
 
 /** Builds the assets. */
 function buildAssets() {
-	return cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2");
+	return Promise.all([
+		cp("node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2", "www/fonts/icons.woff2"),
+		cp("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "www/js/vendor.js")
+	]);
 }
 
 /** Builds the theme. */
@@ -52,7 +55,7 @@ export async function lint() {
 
 /** Publishes the package in the registry. */
 export async function publish() {
-	for (const registry of ["https://registry.npmjs.org", "https://npm.pkg.github.com"]) await exec("npm", ["publish", `--registry=${registry}`]);
+	await exec("npm", ["publish"]);
 	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
 }
 
