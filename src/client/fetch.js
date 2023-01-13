@@ -21,7 +21,7 @@ export default new Proxy(fetch, {
 		}
 
 		const response = /** @type {Response} */ (await Reflect.apply(target, thisArg, [request]));
-		if (!response.ok) throw Object.assign(new Error, {name: "HttpError", request, response});
+		if (!response.ok) throw Object.assign(Error, {name: "HttpError", request, response});
 		return response;
 	}
 });
