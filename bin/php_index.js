@@ -40,7 +40,7 @@ try {
 	}
 
 	// Check the requirements.
-	if (!positionals.length) throw "Required argument 'directory' is missing.";
+	if (!positionals.length) throw Error("Required argument 'directory' is missing.");
 
 	// Populate the input folder.
 	const basePath = fileURLToPath(new URL("..", import.meta.url));
