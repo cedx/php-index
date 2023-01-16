@@ -30,7 +30,7 @@ function buildTheme() {
 	return esbuild(cssOptions());
 }
 
-/** Deletes all generated files and reset any saved state. */
+/** Deletes all generated files. */
 export function clean() {
 	return deleteAsync(["src/client/i18n", "var/**/*", "www/*.phar", "www/css", "www/fonts", "www/js"]);
 }
@@ -53,7 +53,7 @@ export async function lint() {
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
-/** Publishes the package in the registry. */
+/** Publishes the package. */
 export async function publish() {
 	await exec("npm", ["publish"]);
 	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
