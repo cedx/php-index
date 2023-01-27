@@ -9,10 +9,14 @@
  */
 export const SortOrder = Object.freeze({
 
-	/** The sort is ascending. */
+	/**
+	 * The sort is ascending.
+	 */
 	asc: "ASC",
 
-	/** The sort is descending. */
+	/**
+	 * The sort is descending.
+	 */
 	desc: "DESC"
 });
 
@@ -191,6 +195,6 @@ export class Sort {
 	 * @returns {string} The string representation of this object.
 	 */
 	toString() {
-		return this.#attributes.map(item => `${item.at(1) == SortOrder.asc ? "" : "-"}${item.at(0)}`).join(",");
+		return this.#attributes.map(item => `${item.at(1) == SortOrder.asc ? "" : "-"}${item.at(0)}`).join();
 	}
 }

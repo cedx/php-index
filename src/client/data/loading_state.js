@@ -4,12 +4,18 @@
  */
 export const LoadingState = Object.freeze({
 
-	/** The loading is in progress. */
+	/**
+	 * The loading is in progress.
+	 */
 	loading: 0,
 
-	/** The loading is done. */
+	/**
+	 * The loading is done.
+	 */
 	done: 1,
 
-	/** The loading has failed. */
+	/**
+	 * The loading has failed.
+	 */
 	failed: 2
 });

@@ -29,14 +29,14 @@ Options:
 try {
 	// Parse the command line arguments.
 	const {positionals, values} = parseArgs({allowPositionals: true, options: {
-		help: {short: "h", type: "boolean"},
-		version: {short: "v", type: "boolean"}
+		help: {short: "h", type: "boolean", default: false},
+		version: {short: "v", type: "boolean", default: false}
 	}});
 
 	// Print the usage.
 	if (values.help || values.version) {
 		console.log(values.help ? usage.trim() : pkg.version);
-		process.exit();
+		process.exit(0);
 	}
 
 	// Check the requirements.
@@ -55,5 +55,5 @@ try {
 }
 catch (error) {
 	console.error(error instanceof Error ? error.message : error);
-	process.exitCode = 1;
+	process.exit(1);
 }

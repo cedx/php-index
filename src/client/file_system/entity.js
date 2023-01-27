@@ -4,10 +4,14 @@
  */
 export const EntityType = Object.freeze({
 
-	/** The file system entity is a directory. */
+	/**
+	 * The file system entity is a directory.
+	 */
 	directory: "directory",
 
-	/** The file system entity is a file. */
+	/**
+	 * The file system entity is a file.
+	 */
 	file: "file"
 });
 
