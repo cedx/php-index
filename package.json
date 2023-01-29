@@ -30,7 +30,7 @@
 		"del": "^7.0.0",
 		"esbuild": "^0.17.5",
 		"esbuild-plugin-minify-html-literals": "^1.0.2",
-		"eslint": "^8.32.0",
+		"eslint": "^8.33.0",
 		"gulp": "^4.0.2",
 		"lit": "^2.6.1",
 		"stylelint": "^14.16.1",
