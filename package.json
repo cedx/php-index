@@ -19,7 +19,7 @@
 		"execa": "^7.0.0"
 	},
 	"devDependencies": {
-		"esbuild": "^0.17.10",
+		"esbuild": "^0.17.11",
 		"stylelint": "^15.2.0",
 		"stylelint-config-standard": "^30.0.1"
 	},
