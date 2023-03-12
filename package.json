@@ -6,7 +6,7 @@
 	"name": "@cedx/php-index",
 	"repository": "github:cedx/php-index",
 	"type": "commonjs",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -15,11 +15,9 @@
 	"bin": {
 		"php_index": "./bin/php_index.js"
 	},
-	"dependencies": {
-		"execa": "^7.0.0"
-	},
 	"devDependencies": {
 		"esbuild": "^0.17.11",
+		"glob-watcher": "^5.0.5",
 		"stylelint": "^15.2.0",
 		"stylelint-config-standard": "^30.0.1"
 	},
@@ -41,6 +39,6 @@
 		"web"
 	],
 	"scripts": {
-		"prepack": "gulp"
+		"prepack": "lix Dist"
 	}
 }

@@ -43,7 +43,7 @@ final class Server {
 			"path" => $entry,
 			"size" => ($isDirectory = is_dir($path)) ? -1 : filesize($path),
 			"type" => $isDirectory ? "directory" : "file",
-		], $entries)));
+		], $entries), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 	}
 
 	/**
