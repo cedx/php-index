@@ -6,7 +6,7 @@
 
 .bi::before {
 	display: inline-block;
-	font-family: "Bootstrap Icons" !important; /* stylelint-disable-line font-family-no-missing-generic-family-keyword */
+	font-family: "Bootstrap Icons" !important;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: normal !important;
