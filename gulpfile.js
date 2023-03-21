@@ -46,24 +46,6 @@ export function i18n() {
 	return exec("lit-localize", ["--config=etc/locale.json", "extract"]);
 }
 
-/** Performs the static analysis of source code. */
-export async function lint() {
-	await exec("eslint", ["--config=etc/eslint.json", ...config.include]);
-	await exec("stylelint", ["--config=etc/stylelint.json", "src/ui/**/*.css"]);
-	return exec("tsc", ["--project", "jsconfig.json"]);
-}
-
-/** Publishes the package. */
-export async function publish() {
-	await exec("npm", ["publish"]);
-	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
-}
-
-/** Starts the development server. */
-export function serve() {
-	return exec("php", ["-S", "127.0.0.1:8080", "-t", "www"]);
-}
-
 /** Watches for file changes. */
 export const watch = gulp.series(
 	gulp.parallel(buildAssets, watchApp, watchTheme),

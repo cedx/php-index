@@ -1,4 +1,4 @@
-package php_index;
+package php_index.base;
 
 #if macro
 import haxe.macro.Compiler;
