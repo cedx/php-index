@@ -1,0 +1,4 @@
+--class-path scripts
+--class-path src
+--js var/scripts.js
+--library hxnodejs
