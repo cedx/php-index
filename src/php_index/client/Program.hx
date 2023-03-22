@@ -11,6 +11,7 @@ import turnwing.source.ResourceStringSource;
 import turnwing.template.HaxeTemplate;
 using StringTools;
 using haxe.io.Path;
+using php_index.client.ElementTools;
 
 /** Application entry point. **/
 function main() {
@@ -24,13 +25,16 @@ function main() {
 	final language = parts.length > 0 && supportedLanguages.contains(parts[0]) ? parts[0] : "en";
 	Container.instance.set("locale", new Locale(language));
 
-	final manager = new Manager<Messages>(new JsonProvider<Messages>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate()));
-	manager.prepare([language]).next(_ -> Container.instance.set("messages", manager.language(language))).handle(outcome -> switch outcome {
-		case Failure(error):
-			Browser.console.error(error.message);
-		case Success(_):
-			final body = Browser.document.body;
-			while (body.hasChildNodes()) body.removeChild(body.lastChild);
-			// TODO Renderer.mount(body, "<Root/>");
-	});
+	final provider = new JsonProvider<Messages>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate());
+	new Manager<Messages>(provider)
+		.get(language)
+		.next(messages -> Container.instance.set("messages", messages))
+		.handle(outcome -> switch outcome {
+			case Failure(error):
+				Browser.console.error(error.message);
+			case Success(_):
+				final body = Browser.document.body;
+				body.removeChildren();
+				// TODO Renderer.mount(body, "<Root/>");
+		});
 }

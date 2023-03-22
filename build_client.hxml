@@ -8,6 +8,7 @@
 --library coconut.data
 --library coconut.vdom
 --library intl
+--library tink_json
 --library turnwing
 --main php_index.client.Program
 --resource share/locale/en.json@locale.en.json
