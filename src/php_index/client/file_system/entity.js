@@ -1,21 +1,4 @@
 /**
- * Defines the type of a file system entity.
- * @enum {string}
- */
-export const EntityType = Object.freeze({
-
-	/**
-	 * The file system entity is a directory.
-	 */
-	directory: "directory",
-
-	/**
-	 * The file system entity is a file.
-	 */
-	file: "file"
-});
-
-/**
  * A reference to an entity on the file system.
  */
 export class Entity {

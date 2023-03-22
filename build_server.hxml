@@ -1,0 +1,9 @@
+--class-path src
+--dce full
+--define analyzer-optimize
+--define no-deprecation-warnings
+--define php-front=www/index.php
+--define real-position
+--library tink_web
+--main php_index.server.Program
+--php .
