@@ -3,8 +3,8 @@
 $stub = <<<'EOF'
 <?php
 $rootPath = basename(__FILE__);
-require "phar://$rootPath/src/server/index.php";
-\PhpIndex\main();
+require "phar://$rootPath/src/php_index/server/index.php";
+\php_index\main();
 __HALT_COMPILER();
 EOF;
 
@@ -26,11 +26,7 @@ try {
 	$phar->setStub($stub);
 	exit(0);
 }
-catch (RuntimeException $e) {
-	echo $e->getMessage(), PHP_EOL;
-	exit(($code = $e->getCode()) ? $code : 5);
-}
 catch (Throwable $e) {
 	echo $e->getMessage(), PHP_EOL;
-	exit(6);
+	exit($e->getCode() ?: 5);
 }

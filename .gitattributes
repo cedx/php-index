@@ -2,6 +2,7 @@
 .* text
 
 *.cjs text
+*.config text
 *.css text diff=css
 *.html text diff=html
 *.http text
@@ -17,9 +18,11 @@
 *.svg text
 *.txt text
 *.webmanifest text
+*.xml text
 *.yaml text
 *.yml text
 
+*.gif binary
 *.ico binary
 *.jpg binary
 *.n binary
