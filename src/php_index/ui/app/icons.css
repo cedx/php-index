@@ -16,6 +16,8 @@
 }
 
 .bi-arrow-90deg-up::before { content: "\f111"; }
+.bi-brightness-high-fill::before { content: "\f1d1"; }
+.bi-circle-half::before { content: "\f288"; }
 .bi-exclamation-circle-fill::before { content: "\f332"; }
 .bi-exclamation-triangle-fill::before { content: "\f33a"; }
 .bi-file-earmark-binary::before { content: "\f35c"; }
@@ -32,5 +34,6 @@
 .bi-file-earmark::before { content: "\f392"; }
 .bi-filter::before { content: "\f3ca"; }
 .bi-folder-fill::before { content: "\f3d1"; }
+.bi-moon-stars-fill::before { content: "\f495"; }
 .bi-sort-down-alt::before { content: "\f574"; }
 .bi-sort-up::before { content: "\f57b"; }

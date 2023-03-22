@@ -1,6 +1,7 @@
 .navbar {
+	--bs-navbar-brand-color: var(--bs-white);
 	--bs-navbar-nav-link-padding-x: 0.75rem;
-	background-color: var(--bs-primary);
+	/* TODO background-color: var(--bs-primary); */
 	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 	left: 0;
 	position: fixed;
@@ -19,7 +20,8 @@
 	top: -1px;
 }
 
+/* TODO
 .navbar-dark {
 	--bs-navbar-color: #ffffffbc;
 	--bs-navbar-hover-color: #fffffff2;
-}
+} */

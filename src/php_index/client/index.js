@@ -5,6 +5,7 @@ import {locales, setLocale} from "./locale.js";
 import "./file_system/listing.js";
 import "./shell/navbar.js";
 import "./shell/root.js";
+import "./shell/theme_selector.js";
 
 // Set the locale.
 const [locale] = navigator.language.split("-");

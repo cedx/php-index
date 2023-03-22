@@ -1,4 +1,4 @@
-<?php namespace PhpIndex;
+<?php namespace php_index;
 
 /**
  * Handles the request/response cycle.
