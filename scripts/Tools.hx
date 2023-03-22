@@ -1,8 +1,29 @@
+#if js
+import js.esbuild.Options.BuildOptions;
+import js.node.ChildProcess;
+#end
 import sys.FileSystem;
 import sys.io.File;
 using DateTools;
 using StringTools;
 using haxe.io.Path;
+
+#if js
+/** Returns the build settings. **/
+function buildOptions(debug = false): BuildOptions return {
+	bundle: true,
+	entryPoints: ["src/php_index/ui/index.css"],
+	external: ["*.woff2"],
+	legalComments: None,
+	minify: !debug,
+	outfile: "www/css/main.css",
+	sourcemap: debug
+};
+
+/** Captures the output of the specified `command`. **/
+function captureCommand(command: String, ?arguments: Array<String>)
+	return ChildProcess.execFileSync(command, arguments, {encoding: "utf8", shell: true}).rtrim();
+#end
 
 /** Recursively deletes all files in the specified `directory`. **/
 function cleanDirectory(directory: String) for (entry in FileSystem.readDirectory(directory).filter(entry -> entry != ".gitkeep")) {

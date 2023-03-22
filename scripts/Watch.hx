@@ -15,11 +15,8 @@ function main() {
 		GlobWatcher.watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand(done, command));
 	}
 
-	/* TODO
 	Esbuild.context(Tools.buildOptions(true))
-		.then(context -> GlobWatcher.watch("src/**\/*.css", done -> measureCallback(done, "esbuild ui/index.css", context.rebuild))); */
-
-	Sys.command("php -S 127.0.0.1:8080 -t www");
+		.then(context -> GlobWatcher.watch("src/**/*.css", done -> measureCallback(done, "esbuild ui/index.css", context.rebuild)));
 }
 
 /** Measures the time it takes to run the specified `callback` function. **/

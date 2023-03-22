@@ -1,7 +1,9 @@
 .navbar {
-	--bs-navbar-brand-color: var(--bs-white);
 	--bs-navbar-nav-link-padding-x: 0.75rem;
-	/* TODO background-color: var(--bs-primary); */
+	--bs-navbar-toggler-border-color: transparent;
+	--bs-navbar-toggler-focus-width: 0;
+	--bs-navbar-toggler-padding-x: 0.25rem;
+	background-color: var(--bs-primary);
 	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 	left: 0;
 	position: fixed;
@@ -15,13 +17,17 @@
 	.navbar { display: none; }
 }
 
+.navbar-brand {
+	align-items: center;
+	display: flex;
+}
+
 .navbar-brand img {
 	position: relative;
 	top: -1px;
 }
 
-/* TODO
 .navbar-dark {
 	--bs-navbar-color: #ffffffbc;
 	--bs-navbar-hover-color: #fffffff2;
-} */
+}
