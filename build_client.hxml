@@ -4,6 +4,7 @@
 --define js-es=6
 --define js-global=window
 --define no-deprecation-warnings
+--define source-map-content
 --js www/js/main.js
 --library coconut.data
 --library coconut.vdom

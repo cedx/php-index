@@ -11,7 +11,7 @@ function main() {
 
 	final srcDir = "src/php_index";
 	for (app in ["client", "server"]) {
-		final command = 'haxe --debug --define source-map-content build_$app.hxml';
+		final command = 'haxe --debug build_$app.hxml';
 		GlobWatcher.watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand(done, command));
 	}
 
