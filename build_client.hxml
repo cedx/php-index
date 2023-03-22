@@ -7,6 +7,7 @@
 --js www/js/main.js
 --library coconut.data
 --library coconut.vdom
+--library intl
 --main php_index.client.Program
 --resource share/locale/en.json@locale.en.json
 --resource share/locale/fr.json@locale.fr.json

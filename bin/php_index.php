@@ -16,7 +16,7 @@ try {
 	if (!Phar::canWrite()) throw new RuntimeException("Phar extension does not support creating Phar archives.", 501);
 
 	// Parse the command line arguments.
-	$options = getopt("i:o:", ["input:", "output:"]) ?: [];
+	$options = getopt("ci:o:", ["compress", "input:", "output:"]) ?: [];
 	$input = $options["i"] ?? ($options["input"] ?? null);
 	if (!$input || !is_dir($input)) throw new RuntimeException("You must provide a valid path to the input directory.", 400);
 	$output = $options["o"] ?? ($options["output"] ?? null);
@@ -26,6 +26,10 @@ try {
 	$phar = new Phar("$output/index.phar");
 	$phar->buildFromDirectory($input);
 	$phar->setStub($stub);
+
+	// Compress the PHAR archive.
+	$compress = $options["c"] ?? ($options["compress"] ?? null);
+	if ($compress !== null && Phar::canCompress(Phar::GZ)) $phar->compressFiles(Phar::GZ);
 	exit(0);
 }
 catch (Throwable $e) {
