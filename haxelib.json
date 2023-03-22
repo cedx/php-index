@@ -1,0 +1,11 @@
+{
+	"classPath": "src/",
+	"contributors": ["cedx"],
+	"description": "A PHP directory index generator.",
+	"license": "MIT",
+	"name": "php_index",
+	"releasenote": "Ported the source code to Haxe.",
+	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
+	"url": "https://github.com/cedx/php-index.hx",
+	"version": "0.3.0"
+}
