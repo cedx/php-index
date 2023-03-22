@@ -12,7 +12,7 @@ class Navbar extends View {
 	@:state var date = "";
 
 	/** The formatter used to format the current date. **/
-	final dateFormatter = new DateFormat(Browser.navigator.language, {dateStyle: Full});
+	final formatter = new DateFormat(Container.instance.locale, {dateStyle: Full});
 
 	/** Converts the first letter of the specified string to upper case. **/
 	function capitalize(value: String) return value.charAt(0).toUpperCase() + value.substring(1);
@@ -36,8 +36,8 @@ class Navbar extends View {
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() {
 		final timer = new Timer(Std.int(1.hours()));
-		date = capitalize(dateFormatter.format(Date.now()));
-		timer.run = () -> date = capitalize(dateFormatter.format(Date.now()));
+		date = capitalize(formatter.format(Date.now()));
+		timer.run = () -> date = capitalize(formatter.format(Date.now()));
 		beforeUnmounting(timer.stop);
 	}
 }
