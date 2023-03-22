@@ -4,6 +4,7 @@
 --define no-deprecation-warnings
 --define php-front=www/index.php
 --define real-position
+--library coconut.data
 --library tink_web
 --main php_index.server.Program
 --php .
