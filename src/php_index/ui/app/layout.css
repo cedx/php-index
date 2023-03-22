@@ -1,5 +1,5 @@
 body {
-	/* TODO accent-color: var(--bs-primary); */
+	accent-color: var(--bs-primary);
 	overflow: hidden;
 }
 
@@ -14,7 +14,7 @@ main {
 }
 
 article {
-	/* TODO background-color: var(--bs-white); */
+	background-color: var(--bs-white);
 	box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 7.5%);
 	overflow: clip;
 	width: 100%;

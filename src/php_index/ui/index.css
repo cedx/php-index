@@ -5,13 +5,9 @@
 @import "app/layout.css";
 @import "app/icons.css";
 
-/* Utilities. */
-/* @import "utilities/text.css"; */
-
 /* Components. */
-@import "components/dropdown.css";
 @import "components/navbar.css";
-/* @import "components/tables.css"; */
+@import "components/tables.css";
 
 /* Views. */
-/* @import "views/listing.css"; */
+@import "views/listing.css";

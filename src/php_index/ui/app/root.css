@@ -1,16 +1,14 @@
 :root {
-	/* TODO --bs-body-bg: var(--bs-gray-200); */
-	/* TODO --bs-body-bg-rgb: 233, 236, 239; */
-	/* TODO --bs-body-text-align: start; */
-	/* TODO --bs-link-color: var(--bs-primary); */
-	/* TODO --bs-link-color-rgb: var(--bs-primary-rgb); */
-	/* TODO --bs-link-hover-color: #12467a; */
-	/* TODO --bs-link-hover-color-rgb: var(); */
-	/* TODO --bs-primary: #165898; */
-	/* TODO --bs-primary-rgb: 22, 88, 152; */
+	--bs-body-bg: var(--bs-gray-200);
+	--bs-body-bg-rgb: 233, 236, 239;
+	--bs-body-text-align: start;
+	--bs-link-color: var(--bs-primary);
+	--bs-link-hover-color: #12467a;
+	--bs-primary: #165898;
+	--bs-primary-rgb: 22, 88, 152;
 	--bs-root-font-size: 14px;
-	/* TODO --bs-secondary: #696969; */
-	/* TODO --bs-secondary-rgb: 105, 105, 105; */
+	--bs-secondary: #696969;
+	--bs-secondary-rgb: 105, 105, 105;
 	--navbar-height: 50px;
 	font-size: var(--bs-root-font-size);
 }
@@ -19,13 +17,12 @@ a {
 	text-decoration: none;
 }
 
-a:not(.btn, .dropdown-item, .nav-link):hover,
-a:not(.btn, .dropdown-item, .nav-link):focus {
+a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):hover,
+a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):focus {
 	text-decoration: underline;
 }
 
-/* TODO
 ::selection {
 	background-color: var(--bs-primary);
 	color: var(--bs-white);
-} */
+}
