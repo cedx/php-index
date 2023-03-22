@@ -5,7 +5,7 @@
 /res/
 /src/**/*.g.json
 /var/
-/www/*.phar
+/www/index.*
 /www/css/
 /www/fonts/
 /www/js/
