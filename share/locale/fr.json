@@ -8,6 +8,7 @@
 	"loading": "Chargement des entrées du répertoire...",
 	"modifiedAt": "Modifié le",
 	"name": "Nom",
+	"offline": "Le réseau est inaccessible. Vérifiez votre connexion.",
 	"parentDirectory": "Dossier parent",
 	"size": "Taille"
 }

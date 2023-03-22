@@ -11,6 +11,7 @@ interface Messages {
 	function loading(): String;
 	function modifiedAt(): String;
 	function name(): String;
+	function offline(): String;
 	function parentDirectory(): String;
 	function size(): String;
 }

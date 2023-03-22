@@ -8,6 +8,7 @@
 	"loading": "Loading the directory entries...",
 	"modifiedAt": "Last modified",
 	"name": "Name",
+	"offline": "The network is inaccessible. Check your connection.",
 	"parentDirectory": "Parent directory",
 	"size": "Size"
 }
