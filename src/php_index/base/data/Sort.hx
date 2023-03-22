@@ -44,7 +44,7 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 		case Asc: "sort-down-alt";
 		case Desc: "sort-up";
 		default: "filter";
-	};
+	}
 
 	/** Gets the index of the specified attribute in the underlying list, or `-1` if the attribute is not found. **/
 	public function indexOf(attribute: String) return Lambda.findIndex(this, item -> item.name == attribute);

@@ -122,4 +122,4 @@ typedef ServeOptions = {
 }
 
 /** Defines the options of the `BuildContext.watch` method. **/
-typedef WatchOptions = {};
+typedef WatchOptions = {}

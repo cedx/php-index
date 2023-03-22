@@ -67,14 +67,14 @@ final class Server {
 	private function getMimeType(string $path): string {
 		return match (strtolower(pathinfo($path, PATHINFO_EXTENSION))) {
 			"css" => "text/css",
-			"gif" => "image/gif",
+			//"gif" => "image/gif",
 			"htm", "html" => "text/html",
-			"jpeg", "jpg" => "image/jpeg",
+			//"jpeg", "jpg" => "image/jpeg",
 			"js" => "application/javascript",
-			"json" => "application/json",
-			"png" => "image/png",
+			//"json" => "application/json",
+			//"png" => "image/png",
 			"svg" => "image/svg+xml",
-			"webmanifest" => "application/manifest+json",
+			//"webmanifest" => "application/manifest+json",
 			"woff2" => "font/woff2",
 			default => "application/octet-stream"
 		};
