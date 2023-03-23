@@ -1,9 +1,3 @@
-//! --library tink_core
-import haxe.crypto.Md5;
-import sys.FileSystem;
-import sys.io.File;
-using haxe.io.Path;
-
 /** Packages the project. **/
 function main() {
 	for (script in ["Clean", "Build", "Version"]) Sys.command('lix $script');
