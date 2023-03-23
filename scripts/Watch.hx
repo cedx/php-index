@@ -9,7 +9,7 @@ using tink.CoreApi;
 /** Watches for file changes. **/
 function main() {
 	measureCommand("lix Build --debug");
-	ChildProcess.spawn("php", ["-S", "localhost:8080", "-t", "www"], {stdio: Inherit});
+	ChildProcess.spawn("php", ["-S", "127.0.0.1:8080", "-t", "www"], {stdio: Inherit});
 
 	final srcDir = "src/php_index";
 	for (app in ["client", "server"]) {

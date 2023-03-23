@@ -16,8 +16,10 @@
 		"php_index": "./bin/php_index.js"
 	},
 	"devDependencies": {
+		"@cedx/gulp-php-minify": "^12.0.0",
 		"esbuild": "^0.17.12",
-		"glob-watcher": "^5.0.5"
+		"glob-watcher": "^5.0.5",
+		"gulp": "^4.0.2"
 	},
 	"engines": {
 		"node": ">=18.0.0"
