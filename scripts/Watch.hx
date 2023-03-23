@@ -3,11 +3,13 @@ import haxe.Timer;
 import js.esbuild.Esbuild;
 import js.glob_watcher.GlobWatcher;
 import js.lib.Error as JsError;
+import js.node.ChildProcess;
 using tink.CoreApi;
 
 /** Watches for file changes. **/
 function main() {
 	measureCommand("lix Build --debug");
+	ChildProcess.spawn("php", ["-S", "localhost:8080", "-t", "www"], {stdio: Inherit});
 
 	final srcDir = "src/php_index";
 	for (app in ["client", "server"]) {

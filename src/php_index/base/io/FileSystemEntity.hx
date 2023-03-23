@@ -1,10 +1,10 @@
 package php_index.base.io;
 
 import coconut.data.Model;
+import haxe.io.Mime;
 using haxe.io.Path;
 
 #if php
-import haxe.io.Mime;
 import php.Global;
 import tink.Chunk;
 #end
