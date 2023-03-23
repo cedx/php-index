@@ -17,8 +17,10 @@ function main() {
 		GlobWatcher.watch(['$srcDir/base/**/*.hx', '$srcDir/$app/**/*.hx'], done -> measureCommand(done, command));
 	}
 
-	Esbuild.context(Tools.buildOptions(true))
-		.then(context -> GlobWatcher.watch("src/**/*.css", done -> measureCallback(done, "esbuild ui/index.css", context.rebuild)));
+	Promise.ofJsPromise(Esbuild.context(Tools.buildOptions(true))).handle(outcome -> switch outcome {
+		case Failure(error): throw error;
+		case Success(context): GlobWatcher.watch("src/**/*.css", done -> measureCallback(done, "esbuild ui/index.css", context.rebuild));
+	});
 }
 
 /** Measures the time it takes to run the specified `callback` function. **/
