@@ -2,3 +2,4 @@
 --class-path src
 --js var/scripts.js
 --library hxnodejs
+--library tink_core

@@ -1,4 +1,4 @@
-//! --class-path src
+//! --class-path src --library tink_core
 import php_index.base.Version;
 
 /** Updates the version number in the sources. **/
