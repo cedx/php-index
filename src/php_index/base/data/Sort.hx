@@ -4,10 +4,6 @@ import coconut.data.List;
 using Lambda;
 using StringTools;
 
-#if tink_sql
-import tink.sql.OrderBy.Order;
-#end
-
 /** Represents information relevant to the sorting of data items. **/
 @:forward(iterator, keyValueIterator, length, toArray)
 abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<SortOrder>> {
@@ -77,9 +73,6 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 }
 
 /** Specifies the order of a sort parameter. **/
-#if tink_sql
-typedef SortOrder = Order;
-#else
 enum SortOrder {
 
 	/** The sort is ascending. **/
@@ -88,4 +81,3 @@ enum SortOrder {
 	/** The sort is descending. **/
 	Desc;
 }
-#end

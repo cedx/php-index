@@ -18,15 +18,21 @@ class EntityList implements Model {
 	/** The loading status. **/
 	@:loaded var status: List<FileSystemEntity> = Container.instance.remote.index({listing: true}).next(list -> {
 		items = list;
-		//orderBy("path");
+		orderBy("path");
 		items;
 	});
 
 	/** Sorts the list of file system entities. **/
-	/* TODO
-	public function orderBy(attribute: String, ?direction: SortDirection) {
-		if (direction == null) direction = if (sort.exists(attribute)) sort[attribute] == Asc ? Desc : Asc else Asc;
-		sort = [attribute => direction];
+	public function orderBy(attribute: String, ?order: SortOrder) {
+		if (order == null) order = sort[attribute].or(Asc) == Asc ? Desc : Asc;
+		sort = new Sort().append(attribute, order);
+		items = items.sort((x, y) -> switch attribute {
+			case "path": -1;
+			default: sort.compare(x, y);
+		});
+
+		/* TODO
+		if (order == null) order = if (sort.exists(attribute)) sort[attribute] == Asc ? Desc : Asc else Asc;
 		items = items.sort((x, y) -> {
 			final field1 = Reflect.getProperty(x, attribute);
 			final field2 = Reflect.getProperty(y, attribute);
@@ -41,7 +47,7 @@ class EntityList implements Model {
 					Reflect.compare(field1, field2);
 			}
 
-			direction == Asc ? value : -value;
-		});
-	}*/
+			order == Asc ? value : -value;
+		});*/
+	}
 }
