@@ -14,11 +14,11 @@ class Listing extends View {
 	/** The byte units. **/
 	final byteUnits: Array<SimpleUnit> = [Byte, Kilobyte, Megabyte, Gigabyte, Terabyte, Petabyte];
 
-	/** The list of file system entities. **/
-	@:state var entities: EntityList = new EntityList();
-
 	/** The formatter used to format the dates. **/
 	final dateFormatter = new DateFormat(Container.instance.locale, {dateStyle: Medium, timeStyle: Short});
+
+	/** The list of file system entities. **/
+	@:state var entities: EntityList = new EntityList();
 
 	/** The localized messages. **/
 	final messages: Messages = Container.instance.messages;

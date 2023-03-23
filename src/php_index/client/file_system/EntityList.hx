@@ -24,30 +24,14 @@ class EntityList implements Model {
 
 	/** Sorts the list of file system entities. **/
 	public function orderBy(attribute: String, ?order: SortOrder) {
-		if (order == null) order = sort[attribute].or(Asc) == Asc ? Desc : Asc;
+		if (order == null) order = sort[attribute].or(Desc) == Asc ? Desc : Asc;
 		sort = new Sort().append(attribute, order);
 		items = items.sort((x, y) -> switch attribute {
-			case "path": -1;
-			default: sort.compare(x, y);
+			case "path":
+				final value = x.type == y.type ? Reflect.compare(x.path, y.path) : x.type == Directory ? -1 : 1;
+				order == Asc ? value : -value;
+			default:
+				sort.compare(x, y);
 		});
-
-		/* TODO
-		if (order == null) order = if (sort.exists(attribute)) sort[attribute] == Asc ? Desc : Asc else Asc;
-		items = items.sort((x, y) -> {
-			final field1 = Reflect.getProperty(x, attribute);
-			final field2 = Reflect.getProperty(y, attribute);
-			final value = switch attribute {
-				case "modifiedAt":
-					Reflect.compare((field1: Date).getTime(), (field2: Date).getTime());
-				case "path":
-					final areDirectories = x.type == Directory && y.type == Directory;
-					final areFiles = x.type == File && y.type == File;
-					if (areDirectories || areFiles) Reflect.compare(field1, field2) else x.type == Directory ? -1 : 1;
-				default:
-					Reflect.compare(field1, field2);
-			}
-
-			order == Asc ? value : -value;
-		});*/
 	}
 }
