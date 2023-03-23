@@ -9,16 +9,18 @@ class EntityList implements Model {
 	/** The list items. **/
 	@:editable var items: List<FileSystemEntity> = new List();
 
+	/** The number of list items. **/
+	@:computed var length: Int = items.length;
+
 	/** The current sort. **/
 	@:editable var sort: Sort = new Sort();
 
 	/** The loading status. **/
-	/* TODO
-	@:loaded var status: List<FileSystemEntity> = Application.instance.remote.index({listing: true}).next(list -> {
+	@:loaded var status: List<FileSystemEntity> = Container.instance.remote.index({listing: true}).next(list -> {
 		items = list;
-		orderBy("path");
+		//orderBy("path");
 		items;
-	}); */
+	});
 
 	/** Sorts the list of file system entities. **/
 	/* TODO

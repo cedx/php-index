@@ -24,6 +24,8 @@ class Root extends View {
 						<i class="bi bi-exclamation-circle-fill me-1"/> ${messages.offline()}
 					</div>
 				</if>
+
+				<php_index.client.file_system.Listing/>
 			</main>
 		</>
 	';

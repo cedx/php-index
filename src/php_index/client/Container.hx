@@ -1,7 +1,14 @@
 package php_index.client;
 
+import haxe.Resource;
 import haxe.exceptions.ArgumentException;
 import intl.Locale;
+import js.Browser;
+import tink.Web;
+import tink.http.clients.JsFetchClient;
+import tink.web.proxy.Remote;
+using StringTools;
+using haxe.io.Path;
 
 /** Provides a dependency container. **/
 final class Container {
@@ -17,6 +24,10 @@ final class Container {
 	public var messages(get, never): Messages;
 		inline function get_messages() return get("messages");
 
+	/** The remote API client. **/
+	public var remote(get, never): Remote<RemoteApi>;
+		inline function get_remote() return get("remote");
+
 	/** The registered factories. **/
 	final factories: Map<String, () -> Any> = [];
 
@@ -24,7 +35,15 @@ final class Container {
 	final services: Map<String, Any> = [];
 
 	/** Creates a new container. **/
-	function new() {}
+	function new() {
+		final supportedLanguages = Resource.listNames()
+			.filter(res -> res.startsWith("locale."))
+			.map(res -> res.substring(7).withoutExtension());
+
+		final parts = Browser.navigator.language.split("-");
+		set("locale", new Locale(parts.length > 0 && supportedLanguages.contains(parts[0]) ? parts[0] : "en"));
+		set("remote", Web.connect((Browser.location.href: RemoteApi), {client: new JsFetchClient()}));
+	}
 
 	/** Gets a value indicating whether this container has a service registered with the specified `token`. **/
 	public function exists(token: String)
