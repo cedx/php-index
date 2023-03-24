@@ -46,7 +46,7 @@ class Root {
 
 		final basePath = Sys.programPath().directory();
 		final entities = FileSystem.readDirectory(basePath)
-			.filter(entry -> !exclude.contains(entry) && Global.is_readable(Path.join([basePath, entry])))
+			.filter(entry -> entry.charAt(0) != "." && !exclude.contains(entry) && Global.is_readable(Path.join([basePath, entry])))
 			.map(entry -> new FileSystemEntity({path: Path.join([basePath, entry])}));
 
 		return Success(OutgoingResponse.blob(Json.stringify(entities), Mime.ApplicationJson));
