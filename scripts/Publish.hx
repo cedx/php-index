@@ -1,5 +1,5 @@
 //! --class-path src
-import php_index.Version;
+import php_index.base.Version;
 
 /** Publishes the package. **/
 function main() {
