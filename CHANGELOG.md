@@ -2,6 +2,7 @@
 
 ## Version [0.3.0](https://github.com/cedx/php-index/compare/v0.2.2...v0.3.0)
 - Ported the source code to [Haxe](https://haxe.org).
+- Restored the `--compress` command line option.
 
 ## Version [0.2.2](https://github.com/cedx/php-index/compare/v0.2.1...v0.2.2)
 - Improved compatibility with [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/browsers).

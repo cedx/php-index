@@ -6,4 +6,9 @@ function main() {
 	final bundle = "www/js/main.js";
 	Sys.command('npx esbuild --allow-overwrite --legal-comments=none --log-level=warning --minify --outfile=$bundle $bundle');
 	Sys.command("npx gulp --gulpfile=scripts/Dist.mjs");
+
+	final cli = "bin/php_index.js";
+	Sys.command('npx esbuild --allow-overwrite --legal-comments=none --log-level=warning --minify --outfile=$cli --platform=node $cli');
+	Sys.command('git update-index --chmod=+x $cli');
+	if (Sys.systemName() != "Windows") Sys.command('chmod +x $cli');
 }

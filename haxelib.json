@@ -4,7 +4,7 @@
 	"description": "A PHP directory index generator.",
 	"license": "MIT",
 	"name": "php_index",
-	"releasenote": "Ported the source code to Haxe.",
+	"releasenote": "Ported the source code to Haxe, restored the `--compress` command line option.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://github.com/cedx/php-index.hx",
 	"version": "0.3.0"
