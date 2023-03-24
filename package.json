@@ -6,7 +6,7 @@
 	"name": "@cedx/php-index",
 	"repository": "github:cedx/php-index",
 	"type": "commonjs",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
