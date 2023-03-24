@@ -7,7 +7,7 @@ import sys.io.File;
 #end
 
 /** Provides initialization macros. **/
-@:noDoc abstract class Macro {
+abstract class Macro {
 
 	#if macro
 	/** Adds a shebang to the compiled file. **/
