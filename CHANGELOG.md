@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.3.1](https://github.com/cedx/php-index/compare/v0.3.0...v0.3.1)
+- Fixed a regression: dot files were listed.
+
 ## Version [0.3.0](https://github.com/cedx/php-index/compare/v0.2.2...v0.3.0)
 - Ported the source code to [Haxe](https://haxe.org).
 - Restored the `--compress` command line option.
