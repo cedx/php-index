@@ -65,25 +65,18 @@ final class Program {
 
 	/** Gets the path to the operating system directory for temporary files. **/
 	static function tempDirectory() {
-		if (Sys.systemName() != "Windows") {
-			for (name in ["TMPDIR", "TMP", "TEMP"]) {
-				final path = Sys.getEnv(name);
-				if (path != null) return path.length > 1 ? path.removeTrailingSlashes() : path;
-			}
-
-			return "/tmp";
+		function getEnv(name: String) {
+			final value = Sys.getEnv(name);
+			return value != null ? Some(value) : None;
 		}
 
-		for (name in ["TMP", "TEMP"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
+		return switch Sys.systemName() {
+			case "Windows":
+				final path = getEnv("TMP").orTry(getEnv("TEMP")).or(getEnv("SystemRoot").orTry(getEnv("windir")).sure() + "\\Temp");
+				path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
+			default:
+				final path = getEnv("TMPDIR").orTry(getEnv("TMP")).orTry(getEnv("TEMP")).or("/tmp");
+				path.length > 1 ? path.removeTrailingSlashes() : path;
 		}
-
-		for (name in ["SystemRoot", "windir"]) {
-			final path = Sys.getEnv(name);
-			if (path != null) return '${path.removeTrailingSlashes()}\\Temp';
-		}
-
-		return "C:\\Windows\\Temp";
 	}
 }
