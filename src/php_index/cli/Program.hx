@@ -48,7 +48,7 @@ final class Program {
 
 		// Populate the input folder.
 		final basePath = Path.join([Sys.programPath().directory(), #if js ".." #else "." #end]);
-		final input = Path.join([tempDirectory(), Uuid.v4()]);
+		final input = Path.join([systemTempDirectory(), Uuid.v4()]);
 		["lib", "www"].iter(folder -> copyDirectory(Path.join([basePath, folder]), Path.join([input, folder])));
 		["index.phar", "index.php"].map(file -> 'www/$file').filter(FileSystem.exists).iter(FileSystem.deleteFile);
 
@@ -70,8 +70,8 @@ final class Program {
 		}
 	}
 
-	/** Gets the path to the operating system directory for temporary files. **/
-	static function tempDirectory(): String {
+	/** Gets the path to the system temporary directory. **/
+	static function systemTempDirectory(): String {
 		#if nodejs
 			return Syntax.code("{0}.tmpdir()", Os);
 		#elseif php
