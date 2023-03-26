@@ -8,6 +8,13 @@ using Lambda;
 using StringTools;
 using haxe.io.Path;
 
+#if nodejs
+import js.Syntax;
+import js.node.Os;
+#elseif php
+import php.Syntax;
+#end
+
 /** Build the PHP Index redistributable. **/
 final class Program {
 
@@ -64,19 +71,25 @@ final class Program {
 	}
 
 	/** Gets the path to the operating system directory for temporary files. **/
-	static function tempDirectory() {
-		function getEnv(name: String) {
-			final value = Sys.getEnv(name);
-			return value != null ? Some(value) : None;
-		}
+	static function tempDirectory(): String {
+		#if nodejs
+			return Syntax.code("{0}.tmpdir()", Os);
+		#elseif php
+			return Syntax.code("sys_get_temp_dir()");
+		#else
+			function getEnv(name: String) {
+				final value = Sys.getEnv(name);
+				return value != null ? Some(value) : None;
+			}
 
-		return switch Sys.systemName() {
-			case "Windows":
-				final path = getEnv("TMP").orTry(getEnv("TEMP")).or(getEnv("SystemRoot").orTry(getEnv("windir")).sure() + "\\Temp");
-				path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
-			default:
-				final path = getEnv("TMPDIR").orTry(getEnv("TMP")).orTry(getEnv("TEMP")).or("/tmp");
-				path.length > 1 ? path.removeTrailingSlashes() : path;
-		}
+			return switch Sys.systemName() {
+				case "Windows":
+					final path = getEnv("TMP").orTry(getEnv("TEMP")).or(getEnv("SystemRoot").orTry(getEnv("windir")).sure() + "\\Temp");
+					path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
+				default:
+					final path = getEnv("TMPDIR").orTry(getEnv("TMP")).orTry(getEnv("TEMP")).or("/tmp");
+					path.length > 1 ? path.removeTrailingSlashes() : path;
+			}
+		#end
 	}
 }
