@@ -2,6 +2,7 @@ package php_index.base.io;
 
 import coconut.data.Model;
 import haxe.io.Mime;
+using DateTools;
 using haxe.io.Path;
 
 #if php
@@ -108,7 +109,7 @@ class FileSystemEntity implements Model {
 	@:constant var modifiedAt: Date = @byDefault Date.now();
 	#else
 	public var modifiedAt(get, never): Date;
-		function get_modifiedAt() return Date.fromTime(Global.filemtime(path) * 1000);
+		function get_modifiedAt() return Date.fromTime(Global.filemtime(path) * 1.seconds());
 	#end
 
 	/** The path of this file system entity. **/
