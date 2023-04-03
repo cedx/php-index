@@ -4,7 +4,7 @@
 		"path": "RELATIVE_TO_PROJECT",
 		"Dynamic": ["src/php_index/client/Container"],
 		"EmptyLines": ["src/php_index/client/Messages"],
-		"ReturnCount": ["src/php_index/cli/Program:run"],
+		"ReturnCount": ["src/php_index/cli/Program"],
 		"Trace": ["src/php_index/server/Program:main"],
 		"UnusedImport": ["src/php_index/client/file_system/Listing"]
 	},

@@ -109,7 +109,7 @@ class FileSystemEntity implements Model {
 	@:constant var modifiedAt: Date = @byDefault Date.now();
 	#else
 	public var modifiedAt(get, never): Date;
-		function get_modifiedAt() return Date.fromTime(Global.filemtime(path) * 1.seconds());
+		function get_modifiedAt() return Date.fromTime(Global.filemtime(path).seconds());
 	#end
 
 	/** The path of this file system entity. **/
