@@ -21,7 +21,7 @@ class Root {
 	@:get("/")
 	public function index(query: {?file: String, ?listing: Bool}) {
 		if (query.listing != null) return sendListing();
-		final path = query.file != null ? query.file.trim() : "main.html";
+		final path = query.file?.trim() ?? "main.html";
 		return path.length > 0 ? sendFile(path) : Failure(new Error(UnprocessableEntity, "The file path is required."));
 	}
 

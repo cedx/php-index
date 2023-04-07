@@ -29,17 +29,17 @@ private function measureCallback(?done: Callback<Null<JsError>>, ?prompt: String
 	final timestamp = Timer.stamp();
 	callback.invoke(Noise);
 	Sys.println('> ${Tools.formatDuration(Timer.stamp() - timestamp)}');
-	if (done != null) done.invoke(null);
-} catch (e) { done != null ? done.invoke(new JsError(e.message)) : throw e; }
+	done?.invoke(null);
+} catch (e) { done?.invoke(new JsError(e.message)) ?? throw e; }
 
 /** Measures the time it takes to run the specified `command`. **/
 private function measureCommand(?done: Callback<Null<JsError>>, command: String, ?arguments: Array<String>) {
-	Sys.print('${[command].concat(arguments != null ? arguments : []).join(" ")} ');
+	Sys.print('${[command].concat(arguments ?? []).join(" ")} ');
 	final timestamp = Timer.stamp();
 	final error = Sys.command(command, arguments) == 0 ? null : new JsError('The command "$command" failed.');
-	if (error != null) done != null ? done.invoke(error) : throw error;
+	if (error != null) done?.invoke(error) ?? throw error;
 	else {
 		Sys.println('> ${Tools.formatDuration(Timer.stamp() - timestamp)}');
-		if (done != null) done.invoke(null);
+		done?.invoke(null);
 	}
 }

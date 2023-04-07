@@ -9,7 +9,7 @@ using StringTools;
 abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<SortOrder>> {
 
 	/** Creates a new sort. **/
-	public function new(?attributes: List<Named<SortOrder>>) this = attributes != null ? attributes : new List();
+	public function new(?attributes: List<Named<SortOrder>>) this = attributes ?? new List();
 
 	/** Appends the specified attribute to this sort. **/
 	public function append(attribute: String, order: SortOrder): Sort
