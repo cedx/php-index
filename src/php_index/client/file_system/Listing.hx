@@ -31,8 +31,8 @@ class Listing extends View {
 	/** Formats the specified size. **/
 	function formatBytes(bytes: Float) {
 		var index = 0;
-		while (bytes >= 1024 && index < byteUnits.length) {
-			bytes /= 1024;
+		while (bytes >= 1_024 && index < byteUnits.length) {
+			bytes /= 1_024;
 			index++;
 		}
 
