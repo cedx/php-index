@@ -8,11 +8,12 @@ using Lambda;
 using StringTools;
 using haxe.io.Path;
 
-#if nodejs
-import js.Syntax;
+#if java
+import java.lang.System;
+#elseif nodejs
 import js.node.Os;
 #elseif php
-import php.Syntax;
+import php.Global;
 #end
 
 /** Build the PHP Index redistributable. **/
@@ -71,11 +72,13 @@ final class Program {
 	}
 
 	/** Gets the path to the system temporary directory. **/
-	static function systemTempDirectory(): String {
-		#if nodejs
-			return Syntax.code("{0}.tmpdir()", Os);
+	static #if (java || nodejs || php) inline #end function systemTempDirectory(): String {
+		#if java
+			return System.getProperty("java.io.tmpdir");
+		#elseif nodejs
+			return Os.tmpdir();
 		#elseif php
-			return Syntax.code("sys_get_temp_dir()");
+			return Global.sys_get_temp_dir();
 		#else
 			function getEnv(name: String) {
 				final value = Sys.getEnv(name);

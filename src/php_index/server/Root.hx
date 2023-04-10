@@ -2,7 +2,7 @@ package php_index.server;
 
 import haxe.io.Mime;
 import php.Global;
-import php.Syntax;
+import php.Phar;
 import php_index.base.io.FileSystemEntity;
 import sys.FileSystem;
 import tink.Json;
@@ -27,7 +27,7 @@ class Root {
 
 	/** Sends the specified file to the client. **/
 	function sendFile(path: String) {
-		final pharPath: String = Syntax.staticCall("Phar", "running", false);
+		final pharPath = Phar.running(false);
 		final baseUri: Url = pharPath.length > 0
 			? 'phar://${pharPath.withoutDirectory()}/'
 			: 'file:${Sys.systemName() == "Windows" ? "/" : ""}//${Path.join([Sys.programPath().directory(), ".."])}/';
@@ -41,7 +41,7 @@ class Root {
 	/** Sends the directory listing to the client. **/
 	function sendListing() {
 		final exclude = [Sys.programPath().withoutDirectory(), "desktop.ini", "web.config"];
-		final pharPath: String = Syntax.staticCall("Phar", "running", false);
+		final pharPath = Phar.running(false);
 		if (pharPath.length > 0) exclude.push(pharPath.withoutDirectory());
 
 		final basePath = Sys.programPath().directory();
