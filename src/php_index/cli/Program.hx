@@ -16,7 +16,11 @@ import js.node.Os;
 import php.Global;
 #end
 
-/** Build the PHP Index redistributable. **/
+/**
+	Build the PHP Index redistributable.
+
+	> php_index [flags] <directory>
+**/
 final class Program {
 
 	/** Compress the PHAR archive. **/
@@ -34,7 +38,7 @@ final class Program {
 	/** Application entry point. **/
 	static function main() Cli.process(Sys.args(), new Program()).handle(Cli.exit);
 
-	/** <directory> : The path to the output directory. **/
+	/** directory : The path to the output directory. **/
 	@:defaultCommand
 	public function run(rest: Rest<String>): Promise<Noise> {
 		if (help || version) {

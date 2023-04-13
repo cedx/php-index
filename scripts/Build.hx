@@ -7,7 +7,7 @@ using haxe.io.Path;
 /** Builds the project. **/
 function main() {
 	final debug = Sys.args().contains("--debug");
-	for (app in ["cli", "client", "server"]) Sys.command('haxe ${debug ? "--debug" : ""} build_$app.hxml');
+	for (file in ["build_client", "build_server", "run"]) Sys.command('haxe ${debug ? "--debug" : ""} $file.hxml');
 
 	final bootstrap = Tools.captureCommand("lix", ["run", "bootstrap_bundle", "libpath"]);
 	FileSystem.createDirectory("www/fonts");
