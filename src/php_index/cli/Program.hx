@@ -58,7 +58,7 @@ final class Program {
 		["index.phar", "index.php"].map(file -> 'www/$file').filter(FileSystem.exists).iter(FileSystem.deleteFile);
 
 		// Build the PHAR archive.
-		final output = rest[0].isAbsolute() ? rest[0] : Path.join([haxelibRun ? rest[rest.length - 1] : Sys.getCwd(), rest[0]]);
+		final output = rest[0].isAbsolute() ? rest.shift() : Path.join([haxelibRun ? rest.pop() : Sys.getCwd(), rest.shift()]);
 		FileSystem.createDirectory(output);
 		Sys.command("php", [Path.join([basePath, "bin/php_index.php"]), "--input", input, "--output", output].concat(compress ? ["--compress"] : []));
 		return Noise;
