@@ -8,7 +8,7 @@ function main() {
 
 	final bundle = "www/js/main.js";
 	Sys.command('npx esbuild --allow-overwrite --legal-comments=none --log-level=warning --minify --outfile=$bundle $bundle');
-	Sys.command("npx gulp --gulpfile=scripts/Dist.mjs");
+	Sys.command("npx @cedx/php-minifier --mode=fast lib");
 
 	final cli = "bin/php_index.js";
 	Sys.command('npx esbuild --allow-overwrite --legal-comments=none --log-level=warning --minify --outfile=$cli --platform=node $cli');
