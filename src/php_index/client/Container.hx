@@ -40,8 +40,8 @@ final class Container {
 			.filter(res -> res.startsWith("locale."))
 			.map(res -> res.substring(7).withoutExtension());
 
-		final parts = Browser.navigator.language.split("-");
-		set("locale", new Locale(parts.length > 0 && supportedLanguages.contains(parts[0]) ? parts[0] : "en"));
+		final language = Browser.navigator.language.split("-").shift();
+		set("locale", new Locale(language != null && supportedLanguages.contains(language) ? language : "en"));
 		set("remote", Web.connect((Browser.location.href: RemoteApi), {client: new JsFetchClient()}));
 	}
 
