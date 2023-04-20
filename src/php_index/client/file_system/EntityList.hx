@@ -28,7 +28,7 @@ class EntityList implements Model {
 		sort = new Sort().append(attribute, order);
 		items = items.sort((x, y) -> switch attribute {
 			case "path":
-				final value = x.type == y.type ? Reflect.compare(x.path, y.path) : x.type == Directory ? -1 : 1;
+				final value = if (x.type == y.type) Reflect.compare(x.path, y.path) else x.type == Directory ? -1 : 1;
 				order == Asc ? value : -value;
 			default:
 				sort.compare(x, y);
