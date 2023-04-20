@@ -31,3 +31,21 @@ article {
 article > section {
 	padding: 1rem;
 }
+
+aside {
+	background-color: var(--bs-gray-100);
+	border-bottom: 1px solid var(--bs-border-color);
+	box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 7.5%);
+	left: 0;
+	padding: 0.5rem 0;
+	position: fixed;
+	right: 0;
+	top: var(--navbar-height);
+	user-select: none;
+	width: 100%;
+	z-index: 100;
+}
+
+@media print {
+	aside { display: none; }
+}
