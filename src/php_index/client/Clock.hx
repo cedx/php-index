@@ -5,6 +5,7 @@ import haxe.Timer;
 import intl.DateFormat;
 import intl.Locale;
 import js.Browser;
+import js.Lib;
 using DateTools;
 
 /** Displays the current date and/or time. **/
@@ -39,11 +40,7 @@ class Clock extends View {
 
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() {
-		final format: DateFormatOptions = {};
-		if (dateStyle != null) format.dateStyle = dateStyle;
-		if (timeStyle != null) format.timeStyle = timeStyle;
-
-		final formatter = new DateFormat(locale, format);
+		final formatter = new DateFormat(locale, {dateStyle: dateStyle ?? Lib.undefined, timeStyle: timeStyle ?? Lib.undefined});
 		update(formatter);
 
 		final timer = new Timer(Std.int(timeout.seconds()));
