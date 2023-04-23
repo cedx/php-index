@@ -86,7 +86,7 @@ class Listing extends View {
 								&ndash;
 							<else>
 								<let width=${Math.round((entity.size / maxFileSize) * 100)}>
-									<div class="px-1" style=${{background: 'linear-gradient(90deg, rgb(22 88 152 / 10%) $width%, transparent 0)'}}>
+									<div class="px-1" style=${{background: 'linear-gradient(90deg, rgb(22 88 152 / 15%) $width%, transparent 0)'}}>
 										${formatBytes(entity.size)}
 									</div>
 								</let>
@@ -160,6 +160,5 @@ class Listing extends View {
 	';
 
 	/** Method invoked after this view is mounted. **/
-	override function viewDidMount()
-		Browser.document.title = '${Browser.location.hostname} - $path';
+	override function viewDidMount() Browser.document.title = '${Browser.location.hostname} - $path';
 }
