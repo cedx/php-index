@@ -107,9 +107,10 @@ class Listing extends View {
 	function render() '
 		<>
 			<ActionBar>
-				<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
-					<div>TODO</div>
-					<div class="hstack gap-3">
+				<div>TODO Filter</div>
+
+				<div class="hstack gap-3">
+					<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
 						<if ${directories > 0}>
 							<div><b>${directories}</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
 						</if>
@@ -119,8 +120,8 @@ class Listing extends View {
 						<if ${files > 0}>
 							<div><b>${files}</b> ${files <= 1 ? messages.file() : messages.files()}</div>
 						</if>
-					</div>
-				</let>
+					</let>
+				</div>
 			</ActionBar>
 
 			<article id="listing">
