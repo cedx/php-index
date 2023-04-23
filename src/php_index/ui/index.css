@@ -8,6 +8,7 @@
 /* Components. */
 @import "components/navbar.css";
 @import "components/tables.css";
+@import "components/zoom.css";
 
 /* Views. */
 @import "views/listing.css";
