@@ -77,7 +77,7 @@ class Listing extends View {
 						<td>
 							<div class="text-truncate">
 								<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
-									<i class=${['bi bi-${entity.icon} me-2' => true, "text-dark" => entity.type == File, "text-warning" => entity.type == Directory]}/>${entity.path}
+									<i class=${['bi bi-${entity.icon} me-2' => true, "text-secondary" => entity.type == File, "text-warning" => entity.type == Directory]}/>${entity.path}
 								</a>
 							</div>
 						</td>
