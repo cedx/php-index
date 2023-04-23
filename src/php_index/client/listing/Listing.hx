@@ -20,12 +20,15 @@ class Listing extends View {
 	/** The list of file system entities. **/
 	@:state var entities: EntityList = new EntityList();
 
+	/** The size in bytes of the largest file in the listing. **/
+	@:computed var maxFileSize: Int = entities.items.fold((item, result) -> item.size > result ? item.size : result, 0);
+
 	/** The localized messages. **/
 	final messages: Messages = Container.instance.messages;
 
 	/** The current path. **/
 	final path = Browser.location.pathname.length > 1
-		? Browser.location.pathname.substring(0, Browser.location.pathname.length - 1)
+		? Browser.location.pathname.removeTrailingSlashes()
 		: Browser.location.pathname;
 
 	/** Formats the specified size. **/
@@ -48,10 +51,10 @@ class Listing extends View {
 					<th onclick=${entities.orderBy("path")} scope="col">
 						<span role="button">${messages.name()} <i class="bi bi-${entities.sort.getIcon('path')}"/></span>
 					</th>
-					<th class="text-end" onclick=${entities.orderBy("size")} scope="col">
+					<th onclick=${entities.orderBy("size")} scope="col">
 						<span role="button">${messages.size()} <i class="bi bi-${entities.sort.getIcon('size')}"/></span>
 					</th>
-					<th class="d-none d-sm-table-cell text-end" onclick=${entities.orderBy("modifiedAt")} scope="col">
+					<th class="d-none d-sm-table-cell" onclick=${entities.orderBy("modifiedAt")} scope="col">
 						<span role="button">${messages.modifiedAt()} <i class="bi bi-${entities.sort.getIcon('modifiedAt')}"/></span>
 					</th>
 				</tr>
@@ -78,14 +81,18 @@ class Listing extends View {
 								</a>
 							</div>
 						</td>
-						<td class="text-end">
+						<td>
 							<if ${entity.type == Directory}>
 								&ndash;
 							<else>
-								${formatBytes(entity.size)}
+								<let width=${Math.round((entity.size / maxFileSize) * 100)}>
+									<div class="px-1" style=${{background: 'linear-gradient(90deg, rgb(22 88 152 / 10%) $width%, transparent 0)'}}>
+										${formatBytes(entity.size)}
+									</div>
+								</let>
 							</if>
 						</td>
-						<td class="d-none d-sm-table-cell text-end">
+						<td class="d-none d-sm-table-cell">
 							<time dateTime=${entity.modifiedAt}>
 								${dateFormatter.format(entity.modifiedAt)}
 							</time>
