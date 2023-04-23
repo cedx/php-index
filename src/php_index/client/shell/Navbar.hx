@@ -1,4 +1,4 @@
-package php_index.client;
+package php_index.client.shell;
 
 import js.Browser;
 

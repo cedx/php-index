@@ -26,6 +26,6 @@ function main() {
 			case Success(_):
 				final body = Browser.document.body;
 				while (body.hasChildNodes()) body.removeChild(body.lastChild);
-				Renderer.mount(body, "<Root/>");
+				Renderer.mount(body, "<php_index.client.shell.Root/>");
 		});
 }

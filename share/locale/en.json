@@ -1,8 +1,12 @@
 {
 	"auto": "Auto",
 	"dark": "Dark",
+	"directories": "directories",
+	"directory": "directory",
 	"emptyDirectory": "This directory is empty.",
 	"error": "An error occurred while fetching the directory entries.",
+	"file": "file",
+	"files": "files",
 	"indexOf": "Index of ::directory::",
 	"light": "Light",
 	"loading": "Loading the directory entries...",

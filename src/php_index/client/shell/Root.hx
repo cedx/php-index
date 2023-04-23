@@ -1,4 +1,4 @@
-package php_index.client;
+package php_index.client.shell;
 
 import js.Browser;
 
@@ -25,7 +25,7 @@ class Root extends View {
 					</div>
 				</if>
 
-				<php_index.client.file_system.Listing/>
+				<php_index.client.listing.Listing/>
 			</main>
 		</>
 	';

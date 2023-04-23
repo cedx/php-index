@@ -1,8 +1,12 @@
 {
 	"auto": "Auto",
 	"dark": "Sombre",
+	"directories": "dossiers",
+	"directory": "dossier",
 	"emptyDirectory": "Ce répertoire est vide.",
 	"error": "Une erreur s'est produite lors de la récupération des entrées du répertoire.",
+	"file": "fichier",
+	"files": "fichiers",
 	"indexOf": "Index de ::directory::",
 	"light": "Clair",
 	"loading": "Chargement des entrées du répertoire...",

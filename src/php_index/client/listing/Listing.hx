@@ -1,4 +1,4 @@
-package php_index.client.file_system;
+package php_index.client.listing;
 
 import intl.DateFormat;
 import intl.NumberFormat;
@@ -74,7 +74,7 @@ class Listing extends View {
 						<td>
 							<div class="text-truncate">
 								<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
-									<i class="bi bi-${entity.icon} me-2"/>${entity.path}
+									<i class=${['bi bi-${entity.icon} me-2' => true, "text-dark" => entity.type == File, "text-warning" => entity.type == Directory]}/>${entity.path}
 								</a>
 							</div>
 						</td>
@@ -98,39 +98,58 @@ class Listing extends View {
 
 	/** Renders this view. **/
 	function render() '
-		<article id="listing">
-			<section class=${{"border-bottom": entities.length > 0}}>
-				<h3 class="mb-0">${messages.indexOf(path)}</h3>
-			</section>
+		<>
+			<ActionBar>
+				<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
+					<div>TODO</div>
+					<div class="hstack gap-3">
+						<if ${directories > 0}>
+							<div><b>${directories}</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
+						</if>
+						<if ${directories > 0 && files > 0}>
+							<div class="vr"/>
+						</if>
+						<if ${files > 0}>
+							<div><b>${files}</b> ${files <= 1 ? messages.file() : messages.files()}</div>
+						</if>
+					</div>
+				</let>
+			</ActionBar>
 
-			<switch ${entities.status}>
-				<case ${Loading}>
-					<section class="pt-0">
-						<div class="alert alert-info d-flex align-items-center mb-0">
-							<div class="spinner-border spinner-border-sm"/>
-							<div class="ms-2">${messages.loading()}</div>
-						</div>
-					</section>
-				<case ${Failed(_)}>
-					<section class="pt-0">
-						<div class="alert alert-danger d-flex align-items-center mb-0">
-							<i class="bi bi-exclamation-circle-fill"/>
-							<div class="ms-2">${messages.error()}</div>
-						</div>
-					</section>
-				<case ${Done(_)}>
-					<if ${entities.length > 0}>
-						<listing/>
-					<else>
+			<article id="listing">
+				<section class=${{"border-bottom": entities.length > 0}}>
+					<h4 class="mb-0">${messages.indexOf(path)}</h4>
+				</section>
+
+				<switch ${entities.status}>
+					<case ${Loading}>
 						<section class="pt-0">
-							<div class="alert alert-warning d-flex align-items-center mb-0">
-								<i class="bi bi-exclamation-triangle-fill"/>
-								<div class="ms-2">${messages.emptyDirectory()}</div>
+							<div class="alert alert-info d-flex align-items-center mb-0">
+								<div class="spinner-border spinner-border-sm"/>
+								<div class="ms-2">${messages.loading()}</div>
 							</div>
 						</section>
-					</if>
-			</switch>
-		</article>
+					<case ${Failed(_)}>
+						<section class="pt-0">
+							<div class="alert alert-danger d-flex align-items-center mb-0">
+								<i class="bi bi-exclamation-circle-fill"/>
+								<div class="ms-2">${messages.error()}</div>
+							</div>
+						</section>
+					<case ${Done(_)}>
+						<if ${entities.length > 0}>
+							<listing/>
+						<else>
+							<section class="pt-0">
+								<div class="alert alert-warning d-flex align-items-center mb-0">
+									<i class="bi bi-exclamation-triangle-fill"/>
+									<div class="ms-2">${messages.emptyDirectory()}</div>
+								</div>
+							</section>
+						</if>
+				</switch>
+			</article>
+		</>
 	';
 
 	/** Method invoked after this view is mounted. **/

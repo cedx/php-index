@@ -1,4 +1,4 @@
-package php_index.client.file_system;
+package php_index.client.listing;
 
 import php_index.base.data.Sort;
 import php_index.base.io.FileSystemEntity;

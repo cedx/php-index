@@ -1,4 +1,4 @@
-package php_index.client;
+package php_index.client.listing;
 
 import js.Browser;
 import js.html.Element;
