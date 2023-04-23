@@ -69,6 +69,7 @@ class FileSystemEntity implements Model {
 		"tar" => "zip",
 		"txt" => "text",
 		"wav" => "music",
+		"webp" => "image",
 		"xls" => "spreadsheet",
 		"xlsx" => "spreadsheet",
 		"xml" => "code",
@@ -93,6 +94,9 @@ class FileSystemEntity implements Model {
 		final extension = path.extension().toLowerCase();
 		iconMapping.exists(extension) ? 'file-earmark-${iconMapping[extension]}' : "file-earmark";
 	}
+
+	/** Value indicating whether this file represents an image. **/
+	@:computed var isImage: Bool = ["avif", "gif", "jpeg", "jpg", "png", "webp"].contains(path.extension().toLowerCase());
 
 	/** The MIME type of this file system entity. **/
 	@:computed var mediaType: Mime = type == Directory ? "inode/directory" : switch path.extension().toLowerCase() {
