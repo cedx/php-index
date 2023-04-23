@@ -65,7 +65,7 @@ class Listing extends View {
 						<td colSpan=${2}>
 							<div class="text-truncate">
 								<a href="..">
-									<i class="bi bi-arrow-90deg-up me-2"/>${messages.parentDirectory()}
+									<i class="bi bi-arrow-90deg-up me-2 text-secondary"/>${messages.parentDirectory()}
 								</a>
 							</div>
 						</td>
