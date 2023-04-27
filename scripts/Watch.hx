@@ -29,25 +29,21 @@ function main() {
 	Promise.ofJsPromise(Esbuild.context(Tools.buildOptions(true))).handle(outcome -> switch outcome {
 		case Failure(error): throw error;
 		case Success(context): GlobWatcher.watch("src/**/*.css", done -> {
-			final promise = Promise.ofJsPromise(context.rebuild()).next(_ -> browserSync.reload());
+			final promise = Promise.ofJsPromise(context.rebuild()).next(_ -> { browserSync.reload(); Noise; });
 			measurePromise(done, 'esbuild $srcDir/ui/index.css', promise);
 		});
 	});
 }
 
 /** Measures the time it takes to run the specified `command`. **/
-private function measureCommand(?done: Callback<Null<JsError>>, command: String) {
-	Sys.print('$command ');
-	final timestamp = Timer.stamp();
-	switch Sys.command(command) == 0 ? Success(Noise) : Failure(new Error('The command "$command" failed.')) {
-		case Failure(error): done != null ? done.invoke(error.toJsError()) : throw error;
-		case Success(_): Sys.println('> ${Tools.formatDuration(Timer.stamp() - timestamp)}'); done?.invoke(null);
-	}
-}
+private function measureCommand(?done: Callback<Null<JsError>>, command: String)
+	measurePromise(done, command, Promise.irreversible((resolve, reject) ->
+		Sys.command(command) == 0 ? resolve(Noise) : reject(new Error('The command "$command" failed.'))
+	));
 
 /** Measures the time it takes to run the specified `promise`. **/
-private function measurePromise(?done: Callback<Null<JsError>>, ?prompt: String, promise: Promise<Any>) {
-	if (prompt != null) Sys.print('$prompt ');
+private function measurePromise(?done: Callback<Null<JsError>>, prompt: String, promise: Promise<Any>) {
+	Sys.print('$prompt ');
 	final timestamp = Timer.stamp();
 	promise.handle(outcome -> switch outcome {
 		case Failure(error): done != null ? done.invoke(error.toJsError()) : throw error;
