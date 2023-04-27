@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"@cedx/php-minifier": "^1.0.0",
+		"browser-sync": "^2.29.1",
 		"esbuild": "^0.17.18",
 		"glob-watcher": "^5.0.5"
 	},

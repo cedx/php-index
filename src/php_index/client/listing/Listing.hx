@@ -1,7 +1,8 @@
 package php_index.client.listing;
 
 import intl.DateFormat;
-import intl.NumberFormat;
+import intl.NumberFormat.NumberFormatOptions;
+import intl.NumberFormat.NumberFormatStyle;
 import intl.SimpleUnit;
 import js.Browser;
 import tink.Anon;
@@ -39,7 +40,7 @@ class Listing extends View {
 			index++;
 		}
 
-		final options: NumberFormatOptions = cast {maximumFractionDigits: 2, style: Unit, unit: Byte};
+		final options: NumberFormatOptions = cast {maximumFractionDigits: 2, style: NumberFormatStyle.Unit, unit: Byte};
 		return bytes.toLocaleString(Container.instance.locale, Anon.merge(options, unit = byteUnits[index]));
 	}
 
