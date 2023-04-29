@@ -8,12 +8,8 @@ import js.lib.Error;
 extern class GlobWatcher {
 
 	/** Watches globs and executes a function upon change. **/
-	@:selfCall
-	overload static function watch(globs: EitherType<String, Array<String>>, callback: (?Error -> Void) -> Void): Void;
-
-	/** Watches globs and executes a function upon change. **/
-	@:selfCall
-	overload static function watch(globs: EitherType<String, Array<String>>, options: GlobWatcherOptions, callback: (?Error -> Void) -> Void): Void;
+	@:selfCall overload static function watch(globs: EitherType<String, Array<String>>, callback: (?Error -> Void) -> Void): Void;
+	@:selfCall overload static function watch(globs: EitherType<String, Array<String>>, options: GlobWatcherOptions, callback: (?Error -> Void) -> Void): Void;
 }
 
 /** Defines the options of the `GlobWatcher.watch` method. **/
