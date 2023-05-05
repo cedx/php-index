@@ -7,6 +7,7 @@ interface Messages {
 	function directories(): String;
 	function directory(): String;
 	function emptyDirectory(): String;
+	function emptyResultSet(): String;
 	function error(): String;
 	function file(): String;
 	function files(): String;
@@ -17,5 +18,6 @@ interface Messages {
 	function name(): String;
 	function offline(): String;
 	function parentDirectory(): String;
+	function search(): String;
 	function size(): String;
 }

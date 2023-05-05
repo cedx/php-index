@@ -4,6 +4,7 @@
 	"directories": "directories",
 	"directory": "directory",
 	"emptyDirectory": "This directory is empty.",
+	"emptyResultSet": "No files or folders match your query.",
 	"error": "An error occurred while fetching the directory entries.",
 	"file": "file",
 	"files": "files",
@@ -14,5 +15,6 @@
 	"name": "Name",
 	"offline": "The network is inaccessible. Check your connection.",
 	"parentDirectory": "Parent directory",
+	"search": "Search",
 	"size": "Size"
 }
