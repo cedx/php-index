@@ -35,5 +35,7 @@
 .bi-filter::before { content: "\f3ca"; }
 .bi-folder-fill::before { content: "\f3d1"; }
 .bi-moon-stars-fill::before { content: "\f495"; }
+.bi-search::before { content: "\f52a"; }
 .bi-sort-down-alt::before { content: "\f574"; }
 .bi-sort-up::before { content: "\f57b"; }
+.bi-x-lg::before { content: "\f659"; }
