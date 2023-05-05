@@ -4,7 +4,7 @@
 A [PHP](https://www.php.net) directory index generator, implemented in [Haxe](https://haxe.org).
 
 ## Documentation
-- [User guide](https://github.com/cedx/php-index/wiki)
+- [User guide](https://docs.belin.io/php-index)
 
 ## Development
 - [Git repository](https://github.com/cedx/php-index)
