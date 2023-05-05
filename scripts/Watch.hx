@@ -1,4 +1,4 @@
-//! --class-path src --define hxnodejs --library hxnodejs --library tink_core
+//! --class-path src --define hxnodejs --define no-deprecation-warnings --library hxnodejs --library tink_core
 import haxe.Timer;
 import js.browser_sync.BrowserSync;
 import js.esbuild.Esbuild;
