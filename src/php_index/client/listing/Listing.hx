@@ -5,7 +5,13 @@ import intl.NumberFormat.NumberFormatOptions;
 import intl.NumberFormat.NumberFormatStyle;
 import intl.SimpleUnit;
 import js.Browser;
+import js.html.Event;
+import js.html.FormData;
+import js.html.FormElement;
+import php_index.base.io.FileSystemEntity;
 import tink.Anon;
+import tink.state.Promised;
+using StringTools;
 using haxe.io.Path;
 using intl.NumberFormat.NumberFormatTools;
 
@@ -21,8 +27,11 @@ class Listing extends View {
 	/** The list of file system entities. **/
 	@:state var entities: EntityList = new EntityList();
 
-	/** The size in bytes of the largest file in the listing. **/
-	@:computed var maxFileSize: Int = entities.items.fold((item, result) -> item.size > result ? item.size : result, 0);
+	/** The search form. **/
+	@:ref final form: FormElement;
+
+	/** The loading state. **/
+	@:state var loading: Promised<List<FileSystemEntity>> = Loading;
 
 	/** The localized messages. **/
 	final messages: Messages = Container.instance.messages;
@@ -31,6 +40,9 @@ class Listing extends View {
 	final path = Browser.location.pathname.length > 1
 		? Browser.location.pathname.removeTrailingSlashes()
 		: Browser.location.pathname;
+
+	/** The current query. **/
+	@:state var query = "";
 
 	/** Formats the specified size. **/
 	function formatBytes(bytes: Float) {
@@ -46,110 +58,139 @@ class Listing extends View {
 
 	/** The view corresponding to the file listing. **/
 	function listing(attr: {}) '
-		<table class="table table-hover table-sticky table-striped mb-0">
-			<thead>
-				<tr>
-					<th onclick=${entities.orderBy("path")} scope="col">
-						<span role="button">${messages.name()} <i class="bi bi-${entities.sort.getIcon('path')}"/></span>
-					</th>
-					<th onclick=${entities.orderBy("size")} scope="col">
-						<span role="button">${messages.size()} <i class="bi bi-${entities.sort.getIcon('size')}"/></span>
-					</th>
-					<th class="d-none d-sm-table-cell" onclick=${entities.orderBy("modifiedAt")} scope="col">
-						<span role="button">${messages.modifiedAt()} <i class="bi bi-${entities.sort.getIcon('modifiedAt')}"/></span>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<if ${path.length > 1}>
-					<tr>
-						<td colSpan=${2}>
-							<div class="text-truncate">
-								<a href="..">
-									<i class="bi bi-arrow-90deg-up me-2 text-secondary"/>${messages.parentDirectory()}
-								</a>
-							</div>
-						</td>
-						<td class="d-none d-sm-table-cell"/>
-					</tr>
-				</if>
-				<for ${entity in entities.items}>
-					<tr>
-						<td>
-							<div class="text-truncate">
-								<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
-									<i class=${['bi bi-${entity.icon} me-2' => true, "text-secondary" => entity.type == File, "text-warning" => entity.type == Directory]}/>${entity.path}
-								</a>
-							</div>
-						</td>
-						<td>
-							<if ${entity.type == Directory}>
-								&ndash;
-							<else>
-								<let width=${Math.round((entity.size / maxFileSize) * 100)}>
-									<div class="px-1" style=${{background: 'linear-gradient(90deg, rgb(22 88 152 / 15%) $width%, transparent 0)'}}>
-										${formatBytes(entity.size)}
+		<let items=${entities.filter(query)}>
+			<if ${items.length == 0}>
+				<section>
+					<div class="alert alert-warning d-flex align-items-center mb-0">
+						<i class="bi bi-exclamation-triangle-fill"/>
+						<div class="ms-2">${messages.emptyResultSet()}</div>
+					</div>
+				</section>
+			<else>
+				<table class="table table-hover table-sticky table-striped mb-0">
+					<thead>
+						<tr>
+							<th onclick=${entities.orderBy("path")} scope="col">
+								<span role="button">${messages.name()} <i class="bi bi-${entities.sort.getIcon('path')}"/></span>
+							</th>
+							<th onclick=${entities.orderBy("size")} scope="col">
+								<span role="button">${messages.size()} <i class="bi bi-${entities.sort.getIcon('size')}"/></span>
+							</th>
+							<th class="d-none d-sm-table-cell" onclick=${entities.orderBy("modifiedAt")} scope="col">
+								<span role="button">${messages.modifiedAt()} <i class="bi bi-${entities.sort.getIcon('modifiedAt')}"/></span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<if ${path.length > 1}>
+							<tr>
+								<td colSpan=${2}>
+									<div class="text-truncate">
+										<a href="..">
+											<i class="bi bi-arrow-90deg-up me-2 text-secondary"/>${messages.parentDirectory()}
+										</a>
 									</div>
-								</let>
-							</if>
-						</td>
-						<td class="d-none d-sm-table-cell">
-							<time dateTime=${entity.modifiedAt}>
-								${dateFormatter.format(entity.modifiedAt)}
-							</time>
-						</td>
-					</tr>
-				</for>
-			</tbody>
-		</table>
+								</td>
+								<td class="d-none d-sm-table-cell"/>
+							</tr>
+						</if>
+						<for ${entity in items}>
+							<tr>
+								<td>
+									<div class="text-truncate">
+										<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
+											<i class=${[
+												'bi bi-${entity.icon} me-2' => true,
+												"text-secondary" => entity.type == File,
+												"text-warning" => entity.type == Directory
+											]}/>${entity.path}
+										</a>
+									</div>
+								</td>
+								<td>
+									<if ${entity.type == Directory}>
+										&ndash;
+									<else>
+										<let width=${Math.round((entity.size / entities.maxFileSize) * 100)}>
+											<div class="px-1" style=${{background: 'linear-gradient(90deg, rgb(22 88 152 / 15%) $width%, transparent 0)'}}>
+												${formatBytes(entity.size)}
+											</div>
+										</let>
+									</if>
+								</td>
+								<td class="d-none d-sm-table-cell">
+									<time dateTime=${entity.modifiedAt}>
+										${dateFormatter.format(entity.modifiedAt)}
+									</time>
+								</td>
+							</tr>
+						</for>
+					</tbody>
+				</table>
+			</if>
+		</let>
 	';
 
 	/** Renders this view. **/
 	function render() '
 		<>
 			<ActionBar>
-				<div>TODO Filter</div>
+				<form class="flex-grow-1 flex-sm-grow-0" noValidate onsubmit=${submitForm} ref=${form} spellcheck=${false}>
+					<div class="input-group">
+						<input class="form-control" id="search" name="query" placeholder=${messages.search()} required type="search" value=${query}/>
+						<button class="btn btn-success">
+							<i class="bi bi-search"/>
+						</button>
+						<if ${query.length > 0}>
+							<button class="btn btn-danger" onclick=${resetForm}>
+								<i class="bi bi-x-lg"/>
+							</button>
+						</if>
+					</div>
+				</form>
 
-				<div class="hstack gap-3">
-					<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
-						<if ${directories > 0}>
-							<div><b>${directories}</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
-						</if>
-						<if ${directories > 0 && files > 0}>
-							<div class="vr"/>
-						</if>
-						<if ${files > 0}>
-							<div><b>${files}</b> ${files <= 1 ? messages.file() : messages.files()}</div>
-						</if>
-					</let>
+				<div class="d-none d-sm-block">
+					<div class="hstack gap-3">
+						<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
+							<if ${directories > 0}>
+								<div><b>${directories}</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
+							</if>
+							<if ${directories > 0 && files > 0}>
+								<div class="vr"/>
+							</if>
+							<if ${files > 0}>
+								<div><b>${files}</b> ${files <= 1 ? messages.file() : messages.files()}</div>
+							</if>
+						</let>
+					</div>
 				</div>
 			</ActionBar>
 
-			<article id="listing">
-				<section class=${{"border-bottom": entities.length > 0}}>
+			<article>
+				<section class="border-bottom">
 					<h4 class="mb-0">${messages.indexOf(path)}</h4>
 				</section>
 
-				<switch ${entities.status}>
+				<switch ${loading}>
 					<case ${Loading}>
-						<section class="pt-0">
+						<section>
 							<div class="alert alert-info d-flex align-items-center mb-0">
 								<div class="spinner-border spinner-border-sm"/>
 								<div class="ms-2">${messages.loading()}</div>
 							</div>
 						</section>
-					<case ${Failed(_)}>
-						<section class="pt-0">
+					<case ${Failed(error)}>
+						<section>
 							<div class="alert alert-danger d-flex align-items-center mb-0">
 								<i class="bi bi-exclamation-circle-fill"/>
-								<div class="ms-2">${messages.error()}</div>
+								<div class="ms-2">${error.message}</div>
 							</div>
 						</section>
-					<case ${Done(_)}>
-						<if ${entities.length > 0}>
+					<case ${Done(items)}>
+						<if ${items.length > 0}>
 							<listing/>
 						<else>
-							<section class="pt-0">
+							<section>
 								<div class="alert alert-warning d-flex align-items-center mb-0">
 									<i class="bi bi-exclamation-triangle-fill"/>
 									<div class="ms-2">${messages.emptyDirectory()}</div>
@@ -161,6 +202,24 @@ class Listing extends View {
 		</>
 	';
 
+	/** Resets the form. **/
+	function resetForm(event: Event) {
+		event.preventDefault();
+		query = "";
+	}
+
+	/** Submits the form. **/
+	function submitForm(event: Event) {
+		event.preventDefault();
+		query = (new FormData(form).get("query"): String).trim();
+	}
+
 	/** Method invoked after this view is mounted. **/
-	override function viewDidMount() Browser.document.title = '${Browser.location.hostname} - $path';
+	override function viewDidMount() {
+		Browser.document.title = '${Browser.location.hostname} - $path';
+		entities.fetch().handle(outcome -> switch outcome {
+			case Failure(_): loading = Failed(new Error(messages.error()));
+			case Success(items): loading = Done(items); entities.orderBy("path");
+		});
+	}
 }
