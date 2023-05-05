@@ -7,5 +7,5 @@
 	"releasenote": "Fixed a regression: dot files were listed.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://github.com/cedx/php-index.hx",
-	"version": "0.3.1"
+	"version": "0.4.0"
 }
