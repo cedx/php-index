@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [0.4.0](https://github.com/cedx/php-index/compare/v0.3.1...v0.4.0)
+- Added a search form.
+- Added the `ActionBar` component.
+- Updated the package dependencies.
+
 ## Version [0.3.1](https://github.com/cedx/php-index/compare/v0.3.0...v0.3.1)
 - Fixed a regression: dot files were listed.
 
