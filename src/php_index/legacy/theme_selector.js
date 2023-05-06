@@ -3,28 +3,6 @@ import {html} from "lit";
 import {Component} from "../component.js";
 
 /**
- * Defines the available color modes.
- * @enum {string}
- */
-export const Theme = Object.freeze({
-
-	/**
-	 * The color mode is automatic.
-	 */
-	auto: "auto",
-
-	/**
-	 * The theme is dark.
-	 */
-	dark: "dark",
-
-	/**
-	 * The theme is light.
-	 */
-	light: "light"
-});
-
-/**
  * A dropdown menu that allows to switch the theme mode.
  */
 export class ThemeSelector extends Component {
@@ -107,6 +85,3 @@ export class ThemeSelector extends Component {
 		container.get(localStorage).setObject("pageSize", pageSize);
 	}
 }
-
-// Register the component.
-customElements.define("theme-selector", ThemeSelector);
