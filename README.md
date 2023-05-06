@@ -3,6 +3,8 @@
 
 A [PHP](https://www.php.net) directory index generator, implemented in [Haxe](https://haxe.org).
 
+![Screenshot](docs/screenshot.webp)
+
 ## Documentation
 - [User guide](https://docs.belin.io/php-index)
 
