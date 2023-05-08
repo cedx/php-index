@@ -26,8 +26,8 @@ class EntityList implements Model {
 
 	/** Filters the list items. **/
 	public function filter(query: String) {
-		final normalizedQuery = query.toLowerCase();
-		return normalizedQuery.length > 0 ? items.filter(item -> item.path.toLowerCase().contains(normalizedQuery)) : items;
+		query = query.toLowerCase();
+		return query.length > 0 ? items.filter(item -> item.path.toLowerCase().contains(query)) : items;
 	}
 
 	/** Sorts the list of file system entities. **/
