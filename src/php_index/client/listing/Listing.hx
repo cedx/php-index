@@ -137,7 +137,7 @@ class Listing extends View {
 			<ActionBar>
 				<form class="flex-grow-1 flex-sm-grow-0" noValidate onsubmit=${submitForm} ref=${form} spellcheck=${false}>
 					<div class="input-group">
-						<input class="form-control" id="search" name="query" placeholder=${messages.search()} required type="search" value=${query}/>
+						<input class="form-control" name="query" placeholder=${messages.search()} required type="search" value=${query}/>
 						<button class="btn btn-success">
 							<i class="bi bi-search"/>
 						</button>
