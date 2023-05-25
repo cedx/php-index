@@ -6,6 +6,6 @@
 	"name": "php_index",
 	"releasenote": "Added a search form, added the `ActionBar` component, updated the package dependencies.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
-	"url": "https://github.com/cedx/php-index.hx",
+	"url": "https://docs.belin.io/php-index.hx",
 	"version": "0.4.0"
 }
