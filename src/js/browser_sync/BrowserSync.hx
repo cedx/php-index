@@ -72,6 +72,9 @@ typedef BrowserSyncOptions = {
 
 	/** An existing host to proxy. **/
 	var ?proxy: EitherType<String, ProxyOptions>;
+
+	/** Value indicating whether to use the built-in static server. **/
+	var ?server: EitherType<Bool, EitherType<String, EitherType<Array<String>, ServerOptions>>>;
 }
 
 /** Defines the ghost options related to the forms. **/
@@ -125,4 +128,17 @@ typedef ProxyOptions = {
 
 	/** Value indicating whether to proxy websockets. **/
 	var ?ws: Bool;
+}
+
+/** Defines the built-in server options. **/
+typedef ServerOptions = {
+
+	/** The base directory. **/
+	var ?baseDir: EitherType<String, Array<String>>;
+
+	/** Value indicating whether to enable directory listing. **/
+	var ?directory: Bool;
+
+	/** The index filename. **/
+	var ?index: String;
 }
