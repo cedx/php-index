@@ -4,10 +4,8 @@ using DateTools;
 using haxe.io.Path;
 
 #if js
-import js.esbuild.Options.BuildOptions;
-
 /** Returns the build settings. **/
-function buildOptions(debug = false): BuildOptions return {
+function buildOptions(debug = false): js.esbuild.Options.BuildOptions return {
 	bundle: true,
 	entryPoints: ["src/php_index/ui/index.css"],
 	external: ["*.woff2"],
