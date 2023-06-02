@@ -1,14 +1,11 @@
-#if js
-import js.esbuild.Options.BuildOptions;
-import js.node.ChildProcess;
-#end
 import sys.FileSystem;
 import sys.io.File;
 using DateTools;
-using StringTools;
 using haxe.io.Path;
 
 #if js
+import js.esbuild.Options.BuildOptions;
+
 /** Returns the build settings. **/
 function buildOptions(debug = false): BuildOptions return {
 	bundle: true,
@@ -19,10 +16,6 @@ function buildOptions(debug = false): BuildOptions return {
 	outfile: "www/css/main.css",
 	sourcemap: debug
 };
-
-/** Captures the output of the specified `command`. **/
-function captureCommand(command: String, ?arguments: Array<String>)
-	return ChildProcess.execFileSync(command, arguments, {encoding: "utf8", shell: true}).rtrim();
 #end
 
 /** Recursively deletes all files in the specified `directory`. **/
