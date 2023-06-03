@@ -1,0 +1,4 @@
+# @install: lix --silent download "haxelib:/embed-js#0.2.0" into embed-js/0.2.0/haxelib
+-lib tink_url
+-cp ${HAXE_LIBCACHE}/embed-js/0.2.0/haxelib/src
+-D embed-js=0.2.0
