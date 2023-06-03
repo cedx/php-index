@@ -1,0 +1,9 @@
+.dropdown-header {
+	font-weight: 600;
+}
+
+.dropdown-menu {
+	--bs-dropdown-bg: var(--bs-white);
+	--bs-dropdown-link-active-bg: var(--bs-primary);
+	box-shadow: var(--bs-dropdown-box-shadow);
+}

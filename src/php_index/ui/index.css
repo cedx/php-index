@@ -6,6 +6,8 @@
 @import "app/icons.css";
 
 /* Components. */
+@import "components/dropdown.css";
+@import "components/forms.css";
 @import "components/navbar.css";
 @import "components/tables.css";
 

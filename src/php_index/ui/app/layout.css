@@ -22,7 +22,7 @@ article {
 
 @media screen and (width >= 768px) {
 	article {
-		border-radius: var(--bs-border-radius-sm);
+		border-radius: var(--bs-border-radius);
 		margin: 1.5rem auto;
 		max-width: 720px;
 	}

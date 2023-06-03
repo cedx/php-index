@@ -1,0 +1,8 @@
+.form-control {
+	background-color: var(--bs-white);
+	border-color: var(--bs-gray-400);
+}
+
+.form-control:focus {
+	background-color: var(--bs-white);
+}
