@@ -52,22 +52,22 @@ export class ThemeSelector extends Component {
 		return html`
 			<li class="nav-item dropdown">
 				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-					<i class="bi bi-brightness-high-fill"></i>
+					<i class="bi bi-brightness-high-fill"/>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end">
 					<li>
 						<button class="dropdown-item d-flex align-items-center" @click=${this.#changeTheme} type="button" value=${Theme.light}>
-							<i class="bi bi-brightness-high-fill me-2"></i> ${msg("Light")}
+							<i class="bi bi-brightness-high-fill me-2"/> ${msg("Light")}
 						</button>
 					</li>
 					<li>
 						<button class="dropdown-item d-flex align-items-center" @click=${this.#changeTheme} type="button" value=${Theme.dark}>
-							<i class="bi bi-moon-stars-fill me-2"></i> ${msg("Dark")}
+							<i class="bi bi-moon-stars-fill me-2"/> ${msg("Dark")}
 						</button>
 					</li>
 					<li>
 						<button class="dropdown-item d-flex align-items-center" @click=${this.#changeTheme} type="button" value=${Theme.auto}>
-							<i class="bi bi-circle-half me-2"></i> ${msg("Auto")}
+							<i class="bi bi-circle-half me-2"/> ${msg("Auto")}
 						</button>
 					</li>
 				</ul>
