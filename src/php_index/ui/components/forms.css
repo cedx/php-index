@@ -1,8 +1,10 @@
-.form-control {
+.form-control,
+.form-select {
 	background-color: var(--bs-white);
 	border-color: var(--bs-gray-400);
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
 	background-color: var(--bs-white);
 }
