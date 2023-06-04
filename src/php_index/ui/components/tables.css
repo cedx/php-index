@@ -1,7 +1,3 @@
-.table {
-	--bs-table-bg: var(--bs-white);
-}
-
 .table-sticky > thead {
 	background-color: var(--bs-table-bg);
 	position: sticky;

@@ -1,6 +1,7 @@
 .navbar {
 	--bs-navbar-active-color: var(--bs-white);
 	--bs-navbar-brand-color: var(--bs-white);
+	--bs-navbar-brand-hover-color: var(--bs-white);
 	--bs-navbar-color: #ffffffbc;
 	--bs-navbar-hover-color: #fffffff2;
 	--bs-navbar-nav-link-padding-x: 0.75rem;

@@ -1,5 +1,6 @@
 body {
 	accent-color: var(--bs-primary);
+	background-color: var(--bs-gray-200);
 	overflow: hidden;
 }
 
@@ -14,7 +15,7 @@ main {
 }
 
 article {
-	background-color: var(--bs-white);
+	background-color: var(--bs-body-bg);
 	box-shadow: var(--bs-box-shadow-sm);
 	overflow: clip;
 	width: 100%;
