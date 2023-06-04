@@ -10,8 +10,13 @@
 	--bs-primary-rgb: 22, 88, 152;
 	--bs-root-font-size: 14px;
 	--bs-secondary: #696969;
+	--bs-secondary-color: var(--bs-gray-600);
+	--bs-secondary-color-rgb: 108, 117, 125;
 	--bs-secondary-rgb: 105, 105, 105;
-	--bs-tertiary-bg: var(--bs-gray-200);
+	--bs-tertiary-bg: var(--bs-body-bg);
+	--bs-tertiary-bg-rgb: var(--bs-body-bg-rgb);
+	--bs-tertiary-color: var(--bs-gray-500);
+	--bs-tertiary-color-rgb: 173, 181, 189;
 	--navbar-height: 50px;
 	font-size: var(--bs-root-font-size);
 }
