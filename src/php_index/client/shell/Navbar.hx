@@ -7,7 +7,7 @@ class Navbar extends View {
 
 	/** Renders this view. **/
 	function render() '
-		<nav class="navbar navbar-dark navbar-expand-sm">
+		<nav class="navbar navbar-expand-sm">
 			<div class="container-fluid">
 				<div class="navbar-brand">
 					<span><img alt="" height=${24} src="?file=favicon.svg" width=${24}/></span>

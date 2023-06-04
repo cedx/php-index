@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [0.5.0](https://github.com/cedx/php-index/compare/v0.4.0...v0.5.0)
+- Added the `Theme` enumeration.
+- Added the `ThemeSelector` component.
+- Updated the package dependencies.
+
 ## Version [0.4.0](https://github.com/cedx/php-index/compare/v0.3.1...v0.4.0)
 - Added a search form.
 - Added the `ActionBar` component.
