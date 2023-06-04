@@ -14,4 +14,4 @@ A [PHP](https://www.php.net) directory index generator, implemented in [Haxe](ht
 - [Submit an issue](https://github.com/cedx/php-index/issues)
 
 ## Licence
-[PHP Index](https://github.com/cedx/php-index) is distributed under the MIT License.
+[PHP Index](https://docs.belin.io/php-index) is distributed under the MIT License.
