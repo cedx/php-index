@@ -16,14 +16,8 @@ class Navbar extends View {
 
 				<div class="collapse navbar-collapse">
 					<span class="navbar-text ms-auto">
-						<Clock dateStyle=${Long} locale=${Container.instance.locale} timeout=${1_800}/>
+						<Clock dateStyle=${Full} locale=${Container.instance.locale} timeout=${1_800}/>
 					</span>
-					<ul class="navbar-nav ms-3">
-						<li class="nav-item">
-							<div class="vr h-100 mx-2 text-white"/>
-						</li>
-						<Theme.ThemeSelector/>
-					</ul>
 				</div>
 			</div>
 		</nav>
