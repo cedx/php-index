@@ -7,7 +7,7 @@
 	--bs-navbar-toggler-focus-width: 0;
 	--bs-navbar-toggler-padding-x: 0.25rem;
 	background-color: var(--bs-primary);
-	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+	box-shadow: var(--bs-box-shadow);
 	left: 0;
 	position: fixed;
 	right: 0;
