@@ -7,5 +7,5 @@
 	"releasenote": "Added the `Theme` enumeration, added the `ThemeSelector` component, updated the package dependencies.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://docs.belin.io/php-index.hx",
-	"version": "0.5.0"
+	"version": "1.0.0"
 }
