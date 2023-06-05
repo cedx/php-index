@@ -4,6 +4,10 @@ body {
 	overflow: hidden;
 }
 
+[data-bs-theme="dark"] body {
+	background-color: var(--bs-black);
+}
+
 main {
 	inset: var(--main-offset, var(--navbar-height)) 0 0 0;
 	overflow: auto;
@@ -19,6 +23,10 @@ article {
 	box-shadow: var(--bs-box-shadow-sm);
 	overflow: clip;
 	width: 100%;
+}
+
+[data-bs-theme="dark"] article {
+	border: var(--bs-border-width) solid var(--bs-border-color);
 }
 
 @media screen and (width >= 768px) {
@@ -45,6 +53,10 @@ aside {
 	user-select: none;
 	width: 100%;
 	z-index: 100;
+}
+
+[data-bs-theme="dark"] aside {
+	background-color: var(--bs-gray-800);
 }
 
 @media print {
