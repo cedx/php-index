@@ -25,10 +25,6 @@ article {
 	width: 100%;
 }
 
-[data-bs-theme="dark"] article {
-	border: var(--bs-border-width) solid var(--bs-border-color);
-}
-
 @media screen and (width >= 768px) {
 	article {
 		border-radius: var(--bs-border-radius);
