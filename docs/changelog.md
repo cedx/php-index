@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.0.0](https://github.com/cedx/php-index/compare/v0.5.0...v1.0.0)
+- Added support for dark mode.
+
 ## Version [0.5.0](https://github.com/cedx/php-index/compare/v0.4.0...v0.5.0)
 - Added the `Theme` enumeration.
 - Added the `ThemeSelector` component.
