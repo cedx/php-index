@@ -57,6 +57,7 @@ aside {
 
 [data-bs-theme="dark"] aside {
 	background-color: var(--bs-gray-800);
+	border-bottom-color: var(--bs-black);
 }
 
 @media print {

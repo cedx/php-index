@@ -11,6 +11,7 @@
 	--bs-navbar-toggler-padding-x: 0.25rem;
 	background-color: var(--bs-primary);
 	box-shadow: var(--bs-box-shadow);
+	height: var(--navbar-height);
 	left: 0;
 	position: fixed;
 	right: 0;

@@ -1,6 +1,5 @@
 package php_index.client.shell;
 
-import coconut.ui.View;
 import haxe.Timer;
 import intl.DateFormat;
 import intl.Locale;
