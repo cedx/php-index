@@ -2,3 +2,4 @@ input[name="query"] { width: 24ch !important; }
 table { table-layout: fixed; }
 table th:nth-child(2) { width: 90px; }
 table th:nth-child(3) { width: 160px; }
+table tr:last-child td { border-bottom-width: 0; }
