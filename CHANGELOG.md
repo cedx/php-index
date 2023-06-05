@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.0.1](https://github.com/cedx/php-index/compare/v1.0.0...v1.0.1)
+- Fixed a packaging issue.
+
 ## Version [1.0.0](https://github.com/cedx/php-index/compare/v0.5.0...v1.0.0)
 - Added support for dark mode.
 
