@@ -18,7 +18,7 @@ class Navbar extends View {
 					<span class="navbar-text ms-auto">
 						<Clock dateStyle=${Full} locale=${Container.instance.locale} timeout=${1_800}/>
 					</span>
-					<ul class="navbar-nav">
+					<ul class="navbar-nav ms-2">
 						<Theme.ThemeSelector/>
 					</ul>
 				</div>
