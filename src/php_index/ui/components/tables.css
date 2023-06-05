@@ -1,12 +1,11 @@
 .table-sticky > thead {
-	background-color: var(--bs-table-bg);
 	position: sticky;
 	top: 0;
 	z-index: 50;
 }
 
 .table-sticky > thead::after {
-	border-bottom: var(--bs-border-width) solid currentcolor;
+	border-bottom: var(--bs-border-width) solid var(--bs-border-color);
 	bottom: 0;
 	content: "";
 	left: 0;
