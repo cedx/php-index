@@ -1,4 +1,4 @@
-article > .table > :not(caption) > tr:last-child > * {
+.last-row-borderless > tr:last-child > * {
 	border-bottom-width: 0;
 }
 

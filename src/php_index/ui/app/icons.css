@@ -17,6 +17,7 @@
 
 .bi-arrow-90deg-up::before { content: "\f111"; }
 .bi-brightness-high-fill::before { content: "\f1d1"; }
+.bi-check-lg::before { content: "\f633"; }
 .bi-circle-half::before { content: "\f288"; }
 .bi-exclamation-circle-fill::before { content: "\f332"; }
 .bi-exclamation-triangle-fill::before { content: "\f33a"; }

@@ -28,16 +28,3 @@
 	background-color: var(--bs-primary);
 	color: var(--bs-white);
 }
-
-a {
-	text-decoration: none;
-}
-
-a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):hover,
-a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):focus {
-	text-decoration: underline;
-}
-
-body.loading {
-	cursor: progress;
-}

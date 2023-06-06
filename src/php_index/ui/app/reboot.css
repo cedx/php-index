@@ -1,0 +1,13 @@
+a {
+	text-decoration: none;
+}
+
+a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):hover,
+a:not(.btn, .dropdown-item, .list-group-item-action, .nav-link):focus {
+	text-decoration: underline;
+}
+
+menu {
+	margin-bottom: 0;
+	margin-top: 0;
+}
