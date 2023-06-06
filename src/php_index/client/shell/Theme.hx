@@ -35,44 +35,71 @@ enum abstract Theme(String) from String to String {
 		}
 }
 
-/** A dropdown menu that allows to switch the color mode. **/
+/** A dropdown menu allowing to switch the color mode. **/
+class ThemeDropdown extends View {
+
+	/** The icon of the dropdown menu. **/
+	@:state var icon: String = Auto.icon;
+
+	/** The label of the dropdown menu. **/
+	@:attribute var label = "";
+
+	/** Renders this view. **/
+	function render() '
+		<li class="nav-item dropdown">
+			<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
+				<i class=${['bi bi-${icon}' => true, "me-2" => label.length > 0]}/>
+				<if ${label.length > 0}>${label}</if>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-end">
+				<ThemeSelector onChange=${updateIcon}/>
+			</ul>
+		</li>
+	';
+
+	/** Updates the icon when the theme is changed. **/
+	function updateIcon(theme: Theme) icon = theme.icon;
+}
+
+/** A component allowing to switch the color mode. **/
 class ThemeSelector extends View {
 
-	/** The media query used to check the system theme. **/
-	final mediaQuery = Browser.window.matchMedia("(prefers-color-scheme: dark)");
+	/** The handler invoked when a value has been selected. **/
+	@:attribute var onChange: Callback<Theme> = function() {};
 
 	/** The current theme. **/
-	@:state var theme: Theme = {
+	@:state public var theme: Theme = {
 		final colorMode = Browser.window.localStorage.getItem("theme");
 		AbstractEnum.getValues(Theme).contains(colorMode) ? colorMode : Auto;
 	}
 
+	/** The media query used to check the system theme. **/
+	final mediaQuery = Browser.window.matchMedia("(prefers-color-scheme: dark)");
+
 	/** Applies the theme to the document. **/
-	function applyTheme()
+	function applyTheme() {
 		Browser.document.documentElement.dataset.bsTheme = if (theme == Auto) mediaQuery.matches ? Dark : Light else theme;
+		onChange.invoke(theme);
+	}
 
 	/** Changes the current theme. **/
-	function changeTheme(colorMode: Theme) {
+	function changeTheme(colorMode: Theme) if (colorMode != theme) {
 		Browser.window.localStorage.setItem("theme", theme = colorMode);
 		applyTheme();
 	}
 
 	/** Renders this view. **/
 	function render() '
-		<li class="nav-item dropdown">
-			<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-				<i class="bi bi-${theme.icon}"/>
-			</a>
-			<ul class="dropdown-menu dropdown-menu-end">
-				<for ${colorMode in AbstractEnum.getValues(Theme)}>
-					<li>
-						<button class=${{active: theme == colorMode, "dropdown-item d-flex align-items-center": true}} onclick=${changeTheme(colorMode)}>
-							<i class="bi bi-${colorMode.icon} me-2"/> ${colorMode.label)}
-						</button>
-					</li>
-				</for>
-			</ul>
-		</li>
+		<>
+			<for ${colorMode in AbstractEnum.getValues(Theme)}>
+				<li>
+					<button class="dropdown-item d-flex align-items-center justify-content-between" onclick=${changeTheme(colorMode)}>
+						<span><i class="bi bi-${colorMode.icon} me-1"/> ${colorMode.label)}</span>
+						<if ${theme == colorMode}><i class="bi bi-check-lg ms-2"/></if>
+					</button>
+				</li>
+			</for>
+		</>
 	';
 
 	/** Method invoked after this view is mounted. **/

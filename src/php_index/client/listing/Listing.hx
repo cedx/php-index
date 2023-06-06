@@ -81,7 +81,7 @@ class Listing extends View {
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="last-row-borderless">
 						<if ${path.length > 1}>
 							<tr>
 								<td colSpan=${2}>

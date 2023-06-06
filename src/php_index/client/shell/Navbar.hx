@@ -15,8 +15,8 @@ class Navbar extends View {
 				</div>
 
 				<div class="collapse navbar-collapse">
-					<menu class="navbar-nav mb-0 ms-auto">
-						<Theme.ThemeSelector/>
+					<menu class="navbar-nav ms-auto">
+						<Theme.ThemeDropdown/>
 					</menu>
 				</div>
 			</div>
