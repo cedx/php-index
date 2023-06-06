@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.1.0](https://github.com/cedx/php-index/compare/v1.0.1...v1.1.0)
+- Improved the theme selector.
+
 ## Version [1.0.1](https://github.com/cedx/php-index/compare/v1.0.0...v1.0.1)
 - Fixed a packaging issue.
 
