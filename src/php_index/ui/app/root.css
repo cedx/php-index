@@ -1,10 +1,11 @@
 :root {
+	--bs-body-text-align: start;
+	--bs-root-font-size: 14px;
 	--navbar-height: 50px;
-	font-size: var(--bs-root-font-size, 14px);
+	font-size: var(--bs-root-font-size);
 }
 
 :root, [data-bs-theme="light"] {
-	--bs-body-text-align: start;
 	--bs-heading-color: var(--bs-emphasis-color);
 	--bs-link-color: var(--bs-primary);
 	--bs-link-color-rgb: var(--bs-primary-rgb);
@@ -12,7 +13,6 @@
 	--bs-link-hover-color-rgb: 18, 70, 122;
 	--bs-primary: #165898;
 	--bs-primary-rgb: 22, 88, 152;
-	--bs-root-font-size: 14px;
 }
 
 [data-bs-theme="dark"] {
