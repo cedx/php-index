@@ -8,17 +8,13 @@ function main() {
 	Sys.command("git checkout -- src/php_index/ui/index.css");
 	FileSystem.deleteFile("www/index.php");
 
-	minifyFile("www/js/main.js");
+	minifyFile("bin/php_index.js", Node);
+	minifyFile("www/js/main.js", Browser);
 	Sys.command("npx @cedx/php-minifier --mode=fast lib");
-
-	final cli = "bin/php_index.js";
-	minifyFile(cli, Node);
-	Sys.command('git update-index --chmod=+x $cli');
-	if (Sys.systemName() != "Windows") Sys.command('chmod +x $cli');
 }
 
 /** Minifies the specified `source` file. **/
-private function minifyFile(source: String, ?destination: String, platform = Platform.Browser) Sys.command("npx", [
+private function minifyFile(source: String, ?destination: String, platform: Platform) Sys.command("npx", [
 	"esbuild",
 	"--allow-overwrite",
 	"--legal-comments=none",

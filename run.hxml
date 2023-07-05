@@ -8,5 +8,4 @@
 --library hxnodejs
 --library tink_cli
 --library uuid
---macro php_index.cli.Macro.shebang("node")
 --main php_index.cli.Program
