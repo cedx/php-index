@@ -14,7 +14,5 @@ function main() {
 	final bootstrap = ChildProcess.execFileSync("lix", ["run", "bootstrap_bundle", "libpath"], {encoding: "utf8", shell: true}).rtrim();
 	FileSystem.createDirectory("www/fonts");
 	File.copy(Path.join([bootstrap, "fonts/bootstrap-icons.woff2"]), "www/fonts/icons.woff2");
-
-	Tools.replaceInFile("src/php_index/ui/index.css", ~/".*\/css\/bootstrap.css"/, '"${Path.join([bootstrap, "css/bootstrap.css"])}"');
 	Esbuild.build(Tools.buildOptions(debug));
 }

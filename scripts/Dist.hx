@@ -5,7 +5,6 @@ import sys.FileSystem;
 /** Packages the project. **/
 function main() {
 	for (script in ["Clean", "Build", "Version"]) Sys.command('lix $script');
-	Sys.command("git checkout -- src/php_index/ui/index.css");
 	FileSystem.deleteFile("www/index.php");
 
 	minifyFile("bin/php_index.js", Node);

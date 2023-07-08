@@ -4,5 +4,5 @@ package js.esbuild;
 typedef Plugin = {
 
 	/** The plugin name. **/
-	final name: String;
+	var name: String;
 }
