@@ -45,6 +45,19 @@ enum abstract LegalComments(String) from String to String {
 	var None = "none";
 }
 
+/** Defines the target platform. **/
+enum abstract Platform(String) from String to String {
+
+	/** The platform is a browser. **/
+	var Browser = "browser";
+
+	/** The platform is neutral. **/
+	var Neutral = "neutral";
+
+	/** The platform is Node.js. **/
+	var Node = "node";
+}
+
 /** Defines how a source map is generated. **/
 enum abstract Sourcemap(String) from String to String {
 
@@ -103,6 +116,9 @@ typedef CommonOptions = {
 
 	/** Value indicating whether the generated code will be minified instead of pretty-printed. **/
 	var ?minify: Bool;
+
+	/** The target platform. **/
+	var ?platform: Platform;
 
 	/** Value indicating whether to generate source maps. **/
 	var ?sourcemap: EitherType<Bool, Sourcemap>;

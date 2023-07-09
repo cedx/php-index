@@ -2,7 +2,7 @@ package php_index.client;
 
 import coconut.ui.Renderer;
 import js.Browser;
-import php_index.base.Version;
+import php_index.base.Platform;
 import turnwing.Manager;
 import turnwing.provider.JsonProvider;
 import turnwing.source.ResourceStringSource;
@@ -13,7 +13,7 @@ function main() {
 	final container = Container.instance;
 
 	final root = Browser.document.documentElement;
-	root.dataset.version = Version.packageVersion;
+	root.dataset.version = Platform.packageVersion;
 	root.lang = container.locale.language;
 
 	final provider = new JsonProvider<Messages>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate());

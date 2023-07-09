@@ -1,14 +1,15 @@
-#if js
+#if nodejs
 import js.esbuild.Options.BuildOptions;
 import js.html.URL;
 import js.lib.RegExp;
+import php_index.base.Platform;
 #end
 import sys.FileSystem;
 import sys.io.File;
 using DateTools;
 using haxe.io.Path;
 
-#if js
+#if nodejs
 /** Returns the build settings. **/
 function buildOptions(debug = false): BuildOptions return {
 	bundle: true,
@@ -24,15 +25,14 @@ function buildOptions(debug = false): BuildOptions return {
 /** Resolves `haxelib://` imports. **/
 private final haxelibResolver = {
 	name: "haxelib",
-	setup: build -> build.onResolve({filter: new RegExp("^haxelib://")}, args -> {
-		final fileUri = new URL(args.path);
-		final haxeRoot = Sys.getEnv("HAXESHIM_ROOT") ?? Sys.getEnv("HAXE_ROOT") ?? '${Sys.getEnv(Sys.systemName() == "Windows" ? "APPDATA" : "HOME")}/haxe';
-		{path: Path.join([
-			Sys.getEnv("HAXESHIM_LIBCACHE") ?? Sys.getEnv("HAXE_LIBCACHE") ?? Path.join([haxeRoot, "haxe_libraries"]),
-			~/\r?\n/.split(File.getContent('haxe_libraries/${fileUri.hostname}.hxml')).shift().split(" ").pop(),
-			fileUri.pathname.substring(1)
-		])};
-	})
+	setup: build -> {
+		final cache: Map<String, String> = [];
+		build.onResolve({filter: new RegExp("^haxelib://")}, args -> {
+			final uri = new URL(args.path);
+			if (!cache.exists(uri.hostname)) cache[uri.hostname] = Platform.resolveLibrary(uri.hostname);
+			{path: Path.join([cache[uri.hostname], uri.pathname.substring(1)])};
+		});
+	}
 };
 #end
 

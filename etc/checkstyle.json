@@ -2,6 +2,7 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
+		"ConditionalCompilation": ["src/php_index/base/Platform"],
 		"Dynamic": ["src/php_index/client/Container"],
 		"EmptyLines": ["src/php_index/client/Messages"],
 		"ReturnCount": ["src/php_index/cli/Program"],

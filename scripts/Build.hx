@@ -1,4 +1,4 @@
-//! --class-path src --define hxnodejs --define no-deprecation-warnings --library hxnodejs
+//! --class-path src --define hxnodejs --define no-deprecation-warnings --library hxnodejs --library tink_core
 import js.esbuild.Esbuild;
 import js.node.ChildProcess;
 import sys.FileSystem;

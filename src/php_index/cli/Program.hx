@@ -1,6 +1,6 @@
 package php_index.cli;
 
-import php_index.base.Version;
+import php_index.base.Platform;
 import sys.FileSystem;
 import sys.io.File;
 import uuid.Uuid;
@@ -42,7 +42,7 @@ final class Program {
 	@:defaultCommand
 	public function run(rest: Rest<String>): Promise<Noise> {
 		if (help || version) {
-			Sys.println(version ? Version.packageVersion : Cli.getDoc(this));
+			Sys.println(version ? Platform.packageVersion : Cli.getDoc(this));
 			return Noise;
 		}
 
