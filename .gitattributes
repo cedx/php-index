@@ -13,6 +13,7 @@
 *.md text diff=markdown
 *.mjs text
 *.php text diff=php
+*.ps1 text
 *.sql text
 *.svg text
 *.txt text
