@@ -11,7 +11,7 @@ function main() {
 	final debug = Sys.args().contains("--debug");
 	for (file in ["build_client", "build_server", "run"]) Sys.command('haxe ${debug ? "--debug" : ""} $file.hxml');
 
-	final bootstrap = ChildProcess.execFileSync("lix", ["run", "bootstrap_bundle", "libpath"], {encoding: "utf8", shell: true}).rtrim();
+	final bootstrap = ChildProcess.execSync("lix run bootstrap_bundle libpath", {encoding: "utf8"}).rtrim();
 	FileSystem.createDirectory("www/fonts");
 	File.copy(Path.join([bootstrap, "fonts/bootstrap-icons.woff2"]), "www/fonts/icons.woff2");
 	Esbuild.build(Tools.buildOptions(debug));
