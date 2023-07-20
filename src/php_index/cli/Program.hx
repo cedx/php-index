@@ -84,17 +84,17 @@ final class Program {
 		#elseif php
 			return Global.sys_get_temp_dir();
 		#else
-			function getEnv(name: String) {
-				final value = Sys.getEnv(name);
-				return value != null ? Some(value) : None;
+			function env(name: String) return switch Sys.getEnv(name) {
+				case null | "": None;
+				case value: Some(value);
 			}
 
 			return switch Sys.systemName() {
 				case "Windows":
-					final path = getEnv("TMP").orTry(getEnv("TEMP")).or(getEnv("SystemRoot").orTry(getEnv("windir")).sure() + "\\Temp");
+					final path = env("TMP").orTry(env("TEMP")).or(Path.join([env("SystemRoot").orTry(env("windir")).sure(), "Temp"]));
 					path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
 				default:
-					final path = getEnv("TMPDIR").orTry(getEnv("TMP")).orTry(getEnv("TEMP")).or("/tmp");
+					final path = env("TMPDIR").orTry(env("TMP")).orTry(env("TEMP")).or("/tmp");
 					path.length > 1 ? path.removeTrailingSlashes() : path;
 			}
 		#end
