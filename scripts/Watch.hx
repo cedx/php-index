@@ -26,10 +26,10 @@ function main() {
 		});
 	}
 
-	Promise.ofJsPromise(Esbuild.context(Tools.buildOptions(true))).handle(outcome -> switch outcome {
+	Esbuild.context(Tools.buildOptions(true)).toPromise().handle(outcome -> switch outcome {
 		case Failure(error): throw error;
 		case Success(context): GlobWatcher.watch('$srcDir/ui/**/*.css', done -> {
-			final promise = Promise.ofJsPromise(context.rebuild()).next(_ -> { browserSync.reload(); Noise; });
+			final promise = context.rebuild().toPromise().next(_ -> { browserSync.reload(); Noise; });
 			measurePromise(done, 'esbuild $srcDir/ui/index.css', promise);
 		});
 	});
