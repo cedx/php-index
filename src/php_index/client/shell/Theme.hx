@@ -48,8 +48,8 @@ class ThemeDropdown extends View {
 	function render() '
 		<li class="nav-item dropdown">
 			<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-				<i class=${['bi bi-${icon}' => true, "me-2" => label.length > 0]}/>
-				<if ${label.length > 0}>${label}</if>
+				<i class=${['bi bi-$icon' => true, "me-2" => label.length > 0]}/>
+				<if ${label.length > 0}>$label</if>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-end">
 				<ThemeSelector onChange=${updateIcon}/>

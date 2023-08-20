@@ -135,9 +135,9 @@ class Listing extends View {
 	function render() '
 		<>
 			<ActionBar>
-				<form class="flex-grow-1 flex-sm-grow-0" noValidate onsubmit=${submitForm} ref=${form} spellcheck=${false}>
+				<form class="flex-grow-1 flex-sm-grow-0" noValidate onsubmit=${submitForm} ref=$form spellcheck=${false}>
 					<div class="input-group">
-						<input class="form-control" name="query" placeholder=${messages.search()} required type="search" value=${query}/>
+						<input class="form-control" name="query" placeholder=${messages.search()} required type="search" value=$query/>
 						<button class="btn btn-success">
 							<i class="bi bi-search"/>
 						</button>
@@ -153,13 +153,13 @@ class Listing extends View {
 					<div class="hstack gap-3">
 						<let directories=${entities.items.count(item -> item.type == Directory)} files=${entities.items.count(item -> item.type == File)}>
 							<if ${directories > 0}>
-								<div><b>${directories}</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
+								<div><b>$directories</b> ${directories <= 1 ? messages.directory() : messages.directories()}</div>
 							</if>
 							<if ${directories > 0 && files > 0}>
 								<div class="vr"/>
 							</if>
 							<if ${files > 0}>
-								<div><b>${files}</b> ${files <= 1 ? messages.file() : messages.files()}</div>
+								<div><b>$files</b> ${files <= 1 ? messages.file() : messages.files()}</div>
 							</if>
 						</let>
 					</div>
@@ -171,7 +171,7 @@ class Listing extends View {
 					<h4 class="mb-0">${messages.indexOf(path)}</h4>
 				</section>
 
-				<switch ${loading}>
+				<switch $loading>
 					<case ${Loading}>
 						<section>
 							<div class="alert alert-info d-flex align-items-center mb-0">
