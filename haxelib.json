@@ -4,7 +4,7 @@
 	"description": "A PHP directory index generator.",
 	"license": "MIT",
 	"name": "php_index",
-	"releasenote": "Improve the theme selector.",
+	"releasenote": "Use CSS nesting for the stylesheet.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://docs.belin.io/php-index.hx",
 	"version": "1.2.0"
