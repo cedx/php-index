@@ -7,5 +7,5 @@
 	"releasenote": "Improve the theme selector.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://docs.belin.io/php-index.hx",
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
