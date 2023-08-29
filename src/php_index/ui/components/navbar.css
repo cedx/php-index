@@ -18,18 +18,18 @@
 	top: 0;
 	user-select: none;
 	z-index: 1030;
-}
 
-@media print {
-	.navbar { display: none; }
+	@media print {
+		display: none;
+	}
 }
 
 .navbar-brand {
 	align-items: center;
 	display: flex;
-}
 
-.navbar-brand img {
-	position: relative;
-	top: -1px;
+	& img {
+		position: relative;
+		top: -1px;
+	}
 }

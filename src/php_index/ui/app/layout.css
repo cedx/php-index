@@ -2,24 +2,24 @@ body {
 	accent-color: var(--bs-primary);
 	background-color: var(--bs-gray-200);
 	overflow: hidden;
-}
 
-body.loading {
-	cursor: progress;
-}
+	&.loading {
+		cursor: progress;
+	}
 
-[data-bs-theme="dark"] body {
-	background-color: var(--bs-black);
+	[data-bs-theme="dark"] & {
+		background-color: var(--bs-black);
+	}
 }
 
 main {
 	inset: var(--main-offset, var(--navbar-height)) 0 0 0;
 	overflow: auto;
 	position: absolute;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-	main { scroll-behavior: smooth; }
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
+	}
 }
 
 article {
@@ -27,18 +27,16 @@ article {
 	box-shadow: var(--bs-box-shadow-sm);
 	overflow: clip;
 	width: 100%;
-}
 
-@media screen and (width >= 768px) {
-	article {
+	@media screen and (width >= 768px) {
 		border-radius: var(--bs-border-radius);
 		margin: 1.5rem auto;
 		max-width: 720px;
 	}
-}
 
-article > section {
-	padding: 1rem;
+	> section {
+		padding: 1rem;
+	}
 }
 
 aside {
@@ -53,13 +51,13 @@ aside {
 	user-select: none;
 	width: 100%;
 	z-index: 100;
-}
 
-@media print {
-	aside { display: none; }
-}
+	@media print {
+		display: none;
+	}
 
-[data-bs-theme="dark"] aside {
-	background-color: var(--bs-gray-800);
-	border-bottom-color: var(--bs-black);
+	[data-bs-theme="dark"] & {
+		background-color: var(--bs-gray-800);
+		border-bottom-color: var(--bs-black);
+	}
 }

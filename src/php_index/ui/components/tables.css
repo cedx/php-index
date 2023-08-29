@@ -1,22 +1,20 @@
-.last-row-borderless > tr:last-child > * {
-	border-bottom-width: 0;
-}
+.table-sticky {
+	> thead {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+	}
 
-.table-sticky > thead {
-	position: sticky;
-	top: 0;
-	z-index: 50;
-}
+	> thead::after {
+		border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
 
-.table-sticky > thead::after {
-	border-bottom: var(--bs-border-width) solid var(--bs-border-color);
-	bottom: 0;
-	content: "";
-	left: 0;
-	position: absolute;
-	right: 0;
-}
-
-.table-sticky > tbody {
-	border-top: none !important;
+	> tbody {
+		border-top: none !important;
+	}
 }
