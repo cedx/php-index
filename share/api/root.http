@@ -1,15 +1,15 @@
 // Fetches the HTML page.
-GET {{baseUrl}}
+GET {{apiUrl}}
 Accept: text/html
 
 ###
 
 // Fetches a resource embedded in the data file.
-GET {{baseUrl}}?file=js/main.js
+GET {{apiUrl}}?file=js/main.js
 Accept: application/javascript
 
 ###
 
 // Fetches the directory listing.
-GET {{baseUrl}}?listing
+GET {{apiUrl}}?listing
 Accept: application/json
