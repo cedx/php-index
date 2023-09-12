@@ -16,7 +16,7 @@ function main() {
 	root.dataset.version = Platform.packageVersion;
 	root.lang = container.locale.language;
 
-	final provider = new JsonProvider<Messages>(new ResourceStringSource(lang -> 'locale.$lang.json'), new HaxeTemplate());
+	final provider = new JsonProvider<Messages>(new ResourceStringSource(lang -> 'i18n.$lang.json'), new HaxeTemplate());
 	new Manager<Messages>(provider)
 		.get(container.locale.language)
 		.next(messages -> container.set("messages", messages))
