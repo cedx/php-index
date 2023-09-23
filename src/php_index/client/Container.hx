@@ -5,7 +5,6 @@ import haxe.exceptions.ArgumentException;
 import intl.Locale;
 import js.Browser;
 import tink.Web;
-import tink.http.clients.JsFetchClient;
 import tink.web.proxy.Remote;
 using StringTools;
 using haxe.io.Path;
@@ -42,7 +41,7 @@ final class Container {
 
 		final language = Browser.navigator.language.split("-").shift();
 		set("locale", new Locale(language != null && supportedLanguages.contains(language) ? language : "en"));
-		set("remote", Web.connect((Browser.location.href: RemoteApi), {client: new JsFetchClient()}));
+		set("remote", Web.connect((Browser.location.href: RemoteApi)));
 	}
 
 	/** Gets a value indicating whether this container has a service registered with the specified `token`. **/
