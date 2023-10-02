@@ -10,7 +10,7 @@ class Navbar extends View {
 		<nav class="navbar navbar-expand-sm">
 			<div class="container-fluid">
 				<div class="navbar-brand">
-					<span><img alt="" height=${24} src="?file=favicon.svg" width=${24}/></span>
+					<img height=${24} src="?file=favicon.svg" width=${24}/>
 					<span class="ms-2">${Browser.location.hostname}</span>
 				</div>
 

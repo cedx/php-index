@@ -27,9 +27,4 @@
 .navbar-brand {
 	align-items: center;
 	display: flex;
-
-	& img {
-		position: relative;
-		top: -1px;
-	}
 }
