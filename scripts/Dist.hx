@@ -8,6 +8,7 @@ function main() {
 
 	minifyFile("bin/php_index.js", true);
 	minifyFile("www/js/main.js", false);
+	Sys.command("git update-index --chmod=+x bin/php_index.js");
 	Sys.command("npx @cedx/php-minifier --mode=fast lib");
 }
 
