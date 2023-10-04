@@ -4,7 +4,7 @@
 	"homepage": "https://docs.belin.io/php-index",
 	"license": "MIT",
 	"name": "@cedx/php-index",
-	"repository": "github:cedx/php-index",
+	"repository": "cedx/php-index",
 	"type": "commonjs",
 	"version": "1.2.0",
 	"author": {
