@@ -40,7 +40,7 @@ class Root {
 
 	/** Sends the directory listing to the client. **/
 	function sendListing() {
-		final exclude = [Sys.programPath().withoutDirectory(), "desktop.ini", "web.config"];
+		final exclude = [Sys.programPath().withoutDirectory(), "desktop.ini", "web.config", "$RECYCLE.BIN"];
 		final pharPath = Phar.running(false);
 		if (pharPath.length > 0) exclude.push(pharPath.withoutDirectory());
 
