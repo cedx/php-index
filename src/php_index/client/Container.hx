@@ -28,10 +28,10 @@ final class Container {
 		inline function get_remote() return get("remote");
 
 	/** The registered factories. **/
-	final factories: Map<String, () -> Any> = [];
+	final factories = new Map<String, () -> Any>();
 
 	/** The registered services. **/
-	final services: Map<String, Any> = [];
+	final services = new Map<String, Any>();
 
 	/** Creates a new container. **/
 	function new() {

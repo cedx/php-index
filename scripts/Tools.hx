@@ -26,7 +26,7 @@ function buildOptions(debug = false): BuildOptions return {
 private final haxelibResolver = {
 	name: "haxelib",
 	setup: build -> {
-		final cache: Map<String, String> = [];
+		final cache = new Map<String, String>();
 		build.onResolve({filter: new RegExp("^haxelib://")}, args -> {
 			final uri = new URL(args.path);
 			if (!cache.exists(uri.hostname)) cache[uri.hostname] = Platform.resolveLibrary(uri.hostname);
