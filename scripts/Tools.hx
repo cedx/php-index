@@ -30,7 +30,7 @@ private final haxelibResolver = {
 		build.onResolve({filter: new RegExp("^haxelib://")}, args -> {
 			final uri = new URL(args.path);
 			if (!cache.exists(uri.hostname)) cache[uri.hostname] = Platform.resolveLibrary(uri.hostname);
-			{path: Path.join([cache[uri.hostname], uri.pathname.substring(1)])};
+			{path: Path.join([cache[uri.hostname], uri.pathname.substr(1)])};
 		});
 	}
 };

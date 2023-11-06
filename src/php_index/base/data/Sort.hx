@@ -52,7 +52,7 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 	public static function parse(value: String)
 		return new Sort(value == null || value.length == 0 ? null : [for (item in value.split(",")) {
 			final order = item.startsWith("-") ? Desc : Asc;
-			final attribute = order == Asc ? item : item.substring(1);
+			final attribute = order == Asc ? item : item.substr(1);
 			new Named(attribute, order);
 		}]);
 

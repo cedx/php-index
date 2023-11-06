@@ -37,7 +37,7 @@ final class Container {
 	function new() {
 		final supportedLanguages = Resource.listNames()
 			.filter(res -> res.startsWith("i18n."))
-			.map(res -> res.substring(5).withoutExtension());
+			.map(res -> res.substr(5).withoutExtension());
 
 		final language = Browser.navigator.language.split("-").shift();
 		set("locale", new Locale(language != null && supportedLanguages.contains(language) ? language : "en"));
