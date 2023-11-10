@@ -1,6 +1,5 @@
 //! --class-path src --define hxnodejs --define no-deprecation-warnings --library hxnodejs --library tink_core
 import js.esbuild.Esbuild;
-import js.node.ChildProcess;
 import sys.FileSystem;
 import sys.io.File;
 using StringTools;
@@ -11,8 +10,8 @@ function main() {
 	final debug = Sys.args().contains("--debug");
 	for (file in ["build_client", "build_server", "run"]) Sys.command('haxe ${debug ? "--debug" : ""} $file.hxml');
 
-	final bootstrap = ChildProcess.execSync("lix run bootstrap_bundle libpath", {encoding: "utf8"}).rtrim();
+	final fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
 	FileSystem.createDirectory("www/fonts");
-	File.copy(Path.join([bootstrap, "fonts/bootstrap-icons.woff2"]), "www/fonts/icons.woff2");
+	File.copy(Path.join([fontsource, "material-symbols-rounded-latin-fill-normal.woff2"]), "www/fonts/material_symbols.woff2");
 	Esbuild.build(Tools.buildOptions(debug));
 }
