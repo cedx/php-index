@@ -4,7 +4,7 @@
 	"description": "A PHP directory index generator.",
 	"license": "MIT",
 	"name": "php_index",
-	"releasenote": "Use CSS nesting for the stylesheet.",
+	"releasenote": "Replaced Bootstrap Icons by Material Symbols.",
 	"tags": ["cli", "directory", "generator", "index", "listing", "php", "web"],
 	"url": "https://docs.belin.io/php-index.hx",
 	"version": "1.3.0"
