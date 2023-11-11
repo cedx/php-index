@@ -21,7 +21,7 @@ class Root extends View {
 			<main>
 				<if ${!isOnline}>
 					<div class="alert alert-danger border-end-0 border-start-0 mb-0 rounded-0">
-						<i class="bi bi-exclamation-circle-fill me-1"/> ${messages.offline()}
+						<i class="icon icon-fill fw-bold me-1">error</i> ${messages.offline()}
 					</div>
 				</if>
 

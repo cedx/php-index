@@ -28,3 +28,7 @@
 	align-items: center;
 	display: flex;
 }
+
+.navbar-nav .nav-link .icon {
+	transform: scale(1.2);
+}

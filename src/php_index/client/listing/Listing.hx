@@ -61,9 +61,8 @@ class Listing extends View {
 		<let items=${entities.filter(query)}>
 			<if ${items.length == 0}>
 				<section>
-					<div class="alert alert-warning d-flex align-items-center mb-0">
-						<i class="bi bi-exclamation-triangle-fill"/>
-						<div class="ms-2">${messages.emptyResultSet()}</div>
+					<div class="alert alert-warning mb-0">
+						<i class="icon icon-fill fw-bold me-1">warning</i> ${messages.emptyResultSet()}
 					</div>
 				</section>
 			<else>
@@ -71,13 +70,13 @@ class Listing extends View {
 					<thead>
 						<tr>
 							<th onclick=${entities.orderBy("path")} scope="col">
-								<span role="button">${messages.name()} <i class="bi bi-${entities.sort.getIcon('path')}"/></span>
+								<span role="button">${messages.name()} <i class="icon">${entities.sort.getIcon('path')}</i></span>
 							</th>
 							<th onclick=${entities.orderBy("size")} scope="col">
-								<span role="button">${messages.size()} <i class="bi bi-${entities.sort.getIcon('size')}"/></span>
+								<span role="button">${messages.size()} <i class="icon">${entities.sort.getIcon('size')}</i></span>
 							</th>
 							<th class="d-none d-sm-table-cell" onclick=${entities.orderBy("modifiedAt")} scope="col">
-								<span role="button">${messages.modifiedAt()} <i class="bi bi-${entities.sort.getIcon('modifiedAt')}"/></span>
+								<span role="button">${messages.modifiedAt()} <i class="icon">${entities.sort.getIcon('modifiedAt')}</i></span>
 							</th>
 						</tr>
 					</thead>
@@ -87,7 +86,7 @@ class Listing extends View {
 								<td colSpan=${2}>
 									<div class="text-truncate">
 										<a href="..">
-											<i class="bi bi-arrow-90deg-up me-2 text-secondary"/>${messages.parentDirectory()}
+											<i class="icon fs-5 me-2 text-secondary">drive_folder_upload</i>${messages.parentDirectory()}
 										</a>
 									</div>
 								</td>
@@ -100,10 +99,10 @@ class Listing extends View {
 									<div class="text-truncate">
 										<a href=${entity.type == File ? entity.path : entity.path.addTrailingSlash()}>
 											<i class=${[
-												'bi bi-${entity.icon} me-2' => true,
+												"icon fs-5 me-2" => true,
 												"text-secondary" => entity.type == File,
-												"text-warning" => entity.type == Directory
-											]}/>${entity.path}
+												"icon-fill text-warning" => entity.type == Directory
+											]}>${entity.icon}</i>${entity.path}
 										</a>
 									</div>
 								</td>
@@ -139,11 +138,11 @@ class Listing extends View {
 					<div class="input-group">
 						<input class="form-control" name="query" placeholder=${messages.search()} required type="search" value=$query/>
 						<button class="btn btn-success">
-							<i class="bi bi-search"/>
+							<i class="icon">search</i>
 						</button>
 						<if ${query.length > 0}>
 							<button class="btn btn-danger" onclick=${resetForm}>
-								<i class="bi bi-x-lg"/>
+								<i class="icon">close</i>
 							</button>
 						</if>
 					</div>
@@ -174,16 +173,14 @@ class Listing extends View {
 				<switch $loading>
 					<case ${Loading}>
 						<section>
-							<div class="alert alert-info d-flex align-items-center mb-0">
-								<div class="spinner-border spinner-border-sm"/>
-								<div class="ms-2">${messages.loading()}</div>
+							<div class="alert alert-info mb-0">
+								<div class="spinner-border spinner-border-sm me-1"/> ${messages.loading()}
 							</div>
 						</section>
 					<case ${Failed(error)}>
 						<section>
-							<div class="alert alert-danger d-flex align-items-center mb-0">
-								<i class="bi bi-exclamation-circle-fill"/>
-								<div class="ms-2">${error.message}</div>
+							<div class="alert alert-danger mb-0">
+								<i class="icon icon-fill fw-bold me-1">error</i> ${error.message}
 							</div>
 						</section>
 					<case ${Done(items)}>
@@ -191,9 +188,8 @@ class Listing extends View {
 							<listing/>
 						<else>
 							<section>
-								<div class="alert alert-warning d-flex align-items-center mb-0">
-									<i class="bi bi-exclamation-triangle-fill"/>
-									<div class="ms-2">${messages.emptyDirectory()}</div>
+								<div class="alert alert-warning mb-0">
+									<i class="icon icon-fill fw-bold me-1">warning</i> ${messages.emptyDirectory()}
 								</div>
 							</section>
 						</if>

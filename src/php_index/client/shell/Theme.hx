@@ -18,9 +18,9 @@ enum abstract Theme(String) from String to String {
 	/** The icon corresponding to this theme. **/
 	public var icon(get, never): String;
 		function get_icon() return switch abstract {
-			case Auto: "circle-half";
-			case Dark: "moon-stars-fill";
-			case Light: "brightness-high-fill";
+			case Auto: "tonality";
+			case Dark: "dark_mode";
+			case Light: "light_mode";
 		}
 
 	/** The label corresponding to this theme. **/
@@ -38,27 +38,33 @@ enum abstract Theme(String) from String to String {
 /** A dropdown menu allowing to switch the color mode. **/
 class ThemeDropdown extends View {
 
-	/** The icon of the dropdown menu. **/
-	@:state var icon: String = Auto.icon;
-
 	/** The label of the dropdown menu. **/
 	@:attribute var label = "";
+
+	/** The handler invoked when a value has been selected. **/
+	@:attribute var onChange: Callback<Theme> = function() {};
+
+	/** The icon of the dropdown menu. **/
+	@:state var icon: String = Auto.icon;
 
 	/** Renders this view. **/
 	function render() '
 		<li class="nav-item dropdown">
 			<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-				<i class=${['bi bi-$icon' => true, "me-2" => label.length > 0]}/>
-				<if ${label.length > 0}>$label</if>
+				<i class="icon icon-fill">$icon</i>
+				<if ${label.length > 0}><span class="ms-2">$label</span></if>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-end">
-				<ThemeSelector onChange=${updateIcon}/>
+				<ThemeSelector onChange=${triggerChange}/>
 			</ul>
 		</li>
 	';
 
-	/** Updates the icon when the theme is changed. **/
-	function updateIcon(theme: Theme) icon = theme.icon;
+	/** Triggers a theme change. **/
+	function triggerChange(theme: Theme) {
+		icon = theme.icon;
+		onChange.invoke(theme);
+	}
 }
 
 /** A component allowing to switch the color mode. **/
@@ -94,8 +100,8 @@ class ThemeSelector extends View {
 			<for ${colorMode in AbstractEnum.getValues(Theme)}>
 				<li>
 					<button class="dropdown-item d-flex align-items-center justify-content-between" onclick=${changeTheme(colorMode)}>
-						<span><i class="bi bi-${colorMode.icon} me-1"/> ${colorMode.label)}</span>
-						<if ${theme == colorMode}><i class="bi bi-check-lg ms-2"/></if>
+						<span><i class="icon icon-fill me-1">${colorMode.icon}</i> ${colorMode.label)}</span>
+						<if ${theme == colorMode}><i class="icon ms-2">check</i></if>
 					</button>
 				</li>
 			</for>

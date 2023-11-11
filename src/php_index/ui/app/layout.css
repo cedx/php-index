@@ -60,4 +60,8 @@ aside {
 		background-color: var(--bs-gray-800);
 		border-bottom-color: var(--bs-black);
 	}
+
+	.icon {
+		transform: scale(1.4);
+	}
 }

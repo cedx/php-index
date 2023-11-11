@@ -22,61 +22,63 @@ class FileSystemEntity implements Model {
 
 	/** The icon mapping. **/
 	static final iconMapping = [
-		"avi" => "play",
-		"bat" => "binary",
-		"bin" => "binary",
-		"bz2" => "zip",
-		"cmd" => "binary",
-		"conf" => "code",
-		"config" => "code",
-		"css" => "code",
-		"doc" => "richtext",
-		"docx" => "richtext",
+		"avi" => "video_file",
+		"bat" => "terminal",
+		"bz2" => "folder_zip",
+		"cjs" => "js",
+		"cmd" => "terminal",
+		"conf" => "settings",
+		"config" => "settings",
+		"css" => "css",
+		"csv" => "csv",
+		"doc" => "description",
+		"docx" => "description",
 		"exe" => "binary",
 		"gif" => "image",
-		"gz" => "zip",
-		"htm" => "code",
-		"html" => "code",
+		"gz" => "folder_zip",
+		"htm" => "html",
+		"html" => "html",
 		"hx" => "code",
 		"hxml" => "code",
 		"ico" => "image",
-		"ini" => "code",
+		"ini" => "settings",
 		"jpeg" => "image",
 		"jpg" => "image",
-		"js" => "code",
-		"json" => "code",
-		"m4a" => "music",
-		"m4v" => "play",
-		"md" => "text",
-		"mkv" => "play",
-		"mov" => "play",
-		"mp3" => "music",
-		"mp4" => "play",
-		"odp" => "slides",
-		"ods" => "spreadsheet",
-		"odt" => "richtext",
-		"pdf" => "pdf",
-		"phar" => "zip",
-		"php" => "code",
+		"js" => "js",
+		"json" => "data_object",
+		"m4a" => "audio_file",
+		"m4v" => "video_file",
+		"md" => "makdown",
+		"mjs" => "js",
+		"mkv" => "video_file",
+		"mov" => "video_file",
+		"mp3" => "audio_file",
+		"mp4" => "video_file",
+		"odp" => "slideshow",
+		"ods" => "table",
+		"odt" => "description",
+		"pdf" => "description",
+		"phar" => "folder_zip",
+		"php" => "php",
 		"png" => "image",
-		"ppt" => "slides",
-		"pptx" => "slides",
-		"ps1" => "binary",
-		"rar" => "zip",
-		"rtf" => "richtext",
-		"sh" => "binary",
+		"ppt" => "slideshow",
+		"pptx" => "slideshow",
+		"ps1" => "terminal",
+		"rar" => "folder_zip",
+		"rtf" => "description",
+		"sh" => "terminal",
 		"svg" => "image",
-		"tar" => "zip",
-		"txt" => "text",
-		"wav" => "music",
+		"tar" => "folder_zip",
+		"txt" => "description",
+		"wav" => "audio_file",
 		"webp" => "image",
-		"xls" => "spreadsheet",
-		"xlsx" => "spreadsheet",
+		"xls" => "table",
+		"xlsx" => "table",
 		"xml" => "code",
-		"xz" => "zip",
+		"xz" => "folder_zip",
 		"yaml" => "code",
 		"yml" => "code",
-		"zip" => "zip"
+		"zip" => "folder_zip"
 	];
 
 	#if php
@@ -86,17 +88,11 @@ class FileSystemEntity implements Model {
 
 	/** Value indicating whether this file system entity exists. **/
 	public var exists(get, never): Bool;
-		function get_exists() return Global.file_exists(path);
+		inline function get_exists() return Global.file_exists(path);
 	#end
 
 	/** The icon corresponding to this file system entity. **/
-	@:computed var icon: String = if (type == Directory) "folder-fill" else {
-		final extension = path.extension().toLowerCase();
-		iconMapping.exists(extension) ? 'file-earmark-${iconMapping[extension]}' : "file-earmark";
-	}
-
-	/** Value indicating whether this file represents an image. **/
-	@:computed var isImage: Bool = ["avif", "gif", "jpeg", "jpg", "png", "webp"].contains(path.extension().toLowerCase());
+	@:computed var icon: String = type == Directory ? "folder" : (iconMapping[path.extension().toLowerCase()] ?? "note");
 
 	/** The MIME type of this file system entity. **/
 	@:computed var mediaType: Mime = type == Directory ? "inode/directory" : switch path.extension().toLowerCase() {

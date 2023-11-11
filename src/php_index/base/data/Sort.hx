@@ -35,11 +35,11 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 	@:arrayAccess public function get(attribute: String)
 		return this.first(item -> item.name == attribute).map(item -> item.value);
 
-	/** Gets the name of the icon corresponding to the specified attribute. **/
+	/** Gets the icon corresponding to the specified attribute. **/
 	public function getIcon(attribute: String) return switch get(attribute).orNull() {
-		case Asc: "sort-down-alt";
-		case Desc: "sort-up";
-		default: "filter";
+		case Asc: "arrow_upward";
+		case Desc: "arrow_downward";
+		default: "swap_vert";
 	}
 
 	/** Gets the index of the specified attribute in the underlying list, or `-1` if the attribute is not found. **/
