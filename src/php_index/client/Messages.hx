@@ -20,4 +20,5 @@ interface Messages {
 	function parentDirectory(): String;
 	function search(): String;
 	function size(): String;
+	function theme(): String;
 }

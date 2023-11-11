@@ -3,7 +3,7 @@
 	font-family: "Material Symbols";
 	font-style: normal;
 	font-weight: 100 700;
-	src: url("../fonts/material_symbols.woff2") format("woff2-variations");
+	src: url("?file=fonts/icons.woff2") format("woff2-variations");
 }
 
 .icon {

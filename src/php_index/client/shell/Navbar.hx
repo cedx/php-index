@@ -5,6 +5,9 @@ import js.Browser;
 /** The navigation bar. **/
 class Navbar extends View {
 
+	/** The localized messages. **/
+	final messages = Container.instance.messages;
+
 	/** Renders this view. **/
 	function render() '
 		<nav class="navbar navbar-expand-sm">
@@ -16,7 +19,7 @@ class Navbar extends View {
 
 				<div class="collapse navbar-collapse">
 					<menu class="navbar-nav ms-auto">
-						<Theme.ThemeDropdown/>
+						<Theme.ThemeDropdown label=${messages.theme()}/>
 					</menu>
 				</div>
 			</div>

@@ -12,6 +12,6 @@ function main() {
 
 	final fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
 	FileSystem.createDirectory("www/fonts");
-	File.copy(Path.join([fontsource, "material-symbols-rounded-latin-fill-normal.woff2"]), "www/fonts/material_symbols.woff2");
+	File.copy(Path.join([fontsource, "material-symbols-rounded-latin-fill-normal.woff2"]), "www/fonts/icons.woff2");
 	Esbuild.build(Tools.buildOptions(debug));
 }

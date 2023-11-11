@@ -16,5 +16,6 @@
 	"offline": "Le réseau est inaccessible. Vérifiez votre connexion.",
 	"parentDirectory": "Dossier parent",
 	"search": "Rechercher",
-	"size": "Taille"
+	"size": "Taille",
+	"theme": "Thème"
 }
