@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [1.3.0](https://github.com/cedx/php-index/compare/v1.2.0...v1.3.0)
+- Replaced [Bootstrap Icons](https://icons.getbootstrap.com) by [Material Symbols](https://fonts.google.com/icons).
+- Updated the package dependencies.
+
 ## Version [1.2.0](https://github.com/cedx/php-index/compare/v1.1.0...v1.2.0)
 - Use CSS nesting for the stylesheet.
 
