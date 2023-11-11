@@ -52,7 +52,7 @@ final class Container {
 		Gets the service registered with the specified `token`.
 		Throws an `ArgumentException` if there is no factory associated with the token.
 	**/
-	public function get(token: String): Dynamic {
+	public function get<T>(token: String): T {
 		if (!services.exists(token))
 			if (factories.exists(token)) set(token, factories[token]());
 			else {
@@ -65,7 +65,7 @@ final class Container {
 	}
 
 	/** Registers a service factory with this container. **/
-	public function register(token: String, factory: () -> Any) {
+	public function register<T>(token: String, factory: () -> T) {
 		factories[token] = factory;
 		return this;
 	}
@@ -77,7 +77,7 @@ final class Container {
 	}
 
 	/** Registers a service instance with this container. **/
-	public function set(token: String, service: Any) {
+	public function set<T>(token: String, service: T) {
 		services[token] = service;
 		return this;
 	}
