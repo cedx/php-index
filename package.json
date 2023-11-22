@@ -19,7 +19,7 @@
 		"@cedx/php-minifier": "^1.0.2",
 		"@fontsource-variable/material-symbols-rounded": "^5.0.16",
 		"browser-sync": "^2.29.3",
-		"esbuild": "^0.19.6",
+		"esbuild": "^0.19.7",
 		"glob-watcher": "^6.0.0"
 	},
 	"engines": {
