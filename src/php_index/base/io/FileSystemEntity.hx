@@ -101,7 +101,7 @@ class FileSystemEntity implements Model {
 		case "js": TextJavascript;
 		case "svg": "image/svg+xml";
 		case "woff2": "font/woff2";
-		default: ApplicationOctetStream;
+		case _: ApplicationOctetStream;
 	}
 
 	/** The date of last modification. **/

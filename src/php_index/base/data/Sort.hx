@@ -39,7 +39,7 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 	public function getIcon(attribute: String) return switch get(attribute).orNull() {
 		case Asc: "arrow_upward";
 		case Desc: "arrow_downward";
-		default: "swap_vert";
+		case _: "swap_vert";
 	}
 
 	/** Gets the index of the specified attribute in the underlying list, or `-1` if the attribute is not found. **/

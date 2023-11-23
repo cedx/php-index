@@ -41,7 +41,7 @@ class EntityList implements Model {
 				case "path":
 					final value = if (x.type == y.type) Reflect.compare(x.path, y.path) else x.type == Directory ? -1 : 1;
 					order == Asc ? value : -value;
-				default:
+				case _:
 					sort.compare(x, y);
 			})
 		};

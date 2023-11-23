@@ -26,7 +26,7 @@ abstract class AbstractEnum {
 		return switch type.follow() {
 			case TAbstract(_.get() => type, _) if (type.meta.has(":enum")):
 				type.impl.get().statics.get().filter(field -> field.meta.has(":enum") && field.meta.has(":impl"));
-			default:
+			case _:
 				Context.error('"$type" should be an abstract enum.', abstractEnum.pos);
 		}
 	}

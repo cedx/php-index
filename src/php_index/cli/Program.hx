@@ -93,7 +93,7 @@ final class Program {
 				case "Windows":
 					final path = env("TMP").orTry(env("TEMP")).or(Path.join([env("SystemRoot").orTry(env("windir")).sure(), "Temp"]));
 					path.length > 1 && !path.endsWith(":\\") ? path.removeTrailingSlashes() : path;
-				default:
+				case _:
 					final path = env("TMPDIR").orTry(env("TMP")).orTry(env("TEMP")).or("/tmp");
 					path.length > 1 ? path.removeTrailingSlashes() : path;
 			}
