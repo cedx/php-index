@@ -100,7 +100,7 @@ class ThemeSelector extends View {
 			<for ${colorMode in AbstractEnum.getValues(Theme)}>
 				<li>
 					<button class="dropdown-item d-flex align-items-center justify-content-between" onclick=${changeTheme(colorMode)}>
-						<span><i class="icon icon-fill me-1">${colorMode.icon}</i> ${colorMode.label)}</span>
+						<span><i class="icon icon-fill me-1">${colorMode.icon}</i> ${colorMode.label}</span>
 						<if ${theme == colorMode}><i class="icon ms-2">check</i></if>
 					</button>
 				</li>

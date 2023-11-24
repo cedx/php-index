@@ -32,7 +32,7 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 	public function exists(attribute: String) return this.exists(item -> item.name == attribute);
 
 	/** Gets the order associated with the specified attribute. **/
-	@:arrayAccess public function get(attribute: String)
+	@:op([]) public function get(attribute: String)
 		return this.first(item -> item.name == attribute).map(item -> item.value);
 
 	/** Gets the icon corresponding to the specified attribute. **/
@@ -65,7 +65,7 @@ abstract Sort(List<Named<SortOrder>>) from List<Named<SortOrder>> to List<Named<
 		return this.filter(item -> item.name != attribute);
 
 	/** Sets the order of the specified attribute. **/
-	@:arrayAccess public function set(attribute: String, order: SortOrder): Sort
+	@:op([]) public function set(attribute: String, order: SortOrder): Sort
 		return exists(attribute) ? this.replace(item -> item.name == attribute, item -> new Named(item.name, order)) : append(attribute, order);
 
 	/** Returns a string representation of this object. **/
