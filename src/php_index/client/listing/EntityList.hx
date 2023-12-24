@@ -8,7 +8,7 @@ using StringTools;
 class EntityList implements Model {
 
 	/** The list items. **/
-	@:observable var items: List<FileSystemEntity> = new List();
+	@:observable var items: List<FileSystemEntity> = @byDefault new List();
 
 	/** The number of list items. **/
 	@:computed var length: Int = items.length;
@@ -17,7 +17,7 @@ class EntityList implements Model {
 	@:computed var maxFileSize: Int = items.fold((item, result) -> item.size > result ? item.size : result, 0);
 
 	/** The current sort. **/
-	@:observable var sort: Sort = new Sort();
+	@:observable var sort: Sort = @byDefault new Sort();
 
 	/** Fetches the list items. **/
 	@:transition(return items)
