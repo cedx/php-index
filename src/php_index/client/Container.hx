@@ -1,7 +1,6 @@
 package php_index.client;
 
 import haxe.Resource;
-import haxe.exceptions.ArgumentException;
 import intl.Locale;
 import js.Browser;
 import tink.Web;
@@ -17,15 +16,15 @@ final class Container {
 
 	/** The current locale. **/
 	public var locale(get, never): Locale;
-		inline function get_locale() return get("locale");
+		function get_locale() return get("locale").sure();
 
 	/** The localized messages. **/
 	public var messages(get, never): Messages;
-		inline function get_messages() return get("messages");
+		function get_messages() return get("messages").sure();
 
 	/** The remote API client. **/
 	public var remote(get, never): Remote<RemoteApi>;
-		inline function get_remote() return get("remote");
+		function get_remote() return get("remote").sure();
 
 	/** The registered factories. **/
 	final factories = new Map<String, () -> Any>();
@@ -52,16 +51,13 @@ final class Container {
 		Gets the service registered with the specified `token`.
 		Throws an `ArgumentException` if there is no factory associated with the token.
 	**/
-	public function get<T>(token: String): T {
-		if (!services.exists(token))
-			if (factories.exists(token)) set(token, factories[token]());
-			else {
-				final type = Type.resolveClass(token);
-				if (type != null) set(token, Type.createInstance(type, []));
-				else throw new ArgumentException("token", 'There is no factory registered with the token "$token".');
-			}
+	public function get<T>(token: String): Option<T> {
+		if (!services.exists(token)) {
+			if (!factories.exists(token)) return None;
+			set(token, factories[token]());
+		}
 
-		return services[token];
+		return Some(services[token]);
 	}
 
 	/** Registers a service factory with this container. **/
