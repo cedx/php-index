@@ -47,10 +47,7 @@ final class Container {
 	public function exists(token: String)
 		return factories.exists(token) || services.exists(token);
 
-	/**
-		Gets the service registered with the specified `token`.
-		Throws an `ArgumentException` if there is no factory associated with the token.
-	**/
+	/** Gets the service registered with the specified `token`. **/
 	public function get<T>(token: String): Option<T> {
 		if (!services.exists(token)) {
 			if (!factories.exists(token)) return None;
