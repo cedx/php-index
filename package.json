@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@cedx/php-minifier": "^1.0.2",
-		"@fontsource-variable/material-symbols-rounded": "^5.0.20",
+		"@fontsource-variable/material-symbols-rounded": "^5.0.21",
 		"browser-sync": "^3.0.2",
 		"esbuild": "^0.19.11",
 		"glob-watcher": "^6.0.0"
