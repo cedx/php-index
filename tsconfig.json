@@ -1,0 +1,16 @@
+{
+	"include": ["*.js", "etc/*.js", "src/**/*.ts"],
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": ".",
+		"checkJs": true,
+		"esModuleInterop": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"paths": {"@cedx/php-index": ["src"]},
+		"strict": true,
+		"target": "ESNext"
+	}
+}
