@@ -17,9 +17,9 @@ try {
 
 	// Parse the command line arguments.
 	$options = getopt("ci:o:", ["compress", "input:", "output:"]) ?: [];
-	$input = $options["i"] ?? ($options["input"] ?? null);
+	$input = $options["i"] ?? ($options["input"] ?? "");
 	if (!$input || !is_dir($input)) throw new RuntimeException("You must provide a valid path to the input directory.", 400);
-	$output = $options["o"] ?? ($options["output"] ?? null);
+	$output = $options["o"] ?? ($options["output"] ?? "");
 	if (!$output || !is_dir($output)) throw new RuntimeException("You must provide a valid path to the output directory.", 400);
 
 	// Create the PHAR archive.
@@ -28,8 +28,8 @@ try {
 	$phar->setStub($stub);
 
 	// Compress the PHAR archive.
-	$compress = $options["c"] ?? ($options["compress"] ?? null);
-	if ($compress !== null && Phar::canCompress(Phar::GZ)) $phar->compressFiles(Phar::GZ);
+	$compress = isset($options["c"]) || isset($options["compress"]);
+	if ($compress && Phar::canCompress(Phar::GZ)) $phar->compressFiles(Phar::GZ);
 	exit(0);
 }
 catch (Throwable $e) {
