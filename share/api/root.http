@@ -4,7 +4,7 @@ Accept: text/html
 
 ### Fetches a resource embedded in the data file.
 GET {{apiUrl}}?file=js/main.js
-Accept: application/javascript
+Accept: text/javascript
 
 ### Fetches the directory listing.
 GET {{apiUrl}}?listing
