@@ -1,4 +1,0 @@
-# @install: lix --silent download "gh://github.com/kevinresol/turnwing#e372a2980cad86d4c0d0daf94e67e8587be8d40f" into turnwing/2.0.0/github/e372a2980cad86d4c0d0daf94e67e8587be8d40f
--lib tink_core
--cp ${HAXE_LIBCACHE}/turnwing/2.0.0/github/e372a2980cad86d4c0d0daf94e67e8587be8d40f/src
--D turnwing=2.0.0
