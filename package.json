@@ -5,8 +5,8 @@
 	"license": "MIT",
 	"name": "@cedx/php-index",
 	"repository": "cedx/php-index",
-	"type": "commonjs",
-	"version": "1.3.0",
+	"type": "module",
+	"version": "2.0.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
