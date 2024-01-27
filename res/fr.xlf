@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="fr" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="se09e137881365ec4">
+  <source>The network is inaccessible. Check your connection.</source>
+  <target>Le réseau est inaccessible. Vérifiez votre connexion.</target>
+</trans-unit>
+</body>
+</file>
+</xliff>
