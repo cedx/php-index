@@ -1,6 +1,6 @@
 import {writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
-import {compile} from "sass";
+import {compileAsync} from "sass-embedded";
 
 /**
  * Compiles the style sheet.
@@ -8,7 +8,7 @@ import {compile} from "sass";
  * @returns {Promise<void>} Resolves when the style sheet has been compiled.
  */
 export default async function compileSass(production = false) {
-	const {css, sourceMap} = compile("src/ui/index.scss", {
+	const {css, sourceMap} = await compileAsync("src/ui/index.scss", {
 		loadPaths: ["node_modules"],
 		sourceMap: !production,
 		style: production ? "compressed" : "expanded"
