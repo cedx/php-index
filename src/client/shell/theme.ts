@@ -1,3 +1,4 @@
+import {Dropdown} from "bootstrap";
 import {customElement, property, state} from "lit/decorators.js";
 import {html, type TemplateResult} from "lit";
 import {when} from "lit/directives/when.js";
@@ -11,14 +12,22 @@ import {Theme, themeIcon, themeLabel} from "../theme.js";
 export class ThemeDropdown extends Component {
 
 	/**
-	 * The icon of the dropdown menu.
-	 */
-	@property() icon = themeIcon(Theme.auto);
-
-	/**
 	 * The label of the dropdown menu.
 	 */
 	@property() label = "";
+
+	/**
+	 * The icon of the dropdown menu.
+	 */
+	@state() private icon = themeIcon(Theme.auto);
+
+	/**
+	 * Method invoked after the first rendering.
+	 */
+	protected firstUpdated(): void {
+		// eslint-disable-next-line no-new
+		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
+	}
 
 	/**
 	 * Renders this component.
@@ -29,22 +38,22 @@ export class ThemeDropdown extends Component {
 			<li class="nav-item dropdown">
 				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
 					<i class="icon icon-fill">${this.icon}</i>
-					${when(this.label, () => html`<span class="ms-2">${this.label}</span>`)}
+					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end">
-					<theme-selector @change=${this.#triggerChange}></theme-selector>
+					<theme-selector @change=${this.#handleChange}></theme-selector>
 				</ul>
 			</li>
 		`;
 	}
 
 	/**
-	 * Triggers a theme change.
+	 * Handles the theme changes.
 	 * @param event The dispatched event.
 	 */
-	#triggerChange(event: CustomEvent<Theme>): void {
+	#handleChange(event: CustomEvent<Theme>): void {
 		this.icon = themeIcon(event.detail);
-		this.dispatchEvent(event);
+		this.requestUpdate(); // TODO why?
 	}
 }
 
@@ -57,7 +66,7 @@ export class ThemeSelector extends Component {
 	/**
 	 * The current theme.
 	 */
-	@state() theme = Theme.auto;
+	@state() private theme = Theme.auto;
 
 	/**
 	 * The media query used to check the system theme.
@@ -93,7 +102,7 @@ export class ThemeSelector extends Component {
 			<li>
 				<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.#changeTheme(theme)}>
 					<span><i class="icon icon-fill me-1">${themeIcon(theme)}</i> ${themeLabel(theme)}</span>
-					<if ${theme == this.theme}><i class="icon ms-2">check</i></if>
+					${when(theme == this.theme, () => html`<i class="icon ms-2">check</i>`)}
 				</button>
 			</li>
 		`);
@@ -105,13 +114,16 @@ export class ThemeSelector extends Component {
 	#applyTheme(): void {
 		document.documentElement.dataset.bsTheme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
 		this.dispatchEvent(new CustomEvent("change", {detail: this.theme}));
+		this.requestUpdate(); // TODO why?
 	}
 
 	/**
 	 * Changes the current theme.
 	 */
 	#changeTheme(theme: Theme): void {
-		localStorage.setItem("theme", this.theme = theme);
-		this.#applyTheme();
+		if (theme != this.theme) {
+			localStorage.setItem("theme", this.theme = theme);
+			this.#applyTheme();
+		}
 	}
 }

@@ -23,6 +23,7 @@
 		"@fontsource-variable/material-symbols-rounded": "^5.0.21",
 		"@lit/localize": "^0.12.1",
 		"@lit/localize-tools": "^0.7.1",
+		"@types/bootstrap": "^5.2.10",
 		"@types/browser-sync": "^2.29.0",
 		"@types/gulp": "^4.0.17",
 		"@types/node": "=20.11.5",

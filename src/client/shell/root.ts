@@ -13,7 +13,7 @@ export class Root extends Component {
 	/**
 	 * Value indicating whether the browser is online.
 	 */
-	@state() isOnline = navigator.onLine;
+	@state() private isOnline = navigator.onLine;
 
 	/**
 	 * Method invoked when this component is connected.
