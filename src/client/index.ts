@@ -3,6 +3,7 @@ import {fetchProxy} from "./fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 
 // Register the application components.
+import "./shell/action_bar.js";
 import "./shell/navbar.js";
 import "./shell/root.js";
 import "./shell/theme.js";
