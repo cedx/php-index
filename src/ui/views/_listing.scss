@@ -1,0 +1,10 @@
+input[name="query"] {
+	width: 24ch !important;
+}
+
+table {
+	table-layout: fixed;
+
+	th:nth-child(2) { width: 90px; }
+	th:nth-child(3) { width: 160px; }
+}

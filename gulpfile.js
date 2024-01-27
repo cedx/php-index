@@ -26,7 +26,7 @@ export async function build() {
 
 // Deletes all generated files.
 export function clean() {
-	return deleteAsync(["lib", "var/**/*", "www/index.{phar,php}", "www/css", "www/fonts", "www/js"]);
+	return deleteAsync(["lib", "var/**/*", "www/css", "www/fonts", "www/js"]);
 }
 
 // Packages the project.
