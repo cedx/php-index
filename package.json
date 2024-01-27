@@ -59,6 +59,7 @@
 	],
 	"scripts": {
 		"postpublish": "gulp publish",
-		"prepack": "gulp"
+		"prepack": "gulp",
+		"start": "gulp watch"
 	}
 }

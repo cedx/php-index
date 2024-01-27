@@ -1,4 +1,3 @@
-import {spawn} from "node:child_process";
 import {cp} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
@@ -59,9 +58,12 @@ export async function publish() {
 // Watches for file changes.
 export async function watch() {
 	await assets();
+	const host = "127.0.0.1:8000";
+	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
+
 	const browser = browserSync.create();
 	const context = await esbuild.context(esbuildOptions(false));
-	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: "127.0.0.1:8000"});
+	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 
 	// eslint-disable-next-line prefer-arrow-callback
 	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, async function buildApp(done) {
@@ -76,8 +78,6 @@ export async function watch() {
 		browser.reload();
 		done();
 	});
-
-	return $`php -S 127.0.0.1:8000 -t www`;
 }
 
 // The default task.
