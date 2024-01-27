@@ -21,7 +21,7 @@ class ActionBar extends View {
 
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() {
-		final navbarHeight = Std.parseInt(Browser.window.getComputedStyle(Browser.document.documentElement).getPropertyValue("--navbar-height"));
+		final navbarHeight = Std.parseInt(getComputedStyle(Browser.document.documentElement).getPropertyValue("--navbar-height"));
 		final style = Browser.document.documentElement.style;
 		style.setProperty("--main-offset", '${navbarHeight + root.offsetHeight}px');
 		beforeUnmounting(() -> style.removeProperty("--main-offset"));

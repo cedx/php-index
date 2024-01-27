@@ -61,8 +61,10 @@ export async function publish() {
 // Watches for file changes.
 export async function watch() {
 	await assets();
+
 	const host = "127.0.0.1:8000";
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
+	await new Promise(resolve => setTimeout(resolve, 1_000));
 
 	const browser = browserSync.create();
 	const context = await esbuild.context(esbuildOptions());

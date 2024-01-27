@@ -3,38 +3,6 @@ package php_index.client.shell;
 import js.Browser;
 import php_index.base.AbstractEnum;
 
-/** Defines the available color modes. **/
-enum abstract Theme(String) from String to String {
-
-	/** The theme is light. **/
-	var Light = "light";
-
-	/** The theme is dark. **/
-	var Dark = "dark";
-
-	/** The color mode is automatic. **/
-	var Auto = "auto";
-
-	/** The icon corresponding to this theme. **/
-	public var icon(get, never): String;
-		function get_icon() return switch abstract {
-			case Auto: "tonality";
-			case Dark: "dark_mode";
-			case Light: "light_mode";
-		}
-
-	/** The label corresponding to this theme. **/
-	public var label(get, never): String;
-		function get_label() {
-			final messages = Container.instance.messages;
-			return switch abstract {
-				case Auto: messages.auto();
-				case Dark: messages.dark();
-				case Light: messages.light();
-			}
-		}
-}
-
 /** A dropdown menu allowing to switch the color mode. **/
 class ThemeDropdown extends View {
 
@@ -75,12 +43,12 @@ class ThemeSelector extends View {
 
 	/** The current theme. **/
 	@:state public var theme: Theme = {
-		final colorMode = Browser.window.localStorage.getItem("theme");
+		final colorMode = localStorage.getItem("theme");
 		AbstractEnum.getValues(Theme).contains(colorMode) ? colorMode : Auto;
 	}
 
 	/** The media query used to check the system theme. **/
-	final mediaQuery = Browser.window.matchMedia("(prefers-color-scheme: dark)");
+	final mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/** Applies the theme to the document. **/
 	function applyTheme() {
@@ -90,7 +58,7 @@ class ThemeSelector extends View {
 
 	/** Changes the current theme. **/
 	function changeTheme(colorMode: Theme) if (colorMode != theme) {
-		Browser.window.localStorage.setItem("theme", theme = colorMode);
+		localStorage.setItem("theme", theme = colorMode);
 		applyTheme();
 	}
 

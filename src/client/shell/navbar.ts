@@ -1,5 +1,5 @@
-import {html, type TemplateResult} from "lit";
 import {msg} from "@lit/localize";
+import {html, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
 import {Component} from "../component.js";
 
@@ -24,7 +24,7 @@ export class Navbar extends Component {
 
 					<div class="collapse navbar-collapse">
 						<menu class="navbar-nav ms-auto">
-							<!-- TODO <Theme.ThemeDropdown .label=${msg("Theme")}/> -->
+							<!-- TODO <theme-dropdown .label=${msg("Theme")}></theme-dropdown> -->
 						</menu>
 					</div>
 				</div>

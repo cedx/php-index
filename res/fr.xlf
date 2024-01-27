@@ -6,6 +6,22 @@
   <source>The network is inaccessible. Check your connection.</source>
   <target>Le réseau est inaccessible. Vérifiez votre connexion.</target>
 </trans-unit>
+<trans-unit id="saab875d8cfcfe712">
+  <source>Theme</source>
+  <target>Thème</target>
+</trans-unit>
+<trans-unit id="sdb73788b3c975f16">
+  <source>Auto</source>
+  <target>Auto</target>
+</trans-unit>
+<trans-unit id="sac895c732f350ac5">
+  <source>Dark</source>
+  <target>Sombre</target>
+</trans-unit>
+<trans-unit id="s3b0ab4b52326316f">
+  <source>Light</source>
+  <target>Clair</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
