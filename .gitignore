@@ -4,6 +4,7 @@
 /lib/
 /node_modules/
 /npm-debug.log
+/src/client/i18n/
 /var/
 /www/css/
 /www/fonts/
