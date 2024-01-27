@@ -1,5 +1,6 @@
 import {customElement, property, state} from "lit/decorators.js";
 import {html, type TemplateResult} from "lit";
+import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {Theme, themeIcon, themeLabel} from "../theme.js";
 
@@ -9,6 +10,42 @@ import {Theme, themeIcon, themeLabel} from "../theme.js";
 @customElement("theme-dropdown")
 export class ThemeDropdown extends Component {
 
+	/**
+	 * The icon of the dropdown menu.
+	 */
+	@property() icon = themeIcon(Theme.auto);
+
+	/**
+	 * The label of the dropdown menu.
+	 */
+	@property() label = "";
+
+	/**
+	 * Renders this component.
+	 * @returns The view template.
+	 */
+	protected render(): TemplateResult {
+		return html`
+			<li class="nav-item dropdown">
+				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
+					<i class="icon icon-fill">${this.icon}</i>
+					${when(this.label, () => html`<span class="ms-2">${this.label}</span>`)}
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<theme-selector @change=${this.#triggerChange}></theme-selector>
+				</ul>
+			</li>
+		`;
+	}
+
+	/**
+	 * Triggers a theme change.
+	 * @param event The dispatched event.
+	 */
+	#triggerChange(event: CustomEvent<Theme>): void {
+		this.icon = themeIcon(event.detail);
+		this.dispatchEvent(event);
+	}
 }
 
 /**
@@ -16,11 +53,6 @@ export class ThemeDropdown extends Component {
  */
 @customElement("theme-selector")
 export class ThemeSelector extends Component {
-
-	/**
-	 * The label of the dropdown menu.
-	 */
-	@property() label = "";
 
 	/**
 	 * The current theme.
