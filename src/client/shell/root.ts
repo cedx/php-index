@@ -45,6 +45,3 @@ export class Root extends Component {
 		`;
 	}
 }
-
-// Register the component.
-customElements.define("app-root", Root);
