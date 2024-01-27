@@ -13,7 +13,7 @@ export class Navbar extends Component {
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	protected render(): TemplateResult {
+	protected override render(): TemplateResult {
 		return html`
 			<nav class="navbar navbar-expand-sm">
 				<div class="container-fluid">

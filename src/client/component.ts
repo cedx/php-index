@@ -8,7 +8,7 @@ export abstract class Component extends LitElement {
 	/**
 	 * The component styles.
 	 */
-	static styles: CSSResultGroup = [document.adoptedStyleSheets, css`
+	static override styles: CSSResultGroup = [document.adoptedStyleSheets, css`
 		:host { contain: content; }
 	`];
 
@@ -21,7 +21,7 @@ export abstract class Component extends LitElement {
 	 * Creates a new custom element.
 	 * @param options An object providing values to initialize this instance.
 	 */
-	constructor(options: Partial<{shadowRoot: boolean}> = {}) {
+	protected constructor(options: Partial<{shadowRoot: boolean}> = {}) {
 		super();
 		this.#useShadowRoot = options.shadowRoot ?? false;
 	}
@@ -30,7 +30,7 @@ export abstract class Component extends LitElement {
 	 * Returns the node into which this component should render.
 	 * @returns The newly created render root.
 	 */
-	protected createRenderRoot(): DocumentFragment|HTMLElement {
+	protected override createRenderRoot(): DocumentFragment|HTMLElement {
 		return this.#useShadowRoot ? super.createRenderRoot() : this;
 	}
 }

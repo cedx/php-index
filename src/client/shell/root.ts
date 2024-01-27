@@ -18,7 +18,7 @@ export class Root extends Component {
 	/**
 	 * Method invoked when this component is connected.
 	 */
-	connectedCallback(): void {
+	override connectedCallback(): void {
 		super.connectedCallback();
 		for (const event of ["online", "offline"]) addEventListener(event, () => this.isOnline = navigator.onLine);
 	}
@@ -27,7 +27,7 @@ export class Root extends Component {
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	protected render(): TemplateResult {
+	protected override render(): TemplateResult {
 		return html`
 			<header>
 				<app-navbar></app-navbar>

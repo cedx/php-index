@@ -24,7 +24,7 @@ export class ThemeDropdown extends Component {
 	/**
 	 * Method invoked after the first rendering.
 	 */
-	protected firstUpdated(): void {
+	protected override firstUpdated(): void {
 		// eslint-disable-next-line no-new
 		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
 	}
@@ -33,7 +33,7 @@ export class ThemeDropdown extends Component {
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	protected render(): TemplateResult {
+	protected override render(): TemplateResult {
 		return html`
 			<li class="nav-item dropdown">
 				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
@@ -53,7 +53,6 @@ export class ThemeDropdown extends Component {
 	 */
 	#handleChange(event: CustomEvent<Theme>): void {
 		this.icon = themeIcon(event.detail);
-		this.requestUpdate(); // TODO why?
 	}
 }
 
@@ -74,30 +73,43 @@ export class ThemeSelector extends Component {
 	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
-	 * Method invoked when this component is connected.
+	 * Creates a new theme selector.
 	 */
-	connectedCallback(): void {
-		super.connectedCallback();
-
+	constructor() {
+		super();
 		const theme = localStorage.getItem("theme") as Theme|null;
 		this.theme = theme && Object.values(Theme).includes(theme) ? theme : Theme.auto;
-		this.#applyTheme();
+	}
+
+
+	/**
+	 * Method invoked when this component is connected.
+	 */
+	override connectedCallback(): void {
+		super.connectedCallback();
 		this.#mediaQuery.addEventListener("change", this.#applyTheme);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
-	disconnectedCallback(): void {
+	override disconnectedCallback(): void {
 		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
 		super.disconnectedCallback();
+	}
+
+	/**
+	 * Method invoked after the first rendering.
+	 */
+	protected override firstUpdated(): void {
+		this.#applyTheme();
 	}
 
 	/**
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	protected render(): TemplateResult[] {
+	protected override render(): TemplateResult[] {
 		return Object.values(Theme).map(theme => html`
 			<li>
 				<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.#changeTheme(theme)}>
@@ -114,7 +126,6 @@ export class ThemeSelector extends Component {
 	#applyTheme(): void {
 		document.documentElement.dataset.bsTheme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
 		this.dispatchEvent(new CustomEvent("change", {detail: this.theme}));
-		this.requestUpdate(); // TODO why?
 	}
 
 	/**
