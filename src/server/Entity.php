@@ -19,21 +19,6 @@ final readonly class Entity implements \JsonSerializable {
 	}
 
 	/**
-	 * Lists the file system entities contained in the specified directory.
-	 * @param string $directory The path to the directory to scan.
-	 * @return self[] The file system entities contained in the specified directory.
-	 */
-	static function list(string $directory): array {
-		$exclude = [basename($_SERVER["SCRIPT_FILENAME"]), "desktop.ini", "web.config", '$Recycle.Bin', '$RECYCLE.BIN'];
-		if ($pharPath = \Phar::running(false)) $exclude[] = basename($pharPath);
-
-		return array_map(fn(string $name) => new self("$directory/$name"), array_filter(
-			scandir($directory),
-			fn(string $name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
-		));
-	}
-
-	/**
 	 * Gets the contents of this file system entity.
 	 * @return string|null The contents of this file system entity.
 	 */
