@@ -27,7 +27,7 @@ export class Root extends Component {
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	render(): TemplateResult {
+	protected render(): TemplateResult {
 		return html`
 			<header>
 				<app-navbar></app-navbar>
