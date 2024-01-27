@@ -15,5 +15,5 @@ export default async function compileSass(production = false) {
 	});
 
 	if (sourceMap) await writeFile("www/css/main.css.map", JSON.stringify(sourceMap));
-	return writeFile("www/css/main.css", sourceMap ? `${css}${EOL}//# sourceMappingURL=main.css.map` : css);
+	return writeFile("www/css/main.css", sourceMap ? `${css}${EOL}/*# sourceMappingURL=main.css.map */` : css);
 }

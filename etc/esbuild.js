@@ -8,6 +8,7 @@ import {minifyHTMLLiteralsPlugin as minifyHtml} from "esbuild-plugin-minify-html
 export default function esbuildOptions(production = false) {
 	return {
 		bundle: true,
+		conditions: production ? [] : ["development"],
 		drop: production ? ["debugger"] : [],
 		entryPoints: ["src/client/index.ts"],
 		format: "esm",
