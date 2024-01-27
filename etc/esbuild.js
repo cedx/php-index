@@ -5,7 +5,7 @@ import {minifyHTMLLiteralsPlugin as minifyHtml} from "esbuild-plugin-minify-html
  * @param {boolean} production Value indicating whether the application runs in production mode.
  * @returns {import("esbuild").BuildOptions} The build options.
  */
-export default function esbuildOptions(production) {
+export default function esbuildOptions(production = false) {
 	return {
 		bundle: true,
 		drop: production ? ["debugger"] : [],
@@ -15,7 +15,7 @@ export default function esbuildOptions(production) {
 		minify: production,
 		outfile: "www/js/main.js",
 		plugins: production ? [minifyHtml()] : [],
-		sourceRoot: new URL("www/js/", import.meta.url).href,
+		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		sourcemap: !production,
 		sourcesContent: false,
 		treeShaking: production

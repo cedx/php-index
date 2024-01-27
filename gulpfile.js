@@ -1,4 +1,4 @@
-import {cp} from "node:fs/promises";
+import {cp, mkdir} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
 import browserSync from "browser-sync";
@@ -8,9 +8,12 @@ import {$} from "execa";
 import gulp from "gulp";
 import pkg from "./package.json" with {type: "json"};
 import esbuildOptions from "./etc/esbuild.js";
+import compileSass from "./etc/sass.js";
 
-// Copies the assets.
+// Deploys the assets.
 export async function assets() {
+	await $`lit-localize --config=etc/locale.json build`;
+	await mkdir("www/css", {recursive: true});
 	const fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
 	return cp(join(fontsource, "material-symbols-rounded-latin-fill-normal.woff2"), "www/fonts/icons.woff2");
 }
@@ -20,7 +23,7 @@ export async function build() {
 	const production = env.NODE_ENV == "production";
 	await assets();
 	await esbuild.build(esbuildOptions(production));
-	return $`sass --load-path=node_modules --no-source-map --style=${production ? "compressed" : "expanded"} src/ui/index.scss www/css/main.css`;
+	return compileSass(production);
 }
 
 // Deletes all generated files.
@@ -62,19 +65,19 @@ export async function watch() {
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
 
 	const browser = browserSync.create();
-	const context = await esbuild.context(esbuildOptions(false));
+	const context = await esbuild.context(esbuildOptions());
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 
 	// eslint-disable-next-line prefer-arrow-callback
-	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, async function buildApp(done) {
+	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, async function js(done) {
 		await context.rebuild();
 		browser.reload();
 		done();
 	});
 
 	// eslint-disable-next-line prefer-arrow-callback
-	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, async function buildTheme(done) {
-		await $`sass --load-path=node_modules --source-map --style=expanded src/ui/index.scss www/css/main.css`;
+	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, async function css(done) {
+		await compileSass();
 		browser.reload();
 		done();
 	});
