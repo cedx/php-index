@@ -65,7 +65,7 @@ export class ThemeSelector extends Component {
 	/**
 	 * The current theme.
 	 */
-	@state() private theme = Theme.auto;
+	@state() private theme;
 
 	/**
 	 * The media query used to check the system theme.
