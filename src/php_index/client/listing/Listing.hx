@@ -1,4 +1,4 @@
-package php_index.client.file_system;
+package php_index.client.io;
 
 import intl.DateFormat;
 import intl.NumberFormat.NumberFormatOptions;
@@ -37,9 +37,9 @@ class Listing extends View {
 	final messages: Messages = Container.instance.messages;
 
 	/** The current path. **/
-	final path = Browser.location.pathname.length > 1
-		? Browser.location.pathname.removeTrailingSlashes()
-		: Browser.location.pathname;
+	final path = location.pathname.length > 1
+		? location.pathname.removeTrailingSlashes()
+		: location.pathname;
 
 	/** The current query. **/
 	@:state var query = "";
@@ -212,7 +212,7 @@ class Listing extends View {
 
 	/** Method invoked after this view is mounted. **/
 	override function viewDidMount() {
-		Browser.document.title = '${Browser.location.hostname} - $path';
+		document.title = '${location.hostname} - $path';
 		entities.fetch().handle(outcome -> switch outcome {
 			case Failure(_): loading = Failed(new Error(messages.error()));
 			case Success(items): loading = Done(items); entities.orderBy("path");

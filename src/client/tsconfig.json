@@ -1,5 +1,6 @@
 {
 	"extends": "../../tsconfig",
+	"exclude": ["i18n/*.ts"],
 	"include": ["**/*.ts"],
 	"compilerOptions": {
 		"experimentalDecorators": true,
