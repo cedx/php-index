@@ -5,7 +5,7 @@
 	"tsConfig": "../src/client/tsconfig.json",
 	"interchange": {
 		"format": "xliff",
-		"xliffDir": "../res"
+		"xliffDir": "../share/locale"
 	},
 	"output": {
 		"mode": "runtime",

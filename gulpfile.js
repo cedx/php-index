@@ -63,17 +63,14 @@ export async function publish() {
 export async function watch() {
 	await assets();
 
+	const browser = browserSync.create();
+	const buildContext = await esbuild.context(clientOptions());
 	const host = "127.0.0.1:8000";
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
-	await new Promise(resolve => setTimeout(resolve, 1_000));
-
-	const browser = browserSync.create();
-	const context = await esbuild.context(clientOptions());
-	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 
 	// eslint-disable-next-line prefer-arrow-callback
 	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, async function js(done) {
-		await context.rebuild();
+		await buildContext.rebuild();
 		browser.reload();
 		done();
 	});
@@ -84,6 +81,9 @@ export async function watch() {
 		browser.reload();
 		done();
 	});
+
+	await new Promise(resolve => setTimeout(resolve, 1_000));
+	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 }
 
 // The default task.

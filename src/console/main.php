@@ -1,8 +1,8 @@
 <?php
 /**
  * Application entry point.
- * @throws LogicException A required argument is missing.
- * @throws RuntimeException TODO
+ * @throws LogicException A required command line argument is missing.
+ * @throws RuntimeException The Phar archive could not be created.
  */
 function main(): void {
 	// Parse the command line arguments.
