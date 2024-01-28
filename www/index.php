@@ -1,9 +1,13 @@
 <?php
-use php_index\Controller;
-require __DIR__."/../vendor/autoload.php";
+// Register the class loader.
+spl_autoload_register(function(string $class) {
+	$parts = explode("\\", $class);
+	array_shift($parts);
+	include __DIR__."/../src/server/".implode("/", $parts).".php";
+});
 
 // Start the application.
-$controller = new Controller;
+$controller = new \php_index\Controller;
 try { $controller->handleRequest($_GET); }
 catch (Throwable $e) {
 	$code = $e->getCode();

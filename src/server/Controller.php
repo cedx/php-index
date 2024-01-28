@@ -54,9 +54,9 @@ final class Controller {
 		if ($pharPath = \Phar::running(false)) $exclude[] = basename($pharPath);
 
 		$directory = dirname($_SERVER["SCRIPT_FILENAME"]);
-		$entities = array_map(fn(string $name) => new FileSystemEntity("$directory/$name"), array_filter(
+		$entities = array_map(fn($name) => new FileSystemEntity("$directory/$name"), array_filter(
 			scandir($directory),
-			fn(string $name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
+			fn($name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
 		));
 
 		$this->sendResponse(json_encode(array_values($entities)) ?: "[]", mediaType: "application/json");
