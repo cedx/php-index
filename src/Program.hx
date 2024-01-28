@@ -23,7 +23,7 @@ import php.Global;
 **/
 final class Program {
 
-	/** Compress the PHAR archive. **/
+	/** Compress the Phar archive. **/
 	public var compress = false;
 
 	/** Display this help. **/
@@ -57,7 +57,7 @@ final class Program {
 		["lib", "www"].iter(folder -> copyDirectory(Path.join([basePath, folder]), Path.join([input, folder])));
 		["index.phar", "index.php"].map(file -> 'www/$file').filter(FileSystem.exists).iter(FileSystem.deleteFile);
 
-		// Build the PHAR archive.
+		// Build the Phar archive.
 		final output = rest[0].isAbsolute() ? rest.shift() : Path.join([haxelibRun ? rest.pop() : Sys.getCwd(), rest.shift()]);
 		FileSystem.createDirectory(output);
 		Sys.command("php", [Path.join([basePath, "bin/php_index.php"]), "--input", input, "--output", output].concat(compress ? ["--compress"] : []));

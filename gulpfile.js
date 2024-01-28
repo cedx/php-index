@@ -1,4 +1,3 @@
-import {existsSync} from "node:fs";
 import {cp, mkdir} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
@@ -7,9 +6,8 @@ import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
-import replace from "gulp-replace";
 import pkg from "./package.json" with {type: "json"};
-import esbuildOptions from "./etc/esbuild.js";
+import {clientOptions, consoleOptions} from "./etc/esbuild.js";
 import compileSass from "./etc/sass.js";
 
 // Deploys the assets.
@@ -24,7 +22,8 @@ export async function assets() {
 export async function build() {
 	const production = env.NODE_ENV == "production";
 	await assets();
-	await esbuild.build(esbuildOptions(production));
+	await esbuild.build(clientOptions(production));
+	await esbuild.build(consoleOptions(production));
 	return compileSass(production);
 }
 
@@ -49,12 +48,6 @@ export function i18n() {
 	return $`lit-localize --config=etc/locale.json extract`;
 }
 
-// Installs the project dependencies.
-export async function install() {
-	await $`composer ${existsSync("composer.lock") ? "install" : "update"}`;
-	return $`npm ${existsSync("package-lock.json") ? "install" : "update"}`;
-}
-
 // Performs the static analysis of source code.
 export async function lint() {
 	await $`tsc --project tsconfig.json`;
@@ -66,13 +59,6 @@ export async function publish() {
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
 }
 
-// Updates the version number in the sources.
-export function version() {
-	return gulp.src("composer.json")
-		.pipe(replace(/"version": "\d+(\.\d+){2}"/, `"version": "${pkg.version}"`))
-		.pipe(gulp.dest("."));
-}
-
 // Watches for file changes.
 export async function watch() {
 	await assets();
@@ -82,7 +68,7 @@ export async function watch() {
 	await new Promise(resolve => setTimeout(resolve, 1_000));
 
 	const browser = browserSync.create();
-	const context = await esbuild.context(esbuildOptions());
+	const context = await esbuild.context(clientOptions());
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 
 	// eslint-disable-next-line prefer-arrow-callback
@@ -103,6 +89,5 @@ export async function watch() {
 // The default task.
 export default gulp.series(
 	clean,
-	dist,
-	version
+	dist
 );

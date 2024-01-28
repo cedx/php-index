@@ -15,7 +15,7 @@ function main() {
 /** Minifies the specified source file. **/
 private function minifyFile(source: String, ?destination: String, isNode = false) Sys.command("npx", [
 	"esbuild",
-	"--allow-overwrite",
+	"\"--banner:js=#!/usr/bin/env node\"",
 	"--legal-comments=none",
 	"--log-level=warning",
 	"--minify",

@@ -196,8 +196,11 @@ export class Listing extends Component {
 			index++;
 		}
 
-		const options = {maximumFractionDigits: 2, style: "unit", unit: "byte"};
-		return bytes.toLocaleString(getLocale(), {...options, unit: Listing.byteUnits[index]});
+		return bytes.toLocaleString(getLocale(), {
+			maximumFractionDigits: 2,
+			style: "unit",
+			unit: Listing.byteUnits[index]
+		});
 	}
 
 	/**

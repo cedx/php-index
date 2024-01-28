@@ -36,7 +36,6 @@
 		"esbuild-plugin-minify-html-literals": "^1.0.6",
 		"eslint": "^8.56.0",
 		"gulp": "^4.0.2",
-		"gulp-replace": "^1.1.4",
 		"lit": "^3.1.1",
 		"sass-embedded": "^1.70.0",
 		"source-map-js": "^1.0.2",
@@ -48,7 +47,8 @@
 	},
 	"files": [
 		"bin/",
-		"lib/",
+		"src/console",
+		"src/server",
 		"www/"
 	],
 	"keywords": [
