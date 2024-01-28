@@ -1,12 +1,13 @@
 import "urlpattern-polyfill";
-import {fetchProxy} from "./fetch_proxy.js";
+import {fetchProxy} from "./http/fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 
-// Register the application components.
-import "./shell/action_bar.js";
-import "./shell/navbar.js";
-import "./shell/root.js";
-import "./shell/theme.js";
+// Register the components.
+import "./ui/components/action_bar.js";
+import "./ui/components/listing.js";
+import "./ui/components/navbar.js";
+import "./ui/components/root.js";
+import "./ui/components/theme.js";
 
 // Set the locale.
 const [locale] = navigator.language.split("-");

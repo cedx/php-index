@@ -1,7 +1,7 @@
 /**
  * Defines the type of a file system entity.
  */
-export enum EntityType {
+export enum FileSystemEntityType {
 
 	/**
 	 * The file system entity is a directory.
@@ -17,7 +17,7 @@ export enum EntityType {
 /**
  * A reference to an entity on the file system.
  */
-export class Entity {
+export class FileSystemEntity {
 
 	/**
 	 * The icon mapping.
@@ -100,31 +100,31 @@ export class Entity {
 	/**
 	 * The type of this file system entity.
 	 */
-	readonly type: EntityType;
+	readonly type: FileSystemEntityType;
 
 	/**
 	 * Creates a new file system entity.
 	 * @param options An object providing values to initialize this instance.
 	 */
-	constructor(options: Partial<EntityOptions> = {}) {
+	constructor(options: Partial<FileSystemEntityOptions> = {}) {
 		this.modifiedAt = new Date(options.modifiedAt ?? Date.now());
 		this.path = options.path ?? "";
 		this.size = options.size ?? -1;
-		this.type = options.type ?? EntityType.file;
+		this.type = options.type ?? FileSystemEntityType.file;
 	}
 
 	/**
 	 * The icon corresponding to this file system entity.
 	 */
 	get icon(): string {
-		return this.type == EntityType.directory ? "folder" : Entity.#iconMapping.get(this.path.split(".").pop()?.toLowerCase() ?? "") ?? "note";
+		return this.type == FileSystemEntityType.directory ? "folder" : FileSystemEntity.#iconMapping.get(this.path.split(".").pop()?.toLowerCase() ?? "") ?? "note";
 	}
 }
 
 /**
- * Defines the options of an {@link Entity} instance.
+ * Defines the options of an {@link FileSystemEntity} instance.
  */
-export interface EntityOptions {
+export interface FileSystemEntityOptions {
 
 	/**
 	 * The date of last modification.
@@ -144,5 +144,5 @@ export interface EntityOptions {
 	/**
 	 * The type of this file system entity.
 	 */
-	type: EntityType;
+	type: FileSystemEntityType;
 }

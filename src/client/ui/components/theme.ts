@@ -1,6 +1,6 @@
 import {Dropdown} from "bootstrap";
-import {customElement, property, state} from "lit/decorators.js";
 import {html, type TemplateResult} from "lit";
+import {customElement, property, state} from "lit/decorators.js";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {Theme, themeIcon, themeLabel} from "../theme.js";

@@ -1,5 +1,7 @@
 <?php namespace php_index;
 
+use php_index\io\{FileSystemEntity, FileSystemEntityType};
+
 /**
  * Responds to client requests.
  */
@@ -39,8 +41,8 @@ final class Controller {
 			$baseUri = "file://$prefix" . str_replace("\\", "/", realpath(dirname($_SERVER["SCRIPT_FILENAME"])."/.."));
 		}
 
-		$entity = new Entity("$baseUri/www/$path");
-		if ($entity->exists() && $entity->type() == EntityType::file) $this->sendResponse($entity->contents(), mediaType: $entity->mediaType());
+		$entity = new FileSystemEntity("$baseUri/www/$path");
+		if ($entity->exists() && $entity->type() == FileSystemEntityType::file) $this->sendResponse($entity->contents(), mediaType: $entity->mediaType());
 		else $this->sendResponse("The file '$path' is not found.", mediaType: "text/plain", status: 404);
 	}
 
@@ -52,7 +54,7 @@ final class Controller {
 		if ($pharPath = \Phar::running(false)) $exclude[] = basename($pharPath);
 
 		$directory = dirname($_SERVER["SCRIPT_FILENAME"]);
-		$entities = array_map(fn(string $name) => new Entity("$directory/$name"), array_filter(
+		$entities = array_map(fn(string $name) => new FileSystemEntity("$directory/$name"), array_filter(
 			scandir($directory),
 			fn(string $name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
 		));

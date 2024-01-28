@@ -1,9 +1,9 @@
-<?php namespace php_index;
+<?php namespace php_index\io;
 
 /**
  * A reference to an entity on the file system.
  */
-final readonly class Entity implements \JsonSerializable {
+final readonly class FileSystemEntity implements \JsonSerializable {
 
 	/**
 	 * The path of this file system entity.
@@ -20,10 +20,10 @@ final readonly class Entity implements \JsonSerializable {
 
 	/**
 	 * Gets the contents of this file system entity.
-	 * @return string|null The contents of this file system entity.
+	 * @return string The contents of this file system entity.
 	 */
-	function contents(): ?string {
-		return $this->type() == EntityType::directory ? null : (file_get_contents($this->path) ?: "");
+	function contents(): string {
+		return $this->type() == FileSystemEntityType::directory ? "" : (file_get_contents($this->path) ?: "");
 	}
 
 	/**
@@ -82,14 +82,14 @@ final readonly class Entity implements \JsonSerializable {
 	 * @return int The size in bytes of this file system entity.
 	 */
 	function size(): int {
-		return $this->type() == EntityType::directory ? -1 : (int) @filesize($this->path);
+		return $this->type() == FileSystemEntityType::directory ? -1 : (int) @filesize($this->path);
 	}
 
 	/**
 	 * Gets the type of this file system entity.
-	 * @return EntityType The type of this file system entity.
+	 * @return FileSystemEntityType The type of this file system entity.
 	 */
-	function type(): EntityType {
-		return is_dir($this->path) ? EntityType::directory : EntityType::file;
+	function type(): FileSystemEntityType {
+		return is_dir($this->path) ? FileSystemEntityType::directory : FileSystemEntityType::file;
 	}
 }

@@ -1,9 +1,9 @@
-<?php namespace php_index;
+<?php namespace php_index\io;
 
 /**
  * Defines the type of a file system entity.
  */
-enum EntityType: string {
+enum FileSystemEntityType: string {
 
 	/**
 	 * The file system entity is a directory.
