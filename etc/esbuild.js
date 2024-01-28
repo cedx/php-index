@@ -34,11 +34,10 @@ export function consoleOptions(production = false) {
 		bundle: true,
 		drop: production ? ["debugger"] : [],
 		entryPoints: ["src/console/main.ts"],
-		format: "esm",
 		legalComments: "none",
 		minify: production,
 		platform: "node",
-		outfile: "bin/php_index.js",
+		outfile: "bin/php_index.cjs",
 		treeShaking: production
 	};
 }

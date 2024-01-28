@@ -40,7 +40,7 @@
 </trans-unit>
 <trans-unit id="s559797e1e0e6b7a6">
   <source>Index of <x id="0" equiv-text="${this.#path}"/></source>
-  <source>Index de <x id="0" equiv-text="${this.#path}"/></source>
+  <target>Index de <x id="0" equiv-text="${this.#path}"/></target>
 </trans-unit>
 <trans-unit id="sd3b129c4caa14c07">
   <source>Loading the directory entries...</source>

@@ -13,7 +13,7 @@
 		"url": "https://belin.io"
 	},
 	"bin": {
-		"php_index": "./bin/php_index.js"
+		"php_index": "./bin/php_index.cjs"
 	},
 	"dependencies": {
 		"execa": "^8.0.1"
@@ -47,8 +47,7 @@
 	},
 	"files": [
 		"bin/",
-		"src/console",
-		"src/server",
+		"lib/",
 		"www/"
 	],
 	"keywords": [

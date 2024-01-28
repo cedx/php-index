@@ -6,9 +6,9 @@ function main() {
 	for (script in ["Clean", "Build", "Version"]) Sys.command('lix $script');
 	if (FileSystem.exists("www/index.php")) FileSystem.deleteFile("www/index.php");
 
-	minifyFile("bin/php_index.js", true);
+	minifyFile("bin/php_index.cjs", true);
 	minifyFile("www/js/main.js", false);
-	Sys.command("git update-index --chmod=+x bin/php_index.js");
+	Sys.command("git update-index --chmod=+x bin/php_index.cjs");
 	Sys.command("npx @cedx/php-minifier --mode=fast lib");
 }
 

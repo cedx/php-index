@@ -4,8 +4,5 @@
 	"emptyResultSet": "No files or folders match your query.",
 	"file": "file",
 	"files": "files",
-	"indexOf": "Index of ::directory::",
-	"offline": "The network is inaccessible. Check your connection.",
-	"parentDirectory": "Parent directory",
 	"search": "Search"
 }

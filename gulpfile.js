@@ -23,7 +23,6 @@ export async function build() {
 	const production = env.NODE_ENV == "production";
 	await assets();
 	await esbuild.build(clientOptions(production));
-	await esbuild.build(consoleOptions(production));
 	return compileSass(production);
 }
 
@@ -32,10 +31,18 @@ export function clean() {
 	return deleteAsync(["lib", "var/**/*", "www/css", "www/fonts", "www/js"]);
 }
 
+/// Builds the command line interface.
+export async function cli() {
+	await esbuild.build(consoleOptions(env.NODE_ENV == "production"));
+	// TODO compress PHP files to the "lib" folder
+}
+
 // Packages the project.
-export function dist() {
+export async function dist() {
 	env.NODE_ENV = "production";
-	return build();
+	await build();
+	await cli();
+	return $`git update-index --chmod=+x bin/php_index.cjs`;
 }
 
 // Builds the documentation.
