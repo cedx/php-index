@@ -3,7 +3,6 @@ import {cp, mkdtemp, rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join, resolve} from "node:path";
 import process from "node:process";
-import {fileURLToPath} from "node:url";
 import {parseArgs} from "node:util";
 import {execa} from "execa";
 import pkg from "../../package.json" with {type: "json"};
@@ -34,7 +33,7 @@ async function main(): Promise<number> {
 	}
 
 	// Populate the input folder.
-	const root = fileURLToPath(new URL("..", import.meta.url));
+	const root = join(__dirname, "..");
 	const input = await mkdtemp(join(tmpdir(), "phpindex-"));
 	for (const folder of ["src/server", "www"]) await cp(join(root, folder), join(input, folder), {recursive: true});
 	await rm(join(input, "www/index.php"));
