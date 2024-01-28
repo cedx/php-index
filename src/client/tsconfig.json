@@ -3,7 +3,6 @@
 	"exclude": ["i18n/*.ts"],
 	"include": ["**/*.ts"],
 	"compilerOptions": {
-		"experimentalDecorators": true,
 		"useDefineForClassFields": false
 	}
 }
