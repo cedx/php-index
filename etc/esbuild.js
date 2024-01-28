@@ -1,4 +1,7 @@
-import {minifyHTMLLiteralsPlugin as minifyHtml} from "esbuild-plugin-minify-html-literals";
+import {createHash} from "node:crypto";
+import {readFile} from "node:fs/promises";
+import {EOL} from "node:os";
+import {minifyHTMLLiterals} from "minify-html-literals";
 
 /**
  * Returns the build options of the client application.
@@ -15,7 +18,7 @@ export function clientOptions(production = false) {
 		legalComments: "none",
 		minify: production,
 		outfile: "www/js/main.js",
-		plugins: production ? [minifyHtml()] : [],
+		plugins: production ? [minifyHtmlLiterals()] : [],
 		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		sourcemap: !production,
 		sourcesContent: false,
@@ -39,5 +42,35 @@ export function consoleOptions(production = false) {
 		platform: "node",
 		outfile: "bin/php_index.cjs",
 		treeShaking: production
+	};
+}
+
+/**
+ * Creates a plugin that minifies HTML markup inside template literal strings.
+ * @returns {import("esbuild").Plugin}
+ */
+function minifyHtmlLiterals() {
+	return {
+		name: "minifyHtml",
+		setup: build => {
+			const cache = new Map();
+			build.onLoad({filter: /\.[jt]s$/i}, async ({path}) => {
+				const contents = await readFile(path, "utf8");
+				const hash = createHash("md5").update(contents).digest("hex");
+
+				let entry = cache.get(path);
+				if (!entry || entry.hash != hash) {
+					const {code, map} = minifyHTMLLiterals(contents) ?? {code: contents, map: null};
+					entry = {hash, output: {
+						contents: map ? `${code}${EOL}//# sourceMappingURL=${map.toUrl()}` : code,
+						loader: /\.ts$/i.test(path) ? "ts" : "js"
+					}};
+
+					cache.set(path, entry);
+				}
+
+				return entry.output;
+			});
+		}
 	};
 }

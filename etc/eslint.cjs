@@ -11,6 +11,10 @@ module.exports = {
 	],
 	overrides: [
 		{
+			files: ["gulpfile.js"],
+			rules: {"prefer-arrow-callback": "off"}
+		},
+		{
 			files: ["*.cjs", "*.js", "*.mjs"],
 			rules: {
 				"@typescript-eslint/explicit-function-return-type": "off",

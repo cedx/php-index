@@ -6,9 +6,13 @@ import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
+import phpMinifier from "@cedx/php-minifier";
 import pkg from "./package.json" with {type: "json"};
 import {clientOptions, consoleOptions} from "./etc/esbuild.js";
 import compileSass from "./etc/sass.js";
+
+// Returns a value indicating whether the application runs in production mode.
+const isProduction = () => env.NODE_ENV == "production";
 
 // Deploys the assets.
 export async function assets() {
@@ -20,10 +24,9 @@ export async function assets() {
 
 // Builds the project.
 export async function build() {
-	const production = env.NODE_ENV == "production";
 	await assets();
-	await esbuild.build(clientOptions(production));
-	return compileSass(production);
+	await esbuild.build(clientOptions(isProduction()));
+	return compileSass(isProduction());
 }
 
 // Deletes all generated files.
@@ -31,19 +34,18 @@ export function clean() {
 	return deleteAsync(["lib", "var/**/*", "www/css", "www/fonts", "www/js"]);
 }
 
-/// Builds the command line interface.
-export async function cli() {
-	await esbuild.build(consoleOptions(env.NODE_ENV == "production"));
-	// TODO compress PHP files to the "lib" folder
-}
-
-// Packages the project.
-export async function dist() {
-	env.NODE_ENV = "production";
-	await build();
-	await cli();
-	return $`git update-index --chmod=+x bin/php_index.cjs`;
-}
+// Builds the command line interface.
+export const cli = gulp.series(
+	async function cliJs() {
+		await esbuild.build(consoleOptions(isProduction()));
+		return $`git update-index --chmod=+x bin/php_index.cjs`;
+	},
+	function cliPhp() {
+		let stream = gulp.src("src/server/**/*.php", {read: !isProduction()});
+		if (isProduction()) stream = stream.pipe(phpMinifier({mode: "fast"}));
+		return stream.pipe(gulp.dest("lib"));
+	}
+);
 
 // Builds the documentation.
 export async function doc() {
@@ -75,19 +77,11 @@ export async function watch() {
 	const host = "127.0.0.1:8000";
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
 
-	// eslint-disable-next-line prefer-arrow-callback
-	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, async function js(done) {
-		await buildContext.rebuild();
-		browser.reload();
-		done();
-	});
+	const buildJs = async () => { await buildContext.rebuild(); browser.reload(); };
+	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, buildJs);
 
-	// eslint-disable-next-line prefer-arrow-callback
-	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, async function css(done) {
-		await compileSass();
-		browser.reload();
-		done();
-	});
+	const buildCss = async () => { await compileSass(); browser.reload(); };
+	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, buildCss);
 
 	await new Promise(resolve => setTimeout(resolve, 1_000));
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
@@ -95,6 +89,8 @@ export async function watch() {
 
 // The default task.
 export default gulp.series(
+	function init(done) { env.NODE_ENV = "production"; done(); },
 	clean,
-	dist
+	build,
+	cli
 );

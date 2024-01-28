@@ -192,7 +192,7 @@ export class Sort {
 	 * @param escape A function used to escape the SQL identifiers.
 	 * @returns The SQL clause corresponding to this object.
 	 */
-	toSQL(escape?: (identifier: string) => string): string {
+	toSql(escape?: (identifier: string) => string): string {
 		return this.#attributes.map(([attribute, order]) => `${escape ? escape(attribute) : attribute} ${order}`).join(", ");
 	}
 

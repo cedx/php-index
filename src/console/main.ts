@@ -35,7 +35,7 @@ async function main(): Promise<number> {
 	// Populate the input folder.
 	const root = join(__dirname, "..");
 	const input = await mkdtemp(join(tmpdir(), "phpindex-"));
-	for (const folder of ["src/server", "www"]) await cp(join(root, folder), join(input, folder), {recursive: true});
+	for (const folder of ["lib", "www"]) await cp(join(root, folder), join(input, folder), {recursive: true});
 	await rm(join(input, "www/index.php"));
 
 	// Build the Phar archive.

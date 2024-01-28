@@ -4,7 +4,7 @@ $pharPath = basename(__FILE__);
 spl_autoload_register(function(string $class) use ($pharPath) {
 	$parts = explode("\\", $class);
 	array_shift($parts);
-	include "phar://$pharPath/src/server/".implode("/", $parts).".php";
+	include "phar://$pharPath/lib/".implode("/", $parts).".php";
 });
 
 // Start the application.
