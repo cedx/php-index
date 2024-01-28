@@ -1,21 +1,9 @@
 {
-	"auto": "Auto",
-	"dark": "Sombre",
 	"directories": "dossiers",
 	"directory": "dossier",
 	"emptyDirectory": "Ce répertoire est vide.",
 	"emptyResultSet": "Aucun fichier ou dossier ne correspond à votre requête.",
-	"error": "Une erreur s'est produite lors de la récupération des entrées du répertoire.",
 	"file": "fichier",
 	"files": "fichiers",
-	"indexOf": "Index de ::directory::",
-	"light": "Clair",
-	"loading": "Chargement des entrées du répertoire...",
-	"modifiedAt": "Modifié le",
-	"name": "Nom",
-	"offline": "Le réseau est inaccessible. Vérifiez votre connexion.",
-	"parentDirectory": "Dossier parent",
-	"search": "Rechercher",
-	"size": "Taille",
-	"theme": "Thème"
+	"search": "Rechercher"
 }

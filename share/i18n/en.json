@@ -1,21 +1,11 @@
 {
-	"auto": "Auto",
-	"dark": "Dark",
 	"directories": "directories",
 	"directory": "directory",
-	"emptyDirectory": "This directory is empty.",
 	"emptyResultSet": "No files or folders match your query.",
-	"error": "An error occurred while fetching the directory entries.",
 	"file": "file",
 	"files": "files",
 	"indexOf": "Index of ::directory::",
-	"light": "Light",
-	"loading": "Loading the directory entries...",
-	"modifiedAt": "Last modified",
-	"name": "Name",
 	"offline": "The network is inaccessible. Check your connection.",
 	"parentDirectory": "Parent directory",
-	"search": "Search",
-	"size": "Size",
-	"theme": "Theme"
+	"search": "Search"
 }

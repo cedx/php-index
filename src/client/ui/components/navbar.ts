@@ -24,7 +24,7 @@ export class Navbar extends Component {
 
 					<div class="collapse navbar-collapse">
 						<menu class="navbar-nav ms-auto">
-							<theme-dropdown .label=${msg("Theme")}></theme-dropdown>
+							<theme-dropdown label=${msg("Theme")}></theme-dropdown>
 						</menu>
 					</div>
 				</div>

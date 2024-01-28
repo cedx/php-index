@@ -59,6 +59,6 @@ final class Controller {
 			fn(string $name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
 		));
 
-		$this->sendResponse(json_encode($entities) ?: "[]", mediaType: "application/json");
+		$this->sendResponse(json_encode(array_values($entities)) ?: "[]", mediaType: "application/json");
 	}
 }
