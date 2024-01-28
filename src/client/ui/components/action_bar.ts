@@ -39,7 +39,7 @@ export class ActionBar extends Component {
 	 */
 	protected override render(): TemplateResult {
 		return html`
-			<aside class="container-fluid">
+			<aside class="container-fluid d-print-none">
 				<slot class="d-flex justify-content-between align-items-center"></slot>
 			</aside>
 		`;

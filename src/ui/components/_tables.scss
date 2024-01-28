@@ -1,11 +1,13 @@
+@use "../theme" as *;
+
 .table-sticky {
 	> thead {
 		position: sticky;
 		top: 0;
-		z-index: 50;
+		z-index: $zindex-sticky;
 
 		&::after {
-			border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+			border-bottom: var(--border-width) solid var(--border-color);
 			bottom: 0;
 			content: "";
 			left: 0;

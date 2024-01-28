@@ -1,13 +1,3 @@
-a {
-	text-decoration: none;
-
-	&:not(.btn, .dropdown-item, .list-group-item-action, .nav-link) {
-		&:hover, &:focus {
-			text-decoration: underline;
-		}
-	}
-}
-
 menu {
 	margin: 0;
 	padding: 0;

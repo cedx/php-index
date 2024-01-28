@@ -1,6 +1,6 @@
 body {
-	accent-color: var(--bs-primary);
-	background-color: var(--bs-gray-200);
+	accent-color: var(--primary);
+	background-color: var(--gray-200);
 	overflow: hidden;
 
 	&.loading {
@@ -8,7 +8,7 @@ body {
 	}
 
 	[data-bs-theme="dark"] & {
-		background-color: var(--bs-black);
+		background-color: var(--black);
 	}
 }
 
@@ -23,13 +23,13 @@ main {
 }
 
 article {
-	background-color: var(--bs-body-bg);
-	box-shadow: var(--bs-box-shadow-sm);
+	background-color: var(--body-bg);
+	box-shadow: var(--box-shadow-sm);
 	overflow: hidden;
 	width: 100%;
 
 	@media screen and (width >= 768px) {
-		border-radius: var(--bs-border-radius);
+		border-radius: var(--border-radius);
 		margin: 1.5rem auto;
 		max-width: 720px;
 	}
@@ -40,9 +40,9 @@ article {
 }
 
 aside {
-	background-color: var(--bs-gray-100);
-	border-bottom: var(--bs-border-width) solid var(--bs-border-color);
-	box-shadow: var(--bs-box-shadow-sm);
+	background-color: var(--gray-100);
+	border-bottom: var(--border-width) solid var(--border-color);
+	box-shadow: var(--box-shadow-sm);
 	left: 0;
 	padding: 0.5rem 0;
 	position: fixed;
@@ -52,13 +52,9 @@ aside {
 	width: 100%;
 	z-index: 100;
 
-	@media print {
-		display: none;
-	}
-
 	[data-bs-theme="dark"] & {
-		background-color: var(--bs-gray-800);
-		border-bottom-color: var(--bs-black);
+		background-color: var(--gray-800);
+		border-bottom-color: var(--black);
 	}
 
 	.icon {
