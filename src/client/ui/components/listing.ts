@@ -125,7 +125,7 @@ export class Listing extends Component {
 	override connectedCallback(): void {
 		super.connectedCallback();
 		document.title = `${location.hostname} - ${this.#path}`;
-		this.#fetchEntities();
+		void this.#fetchEntities();
 	}
 
 	/**

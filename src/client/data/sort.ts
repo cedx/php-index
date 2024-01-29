@@ -93,8 +93,8 @@ export class Sort {
 	 */
 	compare(x: object, y: object): number {
 		for (const [attribute, order] of this.#attributes) {
-			const xAttr = Reflect.get(x, attribute);
-			const yAttr = Reflect.get(y, attribute);
+			const xAttr = Reflect.get(x, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+			const yAttr = Reflect.get(y, attribute); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
 			const value = xAttr > yAttr ? 1 : (xAttr < yAttr ? -1 : 0);
 			if (value) return order == SortOrder.asc ? value : -value;
 		}

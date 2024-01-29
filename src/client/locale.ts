@@ -12,7 +12,7 @@ export const locales = new Map<string, LocaleModule>([
  * Gets or sets the active locale.
  */
 export const {getLocale, setLocale} = configureLocalization({
-	loadLocale: async locale => locales.get(locale)!,
+	loadLocale: locale => Promise.resolve(locales.get(locale)!),
 	sourceLocale: "en",
 	targetLocales: ["fr"]
 });
