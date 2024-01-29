@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "../theme" as *;
+
 body {
 	accent-color: var(--primary);
 	background-color: var(--gray-200);
@@ -28,14 +31,14 @@ article {
 	overflow: hidden;
 	width: 100%;
 
-	@media screen and (width >= 768px) {
+	@media screen and (width >= map.get($grid-breakpoints, md)) {
 		border-radius: var(--border-radius);
-		margin: 1.5rem auto;
-		max-width: 720px;
+		margin: map.get($spacers, 4) auto;
+		max-width: map.get($container-max-widths, md);
 	}
 
 	> section {
-		padding: 1rem;
+		padding: $spacer;
 	}
 }
 
@@ -44,13 +47,13 @@ aside {
 	border-bottom: var(--border-width) solid var(--border-color);
 	box-shadow: var(--box-shadow-sm);
 	left: 0;
-	padding: 0.5rem 0;
+	padding: map.get($spacers, 2) 0;
 	position: fixed;
 	right: 0;
 	top: var(--navbar-height);
 	user-select: none;
 	width: 100%;
-	z-index: 100;
+	z-index: $zindex-fixed;
 
 	[data-bs-theme="dark"] & {
 		background-color: var(--gray-800);

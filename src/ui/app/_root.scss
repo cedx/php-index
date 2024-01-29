@@ -2,16 +2,6 @@
 	--navbar-height: 50px;
 }
 
-:root, [data-bs-theme="light"] {
-	--heading-color: var(--emphasis-color);
-	--link-color: var(--primary);
-	--link-color-rgb: var(--primary-rgb);
-	--link-hover-color: #12467a;
-	--link-hover-color-rgb: 18, 70, 122;
-	--primary: #165898;
-	--primary-rgb: 22, 88, 152;
-}
-
 [data-bs-theme="dark"] {
 	--body-bg: var(--gray-900);
 	--body-bg-rbg: 33, 37, 41;
@@ -19,9 +9,4 @@
 	--link-color-rgb: 121, 168, 240;
 	--link-hover-color: #83b4ff;
 	--link-hover-color-rgb: 131, 180, 255;
-}
-
-::selection {
-	background-color: var(--primary);
-	color: var(--white);
 }

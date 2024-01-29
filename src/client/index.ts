@@ -1,4 +1,3 @@
-import "urlpattern-polyfill";
 import {fetchProxy} from "./http/fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 

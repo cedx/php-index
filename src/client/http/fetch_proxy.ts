@@ -14,10 +14,9 @@ export const fetchProxy = new Proxy(fetch, {
 		const request = new Request(...args);
 		if (!request.headers.has("Accept")) request.headers.set("Accept", "application/json");
 
-		const methods = ["PATCH", "POST", "PUT"];
-		if (methods.includes(request.method)) {
-			const [mimeType] = (request.headers.get("Content-Type") ?? "").split(";");
-			if (!mimeType || mimeType == "text/plain") request.headers.set("Content-Type", "application/json");
+		if (["PATCH", "POST", "PUT"].includes(request.method)) {
+			const [mediaType] = (request.headers.get("Content-Type") ?? "").split(";");
+			if (!mediaType || mediaType == "text/plain") request.headers.set("Content-Type", "application/json");
 		}
 
 		const response = await Reflect.apply(target, thisArg, [request]);
