@@ -6,13 +6,30 @@ import process from "node:process";
 import {parseArgs} from "node:util";
 import {execa} from "execa";
 import pkg from "../../package.json" with {type: "json"};
-import usage from "./usage.js";
+
+/**
+ * The usage information.
+ */
+const usage = `
+Build the PHP Index redistributable.
+
+Usage:
+  php_index [options] <directory>
+
+Arguments:
+  directory       The path to the output directory.
+
+Options:
+  -c, --compress  Compress the Phar archive.
+  -h, --help      Display this help.
+  -v, --version   Output the version number.
+`;
 
 /**
  * Application entry point.
- * @returns The application exit code.
+ * @returns Resolves when the application is terminated.
  */
-async function main(): Promise<number> {
+async function main(): Promise<void> {
 	// Parse the command line arguments.
 	const {positionals, values} = parseArgs({allowPositionals: true, options: {
 		compress: {short: "c", type: "boolean", default: false},
@@ -21,16 +38,11 @@ async function main(): Promise<number> {
 	}});
 
 	// Print the usage.
-	if (values.help || values.version) { // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-		console.log(values.version ? pkg.version : usage.trim());
-		return 0;
-	}
+	if (values.help || values.version) // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+		return console.log(values.version ? pkg.version : usage.trim());
 
 	// Check the requirements.
-	if (!positionals.length) {
-		console.error("You must provide the path of the output directory.");
-		return 1;
-	}
+	if (!positionals.length) throw Error("You must provide the path of the output directory.");
 
 	// Populate the input folder.
 	const root = join(__dirname, "..");
@@ -41,11 +53,10 @@ async function main(): Promise<number> {
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);
 	await execa("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
-	return 0;
 }
 
 // Start the application.
-main().then(exitCode => process.exitCode = exitCode, error => {
+main().catch(error => {
 	console.error(error instanceof Error ? error.message : error);
 	process.exitCode = 1;
 });

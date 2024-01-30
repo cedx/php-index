@@ -1,5 +1,30 @@
 <?php
 /**
+ * The bootstrap stub of the Phar archive.
+ * @var string
+ */
+const stub = <<<'EOF'
+<?php
+// Register the class loader.
+$pharPath = basename(__FILE__);
+spl_autoload_register(function(string $class) use ($pharPath) {
+	$parts = explode("\\", $class);
+	array_shift($parts);
+	include "phar://$pharPath/lib/".implode("/", $parts).".php";
+});
+
+// Start the application.
+$controller = new \php_index\Controller;
+try { $controller->handleRequest($_GET); }
+catch (Throwable $e) {
+	$code = $e->getCode();
+	$controller->sendResponse($e->getMessage(), mediaType: "text/plain", status: $code >= 400 && $code < 600 ? $code : 500);
+}
+
+__HALT_COMPILER();
+EOF;
+
+/**
  * Application entry point.
  * @throws LogicException A command line argument is missing or invalid.
  * @throws RuntimeException The Phar archive could not be created.
@@ -19,13 +44,10 @@ function main(): void {
 	$output = $values["o"] ?? ($values["output"] ?? "");
 	if (!$output || !is_dir($output)) throw new LogicException("You must provide a valid path to the output directory.", 400);
 
-	$stub = file_get_contents(__DIR__ . "/stub.php");
-	if (!$stub) throw new RuntimeException("Unable to load the bootstrap stub of the Phar archive.", 500);
-
 	// Create the Phar archive.
 	$phar = new Phar("$output/index.phar");
 	$phar->buildFromDirectory($input);
-	$phar->setStub($stub);
+	$phar->setStub(stub);
 
 	// Compress the Phar archive.
 	$compress = isset($values["c"]) || isset($values["compress"]);
