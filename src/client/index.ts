@@ -2,11 +2,11 @@ import {fetchProxy} from "./http/fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 
 // Register the components.
-import "./ui/components/action_bar.js";
-import "./ui/components/listing.js";
-import "./ui/components/navbar.js";
-import "./ui/components/root.js";
-import "./ui/components/theme.js";
+import "./html/components/action_bar.js";
+import "./html/components/listing.js";
+import "./html/components/navbar.js";
+import "./html/components/root.js";
+import "./html/components/theme.js";
 
 // Set the locale.
 const [locale] = navigator.language.split("-");
