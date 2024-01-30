@@ -1,7 +1,7 @@
 <?php
 /**
  * Application entry point.
- * @throws LogicException A required command line argument is missing.
+ * @throws LogicException A command line argument is missing or invalid.
  * @throws RuntimeException The Phar archive could not be created.
  */
 function main(): void {
