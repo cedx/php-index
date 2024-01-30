@@ -18,16 +18,16 @@ module.exports = {
 			}
 		},
 		{
+			files: ["gulpfile.js"],
+			rules: {"prefer-arrow-callback": "off"}
+		},
+		{
 			files: ["src/client/**/*.ts"],
 			rules: {"@typescript-eslint/unbound-method": "off"}
 		},
 		{
 			files: ["test/**/*.js"],
 			rules: {"@typescript-eslint/no-floating-promises": "off"}
-		},
-		{
-			files: ["gulpfile.js"],
-			rules: {"prefer-arrow-callback": "off"}
 		}
 	],
 	parser: "@typescript-eslint/parser",
