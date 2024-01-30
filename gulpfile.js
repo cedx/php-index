@@ -87,7 +87,7 @@ export async function watch() {
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 }
 
-// The default task.
+// Packages the project.
 export default gulp.series(
 	function init(done) { env.NODE_ENV = "production"; done(); },
 	clean,
