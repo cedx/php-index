@@ -13,5 +13,5 @@ const [locale] = navigator.language.split("-");
 await setLocale(locales.has(locale) ? locale : document.documentElement.lang);
 
 // Start the application.
-window.fetch = fetchProxy;
+globalThis.fetch = fetchProxy;
 document.getElementById("loader")?.replaceWith(document.createElement("app-root"));
