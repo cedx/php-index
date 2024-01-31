@@ -24,10 +24,6 @@ module.exports = {
 		{
 			files: ["src/client/**/*.ts"],
 			rules: {"@typescript-eslint/unbound-method": "off"}
-		},
-		{
-			files: ["test/**/*.js"],
-			rules: {"@typescript-eslint/no-floating-promises": "off"}
 		}
 	],
 	parser: "@typescript-eslint/parser",
