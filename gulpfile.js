@@ -6,6 +6,7 @@ import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
+import replace from "gulp-replace";
 import phpMinifier from "@cedx/php-minifier";
 import pkg from "./package.json" with {type: "json"};
 import {clientOptions, consoleOptions} from "./etc/esbuild.js";
@@ -69,6 +70,13 @@ export async function publish() {
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
 }
 
+// Updates the version number in the sources.
+export function version() {
+	return gulp.src("composer.json")
+		.pipe(replace(/"version": "\d+(\.\d+){2}"/, `"version": "${pkg.version}"`))
+		.pipe(gulp.dest("."));
+}
+
 // Watches for file changes.
 export async function watch() {
 	await assets();
@@ -93,5 +101,6 @@ export default gulp.series(
 	function init(done) { env.NODE_ENV = "production"; done(); },
 	clean,
 	build,
-	cli
+	cli,
+	version
 );
