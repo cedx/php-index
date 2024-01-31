@@ -37,8 +37,9 @@ final class Controller {
 	private function sendFile(string $path): void {
 		if ($pharPath = \Phar::running(false)) $baseUri = "phar://" . basename($pharPath);
 		else {
+			$directory = dirname($_SERVER["SCRIPT_FILENAME"])."/..";
 			$prefix = PHP_OS_FAMILY == "Windows" ? "/" : "";
-			$baseUri = "file://$prefix" . str_replace("\\", "/", realpath(dirname($_SERVER["SCRIPT_FILENAME"])."/.."));
+			$baseUri = "file://$prefix" . str_replace("\\", "/", realpath($directory) ?: $directory);
 		}
 
 		$entity = new FileSystemEntity("$baseUri/www/$path");
@@ -55,7 +56,7 @@ final class Controller {
 
 		$directory = dirname($_SERVER["SCRIPT_FILENAME"]);
 		$entities = array_map(fn($name) => new FileSystemEntity("$directory/$name"), array_filter(
-			scandir($directory),
+			scandir($directory) ?: [],
 			fn($name) => $name[0] != "." && !in_array($name, $exclude) && is_readable("$directory/$name")
 		));
 
