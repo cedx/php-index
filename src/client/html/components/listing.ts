@@ -7,6 +7,7 @@ import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {getLocale} from "../../locale.js";
 import {Sort, SortOrder} from "../../data/sort.js";
+import {HttpClient} from "../../http/client.js";
 import {FileSystemEntity, type FileSystemEntityOptions, FileSystemEntityType as FseType} from "../../io/file_system_entity.js";
 import {LoadingState} from "../../net/loading_state.js";
 
@@ -174,8 +175,7 @@ export class Listing extends Component {
 		this.loading = LoadingState.loading;
 
 		try {
-			const response = await fetch("?listing");
-			const items = response.ok ? await response.json() as FileSystemEntityOptions[] : [];
+			const items = await (await new HttpClient().get("?listing")).json() as FileSystemEntityOptions[];
 			this.entities = items.map(item => new FileSystemEntity(item));
 			this.#orderBy("path");
 			this.loading = LoadingState.done;

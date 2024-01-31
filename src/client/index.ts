@@ -1,4 +1,3 @@
-import {fetchProxy} from "./http/fetch_proxy.js";
 import {locales, setLocale} from "./locale.js";
 
 // Register the components.
@@ -13,5 +12,4 @@ const [locale] = navigator.language.split("-");
 await setLocale(locales.has(locale) ? locale : document.documentElement.lang);
 
 // Start the application.
-globalThis.fetch = fetchProxy;
 document.getElementById("loader")?.replaceWith(document.createElement("app-root"));
