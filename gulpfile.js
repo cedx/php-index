@@ -47,6 +47,13 @@ export const cli = gulp.series(
 	}
 );
 
+// Packages the project.
+export const dist = gulp.series(
+	function init(done) { env.NODE_ENV = "production"; done(); },
+	build,
+	cli
+);
+
 // Builds the documentation.
 export async function doc() {
 	for (const file of ["CHANGELOG.md", "LICENSE.md"]) await cp(file, `docs/${file.toLowerCase()}`);
@@ -97,9 +104,7 @@ export async function watch() {
 
 // The default task.
 export default gulp.series(
-	function init(done) { env.NODE_ENV = "production"; done(); },
 	clean,
-	build,
-	cli,
+	dist,
 	version
 );
