@@ -177,8 +177,8 @@ export class Listing extends Component {
 			const response = await fetch("?listing");
 			if (!response.ok) this.loading = LoadingState.failed;
 			else {
-				const entities = await response.json() as FileSystemEntityOptions[];
-				this.entities = entities.map(entity => new FileSystemEntity(entity));
+				const list = await response.json() as FileSystemEntityOptions[];
+				this.entities = list.map(item => new FileSystemEntity(item));
 				this.loading = LoadingState.done;
 				this.#orderBy("path");
 			}
