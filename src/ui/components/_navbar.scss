@@ -1,9 +1,9 @@
 @use "../theme" as *;
 
 .navbar {
-	background-color: $primary;
-	box-shadow: $box-shadow;
-	height: $navbar-height;
+	background-color: var(--primary);
+	box-shadow: var(--box-shadow);
+	height: var(--navbar-height);
 	left: 0;
 	position: fixed;
 	right: 0;

@@ -2,12 +2,12 @@
 @use "../theme" as *;
 
 body {
-	accent-color: $primary;
-	background-color: $gray-200;
+	accent-color: var(--primary);
+	background-color: var(--gray-200);
 	overflow: hidden;
 
 	[data-bs-theme="dark"] & {
-		background-color: $black;
+		background-color: var(--black);
 	}
 
 	&.loading {
@@ -16,7 +16,7 @@ body {
 }
 
 main {
-	inset: var(--main-offset, $navbar-height) 0 0 0;
+	inset: var(--main-offset, var(--navbar-height)) 0 0 0;
 	overflow: auto;
 	position: absolute;
 
@@ -26,17 +26,13 @@ main {
 }
 
 article {
-	background-color: $body-bg;
-	box-shadow: $box-shadow-sm;
+	background-color: var(--body-bg);
+	box-shadow: var(--box-shadow-sm);
 	overflow: hidden;
 	width: 100%;
 
-	[data-bs-theme="dark"] & {
-		background-color: $body-bg-dark;
-	}
-
 	@media screen and (width >= map.get($grid-breakpoints, md)) {
-		border-radius: $border-radius;
+		border-radius: var(--border-radius);
 		margin: map.get($spacers, 4) auto;
 		max-width: map.get($container-max-widths, md);
 	}
@@ -47,21 +43,21 @@ article {
 }
 
 aside {
-	background-color: $gray-100;
-	border-bottom: $border-width solid $border-color;
-	box-shadow: $box-shadow-sm;
+	background-color: var(--gray-100);
+	border-bottom: var(--border-width) solid var(--border-color);
+	box-shadow: var(--box-shadow-sm);
 	left: 0;
 	padding: map.get($spacers, 2) 0;
 	position: fixed;
 	right: 0;
-	top: $navbar-height;
+	top: var(--navbar-height);
 	user-select: none;
 	width: 100%;
 	z-index: $zindex-fixed;
 
 	[data-bs-theme="dark"] & {
-		background-color: $gray-800;
-		border-bottom-color: $black;
+		background-color: var(--gray-800);
+		border-bottom-color: var(--black);
 	}
 
 	.icon {

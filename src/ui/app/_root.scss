@@ -1,5 +1,5 @@
 @use "../theme" as *;
 
 :root {
-	--navbar-height: $navbar-height;
+	--navbar-height: #{$navbar-height};
 }
