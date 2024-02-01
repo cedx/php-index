@@ -1,4 +1,4 @@
-import {writeFile} from "node:fs/promises";
+import {mkdir, writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
 import {compileAsync} from "sass-embedded";
 
@@ -14,6 +14,7 @@ export default async function compileSass(production = false) {
 		style: production ? "compressed" : "expanded"
 	});
 
+	await mkdir("www/css", {recursive: true});
 	if (sourceMap) await writeFile("www/css/main.css.map", JSON.stringify(sourceMap));
 	return writeFile("www/css/main.css", sourceMap ? `${css}${EOL}/*# sourceMappingURL=main.css.map */` : css);
 }

@@ -53,6 +53,7 @@ function minifyHtmlLiterals() {
 	return {
 		name: "minifyHtml",
 		setup: build => {
+			/** @type {Map<string, {hash: string, output: import("esbuild").OnLoadResult}>} */
 			const cache = new Map();
 			build.onLoad({filter: /\.[jt]s$/i}, async ({path}) => {
 				const contents = await readFile(path, "utf8");

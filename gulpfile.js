@@ -1,4 +1,4 @@
-import {cp, mkdir} from "node:fs/promises";
+import {cp} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
 import browserSync from "browser-sync";
@@ -18,7 +18,6 @@ const isProduction = () => env.NODE_ENV == "production";
 // Deploys the assets.
 export async function assets() {
 	await $`lit-localize --config=etc/locale.json build`;
-	await mkdir("www/css", {recursive: true});
 	const fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
 	return cp(join(fontsource, "material-symbols-rounded-latin-fill-normal.woff2"), "www/fonts/icons.woff2");
 }
