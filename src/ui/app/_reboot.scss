@@ -1,6 +1,8 @@
+@use "../theme" as *;
+
 ::selection {
-	background-color: var(--primary);
-	color: var(--white);
+	background-color: $primary;
+	color: $white;
 }
 
 menu {

@@ -1,12 +1,5 @@
-:root {
-	--navbar-height: 50px;
-}
+@use "../theme" as *;
 
-[data-bs-theme="dark"] {
-	--body-bg: var(--gray-900);
-	--body-bg-rbg: 33, 37, 41;
-	--link-color: #79a8f0;
-	--link-color-rgb: 121, 168, 240;
-	--link-hover-color: #83b4ff;
-	--link-hover-color-rgb: 131, 180, 255;
+:root {
+	--navbar-height: $navbar-height;
 }
