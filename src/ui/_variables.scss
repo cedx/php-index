@@ -1,11 +1,14 @@
+// Options.
+$enable-shadows: true;
+$variable-prefix: "";
+
 // Color system.
 $gray-900: #212529;
 $primary: #165898;
 $white: white;
 
-// Options.
-$enable-shadows: true;
-$variable-prefix: "";
+// Typography.
+$font-size-root: 14px;
 
 // Body.
 $body-bg-dark: $gray-900;
@@ -15,9 +18,6 @@ $body-text-align: start;
 $link-color-dark: #79a8f0;
 $link-decoration: none;
 $link-hover-decoration: underline;
-
-// Typography.
-$font-size-root: 14px;
 
 // Navigation bar.
 $navbar-height: 50px;
