@@ -15,14 +15,12 @@
 	"bin": {
 		"php_index": "./bin/php_index.cjs"
 	},
-	"dependencies": {
-		"execa": "^8.0.1"
-	},
 	"devDependencies": {
 		"@cedx/php-minifier": "^2.0.0",
 		"@fontsource-variable/material-symbols-rounded": "^5.0.21",
 		"@lit/localize": "^0.12.1",
 		"@lit/localize-tools": "^0.7.2",
+		"@popperjs/core": "^2.11.8",
 		"@types/bootstrap": "^5.2.10",
 		"@types/browser-sync": "^2.29.0",
 		"@types/gulp": "^4.0.17",
@@ -34,6 +32,7 @@
 		"del": "^7.1.0",
 		"esbuild": "^0.20.0",
 		"eslint": "^8.56.0",
+		"execa": "^8.0.1",
 		"gulp": "^4.0.2",
 		"gulp-replace": "^1.1.4",
 		"lit": "^3.1.2",
