@@ -17,52 +17,6 @@ export class ThemeDropdown extends Component {
 	@property() label = "";
 
 	/**
-	 * The icon of the dropdown menu.
-	 */
-	@state() private icon = themeIcon(Theme.auto);
-
-	/**
-	 * Method invoked after the first rendering.
-	 */
-	protected override firstUpdated(): void {
-		// eslint-disable-next-line no-new
-		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
-	}
-
-	/**
-	 * Renders this component.
-	 * @returns The view template.
-	 */
-	protected override render(): TemplateResult {
-		return html`
-			<li class="nav-item dropdown">
-				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-					<i class="icon icon-fill">${this.icon}</i>
-					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
-				</a>
-				<ul class="dropdown-menu dropdown-menu-end">
-					<theme-selector @change=${this.#handleChange}></theme-selector>
-				</ul>
-			</li>
-		`;
-	}
-
-	/**
-	 * Handles the theme changes.
-	 * @param event The dispatched event.
-	 */
-	#handleChange(event: CustomEvent<Theme>): void {
-		this.icon = themeIcon(event.detail);
-	}
-}
-
-/**
- * A component for switching the color mode.
- */
-@customElement("theme-selector")
-export class ThemeSelector extends Component {
-
-	/**
 	 * The current theme.
 	 */
 	@state() private theme;
@@ -73,14 +27,13 @@ export class ThemeSelector extends Component {
 	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
-	 * Creates a new theme selector.
+	 * Creates a new theme dropdown.
 	 */
 	constructor() {
 		super();
 		const theme = localStorage.getItem("theme") as Theme|null;
 		this.theme = theme && Object.values(Theme).includes(theme) ? theme : Theme.auto;
 	}
-
 
 	/**
 	 * Method invoked when this component is connected.
@@ -102,6 +55,8 @@ export class ThemeSelector extends Component {
 	 * Method invoked after the first rendering.
 	 */
 	protected override firstUpdated(): void {
+		// eslint-disable-next-line no-new
+		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
 		this.#applyTheme();
 	}
 
@@ -109,15 +64,25 @@ export class ThemeSelector extends Component {
 	 * Renders this component.
 	 * @returns The view template.
 	 */
-	protected override render(): TemplateResult[] {
-		return Object.values(Theme).map(theme => html`
-			<li>
-				<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.#changeTheme(theme)}>
-					<span><i class="icon icon-fill me-1">${themeIcon(theme)}</i> ${themeLabel(theme)}</span>
-					${when(theme == this.theme, () => html`<i class="icon ms-2">check</i>`)}
-				</button>
+	protected override render(): TemplateResult {
+		return html`
+			<li class="nav-item dropdown">
+				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
+					<i class="icon icon-fill">${themeIcon(this.theme)}</i>
+					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end">
+					${Object.values(Theme).map(theme => html`
+						<li>
+							<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.#changeTheme(theme)}>
+								<span><i class="icon icon-fill me-1">${themeIcon(theme)}</i> ${themeLabel(theme)}</span>
+								${when(theme == this.theme, () => html`<i class="icon ms-2">check</i>`)}
+							</button>
+						</li>
+					`)}
+				</ul>
 			</li>
-		`);
+		`;
 	}
 
 	/**
@@ -125,7 +90,6 @@ export class ThemeSelector extends Component {
 	 */
 	#applyTheme(): void {
 		document.documentElement.dataset.bsTheme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
-		this.dispatchEvent(new CustomEvent("change", {detail: this.theme}));
 	}
 
 	/**
