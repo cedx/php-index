@@ -40,6 +40,7 @@ export class ThemeDropdown extends Component {
 	 */
 	override connectedCallback(): void {
 		super.connectedCallback();
+		this.#applyTheme();
 		this.#mediaQuery.addEventListener("change", this.#applyTheme);
 	}
 
@@ -57,7 +58,6 @@ export class ThemeDropdown extends Component {
 	protected override firstUpdated(): void {
 		// eslint-disable-next-line no-new
 		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
-		this.#applyTheme();
 	}
 
 	/**
