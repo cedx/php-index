@@ -52,7 +52,7 @@ export function consoleOptions() {
  */
 function minifyHtmlLiterals() {
 	return {
-		name: "minifyHtml",
+		name: "minifyHtmlLiterals",
 		setup: build => {
 			/** @type {Map<string, {hash: string, output: import("esbuild").OnLoadResult}>} */
 			const cache = new Map();
