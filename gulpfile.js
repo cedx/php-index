@@ -12,9 +12,6 @@ import pkg from "./package.json" with {type: "json"};
 import {clientOptions, consoleOptions} from "./etc/esbuild.js";
 import compileSass from "./etc/sass.js";
 
-// Returns a value indicating whether the application runs in production mode.
-const isProduction = () => env.NODE_ENV == "production";
-
 // Deploys the assets.
 export async function assets() {
 	await $`lit-localize --config=etc/locale.json build`;
@@ -25,8 +22,8 @@ export async function assets() {
 // Builds the project.
 export async function build() {
 	await assets();
-	await esbuild.build(clientOptions(isProduction()));
-	return compileSass(isProduction());
+	await esbuild.build(clientOptions());
+	return compileSass();
 }
 
 // Deletes all generated files.
@@ -37,12 +34,13 @@ export function clean() {
 // Builds the command line interface.
 export const cli = gulp.series(
 	async function cliJs() {
-		await esbuild.build(consoleOptions(isProduction()));
+		await esbuild.build(consoleOptions());
 		return $`git update-index --chmod=+x bin/php_index.cjs`;
 	},
 	function cliPhp() {
-		let stream = gulp.src("src/server/**/*.php", {read: !isProduction()});
-		if (isProduction()) stream = stream.pipe(phpMinifier({mode: "fast"}));
+		const production = env.NODE_ENV == "production";
+		let stream = gulp.src("src/server/**/*.php", {read: !production});
+		if (production) stream = stream.pipe(phpMinifier({mode: "fast"}));
 		return stream.pipe(gulp.dest("lib"));
 	}
 );

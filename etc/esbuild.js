@@ -1,14 +1,15 @@
 import {createHash} from "node:crypto";
 import {readFile} from "node:fs/promises";
 import {EOL} from "node:os";
+import {env} from "node:process";
 import {minifyHTMLLiterals} from "minify-html-literals";
 
 /**
  * Returns the build options of the client application.
- * @param {boolean} [production] Value indicating whether the application runs in production mode.
  * @returns {import("esbuild").BuildOptions} Thebuild options of the client application.
  */
-export function clientOptions(production = false) {
+export function clientOptions() {
+	const production = env.NODE_ENV == "production";
 	return {
 		bundle: true,
 		conditions: production ? [] : ["development"],
@@ -28,10 +29,10 @@ export function clientOptions(production = false) {
 
 /**
  * Returns the build options of the console application.
- * @param {boolean} [production] Value indicating whether the application runs in production mode.
  * @returns {import("esbuild").BuildOptions} The build options of the console application.
  */
-export function consoleOptions(production = false) {
+export function consoleOptions() {
+	const production = env.NODE_ENV == "production";
 	return {
 		banner: {js: "#!/usr/bin/env node"},
 		bundle: true,
