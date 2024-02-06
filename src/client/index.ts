@@ -1,3 +1,4 @@
+import "bootstrap";
 import {locales, setLocale} from "./locale.js";
 
 // Register the components.

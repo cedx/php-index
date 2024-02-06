@@ -1,4 +1,3 @@
-import {Dropdown} from "bootstrap";
 import {html, type TemplateResult} from "lit";
 import {customElement, property, state} from "lit/decorators.js";
 import {when} from "lit/directives/when.js";
@@ -50,14 +49,6 @@ export class ThemeDropdown extends Component {
 	override disconnectedCallback(): void {
 		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
 		super.disconnectedCallback();
-	}
-
-	/**
-	 * Method invoked after the first rendering.
-	 */
-	protected override firstUpdated(): void {
-		// eslint-disable-next-line no-new
-		new Dropdown(this.renderRoot.querySelector(".dropdown-toggle")!);
 	}
 
 	/**
