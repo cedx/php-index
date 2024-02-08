@@ -3,6 +3,8 @@
 	"exclude": ["i18n/*.ts"],
 	"include": ["**/*.ts"],
 	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
 		"useDefineForClassFields": false
 	}
 }
