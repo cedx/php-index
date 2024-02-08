@@ -1,4 +1,4 @@
-import "bootstrap";
+import "bootstrap/js/dist/dropdown.js";
 import {locales, setLocale} from "./locale.js";
 
 // Register the components.
