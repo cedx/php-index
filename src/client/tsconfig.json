@@ -1,7 +1,6 @@
 {
 	"extends": "../../tsconfig",
-	"exclude": ["i18n/*.ts"],
-	"include": ["**/*.ts"],
+	"include": ["index.ts"],
 	"compilerOptions": {
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
