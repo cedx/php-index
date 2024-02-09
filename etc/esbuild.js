@@ -48,7 +48,7 @@ export function consoleOptions() {
 
 /**
  * Creates a plugin that minifies HTML markup inside template literal strings.
- * @returns {import("esbuild").Plugin}
+ * @returns {import("esbuild").Plugin} The newly created plugin.
  */
 function minifyHtmlLiterals() {
 	return {
