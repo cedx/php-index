@@ -54,7 +54,7 @@ export class Listing extends Component {
 	/**
 	 * The view corresponding to the file listing.
 	 */
-	get listing(): TemplateResult {
+	get #listing(): TemplateResult {
 		return html`
 			<table class="table table-hover table-sticky table-striped mb-0">
 				<thead>
@@ -95,7 +95,7 @@ export class Listing extends Component {
 							</td>
 							<td>
 								${when(entity.type == FseType.directory, () => html`&ndash;`, () => html`
-									<div class="px-1" style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.maxFileSize) * 100)}%, transparent 0)">
+									<div class="px-1" style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.#maxFileSize) * 100)}%, transparent 0)">
 										${this.#formatBytes(entity.size)}
 									</div>
 								`)}
@@ -115,7 +115,7 @@ export class Listing extends Component {
 	/**
 	 * The size in bytes of the largest file in this listing.
 	 */
-	get maxFileSize(): number {
+	get #maxFileSize(): number {
 		return this.entities.reduce((size, entity) => entity.size > size ? entity.size : size, 0);
 	}
 
@@ -154,7 +154,7 @@ export class Listing extends Component {
 							</div>
 						</section>
 					`],
-					[LoadingState.done, () => this.entities.length ? this.listing : html`
+					[LoadingState.done, () => this.entities.length ? this.#listing : html`
 						<section>
 							<div class="alert alert-warning mb-0">
 								<i class="icon icon-fill fw-bold me-1">warning</i> ${msg("This directory is empty.")}

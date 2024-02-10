@@ -36,7 +36,7 @@
 </trans-unit>
 <trans-unit id="s0f3f0b422c753cde">
   <source>Parent directory</source>
-  <target>Dossier parent/</target>
+  <target>Dossier parent</target>
 </trans-unit>
 <trans-unit id="s559797e1e0e6b7a6">
   <source>Index of <x id="0" equiv-text="${this.#path}"/></source>
