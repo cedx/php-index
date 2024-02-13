@@ -29,7 +29,7 @@ Options:
  * Application entry point.
  * @returns Resolves when the application is terminated.
  */
-async function main(): Promise<void> {
+async function main(): Promise<unknown> {
 	// Parse the command line arguments.
 	const {positionals, values} = parseArgs({allowPositionals: true, options: {
 		compress: {short: "c", type: "boolean", default: false},
@@ -52,7 +52,7 @@ async function main(): Promise<void> {
 
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);
-	await execa("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
+	return execa("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
 }
 
 // Start the application.
