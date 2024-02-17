@@ -2,9 +2,9 @@
 @use "variables" as *;
 
 // Configuration.
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import "pkg:bootstrap/scss/functions";
+@import "pkg:bootstrap/scss/variables";
+@import "pkg:bootstrap/scss/variables-dark";
+@import "pkg:bootstrap/scss/maps";
+@import "pkg:bootstrap/scss/mixins";
+@import "pkg:bootstrap/scss/utilities";

@@ -1,7 +1,7 @@
 import {mkdir, writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
 import {env} from "node:process";
-import {compileAsync} from "sass-embedded";
+import {compileAsync, NodePackageImporter} from "sass-embedded";
 
 /**
  * Compiles the style sheet.
@@ -10,7 +10,7 @@ import {compileAsync} from "sass-embedded";
 export default async function compileSass() {
 	const production = env.NODE_ENV == "production";
 	const {css, sourceMap} = await compileAsync("src/ui/index.scss", {
-		loadPaths: ["node_modules"],
+		importers: [new NodePackageImporter],
 		sourceMap: !production,
 		style: production ? "compressed" : "expanded"
 	});
