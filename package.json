@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@cedx/php-minifier": "^2.0.0",
-		"@fontsource-variable/material-symbols-rounded": "^5.0.22",
+		"@fontsource-variable/material-symbols-rounded": "^5.0.23",
 		"@lit/localize": "^0.12.1",
 		"@lit/localize-tools": "^0.7.2",
 		"@popperjs/core": "^2.11.8",
@@ -30,7 +30,7 @@
 		"bootstrap": "^5.3.2",
 		"browser-sync": "^3.0.2",
 		"del": "^7.1.0",
-		"esbuild": "^0.20.0",
+		"esbuild": "^0.20.1",
 		"eslint": "^8.56.0",
 		"execa": "^8.0.1",
 		"gulp": "^4.0.2",
