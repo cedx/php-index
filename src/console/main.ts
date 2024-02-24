@@ -1,5 +1,5 @@
 import console from "node:console";
-import {cp, mkdtemp, rm} from "node:fs/promises";
+import {cp, mkdir, mkdtemp, rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join, resolve} from "node:path";
 import process from "node:process";
@@ -52,6 +52,7 @@ async function main(): Promise<unknown> {
 
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);
+	await mkdir(output, {recursive: true});
 	return execa("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
 }
 
