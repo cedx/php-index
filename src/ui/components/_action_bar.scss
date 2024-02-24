@@ -5,14 +5,13 @@ action-bar {
 	background-color: var(--gray-100);
 	border-bottom: var(--border-width) solid var(--border-color);
 	box-shadow: var(--box-shadow-sm);
+	display: block;
 	left: 0;
 	padding: map.get($spacers, 2) 0;
 	position: fixed;
 	right: 0;
 	top: var(--navbar-height);
-	user-select: none;
-	width: 100%;
-	z-index: $zindex-dropdown - 1;
+	z-index: $zindex-fixed - 1;
 
 	[data-bs-theme="dark"] & {
 		background-color: var(--gray-800);

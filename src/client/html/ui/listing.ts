@@ -56,8 +56,8 @@ export class Listing extends Component {
 	 */
 	get #listing(): TemplateResult {
 		return html`
-			<table class="table table-hover table-sticky table-striped mb-0">
-				<thead>
+			<table class="table table-hover table-striped mb-0">
+				<thead class="sticky-top">
 					<tr>
 						<th @click=${() => this.#orderBy("path")} scope="col">
 							<span role="button">${msg("Name")} <i class="icon">${this.sort.getIcon("path")}</i></span>

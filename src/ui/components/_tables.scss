@@ -1,22 +1,10 @@
 @use "../theme" as *;
 
-.table-sticky {
-	> thead {
-		position: sticky;
-		top: 0;
-		z-index: $zindex-sticky;
-
-		&::after {
-			border-bottom: var(--border-width) solid var(--border-color);
-			bottom: 0;
-			content: "";
-			left: 0;
-			position: absolute;
-			right: 0;
-		}
-	}
-
-	> tbody {
-		border-top: none !important;
-	}
+.table > thead.sticky-top::after {
+	border-bottom: var(--border-width) solid var(--border-color);
+	bottom: 0;
+	content: "";
+	left: 0;
+	position: absolute;
+	right: 0;
 }

@@ -15,7 +15,7 @@ export class Navbar extends Component {
 	 */
 	protected override render(): TemplateResult {
 		return html`
-			<nav class="navbar navbar-expand-sm d-print-none">
+			<nav class="navbar navbar-expand-sm bg-primary d-print-none fixed-top shadow user-select-none">
 				<div class="container-fluid">
 					<div class="navbar-brand d-flex align-items-center">
 						<img alt="PHP Index" height="24" src="?file=favicon.svg" width="24"/>

@@ -29,8 +29,7 @@ export class ActionBar extends Component {
 	protected override firstUpdated(): void {
 		const {documentElement} = document;
 		const navbarHeight = Number.parseInt(getComputedStyle(documentElement).getPropertyValue("--navbar-height"));
-		const {offsetHeight} = this.renderRoot.firstElementChild as HTMLElement;
-		documentElement.style.setProperty("--main-offset", `${navbarHeight + offsetHeight}px`);
+		documentElement.style.setProperty("--main-offset", `${navbarHeight + this.offsetHeight}px`);
 	}
 
 	/**
@@ -39,7 +38,7 @@ export class ActionBar extends Component {
 	 */
 	protected override render(): TemplateResult {
 		return html`
-			<aside class="container-fluid d-print-none">
+			<aside class="container-fluid d-print-none user-select-none">
 				<slot class="d-flex justify-content-between align-items-center"></slot>
 			</aside>
 		`;

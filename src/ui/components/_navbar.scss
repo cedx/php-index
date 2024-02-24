@@ -1,15 +1,7 @@
 @use "../theme" as *;
 
 .navbar {
-	background-color: var(--primary);
-	box-shadow: var(--box-shadow);
 	height: var(--navbar-height);
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
-	user-select: none;
-	z-index: $zindex-fixed;
 }
 
 .navbar-nav .nav-link .icon {
