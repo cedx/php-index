@@ -38,9 +38,11 @@ function main(): void {
 	if (!extension_loaded("phar")) throw new RuntimeException("Phar extension is not loaded.", 501);
 	if (!Phar::canWrite()) throw new RuntimeException("Phar extension does not support creating Phar archives.", 501);
 
+	/** @var string $input */
 	$input = $values["i"] ?? ($values["input"] ?? "");
 	if (!$input || !is_dir($input)) throw new LogicException("You must provide a valid path to the input directory.", 400);
 
+	/** @var string $output */
 	$output = $values["o"] ?? ($values["output"] ?? "");
 	if (!$output || !is_dir($output)) throw new LogicException("You must provide a valid path to the output directory.", 400);
 

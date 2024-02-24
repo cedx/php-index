@@ -1,4 +1,4 @@
 <?php return ["parameters" => [
 	"level" => 8,
-	"paths" => ["src/server", "www"]
+	"paths" => ["src/console", "src/server", "www"]
 ]];
