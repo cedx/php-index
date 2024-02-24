@@ -59,8 +59,8 @@
 		"web"
 	],
 	"scripts": {
-		"postpublish": "gulp publish",
 		"prepack": "gulp",
+		"release": "gulp publish",
 		"start": "gulp cli && node bin/php_index.cjs --help"
 	}
 }

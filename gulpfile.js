@@ -71,6 +71,7 @@ export async function lint() {
 
 // Publishes the package.
 export async function publish() {
+	for (const registry of ["https://registry.npmjs.org", "https://npm.pkg.github.com"]) await $`npm publish --registry=${registry}`;
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
 }
 
