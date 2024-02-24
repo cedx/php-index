@@ -89,14 +89,19 @@ export class Listing extends Component {
 							<td>
 								<div class="text-truncate">
 									<a href=${entity.type == FseType.file ? entity.path : `${entity.path}/`}>
-										<i class="icon fs-5 me-2 ${classMap({"icon-fill": entity.type == FseType.directory, "text-secondary": entity.type == FseType.file, "text-warning": entity.type == FseType.directory})}">${entity.icon}</i>${entity.path}
+										<i class="icon fs-5 me-2 ${classMap({
+											"icon-fill": entity.type == FseType.directory,
+											"text-secondary": entity.type == FseType.file,
+											"text-warning": entity.type == FseType.directory})
+										}">${entity.icon}</i>${entity.path}
 									</a>
 								</div>
 							</td>
 							<td>
 								${when(entity.type == FseType.directory, () => html`&ndash;`, () => html`
-									<div class="px-1" style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.#maxFileSize) * 100)}%, transparent 0)">
-										${this.#formatBytes(entity.size)}
+									<div class="px-1"
+										style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.#maxFileSize) * 100)}%, transparent 0)">
+											${this.#formatBytes(entity.size)}
 									</div>
 								`)}
 
@@ -134,6 +139,22 @@ export class Listing extends Component {
 	 */
 	protected override render(): TemplateResult {
 		return html`
+			<action-bar>
+				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
+					<div class="input-group">
+						<input class="form-control" name="query" placeholder=${msg("Search")} required type="search" value=${this.filter}/>
+						<button class="btn btn-success" type="submit">
+							<i class="icon">search</i>
+						</button>
+						${when(this.filter.length, () => html`
+							<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
+								<i class="icon">close</i>
+							</button>
+						`)}
+					</div>
+				</form>
+			</action-bar>
+
 			<article>
 				<section class="border-bottom">
 					<h4 class="mb-0">${msg(str`Index of ${this.#path}`)}</h4>

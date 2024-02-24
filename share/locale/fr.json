@@ -3,6 +3,5 @@
 	"directory": "dossier",
 	"emptyResultSet": "Aucun fichier ou dossier ne correspond à votre requête.",
 	"file": "fichier",
-	"files": "fichiers",
-	"search": "Rechercher"
+	"files": "fichiers"
 }

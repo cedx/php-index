@@ -54,6 +54,10 @@
   <source>This directory is empty.</source>
   <target>Ce répertoire est vide.</target>
 </trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Rechercher</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
