@@ -58,6 +58,10 @@
   <source>Search</source>
   <target>Rechercher</target>
 </trans-unit>
+<trans-unit id="sb11c5edad66e0f91">
+  <source>No files or folders match your query.</source>
+  <target>Aucun fichier ou dossier ne correspond à votre requête.</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

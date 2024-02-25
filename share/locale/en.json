@@ -1,7 +1,6 @@
 {
 	"directories": "directories",
 	"directory": "directory",
-	"emptyResultSet": "No files or folders match your query.",
 	"file": "file",
 	"files": "files"
 }

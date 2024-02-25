@@ -1,6 +1,6 @@
 import {msg, str} from "@lit/localize";
 import {html, type TemplateResult} from "lit";
-import {customElement, state} from "lit/decorators.js";
+import {customElement, query, state} from "lit/decorators.js";
 import {classMap} from "lit/directives/class-map.js";
 import {choose} from "lit/directives/choose.js";
 import {when} from "lit/directives/when.js";
@@ -22,7 +22,7 @@ export class Listing extends Component {
 	private static readonly byteUnits = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte", "petabyte"];
 
 	/**
-	 * The list of file system entities.
+	 * The current list of file system entities.
 	 */
 	@state() private entities: FileSystemEntity[] = [];
 
@@ -30,6 +30,11 @@ export class Listing extends Component {
 	 * The current filter.
 	 */
 	@state() private filter = "";
+
+	/**
+	 * The search form element.
+	 */
+	@query("form", true) private readonly form!: HTMLFormElement;
 
 	/**
 	 * The loading state.
@@ -40,6 +45,11 @@ export class Listing extends Component {
 	 * The current sort.
 	 */
 	@state() private sort = new Sort();
+
+	/**
+	 * The list of all file system entities.
+	 */
+	#entities: FileSystemEntity[] = [];
 
 	/**
 	 * The formatter used to format the dates.
@@ -55,66 +65,72 @@ export class Listing extends Component {
 	 * The view corresponding to the file listing.
 	 */
 	get #listing(): TemplateResult {
-		return html`
-			<table class="table table-hover table-striped mb-0">
-				<thead class="sticky-top">
-					<tr>
-						<th @click=${() => this.#orderBy("path")} scope="col">
-							<span role="button">${msg("Name")} <i class="icon">${this.sort.getIcon("path")}</i></span>
-						</th>
-						<th @click=${() => this.#orderBy("size")} scope="col">
-							<span role="button">${msg("Size")} <i class="icon">${this.sort.getIcon("size")}</i></span>
-						</th>
-						<th class="d-none d-sm-table-cell" @click=${() => this.#orderBy("modifiedAt")} scope="col">
-							<span role="button">${msg("Last modified")} <i class="icon">${this.sort.getIcon("modifiedAt")}</i></span>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					${when(this.#path.length > 1, () => html`
+		return !this.entities.length
+			? html `
+				<section>
+					<div class="alert alert-warning mb-0">
+						<i class="icon icon-fill fw-bold me-1">warning</i> ${msg("No files or folders match your query.")}
+					</div>
+				</section>`
+			: html`
+				<table class="table table-hover table-striped mb-0">
+					<thead class="sticky-top">
 						<tr>
-							<td>
-								<div class="text-truncate">
-									<a href="..">
-										<i class="icon fs-5 me-2 text-secondary">drive_folder_upload</i>${msg("Parent directory")}
-									</a>
-								</div>
-							</td>
-							<td></td>
-							<td class="d-none d-sm-table-cell"></td>
+							<th @click=${() => this.#orderBy("path")} scope="col">
+								<span role="button">${msg("Name")} <i class="icon">${this.sort.getIcon("path")}</i></span>
+							</th>
+							<th @click=${() => this.#orderBy("size")} scope="col">
+								<span role="button">${msg("Size")} <i class="icon">${this.sort.getIcon("size")}</i></span>
+							</th>
+							<th class="d-none d-sm-table-cell" @click=${() => this.#orderBy("modifiedAt")} scope="col">
+								<span role="button">${msg("Last modified")} <i class="icon">${this.sort.getIcon("modifiedAt")}</i></span>
+							</th>
 						</tr>
-					`)}
-					${this.entities.map(entity => html`
-						<tr>
-							<td>
-								<div class="text-truncate">
-									<a href=${entity.type == FseType.file ? entity.path : `${entity.path}/`}>
-										<i class="icon fs-5 me-2 ${classMap({
-											"icon-fill": entity.type == FseType.directory,
-											"text-secondary": entity.type == FseType.file,
-											"text-warning": entity.type == FseType.directory})
-										}">${entity.icon}</i>${entity.path}
-									</a>
-								</div>
-							</td>
-							<td>
-								${when(entity.type == FseType.directory, () => html`&ndash;`, () => html`
-									<div class="px-1"
-										style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.#maxFileSize) * 100)}%, transparent 0)">
-											${this.#formatBytes(entity.size)}
+					</thead>
+					<tbody>
+						${when(this.#path.length > 1, () => html`
+							<tr>
+								<td>
+									<div class="text-truncate">
+										<a href="..">
+											<i class="icon fs-5 me-2 text-secondary">drive_folder_upload</i>${msg("Parent directory")}
+										</a>
 									</div>
-								`)}
+								</td>
+								<td></td>
+								<td class="d-none d-sm-table-cell"></td>
+							</tr>
+						`)}
+						${this.entities.map(entity => html`
+							<tr>
+								<td>
+									<div class="text-truncate">
+										<a href=${entity.type == FseType.file ? entity.path : `${entity.path}/`}>
+											<i class="icon fs-5 me-2 ${classMap({
+												"icon-fill": entity.type == FseType.directory,
+												"text-secondary": entity.type == FseType.file,
+												"text-warning": entity.type == FseType.directory})
+											}">${entity.icon}</i>${entity.path}
+										</a>
+									</div>
+								</td>
+								<td>
+									${when(entity.type == FseType.directory, () => html`&ndash;`, () => html`
+										<div class="px-1"
+											style="background: linear-gradient(90deg, rgb(22 88 152 / 15%) ${Math.round((entity.size / this.#maxFileSize) * 100)}%, transparent 0)">
+												${this.#formatBytes(entity.size)}
+										</div>
+									`)}
 
-								${entity.type == FseType.directory ? html`&ndash;` : html``}
-							</td>
-							<td class="d-none d-sm-table-cell">
-								<time datetime=${entity.modifiedAt.toISOString()}>${this.#formatter.format(entity.modifiedAt)}</time>
-							</td>
-						</tr>
-					`)}
-				</tbody>
-			</table>
-		`;
+									${entity.type == FseType.directory ? html`&ndash;` : html``}
+								</td>
+								<td class="d-none d-sm-table-cell">
+									<time datetime=${entity.modifiedAt.toISOString()}>${this.#formatter.format(entity.modifiedAt)}</time>
+								</td>
+							</tr>
+						`)}
+					</tbody>
+				</table>`;
 	}
 
 	/**
@@ -142,11 +158,11 @@ export class Listing extends Component {
 			<action-bar>
 				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
 					<div class="input-group">
-						<input class="form-control" name="query" placeholder=${msg("Search")} required type="search" value=${this.filter}/>
+						<input class="form-control" name="filter" placeholder=${msg("Search")} required/>
 						<button class="btn btn-success" type="submit">
 							<i class="icon">search</i>
 						</button>
-						${when(this.filter.length, () => html`
+						${when(this.filter, () => html`
 							<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
 								<i class="icon">close</i>
 							</button>
@@ -175,7 +191,7 @@ export class Listing extends Component {
 							</div>
 						</section>
 					`],
-					[LoadingState.done, () => this.entities.length ? this.#listing : html`
+					[LoadingState.done, () => this.#entities.length ? this.#listing : html`
 						<section>
 							<div class="alert alert-warning mb-0">
 								<i class="icon icon-fill fw-bold me-1">warning</i> ${msg("This directory is empty.")}
@@ -199,7 +215,7 @@ export class Listing extends Component {
 			if (!response.ok) this.loading = LoadingState.failed;
 			else {
 				const list = await response.json() as FileSystemEntityOptions[];
-				this.entities = list.map(item => new FileSystemEntity(item));
+				this.entities = Array.from(this.#entities = list.map(item => new FileSystemEntity(item)));
 				this.loading = LoadingState.done;
 				this.#orderBy("path");
 			}
@@ -207,6 +223,17 @@ export class Listing extends Component {
 		catch {
 			this.loading = LoadingState.failed;
 		}
+	}
+
+	/**
+	 * Filters the list of file system entities according to the current filter.
+	 */
+	#filterEntities(): void {
+		this.filter = this.filter.trim().toLowerCase();
+		this.entities = Array.from(this.filter ? this.#entities.filter(item => item.path.toLowerCase().includes(this.filter)) : this.#entities);
+
+		const [attribute, order] = this.sort.at(0)!;
+		this.#orderBy(attribute, order);
 	}
 
 	/**
@@ -253,6 +280,9 @@ export class Listing extends Component {
 	 */
 	#resetForm(event: Event): void {
 		event.preventDefault();
+		this.filter = "";
+		this.form.reset();
+		this.#filterEntities();
 	}
 
 	/**
@@ -261,5 +291,7 @@ export class Listing extends Component {
 	 */
 	#submitForm(event: Event): void {
 		event.preventDefault();
+		this.filter = new FormData(this.form).get("filter") as string;
+		this.#filterEntities();
 	}
 }
