@@ -160,7 +160,7 @@ export class Listing extends Component {
 			<action-bar>
 				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
 					<div class="input-group">
-						<input class="form-control" name="filter" placeholder=${msg("Search")} required/>
+						<input class="form-control" name="filter" placeholder=${msg("Search")} required .value=${this.filter}/>
 						<button class="btn btn-success" type="submit">
 							<i class="icon">search</i>
 						</button>
@@ -239,9 +239,8 @@ export class Listing extends Component {
 	 * Filters the list of file system entities according to the current filter.
 	 */
 	#filterEntities(): void {
-		this.filter = this.filter.trim().toLowerCase();
-		this.entities = Array.from(this.filter ? this.#entities.filter(item => item.path.toLowerCase().includes(this.filter)) : this.#entities);
-
+		const filter = this.filter.toLowerCase();
+		this.entities = Array.from(filter ? this.#entities.filter(item => item.path.toLowerCase().includes(filter)) : this.#entities);
 		const [attribute, order] = this.sort.at(0)!;
 		this.#orderBy(attribute, order);
 	}
@@ -301,7 +300,7 @@ export class Listing extends Component {
 	 */
 	#submitForm(event: Event): void {
 		event.preventDefault();
-		this.filter = new FormData(this.form).get("filter") as string;
+		this.filter = (new FormData(this.form).get("filter") as string).trim();
 		this.#filterEntities();
 	}
 }
