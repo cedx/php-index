@@ -1,7 +1,8 @@
 # Changelog
 
 ## Version [2.0.0](https://github.com/cedx/php-index/compare/v1.3.0...v2.0.0)
-- Ported the source code to [TypeScript](https://www.typescriptlang.org).
+- Ported the source code to [TypeScript](https://www.typescriptlang.org) and [Lit](https://lit.dev).
+- Ported the stylesheet to [Sass](https://sass-lang.com).
 
 ## Version [1.3.0](https://github.com/cedx/php-index/compare/v1.2.0...v1.3.0)
 - Replaced [Bootstrap Icons](https://icons.getbootstrap.com) by [Material Symbols](https://fonts.google.com/icons).
