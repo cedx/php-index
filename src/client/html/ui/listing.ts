@@ -1,8 +1,8 @@
 import {msg, str} from "@lit/localize";
 import {html, type TemplateResult} from "lit";
 import {customElement, query, state} from "lit/decorators.js";
-import {classMap} from "lit/directives/class-map.js";
 import {choose} from "lit/directives/choose.js";
+import {classMap} from "lit/directives/class-map.js";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {getLocale} from "../../locale.js";
@@ -154,6 +154,8 @@ export class Listing extends Component {
 	 * @returns The view template.
 	 */
 	protected override render(): TemplateResult {
+		const directories = this.entities.filter(item => item.type == FseType.directory).length;
+		const files = this.entities.filter(item => item.type == FseType.file).length;
 		return html`
 			<action-bar>
 				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
@@ -169,6 +171,14 @@ export class Listing extends Component {
 						`)}
 					</div>
 				</form>
+
+				<div class="d-none d-sm-block">
+					<div class="hstack gap-3">
+						${when(directories, () => html`<div><b>${directories}</b> ${directories > 1 ? msg("directories") : msg("directory")}</div>`)}
+						${when(directories && files, () => html`<div class="vr"/>`)}
+						${when(files, () => html`<div><b>${files}</b> ${files > 1 ? msg("files") : msg("file")}</div>`)}
+					</div>
+				</div>
 			</action-bar>
 
 			<article>

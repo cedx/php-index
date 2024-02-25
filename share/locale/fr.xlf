@@ -62,6 +62,22 @@
   <source>No files or folders match your query.</source>
   <target>Aucun fichier ou dossier ne correspond à votre requête.</target>
 </trans-unit>
+<trans-unit id="sc4b1f4eb0734a1a8">
+  <source>directory</source>
+  <target>dossier</target>
+</trans-unit>
+<trans-unit id="s88169a70c68f115c">
+  <source>directories</source>
+  <target>dossiers</target>
+</trans-unit>
+<trans-unit id="saad01178f02a6a23">
+  <source>file</source>
+  <target>fichier</target>
+</trans-unit>
+<trans-unit id="s69f800801812a5f0">
+  <source>files</source>
+  <target>fichiers</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

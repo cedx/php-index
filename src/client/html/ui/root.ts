@@ -20,6 +20,7 @@ export class Root extends Component {
 	 */
 	override connectedCallback(): void {
 		super.connectedCallback();
+		// eslint-disable-next-line @typescript-eslint/no-loop-func
 		for (const event of ["online", "offline"]) addEventListener(event, () => this.isOnline = navigator.onLine);
 	}
 
