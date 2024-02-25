@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.0.1](https://github.com/cedx/php-index/compare/v2.0.0...v2.0.1)
+- Fixed an issue that occurs when the language is set to the default value.
+
 ## Version [2.0.0](https://github.com/cedx/php-index/compare/v1.3.0...v2.0.0)
 - Ported the source code to [TypeScript](https://www.typescriptlang.org) and [Lit](https://lit.dev).
 - Ported the stylesheet to [Sass](https://sass-lang.com).
