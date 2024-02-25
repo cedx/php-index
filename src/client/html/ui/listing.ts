@@ -160,7 +160,7 @@ export class Listing extends Component {
 			<action-bar>
 				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
 					<div class="input-group">
-						<input class="form-control" name="filter" placeholder=${msg("Search")} required .value=${this.filter}/>
+						<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter}/>
 						<button class="btn btn-success" type="submit">
 							<i class="icon">search</i>
 						</button>
@@ -290,7 +290,6 @@ export class Listing extends Component {
 	#resetForm(event: Event): void {
 		event.preventDefault();
 		this.filter = "";
-		this.form.reset();
 		this.#filterEntities();
 	}
 
