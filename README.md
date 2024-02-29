@@ -6,7 +6,7 @@ A [PHP](https://www.php.net) directory index generator, implemented in [TypeScri
 ![Screenshot](docs/screenshot.webp)
 
 ## Documentation
-- [User guide](https://cedx.github.io/php-index)
+- [User guide](https://docs.belin.io/php-index)
 
 ## Development
 - [Git repository](https://github.com/cedx/php-index)
