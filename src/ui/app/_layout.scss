@@ -7,7 +7,7 @@ body {
 	overflow: hidden;
 
 	[data-bs-theme="dark"] & {
-		background-color: var(--black);
+		background-color: var(--secondary-bg-subtle);
 	}
 
 	&.loading {
