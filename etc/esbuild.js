@@ -36,12 +36,13 @@ export function consoleOptions() {
 	return {
 		banner: {js: "#!/usr/bin/env node"},
 		bundle: true,
+		conditions: production ? [] : ["development"],
 		drop: production ? ["debugger"] : [],
 		entryPoints: ["src/console/main.ts"],
 		legalComments: "none",
 		minify: production,
-		platform: "node",
 		outfile: "bin/php_index.cjs",
+		platform: "node",
 		treeShaking: production
 	};
 }
