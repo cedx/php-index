@@ -162,11 +162,11 @@ export class Listing extends Component {
 					<div class="input-group">
 						<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter}/>
 						<button class="btn btn-success" type="submit">
-							<i class="icon">search</i>
+							<i class="icon transform-scale-140">search</i>
 						</button>
 						${when(this.filter, () => html`
 							<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
-								<i class="icon">close</i>
+								<i class="icon transform-scale-140">close</i>
 							</button>
 						`)}
 					</div>

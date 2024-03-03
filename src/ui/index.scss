@@ -5,6 +5,9 @@
 @use "theme";
 @use "bootstrap";
 
+// Utilities.
+@use "utilities/transform";
+
 // Application.
 @use "app/root";
 @use "app/reboot";
