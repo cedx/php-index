@@ -9,7 +9,7 @@
 .icon {
 	direction: ltr;
 	display: inline-block;
-	font-family: "Material Symbols";
+	font-family: "Material Symbols"; // stylelint-disable-line font-family-no-missing-generic-family-keyword
 	font-style: normal;
 	font-weight: normal;
 	letter-spacing: normal;
