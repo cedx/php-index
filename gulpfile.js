@@ -92,11 +92,14 @@ export async function watch() {
 	const host = "127.0.0.1:8000";
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
 
+	const buildCss = async () => { await compileSass(); browser.reload(); };
+	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, buildCss);
+
 	const buildJs = async () => { await buildContext.rebuild(); browser.reload(); };
 	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, buildJs);
 
-	const buildCss = async () => { await compileSass(); browser.reload(); };
-	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, buildCss);
+	const buildPhp = (/** @type {import("undertaker").TaskCallback} */ done) => { browser.reload(); done(); }
+	gulp.watch("src/server/**/*.php", buildPhp);
 
 	await new Promise(resolve => setTimeout(resolve, 1_000));
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
