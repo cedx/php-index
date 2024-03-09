@@ -17,4 +17,8 @@ action-bar {
 		background-color: var(--gray-800);
 		border-bottom-color: var(--black);
 	}
+
+	input[name="filter"] {
+		width: 24ch !important;
+	}
 }
