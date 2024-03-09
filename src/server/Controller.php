@@ -8,13 +8,19 @@ use php_index\io\{FileSystemEntity, FileSystemEntityType};
 final class Controller {
 
 	/**
+	 * Creates a new controller.
+	 * @param Configuration $config Value indicating whether to enable information about PHP's configuration.
+	 */
+	function __construct(private Configuration $config = new Configuration) {}
+
+	/**
 	 * Handles the client requests.
 	 * @param array<string, string> $query The query string.
 	 */
 	function handleRequest(array $query): void {
 		if (isset($query["listing"])) $this->sendListing();
-		else if ($path = trim($query["file"] ?? "main.html")) $this->sendFile($path);
-		else $this->sendResponse("The file path is required.", mediaType: "text/plain", status: 422);
+		else if (isset($query["phpinfo"])) $this->sendPhpInfo();
+		else $this->sendFile($query["file"] ?? "main.html");
 	}
 
 	/**
@@ -23,16 +29,18 @@ final class Controller {
 	 * @param string $mediaType The response MIME type.
 	 * @param int $status The status code of the response.
 	 */
-	function sendResponse(string $body, string $mediaType = "application/octet-stream", int $status = 200): void {
+	function sendResponse(string $body, string $mediaType = "application/octet-stream", int $status = 200): never {
 		http_response_code($status);
 		header("Content-Length: ".strlen($body));
 		header("Content-Type: $mediaType");
 		print $body;
+		exit();
 	}
 
 	/**
 	 * Sends the specified file to the client.
 	 * @param string $path The relative path of the file to send.
+	 * @throws \RuntimeException The requested file was not found.
 	 */
 	private function sendFile(string $path): void {
 		if ($pharPath = \Phar::running(false)) $baseUri = "phar://" . basename($pharPath);
@@ -43,8 +51,8 @@ final class Controller {
 		}
 
 		$entity = new FileSystemEntity("$baseUri/www/$path");
-		if ($entity->exists() && $entity->type() == FileSystemEntityType::file) $this->sendResponse($entity->contents(), mediaType: $entity->mediaType());
-		else $this->sendResponse("The file '$path' is not found.", mediaType: "text/plain", status: 404);
+		if ($entity->exists() && $entity->type() == FileSystemEntityType::file) $this->sendResponse($entity->contents(), $entity->mediaType());
+		throw new \RuntimeException("The file '$path' is not found.", 404);
 	}
 
 	/**
@@ -61,5 +69,24 @@ final class Controller {
 		));
 
 		$this->sendResponse(json_encode(array_values($entities)) ?: "[]", mediaType: "application/json");
+	}
+
+	/**
+	 * Sends the information about PHP's configuration.
+	 * @throws \RuntimeException PHP information is not enabled.
+	 */
+	private function sendPhpInfo(): void {
+		if (!$this->config->phpInfo) throw new \RuntimeException("404 Not Found", 404);
+
+		$replacements = [
+			"</head>" => '<link rel="icon" href="?file=favicon.svg"/><link rel="stylesheet" href="?file=css/main.css"/></head>',
+			"<body>" => '<body id="phpinfo">',
+			"<table>" => '<table class="table table-striped">'
+		];
+
+		ob_start();
+		phpinfo();
+		$output = str_replace(array_keys($replacements), $replacements, (string) @ob_get_clean());
+		$this->sendResponse($output, mediaType: "text/html; charset=utf-8");
 	}
 }
