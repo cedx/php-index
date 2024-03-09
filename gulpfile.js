@@ -42,6 +42,9 @@ export const cli = gulp.series(
 		let stream = gulp.src("src/server/**/*.php", {read: !production});
 		if (production) stream = stream.pipe(phpMinifier({mode: "fast"}));
 		return stream.pipe(gulp.dest("lib"));
+	},
+	function cliConfig() {
+		return cp("src/server/config.json", "lib/config.json");
 	}
 );
 
@@ -78,7 +81,7 @@ export async function publish() {
 
 // Updates the version number in the sources.
 export function version() {
-	return gulp.src("composer.json")
+	return gulp.src(["composer.json", "src/server/config.json"], {base: "."})
 		.pipe(replace(/"version": "\d+(\.\d+){2}"/, `"version": "${pkg.version}"`))
 		.pipe(gulp.dest("."));
 }
@@ -108,6 +111,6 @@ export async function watch() {
 // The default task.
 export default gulp.series(
 	clean,
-	dist,
-	version
+	version,
+	dist
 );
