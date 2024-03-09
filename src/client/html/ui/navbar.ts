@@ -1,7 +1,9 @@
 import {msg} from "@lit/localize";
 import {html, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
+import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
+import config from "../../config.js";
 
 /**
  * The navigation bar.
@@ -25,6 +27,14 @@ export class Navbar extends Component {
 					<div class="collapse navbar-collapse">
 						<menu class="navbar-nav ms-auto">
 							<theme-dropdown label=${msg("Theme")}></theme-dropdown>
+							${when(config.phpInfo, () => html`
+								<li class="nav-item">
+									<div class="vr h-100 mx-2 text-light"></div>
+								</li>
+								<li class="nav-item" data-bs-title=${msg("PHP information")} data-bs-toggle="tooltip">
+									<a class="nav-link pe-2" href="?phpinfo" target="_blank"><i class="icon icon-fill">settings</i></a>
+								</li>
+							`)}
 						</menu>
 					</div>
 				</div>

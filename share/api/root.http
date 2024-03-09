@@ -6,6 +6,10 @@ Accept: text/html
 GET {{apiUrl}}/?file=js/main.js
 Accept: text/javascript
 
+### Fetches the PHP information.
+GET {{apiUrl}}/?phpinfo
+Accept: application/json
+
 ### Fetches the directory listing.
 GET {{apiUrl}}/?listing
 Accept: application/json

@@ -8,12 +8,6 @@ use php_index\io\{FileSystemEntity, FileSystemEntityType};
 final class Controller {
 
 	/**
-	 * Creates a new controller.
-	 * @param Configuration $config Value indicating whether to enable information about PHP's configuration.
-	 */
-	function __construct(private Configuration $config = new Configuration) {}
-
-	/**
 	 * Handles the client requests.
 	 * @param array<string, string> $query The query string.
 	 */
@@ -76,16 +70,16 @@ final class Controller {
 	 * @throws \RuntimeException PHP information is not enabled.
 	 */
 	private function sendPhpInfo(): void {
-		if (!$this->config->phpInfo) throw new \RuntimeException("404 Not Found", 404);
+		if (!(new Configuration)->phpInfo) throw new \RuntimeException("404 Not Found", 404);
 
 		$replacements = [
 			"</head>" => '<link rel="icon" href="?file=favicon.svg"/><link rel="stylesheet" href="?file=css/main.css"/></head>',
 			"<body>" => '<body id="phpinfo">',
-			"<table>" => '<table class="table table-striped">'
+			"<table>" => '<table class="table table-sm table-striped">'
 		];
 
 		ob_start();
-		phpinfo();
+		phpinfo(INFO_GENERAL | INFO_CONFIGURATION | INFO_MODULES | INFO_ENVIRONMENT | INFO_VARIABLES);
 		$output = str_replace(array_keys($replacements), $replacements, (string) @ob_get_clean());
 		$this->sendResponse($output, mediaType: "text/html; charset=utf-8");
 	}

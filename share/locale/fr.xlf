@@ -78,6 +78,10 @@
   <source>files</source>
   <target>fichiers</target>
 </trans-unit>
+<trans-unit id="sd723aaf68550880d">
+  <source>PHP information</source>
+  <target>Informations PHP</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

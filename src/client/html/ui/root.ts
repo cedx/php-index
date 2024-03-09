@@ -1,4 +1,5 @@
 import {msg} from "@lit/localize";
+import {Tooltip} from "bootstrap";
 import {html, type TemplateResult} from "lit";
 import {customElement, state} from "lit/decorators.js";
 import {when} from "lit/directives/when.js";
@@ -20,8 +21,11 @@ export class Root extends Component {
 	 */
 	override connectedCallback(): void {
 		super.connectedCallback();
-		// eslint-disable-next-line @typescript-eslint/no-loop-func
-		for (const event of ["online", "offline"]) addEventListener(event, () => this.isOnline = navigator.onLine);
+		const updateOnlineStatus = (): boolean => this.isOnline = navigator.onLine;
+		for (const event of ["online", "offline"]) addEventListener(event, updateOnlineStatus);
+
+		// eslint-disable-next-line no-new
+		new Tooltip(document.body, {container: document.body, selector: '[data-bs-toggle="tooltip"]', trigger: "hover"});
 	}
 
 	/**

@@ -1,5 +1,5 @@
 import console from "node:console";
-import {cp, mkdir, mkdtemp, rm} from "node:fs/promises";
+import {cp, mkdir, mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join, resolve} from "node:path";
 import process from "node:process";
@@ -21,6 +21,7 @@ Arguments:
 
 Options:
   -c, --compress  Compress the Phar archive.
+  -p, --phpinfo   Add a link to the PHP information.
   -h, --help      Display this help.
   -v, --version   Output the version number.
 `;
@@ -34,6 +35,7 @@ async function main(): Promise<unknown> {
 	const {positionals, values} = parseArgs({allowPositionals: true, options: {
 		compress: {short: "c", type: "boolean", default: false},
 		help: {short: "h", type: "boolean", default: false},
+		phpinfo: {short: "p", type: "boolean", default: false},
 		version: {short: "v", type: "boolean", default: false}
 	}});
 
@@ -49,6 +51,14 @@ async function main(): Promise<unknown> {
 	const input = await mkdtemp(join(tmpdir(), "phpindex-"));
 	for (const folder of ["lib", "www"]) await cp(join(root, folder), join(input, folder), {recursive: true});
 	await rm(join(input, "www/index.php"));
+
+	// Update the application configuration.
+	const replaceInFile = async (file: string, search: RegExp, replace: string): Promise<void> =>
+		writeFile(file, (await readFile(file, {encoding: "utf8"})).replace(search, replace));
+
+	const isEnabled = values.phpinfo ? "true" : "false";
+	await replaceInFile("lib/config.json", /"phpInfo":\s?[^,]+,/, `"phpInfo": ${isEnabled},`);
+	await replaceInFile("www/js/main.js", /phpInfo:\s?[^,]+,/, `phpInfo: ${isEnabled},`);
 
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);

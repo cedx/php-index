@@ -1,0 +1,102 @@
+@use "sass:map";
+@use "../theme" as *;
+
+#phpinfo {
+	overflow: auto;
+	padding-top: var(--navbar-height);
+
+	> div {
+		background-color: var(--body-bg);
+		border-radius: var(--border-radius);
+		box-shadow: var(--box-shadow-sm);
+		margin: map.get($spacers, 4) auto;
+		max-width: map.get($container-max-widths, xl);
+		overflow: clip;
+	}
+
+	h1, h2 {
+		color: var(--light);
+		font-size: $h4-font-size;
+		margin-bottom: 0;
+		padding: ($spacer * 0.75);
+		text-align: start;
+	}
+
+	h1 {
+		background-color: var(--dark);
+	}
+
+	h2 {
+		background-color: var(--secondary);
+	}
+
+	hr, img {
+		display: none;
+	}
+
+	th, td {
+		font-size: inherit;
+		text-align: start !important;
+	}
+
+	th {
+		top: var(--navbar-height);
+		z-index: $zindex-sticky;
+	}
+
+	th::after {
+		border-bottom: var(--border-width) solid var(--border-color);
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+
+	table {
+		box-shadow: none;
+		margin: 0;
+
+		&:first-child {
+			box-shadow: var(--box-shadow);
+			height: var(--navbar-height);
+			left: 0;
+			margin-bottom: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			z-index: $zindex-fixed;
+
+			h1 {
+				align-items: center;
+				background: ($container-padding-x * 0.5) center / 24px 24px no-repeat url("?file=favicon.svg");
+				color: $navbar-light-brand-color;
+				font-size: $navbar-brand-font-size;
+				font-weight: 400;
+				padding: $spacer ($container-padding-x * 0.5) $spacer calc(24px + ($spacer * 1.25));
+			}
+
+			td {
+				background-color: var(--primary);
+				border: none;
+				color: var(--white);
+				padding: 0;
+			}
+		}
+	}
+
+	.e {
+		font-weight: 600;
+		width: 270px;
+	}
+
+	.h {
+		background: none;
+		th:first-child { width: 270px; }
+	}
+
+	.v i {
+		color: var(--secondary);
+		font-style: normal;
+	}
+}
