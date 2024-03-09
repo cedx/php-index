@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.1.0](https://github.com/cedx/php-index/compare/v2.0.1...v2.1.0)
+- Added a CLI option to add a link to the PHP information.
+
 ## Version [2.0.1](https://github.com/cedx/php-index/compare/v2.0.0...v2.0.1)
 - Fixed an issue that occurs when the language is set to the default value.
 
