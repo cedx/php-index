@@ -28,11 +28,8 @@ export class Navbar extends Component {
 						<menu class="navbar-nav ms-auto">
 							<theme-dropdown label=${msg("Theme")}></theme-dropdown>
 							${when(config.phpInfo, () => html`
-								<li class="nav-item">
-									<div class="vr h-100 mx-2 text-light"></div>
-								</li>
 								<li class="nav-item" data-bs-title=${msg("PHP information")} data-bs-toggle="tooltip">
-									<a class="nav-link pe-2" href="?phpinfo" target="_blank"><i class="icon icon-fill">settings</i></a>
+									<a class="nav-link pe-2" href="?phpinfo" target="_blank"><i class="icon icon-fill transform-scale-130">settings</i></a>
 								</li>
 							`)}
 						</menu>

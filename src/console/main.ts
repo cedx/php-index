@@ -57,8 +57,8 @@ async function main(): Promise<unknown> {
 		writeFile(file, (await readFile(file, {encoding: "utf8"})).replace(search, replace));
 
 	const isEnabled = values.phpinfo ? "true" : "false";
-	await replaceInFile("lib/config.json", /"phpInfo":\s?[^,]+,/, `"phpInfo": ${isEnabled},`);
-	await replaceInFile("www/js/main.js", /phpInfo:\s?[^,]+,/, `phpInfo: ${isEnabled},`);
+	await replaceInFile(join(input, "lib/config.json"), /"phpInfo":\s?[^,]+,/, `"phpInfo": ${isEnabled},`);
+	await replaceInFile(join(input, "www/js/main.js"), /phpInfo:\s?[^,]+,/, `phpInfo: ${isEnabled},`);
 
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);
