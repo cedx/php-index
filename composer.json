@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"name": "cedx/php-index",
 	"type": "project",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"authors": [
 		{"email": "cedric@belin.io", "name": "Cédric Belin", "homepage": "https://belin.io"}
 	],
