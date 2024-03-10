@@ -20,8 +20,8 @@ export function clientOptions() {
 		minify: production,
 		outfile: "www/js/main.js",
 		plugins: production ? [minifyHtmlLiterals()] : [],
-		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		sourcemap: !production,
+		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		sourcesContent: false,
 		treeShaking: production
 	};
