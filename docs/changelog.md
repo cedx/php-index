@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.1.2](https://github.com/cedx/php-index/compare/v2.1.1...v2.1.2)
+- Fixed the search input.
+
 ## Version [2.1.1](https://github.com/cedx/php-index/compare/v2.1.0...v2.1.1)
 - Fixed the `ENOENT` errors occurring when updating the configuration data.
 
