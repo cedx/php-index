@@ -91,11 +91,11 @@ export async function watch() {
 	await assets();
 
 	const browser = browserSync.create();
-	const buildContext = await esbuild.context(clientOptions());
+	const context = await esbuild.context(clientOptions());
 	const host = "127.0.0.1:8000";
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
 
-	const buildClient = async () => { await buildContext.rebuild(); browser.reload(); };
+	const buildClient = async () => { await context.rebuild(); browser.reload(); };
 	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, buildClient);
 
 	const buildServer = (/** @type {import("undertaker").TaskCallback} */ done) => { browser.reload(); done(); }
