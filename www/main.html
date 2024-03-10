@@ -15,10 +15,9 @@
 		<link rel="preload" href="?file=fonts/icons.woff2" as="font" type="font/woff2" crossorigin/>
 
 		<script type="module">
-			const fetchCss = async url => (await fetch(url)).text();
-			const stylesheet = new CSSStyleSheet;
-			stylesheet.replaceSync(await fetchCss("?file=css/main.css"));
-			document.adoptedStyleSheets = [stylesheet];
+			const styleSheet = new CSSStyleSheet;
+			styleSheet.replaceSync(await (await fetch("?file=css/main.css")).text());
+			document.adoptedStyleSheets = [styleSheet];
 			import("./?file=js/main.js");
 		</script>
 
