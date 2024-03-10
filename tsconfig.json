@@ -12,7 +12,6 @@
 		"noEmit": true,
 		"noImplicitOverride": true,
 		"resolveJsonModule": true,
-		"paths": {"@cedx/php-index": ["src"]},
 		"strict": true,
 		"target": "ESNext"
 	}
