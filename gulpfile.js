@@ -88,7 +88,7 @@ export function version() {
 
 // Watches for file changes.
 export async function watch() {
-	await assets();
+	await build();
 
 	const browser = browserSync.create();
 	const context = await esbuild.context(clientOptions());
@@ -96,13 +96,13 @@ export async function watch() {
 	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
 
 	const buildClient = async () => { await context.rebuild(); browser.reload(); };
-	gulp.watch("src/client/**/*.ts", {ignoreInitial: false}, buildClient);
+	gulp.watch("src/client/**/*.ts", buildClient);
 
 	const buildServer = (/** @type {import("undertaker").TaskCallback} */ done) => { browser.reload(); done(); }
 	gulp.watch("src/server/**/*.php", buildServer);
 
 	const buildStyleSheet = async () => { await compileSass(); browser.reload(); };
-	gulp.watch("src/ui/**/*.scss", {ignoreInitial: false}, buildStyleSheet);
+	gulp.watch("src/ui/**/*.scss", buildStyleSheet);
 
 	await new Promise(resolve => setTimeout(resolve, 1_000));
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
