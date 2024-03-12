@@ -25,6 +25,10 @@ main {
 			scroll-behavior: smooth;
 		}
 	}
+
+	@media print {
+		top: 0;
+	}
 }
 
 article {

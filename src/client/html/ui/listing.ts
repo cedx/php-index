@@ -158,19 +158,21 @@ export class Listing extends Component {
 		const files = this.entities.filter(item => item.type == FseType.file).length;
 		return html`
 			<action-bar>
-				<form class="flex-grow-1 flex-sm-grow-0" novalidate @submit=${this.#submitForm} spellcheck="false">
-					<div class="input-group">
-						<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter} />
-						<button class="btn btn-success" type="submit">
-							<i class="icon transform-scale-140">search</i>
-						</button>
-						${when(this.filter, () => html`
-							<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
-								<i class="icon transform-scale-140">close</i>
+				<search>
+					<form class="flex-grow-1 flex-sm-grow-0" novalidate spellcheck="false" @submit=${this.#submitForm}>
+						<div class="input-group">
+							<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter} />
+							<button class="btn btn-success" type="submit">
+								<i class="icon transform-scale-140">search</i>
 							</button>
-						`)}
-					</div>
-				</form>
+							${when(this.filter, () => html`
+								<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
+									<i class="icon transform-scale-140">close</i>
+								</button>
+							`)}
+						</div>
+					</form>
+				</search>
 
 				<div class="d-none d-sm-block">
 					<div class="hstack gap-3">
