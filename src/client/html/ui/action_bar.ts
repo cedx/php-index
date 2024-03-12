@@ -13,6 +13,7 @@ export class ActionBar extends Component {
 	 */
 	constructor() {
 		super({shadowRoot: true});
+		this.classList.add("d-print-none");
 	}
 
 	/**
@@ -38,7 +39,7 @@ export class ActionBar extends Component {
 	 */
 	protected override render(): TemplateResult {
 		return html`
-			<aside class="container-fluid d-print-none user-select-none">
+			<aside class="container-fluid user-select-none">
 				<slot class="d-flex justify-content-between align-items-center"></slot>
 			</aside>
 		`;

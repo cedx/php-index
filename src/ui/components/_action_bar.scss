@@ -6,11 +6,9 @@ action-bar {
 	border-bottom: var(--border-width) solid var(--border-color);
 	box-shadow: var(--box-shadow-sm);
 	display: block;
-	left: 0;
+	inset: var(--navbar-height) 0 auto 0;
 	padding: map.get($spacers, 2) 0;
 	position: fixed;
-	right: 0;
-	top: var(--navbar-height);
 	z-index: $zindex-fixed - 1;
 
 	[data-bs-theme="dark"] & {
