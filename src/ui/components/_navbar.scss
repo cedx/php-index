@@ -4,7 +4,7 @@
 	background-color: var(--primary);
 	height: var(--navbar-height);
 	box-shadow: var(--box-shadow);
-	inset: 0 0 auto 0;
+	inset: 0 0 auto;
 	position: fixed;
 	user-select: none;
 	z-index: $zindex-fixed;
