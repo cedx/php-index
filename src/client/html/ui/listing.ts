@@ -1,14 +1,13 @@
 import {msg, str} from "@lit/localize";
+import {Task} from "@lit/task";
 import {html, type TemplateResult} from "lit";
 import {customElement, query, state} from "lit/decorators.js";
-import {choose} from "lit/directives/choose.js";
 import {classMap} from "lit/directives/class-map.js";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {getLocale} from "../../locale.js";
 import {Sort, SortOrder} from "../../data/sort.js";
 import {FileSystemEntity, type FileSystemEntityOptions, FileSystemEntityType as FseType} from "../../io/file_system_entity.js";
-import {LoadingState} from "../../net/loading_state.js";
 
 /**
  * Displays the list of file system entities.
@@ -37,11 +36,6 @@ export class Listing extends Component {
 	@query("form", true) private readonly form!: HTMLFormElement;
 
 	/**
-	 * The loading state.
-	 */
-	@state() private loading = LoadingState.loading;
-
-	/**
 	 * The current sort.
 	 */
 	@state() private sort = new Sort();
@@ -49,7 +43,15 @@ export class Listing extends Component {
 	/**
 	 * The list of all file system entities.
 	 */
-	#entities: FileSystemEntity[] = [];
+	readonly #entities = new Task(this, async () => {
+		const response = await fetch("?listing");
+		if (!response.ok) throw Error(response.status.toString());
+
+		const items = (await response.json() as FileSystemEntityOptions[]).map(item => new FileSystemEntity(item));
+		this.entities = Array.from(items);
+		this.#orderBy("path");
+		return items;
+	});
 
 	/**
 	 * The formatter used to format the dates.
@@ -146,7 +148,7 @@ export class Listing extends Component {
 	override connectedCallback(): void {
 		super.connectedCallback();
 		document.title = `${location.hostname} - ${this.#path}`;
-		void this.#fetchEntities();
+		void this.#entities.run();
 	}
 
 	/**
@@ -160,17 +162,19 @@ export class Listing extends Component {
 			<action-bar>
 				<search>
 					<form class="flex-grow-1 flex-sm-grow-0" novalidate spellcheck="false" @submit=${this.#submitForm}>
-						<div class="input-group">
-							<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter} />
-							<button class="btn btn-success" type="submit">
-								<i class="icon transform-scale-140">search</i>
-							</button>
-							${when(this.filter, () => html`
-								<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
-									<i class="icon transform-scale-140">close</i>
+						<fieldset .disabled=${!this.#entities.value?.length}>
+							<div class="input-group">
+								<input class="form-control" name="filter" placeholder=${msg("Search")} .value=${this.filter} />
+								<button class="btn btn-success" type="submit">
+									<i class="icon transform-scale-140">search</i>
 								</button>
-							`)}
-						</div>
+								${when(this.filter, () => html`
+									<button class="btn btn-danger" @click=${this.#resetForm} type="reset">
+										<i class="icon transform-scale-140">close</i>
+									</button>
+								`)}
+							</div>
+						</fieldset>
 					</form>
 				</search>
 
@@ -188,61 +192,37 @@ export class Listing extends Component {
 					<h4 class="mb-0">${msg(str`Index of ${this.#path}`)}</h4>
 				</section>
 
-				${choose(this.loading, [
-					[LoadingState.loading, () => html`
-						<section>
-							<div class="alert alert-info mb-0">
-								<div class="spinner-border spinner-border-sm me-1"></div> ${msg("Loading the directory entries...")}
-							</div>
-						</section>
-					`],
-					[LoadingState.failed, () => html`
-						<section>
-							<div class="alert alert-danger mb-0">
-								<i class="icon icon-fill fw-bold me-1">error</i> ${msg("An error occurred while fetching the directory entries.")}
-							</div>
-						</section>
-					`],
-					[LoadingState.done, () => this.#entities.length ? this.#listing : html`
+				${this.#entities.render({
+					complete: entities => entities.length ? this.#listing : html`
 						<section>
 							<div class="alert alert-warning mb-0">
 								<i class="icon icon-fill fw-bold me-1">warning</i> ${msg("This directory is empty.")}
 							</div>
-						</section>
-					`]
-				])}
+						</section>`,
+					error: () => html`
+						<section>
+							<div class="alert alert-danger mb-0">
+								<i class="icon icon-fill fw-bold me-1">error</i> ${msg("An error occurred while fetching the directory entries.")}
+							</div>
+						</section>`,
+					pending: () => html`
+						<section>
+							<div class="alert alert-info mb-0">
+								<div class="spinner-border spinner-border-sm me-1"></div> ${msg("Loading the directory entries...")}
+							</div>
+						</section>`
+				})}
 			</article>
 		`;
-	}
-
-	/**
-	 * Fetches the file system entities.
-	 * @returns Resolves when the entities have been fetched.
-	 */
-	async #fetchEntities(): Promise<void> {
-		this.loading = LoadingState.loading;
-
-		try {
-			const response = await fetch("?listing");
-			if (!response.ok) this.loading = LoadingState.failed;
-			else {
-				const list = await response.json() as FileSystemEntityOptions[];
-				this.entities = Array.from(this.#entities = list.map(item => new FileSystemEntity(item)));
-				this.loading = LoadingState.done;
-				this.#orderBy("path");
-			}
-		}
-		catch {
-			this.loading = LoadingState.failed;
-		}
 	}
 
 	/**
 	 * Filters the list of file system entities according to the current filter.
 	 */
 	#filterEntities(): void {
+		const entities = this.#entities.value ?? [];
 		const filter = this.filter.toLowerCase();
-		this.entities = Array.from(filter ? this.#entities.filter(item => item.path.toLowerCase().includes(filter)) : this.#entities);
+		this.entities = Array.from(filter ? entities.filter(item => item.path.toLowerCase().includes(filter)) : entities);
 		const [attribute, order] = this.sort.at(0)!;
 		this.#orderBy(attribute, order);
 	}
