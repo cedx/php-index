@@ -253,7 +253,7 @@ export class Listing extends Component {
 	#orderBy(attribute: string, order?: SortOrder): void {
 		order ??= (this.sort.get(attribute) ?? SortOrder.desc) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
 		this.sort = new Sort().append(attribute, order);
-		this.entities = this.entities.sort((x, y) => {
+		this.entities = this.entities.toSorted((x, y) => {
 			switch (attribute) {
 				case "path": {
 					const value = x.type == y.type ? x.path.localeCompare(y.path, getLocale()) : x.type == FseType.directory ? -1 : 1;
