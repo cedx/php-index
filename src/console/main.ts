@@ -1,10 +1,10 @@
+import {execFile} from "node:child_process";
 import console from "node:console";
 import {cp, mkdir, mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join, resolve} from "node:path";
 import process from "node:process";
-import {parseArgs} from "node:util";
-import {execa} from "execa";
+import {parseArgs, promisify} from "node:util";
 import pkg from "../../package.json" with {type: "json"};
 
 /**
@@ -63,7 +63,9 @@ async function main(): Promise<unknown> {
 	// Build the Phar archive.
 	const output = resolve(positionals[0]);
 	await mkdir(output, {recursive: true});
-	return execa("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
+
+	const exec = promisify(execFile);
+	return exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
 }
 
 // Start the application.
