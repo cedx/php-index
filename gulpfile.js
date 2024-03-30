@@ -67,6 +67,7 @@ export function i18n() {
 
 // Performs the static analysis of source code.
 export async function lint() {
+	await build();
 	await $`tsc --project .`;
 	await $`eslint --config=etc/eslint.config.js gulpfile.js etc src`;
 	await $`stylelint --config=etc/stylelint.js src/ui/**/*.scss`;
