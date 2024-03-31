@@ -10,21 +10,13 @@ import {minifyHTMLLiterals} from "minify-html-literals";
  */
 export function clientOptions() {
 	const production = env.NODE_ENV == "production";
-	return {
-		bundle: true,
-		conditions: production ? [] : ["development"],
-		drop: production ? ["debugger"] : [],
+	return Object.assign(sharedOptions(production), {
 		entryPoints: ["src/client/index.ts"],
 		format: "esm",
-		legalComments: "none",
-		minify: production,
 		outfile: "www/js/main.js",
 		plugins: production ? [minifyHtmlLiterals()] : [],
-		sourcemap: !production,
-		sourceRoot: new URL("../www/js/", import.meta.url).href,
-		sourcesContent: false,
-		treeShaking: production
-	};
+		sourceRoot: new URL("../www/js/", import.meta.url).href
+	});
 }
 
 /**
@@ -33,16 +25,28 @@ export function clientOptions() {
  */
 export function consoleOptions() {
 	const production = env.NODE_ENV == "production";
-	return {
+	return Object.assign(sharedOptions(production), {
 		banner: {js: "#!/usr/bin/env node"},
+		entryPoints: ["src/console/main.ts"],
+		outfile: "bin/php_index.cjs",
+		platform: "node",
+		sourceRoot: new URL("../bin/", import.meta.url).href
+	});
+}
+
+/**
+ * Returns the build options shared by all applications.
+ * @param production Value indicating whether the application is running in debug mode.
+ * @returns {import("esbuild").BuildOptions} The build options shared by all applications.
+ */
+function sharedOptions(production = false) {
+	return {
 		bundle: true,
 		conditions: production ? [] : ["development"],
 		drop: production ? ["debugger"] : [],
-		entryPoints: ["src/console/main.ts"],
 		legalComments: "none",
 		minify: production,
-		outfile: "bin/php_index.cjs",
-		platform: "node",
+		sourcemap: !production,
 		treeShaking: production
 	};
 }
