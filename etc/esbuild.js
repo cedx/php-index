@@ -27,7 +27,7 @@ export function consoleOptions() {
 	const production = env.NODE_ENV == "production";
 	return Object.assign(sharedOptions(production), {
 		banner: {js: "#!/usr/bin/env node"},
-		entryPoints: ["src/console/main.ts"],
+		entryPoints: ["src/console/index.ts"],
 		outfile: "bin/php_index.cjs",
 		platform: "node",
 		sourceRoot: new URL("../bin/", import.meta.url).href

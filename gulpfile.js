@@ -80,6 +80,12 @@ export async function publish() {
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
 }
 
+// Starts the development server.
+export async function serve() {
+	await doc();
+	return $({stdio: "inherit"})`mkdocs serve --config-file=etc/mkdocs.yaml`;
+}
+
 // Updates the version number in the sources.
 export function version() {
 	return gulp.src(["composer.json", "src/server/config.json"], {base: "."})
@@ -94,7 +100,7 @@ export async function watch() {
 	const browser = browserSync.create();
 	const context = await esbuild.context(clientOptions());
 	const host = "127.0.0.1:8000";
-	$`php -S ${host} -t www`; // eslint-disable-line @typescript-eslint/no-unused-expressions
+	void $`php -S ${host} -t www`;
 
 	gulp.watch("src/client/**/*.ts", async function buildClient() {
 		await context.rebuild();

@@ -14,7 +14,7 @@ const usage = `
 Build the PHP Index redistributable.
 
 Usage:
-  php_index [options] <directory>
+  npx @cedx/php-index [options] <directory>
 
 Arguments:
   directory       The path to the output directory.
