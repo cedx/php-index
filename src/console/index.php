@@ -44,10 +44,10 @@ function main(): void {
 
 	/** @var string $output */
 	$output = $values["o"] ?? ($values["output"] ?? "");
-	if (!$output || !is_dir($output)) throw new LogicException("You must provide a valid path to the output directory.", 400);
+	if (!$output || !is_dir(dirname($output))) throw new LogicException("You must provide a valid path to the output archive.", 400);
 
 	// Create the Phar archive.
-	$phar = new Phar("$output/index.phar");
+	$phar = new Phar($output);
 	$phar->buildFromDirectory($input);
 	$phar->setStub(stub);
 

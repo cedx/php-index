@@ -13,10 +13,10 @@ $ npx @cedx/php-index --help
 Build the PHP Index redistributable.
 
 Usage:
-  npx @cedx/php-index [options] <directory>
+  npx @cedx/php-index [options] [phar]
 
 Arguments:
-  directory       The path to the output directory.
+  phar            The path to the output Phar archive.
 
 Options:
   -c, --compress  Compress the Phar archive.

@@ -2,7 +2,7 @@ import {execFile} from "node:child_process";
 import console from "node:console";
 import {cp, mkdir, mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import {tmpdir} from "node:os";
-import {join, resolve} from "node:path";
+import {dirname, join, resolve} from "node:path";
 import process from "node:process";
 import {parseArgs, promisify} from "node:util";
 import pkg from "../../package.json" with {type: "json"};
@@ -14,10 +14,10 @@ const usage = `
 Build the PHP Index redistributable.
 
 Usage:
-  npx @cedx/php-index [options] <directory>
+  npx @cedx/php-index [options] [phar]
 
 Arguments:
-  directory       The path to the output directory.
+  phar            The path to the output Phar archive.
 
 Options:
   -c, --compress  Compress the Phar archive.
@@ -43,9 +43,6 @@ async function main(): Promise<unknown> {
 	if (values.help || values.version) // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
 		return console.log(values.version ? pkg.version : usage.trim());
 
-	// Check the requirements.
-	if (!positionals.length) throw Error("You must provide the path of the output directory.");
-
 	// Populate the input folder.
 	const root = join(__dirname, "..");
 	const input = await mkdtemp(join(tmpdir(), "phpindex-"));
@@ -61,8 +58,8 @@ async function main(): Promise<unknown> {
 	await replaceInFile(join(input, "www/js/main.js"), /phpInfo:\s?[^,]+,/, `phpInfo: ${isEnabled},`);
 
 	// Build the Phar archive.
-	const output = resolve(positionals[0]);
-	await mkdir(output, {recursive: true});
+	const output = resolve(positionals.length ? positionals[0] : "index.phar");
+	await mkdir(dirname(output), {recursive: true});
 
 	const exec = promisify(execFile);
 	return exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
