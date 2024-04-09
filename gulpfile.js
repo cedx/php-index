@@ -100,7 +100,7 @@ export async function watch() {
 	const browser = browserSync.create();
 	const context = await esbuild.context(clientOptions());
 	const host = "127.0.0.1:8000";
-	void $`php -S ${host} -t www`;
+	void $({stdio: "inherit"})`php -S ${host} -t www`;
 
 	gulp.watch("src/client/**/*.ts", async function buildClient() {
 		await context.rebuild();
