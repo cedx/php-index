@@ -1,6 +1,7 @@
 import {cp} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
+import {setTimeout} from "node:timers/promises";
 import browserSync from "browser-sync";
 import {deleteAsync} from "del";
 import esbuild from "esbuild";
@@ -117,7 +118,7 @@ export async function watch() {
 		browser.reload();
 	});
 
-	await new Promise(resolve => setTimeout(resolve, 1_000));
+	await setTimeout(1_000);
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 }
 
