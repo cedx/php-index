@@ -47,6 +47,7 @@ function sharedOptions(production = false) {
 		legalComments: "none",
 		minify: production,
 		sourcemap: !production,
+		sourcesContent: false,
 		treeShaking: production
 	};
 }
