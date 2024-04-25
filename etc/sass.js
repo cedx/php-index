@@ -12,10 +12,11 @@ export default async function compileSass() {
 	const {css, sourceMap} = await compileAsync("src/ui/index.scss", {
 		importers: [new NodePackageImporter],
 		sourceMap: !production,
+		sourceMapIncludeSources: false,
 		style: production ? "compressed" : "expanded"
 	});
 
 	await mkdir("www/css", {recursive: true});
 	if (sourceMap) await writeFile("www/css/main.css.map", JSON.stringify(sourceMap));
-	return writeFile("www/css/main.css", sourceMap ? `${css}${EOL}/*# sourceMappingURL=main.css.map */` : css);
+	return writeFile("www/css/main.css", sourceMap ? `${css}${EOL}/*# sourceMappingURL=?file=css/main.css.map */` : css);
 }
