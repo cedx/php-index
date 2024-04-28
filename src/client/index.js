@@ -6,7 +6,7 @@ import "./html/ui/action_bar.js";
 import "./html/ui/listing.js";
 import "./html/ui/navbar.js";
 import "./html/ui/root.js";
-import "./html/ui/theme.js";
+import "./html/ui/theme_dropdown.js";
 
 // Start the application.
 const [locale] = navigator.language.split("-");

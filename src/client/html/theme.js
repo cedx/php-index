@@ -2,49 +2,48 @@ import {msg} from "@lit/localize";
 
 /**
  * Defines the available color modes.
+ * @enum {string}
  */
-export enum Theme {
+export const Theme = Object.freeze({
 
 	/**
 	 * The theme is light.
 	 */
-	light = "light",
+	light: "light",
 
 	/**
 	 * The theme is dark.
 	 */
-	dark = "dark",
+	dark: "dark",
 
 	/**
 	 * The color mode is automatic.
 	 */
-	auto = "auto"
-}
+	auto: "auto"
+});
 
 /**
  * Gets the icon corresponding to the specified theme.
- * @param theme The theme.
- * @returns The icon corresponding to the specified theme.
+ * @param {Theme} theme The theme.
+ * @returns {string} The icon corresponding to the specified theme.
  */
-export function themeIcon(theme: Theme): string {
+export function themeIcon(theme) {
 	switch (theme) {
-		case Theme.auto: return "tonality";
 		case Theme.dark: return "dark_mode";
 		case Theme.light: return "light_mode";
-		default: return "";
+		default: return "tonality";
 	}
 }
 
 /**
  * Gets the label corresponding to the specified theme.
- * @param theme The theme.
- * @returns The label corresponding to the specified theme.
+ * @param {Theme} theme The theme.
+ * @returns {string} The label corresponding to the specified theme.
  */
-export function themeLabel(theme: Theme): string {
+export function themeLabel(theme) {
 	switch (theme) {
-		case Theme.auto: return msg("Auto");
 		case Theme.dark: return msg("Dark");
 		case Theme.light: return msg("Light");
-		default: return "";
+		default: return msg("Auto");
 	}
 }
