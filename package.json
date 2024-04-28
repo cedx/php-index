@@ -13,18 +13,19 @@
 		"url": "https://belin.io"
 	},
 	"bin": {
-		"php_index": "./bin/php_index.cjs"
+		"php_index": "./bin/php_index.js"
 	},
 	"devDependencies": {
+		"@babel/eslint-parser": "^7.24.1",
+		"@babel/plugin-syntax-import-attributes": "^7.24.1",
 		"@cedx/php-minifier": "^2.1.1",
-		"@fontsource-variable/material-symbols-rounded": "^5.0.29",
+		"@fontsource-variable/material-symbols-rounded": "^5.0.30",
 		"@lit/localize": "^0.12.1",
 		"@lit/localize-tools": "^0.7.2",
 		"@lit/task": "^1.0.0",
 		"@popperjs/core": "^2.11.8",
 		"@types/bootstrap": "^5.2.10",
 		"@types/browser-sync": "^2.29.0",
-		"@types/eslint__js": "^8.42.3",
 		"@types/gulp": "^4.0.17",
 		"@types/node": "^20.12.7",
 		"bootstrap": "^5.3.3",
@@ -41,16 +42,14 @@
 		"source-map-js": "^1.2.0",
 		"stylelint": "^16.4.0",
 		"stylelint-config-standard-scss": "^13.1.0",
-		"typescript": "^5.4.5",
-		"typescript-eslint": "^7.7.1"
+		"typescript": "^5.4.5"
 	},
 	"engines": {
-		"node": ">=20.0.0"
+		"node": ">=22.0.0"
 	},
 	"files": [
 		"bin/",
 		"lib/",
-		"src/console/",
 		"www/"
 	],
 	"keywords": [
@@ -64,7 +63,6 @@
 	],
 	"scripts": {
 		"prepack": "gulp",
-		"release": "gulp publish",
-		"start": "gulp cli && node bin/php_index.cjs --help"
+		"start": "node bin/php_index.js --help"
 	}
 }
