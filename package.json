@@ -23,7 +23,6 @@
 		"@lit/localize": "^0.12.1",
 		"@lit/localize-tools": "^0.7.2",
 		"@lit/task": "^1.0.0",
-		"@popperjs/core": "^2.11.8",
 		"@types/bootstrap": "^5.2.10",
 		"@types/browser-sync": "^2.29.0",
 		"@types/gulp": "^4.0.17",
