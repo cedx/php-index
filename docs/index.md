@@ -1,5 +1,5 @@
 # PHP Index
-A [PHP](https://www.php.net) directory index generator, implemented in [TypeScript](https://www.typescriptlang.org).
+A [PHP](https://www.php.net) directory index generator, implemented in [JavaScript](https://developer.mozilla.org/docs/Web/JavaScript).
 
 ![Screenshot](screenshot.webp)
 

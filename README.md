@@ -1,7 +1,7 @@
 # PHP Index
 ![Node.js](https://badgen.net/npm/node/@cedx/php-index) ![npm](https://badgen.net/npm/v/@cedx/php-index) ![License](https://badgen.net/npm/license/@cedx/php-index) ![Downloads](https://badgen.net/npm/dt/@cedx/php-index)
 
-A [PHP](https://www.php.net) directory index generator, implemented in [TypeScript](https://www.typescriptlang.org).
+A [PHP](https://www.php.net) directory index generator, implemented in [JavaScript](https://developer.mozilla.org/docs/Web/JavaScript).
 
 ![Screenshot](docs/screenshot.webp)
 

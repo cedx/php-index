@@ -1,7 +1,7 @@
 site_name: PHP Index
 site_url: https://docs.belin.io/php-index
 site_author: Cédric Belin - cedric@belin.io
-site_description: A PHP directory index generator, implemented in TypeScript.
+site_description: A PHP directory index generator, implemented in JavaScript.
 
 docs_dir: ../docs
 site_dir: ../var/docs
