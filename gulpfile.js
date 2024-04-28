@@ -10,20 +10,15 @@ import gulp from "gulp";
 import replace from "gulp-replace";
 import phpMinifier from "@cedx/php-minifier";
 import pkg from "./package.json" with {type: "json"};
-import {clientOptions, consoleOptions} from "./etc/esbuild.js";
+import buildOptions from "./etc/esbuild.js";
 import compileSass from "./etc/sass.js";
-
-// Deploys the assets.
-export async function assets() {
-	await $`lit-localize --config=etc/locale.json build`;
-	const fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
-	return cp(join(fontsource, "material-symbols-rounded-latin-fill-normal.woff2"), "www/fonts/icons.woff2");
-}
 
 // Builds the project.
 export async function build() {
-	await assets();
-	await esbuild.build(clientOptions());
+	const fontsource = "node_modules/@fontsource-variable/material-symbols-rounded/files";
+	await cp(join(fontsource, "material-symbols-rounded-latin-fill-normal.woff2"), "www/fonts/icons.woff2");
+	await $`lit-localize --config=etc/locale.json build`;
+	await esbuild.build(buildOptions());
 	return compileSass();
 }
 
@@ -34,10 +29,6 @@ export function clean() {
 
 // Builds the command line interface.
 export const cli = gulp.series(
-	async function cliJs() {
-		await esbuild.build(consoleOptions());
-		return $`git update-index --chmod=+x bin/php_index.js`;
-	},
 	function cliPhp() {
 		const production = env.NODE_ENV == "production";
 		let stream = gulp.src("src/server/**/*.php", {read: !production});
@@ -96,13 +87,10 @@ export function version() {
 // Watches for file changes.
 export async function watch() {
 	await build();
-
 	const browser = browserSync.create();
-	const context = await esbuild.context(clientOptions());
-	const host = "127.0.0.1:8000";
-	void $({stdio: "inherit"})`php -S ${host} -t www`;
+	const context = await esbuild.context(buildOptions());
 
-	gulp.watch("src/client/**/*.ts", async function buildClient() {
+	gulp.watch("src/client/**/*.js", async function buildClient() {
 		await context.rebuild();
 		browser.reload();
 	});
@@ -117,6 +105,8 @@ export async function watch() {
 		browser.reload();
 	});
 
+	const host = "127.0.0.1:8000";
+	void $({stdio: "inherit"})`php -S ${host} -t www`;
 	await setTimeout(1_000);
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 }
