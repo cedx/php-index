@@ -165,11 +165,19 @@ export class Sort {
 	}
 
 	/**
-	 * Removes the specified attribute from this sort.
-	 * @param attribute The attribute name.
+	 * Returns a value indicating whether the current sort satisfies the specified conditions.
+	 * @param conditions The conditions to satisfy.
+	 * @returns `true` if the current sort satisfies the specified conditions, otherwise `false`.
 	 */
-	remove(attribute: string): void {
-		this.#attributes = this.#attributes.filter(([key]) => key != attribute);
+	satisfies(conditions: Partial<{attributes: string[], min: number, max: number}> = {}): boolean {
+		const min = conditions.min ?? -1;
+		if (min >= 0) return this.length >= min;
+
+		const max = conditions.max ?? -1;
+		if (max >= 0) return this.length <= max;
+
+		const attributes = conditions.attributes ?? [];
+		return attributes.length ? this.#attributes.every(([key]) => attributes.includes(key)) : true;
 	}
 
 	/**
