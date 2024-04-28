@@ -1,36 +1,43 @@
-import {css, LitElement, type CSSResultGroup} from "lit";
+import {css, LitElement} from "lit";
 
 /**
  * The base class for custom elements.
+ * @abstract
  */
-export abstract class Component extends LitElement {
+export class Component extends LitElement {
 
 	/**
 	 * The component styles.
+	 * @type {import("lit").CSSResultGroup}
+	 * @override
 	 */
-	static override styles: CSSResultGroup = [document.adoptedStyleSheets, css`
+	static styles = [document.adoptedStyleSheets, css`
 		:host { contain: content; }
 	`];
 
 	/**
 	 * Value indicating whether this component uses a shadow root.
+	 * @type {boolean}
+	 * @readonly
 	 */
-	readonly #useShadowRoot: boolean;
+	#useShadowRoot;
 
 	/**
 	 * Creates a new custom element.
-	 * @param options An object providing values to initialize this instance.
+	 * @param {Partial<{shadowRoot: boolean}>} options An object providing values to initialize this instance.
 	 */
-	protected constructor(options: Partial<{shadowRoot: boolean}> = {}) {
+	constructor(options = {}) {
 		super();
 		this.#useShadowRoot = options.shadowRoot ?? false;
 	}
 
 	/**
 	 * Returns the node into which this component should render.
-	 * @returns The newly created render root.
+	 * @returns {DocumentFragment|HTMLElement} The newly created render root.
+	 * @protected
+	 * @override
 	 */
-	protected override createRenderRoot(): DocumentFragment|HTMLElement {
+	createRenderRoot() {
 		return this.#useShadowRoot ? super.createRenderRoot() : this;
 	}
 }
