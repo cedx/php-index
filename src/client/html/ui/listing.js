@@ -1,53 +1,48 @@
 import {msg, str} from "@lit/localize";
 import {Task} from "@lit/task";
-import {html, type TemplateResult} from "lit";
-import {customElement, query, state} from "lit/decorators.js";
+import {html} from "lit";
 import {classMap} from "lit/directives/class-map.js";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {getLocale} from "../../locale.js";
 import {Sort, SortOrder} from "../../data/sort.js";
-import {FileSystemEntity, type FileSystemEntityOptions, FileSystemEntityType as FseType} from "../../io/file_system_entity.js";
+import {FileSystemEntity, FileSystemEntityType as FseType} from "../../io/file_system_entity.js";
 
 /**
  * Displays the list of file system entities.
  */
-@customElement("app-listing")
 export class Listing extends Component {
 
 	/**
+	 * The reactive properties.
+	 * @type {import("lit").PropertyDeclarations}
+	 * @override
+	 */
+	static properties = {
+		entities: {state: true},
+		filter: {state: true},
+		sort: {state: true}
+	};
+
+	/**
 	 * The byte units.
+	 * @type {string[]}
+	 * @readonly
 	 */
-	private static readonly byteUnits = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte", "petabyte"];
-
-	/**
-	 * The current list of file system entities.
-	 */
-	@state() private entities: FileSystemEntity[] = [];
-
-	/**
-	 * The current filter.
-	 */
-	@state() private filter = "";
-
-	/**
-	 * The search form element.
-	 */
-	@query("form", true) private readonly form!: HTMLFormElement;
-
-	/**
-	 * The current sort.
-	 */
-	@state() private sort = new Sort();
+	static #byteUnits = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte", "petabyte"];
 
 	/**
 	 * The list of all file system entities.
+	 * @type {Task<[], FileSystemEntity[]>}
+	 * @readonly
 	 */
-	readonly #entities = new Task(this, async () => {
+	#entities = new Task(this, async () => {
 		const response = await fetch("?listing");
 		if (!response.ok) throw Error(response.status.toString());
 
-		const items = (await response.json() as FileSystemEntityOptions[]).map(item => new FileSystemEntity(item));
+		const items = (await response.json())
+			.map((/** @type {import("../../io/file_system_entity.js").FileSystemEntityOptions} */ item) => new FileSystemEntity(item));
+
 		this.entities = Array.from(items);
 		this.#orderBy("path");
 		return items;
@@ -55,18 +50,58 @@ export class Listing extends Component {
 
 	/**
 	 * The formatter used to format the dates.
+	 * @type {Intl.DateTimeFormat}
+	 * @readonly
 	 */
-	readonly #formatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "medium", timeStyle: "short"});
+	#formatter = new Intl.DateTimeFormat(getLocale(), {dateStyle: "medium", timeStyle: "short"});
 
 	/**
 	 * The current path.
+	 * @type {string}
+	 * @readonly
 	 */
-	readonly #path = location.pathname.length > 1 ? location.pathname.replace(/\/$/, "") : location.pathname;
+	#path = location.pathname.length > 1 ? location.pathname.replace(/\/$/, "") : location.pathname;
+
+	/**
+	 * Creates a new file listing.
+	 */
+	constructor() {
+		super();
+
+		/**
+		 * The current list of file system entities.
+		 * @type {FileSystemEntity[]}
+		 * @private
+		 */
+		this.entities = [];
+
+		/**
+		 * The current filter.
+		 * @type {string}
+		 * @private
+		 */
+		this.filter = "";
+
+		/**
+		 * The current sort.
+		 * @type {Sort}
+		 * @private
+		 */
+		this.sort = new Sort;
+	}
+
+	/**
+	 * Registers the component.
+	 */
+	static {
+		customElements.define("app-listing", this);
+	}
 
 	/**
 	 * The view corresponding to the file listing.
+	 * @type {import("lit").TemplateResult}
 	 */
-	get #listing(): TemplateResult {
+	get #listing() {
 		return !this.entities.length
 			? html `
 				<section>
@@ -137,15 +172,17 @@ export class Listing extends Component {
 
 	/**
 	 * The size in bytes of the largest file in this listing.
+	 * @type {number}
 	 */
-	get #maxFileSize(): number {
+	get #maxFileSize() {
 		return this.entities.reduce((size, entity) => entity.size > size ? entity.size : size, 0);
 	}
 
 	/**
 	 * Method invoked when this component is connected.
+	 * @override
 	 */
-	override connectedCallback(): void {
+	connectedCallback() {
 		super.connectedCallback();
 		document.title = `${location.hostname} - ${this.#path}`;
 		void this.#entities.run();
@@ -153,9 +190,11 @@ export class Listing extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
+	 * @override
 	 */
-	protected override render(): TemplateResult {
+	render() {
 		const directories = this.entities.filter(item => item.type == FseType.directory).length;
 		const files = this.entities.filter(item => item.type == FseType.file).length;
 		return html`
@@ -219,21 +258,22 @@ export class Listing extends Component {
 	/**
 	 * Filters the list of file system entities according to the current filter.
 	 */
-	#filterEntities(): void {
+	#filterEntities() {
 		const entities = this.#entities.value ?? [];
 		const filter = this.filter.toLowerCase();
 		this.entities = Array.from(filter ? entities.filter(item => item.path.toLowerCase().includes(filter)) : entities);
-		const [attribute, order] = this.sort.at(0)!;
+		const [attribute, order] = /** @type {import("../../data/sort.js").SortEntry} */ (this.sort.at(0));
 		this.#orderBy(attribute, order);
 	}
 
 	/**
-	 * Formats the specified size.
-	 * @returns The friendly formatted size.
+	 * Formats the specified file size.
+	 * @param {number} bytes The file size in bytes.
+	 * @returns {string} The friendly formatted file size.
 	 */
-	#formatBytes(bytes: number): string {
+	#formatBytes(bytes) {
 		let index = 0;
-		while (bytes >= 1_024 && index < Listing.byteUnits.length) {
+		while (bytes >= 1_024 && index < Listing.#byteUnits.length) {
 			bytes /= 1_024;
 			index++;
 		}
@@ -241,16 +281,16 @@ export class Listing extends Component {
 		return bytes.toLocaleString(getLocale(), {
 			maximumFractionDigits: 2,
 			style: "unit",
-			unit: Listing.byteUnits[index]
+			unit: Listing.#byteUnits[index]
 		});
 	}
 
 	/**
 	 * Sorts the list items.
-	 * @param attribute The sort attribute.
-	 * @param order The sort order.
+	 * @param {string} attribute The sort attribute.
+	 * @param {SortOrder} [order] The sort order.
 	 */
-	#orderBy(attribute: string, order?: SortOrder): void {
+	#orderBy(attribute, order) {
 		order ??= (this.sort.get(attribute) ?? SortOrder.desc) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
 		this.sort = new Sort().append(attribute, order);
 		this.entities = this.entities.toSorted((x, y) => {
@@ -267,9 +307,9 @@ export class Listing extends Component {
 
 	/**
 	 * Resets the form.
-	 * @param event The dispatched event.
+	 * @param {Event} event The dispatched event.
 	 */
-	#resetForm(event: Event): void {
+	#resetForm(event) {
 		event.preventDefault();
 		this.filter = "";
 		this.#filterEntities();
@@ -277,11 +317,12 @@ export class Listing extends Component {
 
 	/**
 	 * Submits the form.
-	 * @param event The dispatched event.
+	 * @param {Event} event The dispatched event.
 	 */
-	#submitForm(event: Event): void {
+	#submitForm(event) {
 		event.preventDefault();
-		this.filter = (new FormData(this.form).get("filter") as string).trim();
+		const form = /** @type {HTMLFormElement} */ (this.renderRoot.querySelector("form"));
+		this.filter = /** @type {string} */ (new FormData(form).get("filter")).trim();
 		this.#filterEntities();
 	}
 }

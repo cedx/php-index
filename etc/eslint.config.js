@@ -5,8 +5,11 @@ import globals from "globals";
 export default [
 	js.configs.recommended,
 	{
+		ignores: ["src/client/i18n"]
+	},
+	{
 		languageOptions: {
-			globals: {...globals.browser},
+			globals: {...globals.browser, ...globals.builtin},
 			parser: babelParser,
 			parserOptions: {
 				requireConfigFile: false,
@@ -101,7 +104,7 @@ export default [
 			"no-new-wrappers": "error",
 			"no-object-constructor": "error",
 			"no-octal-escape": "error",
-			"no-param-reassign": "error",
+			"no-param-reassign": "off",
 			"no-plusplus": "off",
 			"no-proto": "error",
 			"no-restricted-exports": "error",
@@ -158,5 +161,9 @@ export default [
 			"line-comment-position": "error",
 			"unicode-bom": "error"
 		}
+	},
+	{
+		files: ["gulpfile.js"],
+		rules: {"prefer-arrow-callback": "off"}
 	}
 ];

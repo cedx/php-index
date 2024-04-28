@@ -1,11 +1,9 @@
-import {html, type TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
+import {html} from "lit";
 import {Component} from "../component.js";
 
 /**
  * An action bar located under the navigation bar.
  */
-@customElement("action-bar")
 export class ActionBar extends Component {
 
 	/**
@@ -13,21 +11,30 @@ export class ActionBar extends Component {
 	 */
 	constructor() {
 		super({shadowRoot: true});
-		this.classList.add("d-print-none");
+	}
+
+	/**
+	 * Registers the component.
+	 */
+	static {
+		customElements.define("action-bar", this);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
+	 * @override
 	 */
-	override disconnectedCallback(): void {
+	disconnectedCallback() {
 		document.documentElement.style.removeProperty("--main-offset");
 		super.disconnectedCallback();
 	}
 
 	/**
 	 * Method invoked after the first rendering.
+	 * @protected
+	 * @override
 	 */
-	protected override firstUpdated(): void {
+	firstUpdated() {
 		const {documentElement} = document;
 		const navbarHeight = Number.parseInt(getComputedStyle(documentElement).getPropertyValue("--navbar-height"));
 		documentElement.style.setProperty("--main-offset", `${navbarHeight + this.offsetHeight}px`);
@@ -35,11 +42,13 @@ export class ActionBar extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
+	 * @override
 	 */
-	protected override render(): TemplateResult {
+	render() {
 		return html`
-			<aside class="container-fluid user-select-none">
+			<aside class="container-fluid">
 				<slot class="d-flex justify-content-between align-items-center"></slot>
 			</aside>
 		`;

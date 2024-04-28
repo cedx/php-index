@@ -1,27 +1,53 @@
 import {msg} from "@lit/localize";
 import {Tooltip} from "bootstrap";
-import {html, type TemplateResult} from "lit";
-import {customElement, state} from "lit/decorators.js";
+import {html} from "lit";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 
 /**
  * The root component.
  */
-@customElement("app-root")
 export class Root extends Component {
 
 	/**
-	 * Value indicating whether the browser is online.
+	 * The reactive properties.
+	 * @type {import("lit").PropertyDeclarations}
+	 * @override
 	 */
-	@state() private isOnline = navigator.onLine;
+	static properties = {
+		isOnline: {state: true}
+	};
+
+	/**
+	 * Creates a new root component.
+	 */
+	constructor() {
+		super();
+
+		/**
+		 * Value indicating whether the browser is online.
+		 * @type {boolean}
+		 * @private
+		 */
+		this.isOnline = navigator.onLine;
+	}
+
+	/**
+	 * Registers the component.
+	 */
+	static {
+		customElements.define("app-root", this);
+	}
 
 	/**
 	 * Method invoked when this component is connected.
+	 * @override
 	 */
-	override connectedCallback(): void {
+	connectedCallback() {
 		super.connectedCallback();
-		const updateOnlineStatus = (): boolean => this.isOnline = navigator.onLine;
+
+		// eslint-disable-next-line no-return-assign
+		const updateOnlineStatus = () => this.isOnline = navigator.onLine;
 		for (const event of ["online", "offline"]) addEventListener(event, updateOnlineStatus);
 
 		// eslint-disable-next-line no-new
@@ -30,9 +56,11 @@ export class Root extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
+	 * @override
 	 */
-	protected override render(): TemplateResult {
+	render() {
 		return html`
 			<header>
 				<app-navbar></app-navbar>

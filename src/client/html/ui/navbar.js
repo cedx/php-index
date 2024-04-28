@@ -1,6 +1,5 @@
 import {msg} from "@lit/localize";
-import {html, type TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
+import {html} from "lit";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import config from "../../config.js";
@@ -8,14 +7,22 @@ import config from "../../config.js";
 /**
  * The navigation bar.
  */
-@customElement("app-navbar")
 export class Navbar extends Component {
 
 	/**
-	 * Renders this component.
-	 * @returns The view template.
+	 * Registers the component.
 	 */
-	protected override render(): TemplateResult {
+	static {
+		customElements.define("app-navbar", this);
+	}
+
+	/**
+	 * Renders this component.
+	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
+	 * @override
+	 */
+	render() {
 		return html`
 			<nav class="navbar navbar-expand-sm">
 				<div class="container-fluid">

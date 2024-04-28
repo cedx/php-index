@@ -1,5 +1,4 @@
-import {html, type TemplateResult} from "lit";
-import {customElement, property, state} from "lit/decorators.js";
+import {html} from "lit";
 import {when} from "lit/directives/when.js";
 import {Component} from "../component.js";
 import {Theme, themeIcon, themeLabel} from "../theme.js";
@@ -7,37 +6,58 @@ import {Theme, themeIcon, themeLabel} from "../theme.js";
 /**
  * A dropdown menu for switching the color mode.
  */
-@customElement("theme-dropdown")
 export class ThemeDropdown extends Component {
 
 	/**
-	 * The label of the dropdown menu.
+	 * The reactive properties.
+	 * @type {import("lit").PropertyDeclarations}
+	 * @override
 	 */
-	@property() label = "";
-
-	/**
-	 * The current theme.
-	 */
-	@state() private theme;
+	static properties = {
+		label: {},
+		theme: {state: true}
+	};
 
 	/**
 	 * The media query used to check the system theme.
+	 * @type {MediaQueryList}
+	 * @readonly
 	 */
-	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
+	#mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
 	 * Creates a new theme dropdown.
 	 */
 	constructor() {
 		super();
-		const theme = localStorage.getItem("theme") as Theme|null;
-		this.theme = theme && Object.values(Theme).includes(theme) ? theme : Theme.auto;
+		const theme = /** @type {Theme|null} */ (localStorage.getItem("theme"));
+
+		/**
+		 * The label of the dropdown menu.
+		 * @type {string}
+		 */
+		this.label = "";
+
+		/**
+		 * The current theme.
+		 * @type {Theme}
+		 * @private
+		 */
+		this.theme = theme && /** @type {string[]} */ (Object.values(Theme)).includes(theme) ? theme : Theme.auto;
+	}
+
+	/**
+	 * Registers the component.
+	 */
+	static {
+		customElements.define("theme-dropdown", this);
 	}
 
 	/**
 	 * Method invoked when this component is connected.
+	 * @override
 	 */
-	override connectedCallback(): void {
+	connectedCallback() {
 		super.connectedCallback();
 		this.#applyTheme();
 		this.#mediaQuery.addEventListener("change", this.#applyTheme);
@@ -45,17 +65,20 @@ export class ThemeDropdown extends Component {
 
 	/**
 	 * Method invoked when this component is disconnected.
+	 * @override
 	 */
-	override disconnectedCallback(): void {
+	disconnectedCallback() {
 		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
 		super.disconnectedCallback();
 	}
 
 	/**
 	 * Renders this component.
-	 * @returns The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
+	 * @protected
+	 * @override
 	 */
-	protected override render(): TemplateResult {
+	render() {
 		return html`
 			<li class="nav-item dropdown">
 				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
@@ -79,14 +102,15 @@ export class ThemeDropdown extends Component {
 	/**
 	 * Applies the theme to the document.
 	 */
-	#applyTheme(): void {
+	#applyTheme() {
 		document.documentElement.dataset.bsTheme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
 	}
 
 	/**
 	 * Changes the current theme.
+	 * @param {Theme} theme The new theme.
 	 */
-	#changeTheme(theme: Theme): void {
+	#changeTheme(theme) {
 		if (theme != this.theme) {
 			localStorage.setItem("theme", this.theme = theme);
 			this.#applyTheme();
