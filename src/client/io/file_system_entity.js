@@ -1,18 +1,19 @@
 /**
  * Defines the type of a file system entity.
+ * @enum {string}
  */
-export enum FileSystemEntityType {
+export const FileSystemEntityType = Object.freeze({
 
 	/**
 	 * The file system entity is a directory.
 	 */
-	directory = "directory",
+	directory: "directory",
 
 	/**
 	 * The file system entity is a file.
 	 */
-	file = "file"
-}
+	file: "file"
+});
 
 /**
  * A reference to an entity on the file system.
@@ -21,8 +22,10 @@ export class FileSystemEntity {
 
 	/**
 	 * The icon mapping.
+	 * @type {Map<string, string>}
+	 * @readonly
 	 */
-	static readonly #iconMapping = new Map<string, string>([
+	static #iconMapping = new Map([
 		["avi", "video_file"],
 		["bat", "terminal"],
 		["bz2", "folder_zip"],
@@ -84,29 +87,37 @@ export class FileSystemEntity {
 
 	/**
 	 * The date of last modification.
+	 * @type {Date}
+	 * @readonly
 	 */
-	readonly modifiedAt: Date;
+	modifiedAt;
 
 	/**
 	 * The path of this file system entity.
+	 * @type {string}
+	 * @readonly
 	 */
-	readonly path: string;
+	path;
 
 	/**
 	 * The size of this file system entity.
+	 * @type {number}
+	 * @readonly
 	 */
-	readonly size: number;
+	size;
 
 	/**
 	 * The type of this file system entity.
+	 * @type {FileSystemEntityType}
+	 * @readonly
 	 */
-	readonly type: FileSystemEntityType;
+	type;
 
 	/**
 	 * Creates a new file system entity.
-	 * @param options An object providing values to initialize this instance.
+	 * @param {Partial<FileSystemEntityOptions>} options An object providing values to initialize this instance.
 	 */
-	constructor(options: Partial<FileSystemEntityOptions> = {}) {
+	constructor(options = {}) {
 		this.modifiedAt = new Date(options.modifiedAt ?? Date.now());
 		this.path = options.path ?? "";
 		this.size = options.size ?? -1;
@@ -115,34 +126,20 @@ export class FileSystemEntity {
 
 	/**
 	 * The icon corresponding to this file system entity.
+	 * @type {string}
 	 */
-	get icon(): string {
-		return this.type == FileSystemEntityType.directory ? "folder" : FileSystemEntity.#iconMapping.get(this.path.split(".").pop()?.toLowerCase() ?? "") ?? "note";
+	get icon() {
+		return this.type == FileSystemEntityType.directory
+			? "folder"
+			: FileSystemEntity.#iconMapping.get(this.path.split(".").pop()?.toLowerCase() ?? "") ?? "note";
 	}
 }
 
 /**
  * Defines the options of an {@link FileSystemEntity} instance.
+ * @typedef {object} FileSystemEntityOptions
+ * @property {string} modifiedAt The date of last modification.
+ * @property {string} path The path of this file system entity.
+ * @property {number} size The size of this file system entity.
+ * @property {FileSystemEntityType} type The type of this file system entity.
  */
-export interface FileSystemEntityOptions {
-
-	/**
-	 * The date of last modification.
-	 */
-	modifiedAt: string;
-
-	/**
-	 * The path of this file system entity.
-	 */
-	path: string;
-
-	/**
-	 * The size of this file system entity.
-	 */
-	size: number;
-
-	/**
-	 * The type of this file system entity.
-	 */
-	type: FileSystemEntityType;
-}
