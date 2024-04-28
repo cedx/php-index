@@ -71,7 +71,7 @@ export class Sort {
 	 * @returns This instance.
 	 */
 	append(attribute: string, order: SortOrder): this {
-		this.remove(attribute);
+		this.delete(attribute);
 		this.#attributes.push([attribute, order]);
 		return this;
 	}
@@ -100,6 +100,14 @@ export class Sort {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Removes the specified attribute from this sort.
+	 * @param attribute The attribute name.
+	 */
+	delete(attribute: string): void {
+		this.#attributes = this.#attributes.filter(([key]) => key != attribute);
 	}
 
 	/**
@@ -151,7 +159,7 @@ export class Sort {
 	 * @returns This instance.
 	 */
 	prepend(attribute: string, order: SortOrder): this {
-		this.remove(attribute);
+		this.delete(attribute);
 		this.#attributes.unshift([attribute, order]);
 		return this;
 	}
