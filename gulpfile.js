@@ -36,7 +36,7 @@ export function clean() {
 export const cli = gulp.series(
 	async function cliJs() {
 		await esbuild.build(consoleOptions());
-		return $`git update-index --chmod=+x bin/php_index.cjs`;
+		return $`git update-index --chmod=+x bin/php_index.js`;
 	},
 	function cliPhp() {
 		const production = env.NODE_ENV == "production";

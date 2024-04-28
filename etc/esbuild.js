@@ -28,7 +28,7 @@ export function consoleOptions() {
 	return Object.assign(sharedOptions(production), {
 		banner: {js: "#!/usr/bin/env node"},
 		entryPoints: ["src/console/index.ts"],
-		outfile: "bin/php_index.cjs",
+		outfile: "bin/php_index.js",
 		platform: "node",
 		sourceRoot: new URL("../bin/", import.meta.url).href
 	});

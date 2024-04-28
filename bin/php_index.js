@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {execFile} from "node:child_process";
 import console from "node:console";
 import {cp, mkdir, mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
@@ -5,11 +6,9 @@ import {tmpdir} from "node:os";
 import {dirname, join, resolve} from "node:path";
 import {exit} from "node:process";
 import {parseArgs, promisify} from "node:util";
-import pkg from "../../package.json" with {type: "json"};
+import pkg from "../package.json" with {type: "json"};
 
-/**
- * The usage information.
- */
+// The usage information.
 const usage = `
 Build the PHP Index redistributable.
 
@@ -26,11 +25,7 @@ Options:
   -v, --version   Output the version number.
 `;
 
-/**
- * Application entry point.
- * @returns Resolves when the application is terminated.
- */
-async function main(): Promise<unknown> {
+try {
 	// Parse the command line arguments.
 	const {positionals, values} = parseArgs({allowPositionals: true, options: {
 		compress: {short: "c", type: "boolean", default: false},
@@ -40,17 +35,19 @@ async function main(): Promise<unknown> {
 	}});
 
 	// Print the usage.
-	if (values.help || values.version) // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-		return console.log(values.version ? pkg.version : usage.trim());
+	if (values.help || values.version) {
+		console.log(values.version ? pkg.version : usage.trim());
+		exit();
+	}
 
 	// Populate the input folder.
-	const root = join(__dirname, "..");
+	const root = join(import.meta.dirname, "..");
 	const input = await mkdtemp(join(tmpdir(), "phpindex-"));
 	for (const folder of ["lib", "www"]) await cp(join(root, folder), join(input, folder), {recursive: true});
 	await rm(join(input, "www/index.php"));
 
 	// Update the application configuration.
-	const replaceInFile = async (file: string, search: RegExp, replace: string): Promise<void> =>
+	const replaceInFile = async (/** @type {string} */ file, /** @type {RegExp} */ search, /** @type {string} */ replace) =>
 		writeFile(file, (await readFile(file, {encoding: "utf8"})).replace(search, replace));
 
 	const isEnabled = values.phpinfo ? "true" : "false";
@@ -62,11 +59,9 @@ async function main(): Promise<unknown> {
 	await mkdir(dirname(output), {recursive: true});
 
 	const exec = promisify(execFile);
-	return exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
+	await exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
 }
-
-// Start the application.
-main().catch((error: unknown) => {
+catch (error) {
 	console.error(error instanceof Error ? error.message : error);
 	exit(1);
-});
+}
