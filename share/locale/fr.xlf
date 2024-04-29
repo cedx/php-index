@@ -82,6 +82,14 @@
   <source>PHP information</source>
   <target>Informations PHP</target>
 </trans-unit>
+<trans-unit id="s4cc5cea67c82f46f">
+  <source>The network is inaccessible.</source>
+  <target>Le réseau est inaccessible.</target>
+</trans-unit>
+<trans-unit id="sf3ef633c73ddd2bc">
+  <source>Check your connection.</source>
+  <target>Vérifiez votre connexion.</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
