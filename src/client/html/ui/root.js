@@ -46,7 +46,6 @@ export class Root extends Component {
 	connectedCallback() {
 		super.connectedCallback();
 
-		// eslint-disable-next-line no-return-assign
 		const updateOnlineStatus = () => this.isOnline = navigator.onLine;
 		for (const event of ["online", "offline"]) addEventListener(event, updateOnlineStatus);
 
