@@ -101,9 +101,11 @@ export class ThemeDropdown extends Component {
 
 	/**
 	 * Applies the theme to the document.
+	 * @readonly
 	 */
-	#applyTheme() {
-		document.documentElement.dataset.bsTheme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
+	#applyTheme = () => {
+		const theme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
+		document.documentElement.dataset.bsTheme = theme;
 	}
 
 	/**
