@@ -3,10 +3,10 @@ import {Task} from "@lit/task";
 import {html} from "lit";
 import {classMap} from "lit/directives/class-map.js";
 import {when} from "lit/directives/when.js";
-import {Component} from "../component.js";
-import {getLocale} from "../../locale.js";
-import {Sort, SortOrder} from "../../data/sort.js";
-import {FileSystemEntity, FileSystemEntityType as FseType} from "../../io/file_system_entity.js";
+import {getLocale} from "../locale.js";
+import {Sort, SortOrder} from "../data/sort.js";
+import {FileSystemEntity, FileSystemEntityType as FseType} from "../io/file_system_entity.js";
+import {Component} from "./component.js";
 
 /**
  * Displays the list of file system entities.
@@ -41,7 +41,7 @@ export class Listing extends Component {
 		if (!response.ok) throw Error(response.status.toString());
 
 		const items = (await response.json())
-			.map((/** @type {import("../../io/file_system_entity.js").FileSystemEntityOptions} */ item) => new FileSystemEntity(item));
+			.map((/** @type {import("../io/file_system_entity.js").FileSystemEntityOptions} */ item) => new FileSystemEntity(item));
 
 		this.entities = Array.from(items);
 		this.#orderBy("path");
@@ -262,7 +262,7 @@ export class Listing extends Component {
 		const entities = this.#entities.value ?? [];
 		const filter = this.filter.toLowerCase();
 		this.entities = Array.from(filter ? entities.filter(item => item.path.toLowerCase().includes(filter)) : entities);
-		const [attribute, order] = /** @type {import("../../data/sort.js").SortEntry} */ (this.sort.at(0));
+		const [attribute, order] = /** @type {import("../data/sort.js").SortEntry} */ (this.sort.at(0));
 		this.#orderBy(attribute, order);
 	}
 

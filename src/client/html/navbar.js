@@ -1,8 +1,8 @@
 import {msg} from "@lit/localize";
 import {html} from "lit";
 import {when} from "lit/directives/when.js";
-import {Component} from "../component.js";
-import config from "../../config.js";
+import config from "../config.js";
+import {Component} from "./component.js";
 
 /**
  * The navigation bar.

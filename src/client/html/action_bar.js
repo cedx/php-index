@@ -1,5 +1,5 @@
 import {html} from "lit";
-import {Component} from "../component.js";
+import {Component} from "./component.js";
 
 /**
  * An action bar located under the navigation bar.
