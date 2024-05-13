@@ -63,7 +63,7 @@ export async function lint() {
 	await $`eslint --config=etc/eslint.config.js gulpfile.js bin etc src`;
 	await $`lit-analyzer src/client/html/**/*.js`
 	await $`stylelint --config=etc/stylelint.js src/ui/**/*.scss`;
-	return $`vendor/bin/phpstan analyse --configuration=etc/phpstan.php --memory-limit=256M`;
+	return $`php vendor/bin/phpstan analyse --configuration=etc/phpstan.php --memory-limit=256M --verbose`;
 }
 
 // Publishes the package.

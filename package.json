@@ -30,7 +30,7 @@
 		"bootstrap": "^5.3.3",
 		"browser-sync": "^3.0.2",
 		"del": "^7.1.0",
-		"esbuild": "^0.21.1",
+		"esbuild": "^0.21.2",
 		"eslint": "^9.2.0",
 		"execa": "^9.0.2",
 		"globals": "^15.2.0",
