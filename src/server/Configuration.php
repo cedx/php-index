@@ -19,7 +19,7 @@ final readonly class Configuration {
 	 * Creates a new configuration.
 	 */
 	function __construct() {
-		$config = json_decode(file_get_contents(__DIR__."/config.json") ?: "{}", flags: JSON_THROW_ON_ERROR) ?? new \stdClass;
+		$config = json_decode(file_get_contents(__DIR__."/config.json") ?: "{}", flags: JSON_THROW_ON_ERROR);
 		$this->phpInfo = $config->phpInfo ?? false;
 		$this->version = $config->version ?? phpversion();
 	}
