@@ -36,9 +36,9 @@ final readonly class FileSystemEntity implements \JsonSerializable {
 
 	/**
 	 * Converts this object to a map in JSON format.
-	 * @return \stdClass The map in JSON format corresponding to this object.
+	 * @return object The map in JSON format corresponding to this object.
 	 */
-	function jsonSerialize(): \stdClass {
+	function jsonSerialize(): object {
 		return (object) [
 			"modifiedAt" => $this->modifiedAt()->format("c"),
 			"path" => basename($this->path),
