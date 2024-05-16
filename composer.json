@@ -30,7 +30,7 @@
 		"ext-spl": "*"
 	},
 	"require-dev": {
-		"phpstan/phpstan": "^1.11.0"
+		"phpstan/phpstan": "^1.11.1"
 	},
 	"support": {
 		"issues": "https://github.com/cedx/php-index/issues"
