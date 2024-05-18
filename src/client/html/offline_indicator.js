@@ -44,7 +44,7 @@ export class OfflineIndicator extends Component {
 	 */
 	connectedCallback() {
 		super.connectedCallback();
-		for (const event of ["online", "offline"]) addEventListener(event, this.#onNetworkChange);
+		for (const event of ["online", "offline"]) addEventListener(event, this);
 	}
 
 	/**
@@ -52,8 +52,15 @@ export class OfflineIndicator extends Component {
 	 * @override
 	 */
 	disconnectedCallback() {
-		for (const event of ["online", "offline"]) removeEventListener(event, this.#onNetworkChange);
+		for (const event of ["online", "offline"]) removeEventListener(event, this);
 		super.disconnectedCallback();
+	}
+
+	/**
+	 * Handles the events.
+	 */
+	handleEvent() {
+		this.isOnline = navigator.onLine;
 	}
 
 	/**
@@ -72,11 +79,4 @@ export class OfflineIndicator extends Component {
 			</slot>
 		`);
 	}
-
-	/**
-	 * Handles the `online` and `offline` events.
-	 * @returns {boolean} `true` if the browser has access to the network, otherwise `false`.
-	 * @readonly
-	 */
-	#onNetworkChange = () => this.isOnline = navigator.onLine;
 }

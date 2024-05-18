@@ -82,7 +82,7 @@ export class ThemeDropdown extends Component {
 	connectedCallback() {
 		super.connectedCallback();
 		this.#applyTheme();
-		this.#mediaQuery.addEventListener("change", this.#applyTheme);
+		this.#mediaQuery.addEventListener("change", this);
 	}
 
 	/**
@@ -90,8 +90,15 @@ export class ThemeDropdown extends Component {
 	 * @override
 	 */
 	disconnectedCallback() {
-		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
+		this.#mediaQuery.removeEventListener("change", this);
 		super.disconnectedCallback();
+	}
+
+	/**
+	 * Handles the events.
+	 */
+	handleEvent() {
+		this.#applyTheme();
 	}
 
 	/**
@@ -123,9 +130,8 @@ export class ThemeDropdown extends Component {
 
 	/**
 	 * Applies the theme to the document.
-	 * @readonly
 	 */
-	#applyTheme = () => {
+	#applyTheme() {
 		const theme = this.theme == Theme.auto ? (this.#mediaQuery.matches ? Theme.dark : Theme.light) : this.theme;
 		document.documentElement.dataset.bsTheme = theme;
 	}
