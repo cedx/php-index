@@ -74,7 +74,7 @@ final readonly class FileSystemEntity implements \JsonSerializable {
 	 */
 	function modifiedAt(): \DateTimeInterface {
 		$timestamp = (int) filemtime($this->path);
-		return new \DateTimeImmutable("@$timestamp");
+		return new \DateTime("@$timestamp");
 	}
 
 	/**
