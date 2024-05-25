@@ -21,7 +21,7 @@ export default function buildOptions() {
 		plugins: production ? [minifyHtml()] : [],
 		sourceRoot: new URL("../www/js/", import.meta.url).href,
 		sourcemap: !production,
-		sourcesContent: false,
+		sourcesContent: true,
 		treeShaking: production
 	};
 }
