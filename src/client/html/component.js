@@ -1,3 +1,4 @@
+/** @import {CSSResultGroup} from "lit" */
 import {css, LitElement} from "lit";
 
 /**
@@ -8,7 +9,7 @@ export class Component extends LitElement {
 
 	/**
 	 * The component styles.
-	 * @type {import("lit").CSSResultGroup}
+	 * @type {CSSResultGroup}
 	 * @override
 	 */
 	static styles = [document.adoptedStyleSheets, css`

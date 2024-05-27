@@ -1,6 +1,5 @@
-/**
- * @type {import("stylelint").Config}
- */
+/** @import {Config} from "stylelint" */
+/** @type {Config} */
 export default {
 	extends: "stylelint-config-standard-scss",
 	rules: {

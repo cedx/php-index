@@ -1,3 +1,4 @@
+/** @import {TemplateResult} from "lit" */
 import {msg} from "@lit/localize";
 import {html} from "lit";
 import {when} from "lit/directives/when.js";
@@ -18,7 +19,7 @@ export class Navbar extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns {import("lit").TemplateResult} The view template.
+	 * @returns {TemplateResult} The view template.
 	 * @protected
 	 * @override
 	 */

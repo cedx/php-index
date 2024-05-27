@@ -1,3 +1,4 @@
+/** @import {PropertyDeclarations, TemplateResult} from "lit" */
 import {msg} from "@lit/localize";
 import {html} from "lit";
 import {when} from "lit/directives/when.js";
@@ -32,7 +33,7 @@ export class ThemeDropdown extends Component {
 
 	/**
 	 * The reactive properties.
-	 * @type {import("lit").PropertyDeclarations}
+	 * @type {PropertyDeclarations}
 	 * @override
 	 */
 	static properties = {
@@ -103,7 +104,7 @@ export class ThemeDropdown extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns {import("lit").TemplateResult} The view template.
+	 * @returns {TemplateResult} The view template.
 	 * @protected
 	 * @override
 	 */

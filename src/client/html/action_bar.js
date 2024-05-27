@@ -1,3 +1,4 @@
+/** @import {TemplateResult} from "lit" */
 import {html} from "lit";
 import {Component} from "./component.js";
 
@@ -42,7 +43,7 @@ export class ActionBar extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns {import("lit").TemplateResult} The view template.
+	 * @returns {TemplateResult} The view template.
 	 * @protected
 	 * @override
 	 */
