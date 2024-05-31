@@ -59,7 +59,7 @@ try {
 	await mkdir(dirname(output), {recursive: true});
 
 	const exec = promisify(execFile);
-	await exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output].concat(values.compress ? ["--compress"] : []));
+	await exec("php", [join(root, "bin/php_index.php"), "--input", input, "--output", output, ...values.compress ? ["--compress"] : []]);
 }
 catch (error) {
 	console.error(error instanceof Error ? error.message : error);
