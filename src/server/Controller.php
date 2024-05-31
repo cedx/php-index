@@ -41,7 +41,7 @@ final class Controller {
 		else {
 			$directory = dirname($_SERVER["SCRIPT_FILENAME"])."/..";
 			$prefix = PHP_OS_FAMILY == "Windows" ? "/" : "";
-			$baseUri = "file://$prefix" . str_replace("\\", "/", realpath($directory) ?: $directory);
+			$baseUri = "file://$prefix" . strtr(realpath($directory) ?: $directory, ["\\" => "/"]);
 		}
 
 		$entity = new FileSystemEntity("$baseUri/www/$path");
@@ -80,7 +80,7 @@ final class Controller {
 
 		ob_start();
 		phpinfo(INFO_GENERAL | INFO_CONFIGURATION | INFO_MODULES | INFO_ENVIRONMENT | INFO_VARIABLES);
-		$output = str_replace(array_keys($replacements), $replacements, (string) @ob_get_clean());
+		$output = strtr((string) @ob_get_clean(), $replacements);
 		$this->sendResponse($output, mediaType: "text/html; charset=utf-8");
 	}
 }
