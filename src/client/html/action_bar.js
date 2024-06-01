@@ -37,7 +37,7 @@ export class ActionBar extends Component {
 	 */
 	firstUpdated() {
 		const {documentElement} = document;
-		const navbarHeight = Number.parseInt(getComputedStyle(documentElement).getPropertyValue("--navbar-height"));
+		const navbarHeight = parseInt(getComputedStyle(documentElement).getPropertyValue("--navbar-height"));
 		documentElement.style.setProperty("--main-offset", `${navbarHeight + this.offsetHeight}px`);
 	}
 
