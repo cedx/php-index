@@ -296,14 +296,9 @@ export class Listing extends Component {
 		order ??= (this.sort.get(attribute) ?? SortOrder.desc) == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
 		this.sort = new Sort().append(attribute, order);
 		this.entities = this.entities.toSorted((x, y) => {
-			switch (attribute) {
-				case "path": {
-					const value = x.type == y.type ? x.path.localeCompare(y.path, getLocale()) : x.type == FseType.directory ? -1 : 1;
-					return order == SortOrder.asc ? value : -value;
-				}
-				default:
-					return this.sort.compare(x, y);
-			}
+			if (attribute != "path") return this.sort.compare(x, y);
+			const value = x.type == y.type ? x.path.localeCompare(y.path, getLocale()) : x.type == FseType.directory ? -1 : 1;
+			return order == SortOrder.asc ? value : -value;
 		});
 	}
 
