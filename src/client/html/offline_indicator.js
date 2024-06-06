@@ -1,4 +1,3 @@
-/** @import {PropertyDeclarations, TemplateResult} from "lit" */
 import {msg} from "@lit/localize";
 import {html} from "lit";
 import {when} from "lit/directives/when.js";
@@ -11,7 +10,7 @@ export class OfflineIndicator extends Component {
 
 	/**
 	 * The reactive properties.
-	 * @type {PropertyDeclarations}
+	 * @type {import("lit").PropertyDeclarations}
 	 * @override
 	 */
 	static properties = {
@@ -66,7 +65,7 @@ export class OfflineIndicator extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns {TemplateResult} The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
 	 * @protected
 	 * @override
 	 */

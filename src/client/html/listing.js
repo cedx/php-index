@@ -1,6 +1,3 @@
-/** @import {PropertyDeclarations, TemplateResult} from "lit" */
-/** @import {SortEntry} from "../data/sort.js" */
-/** @import {FileSystemEntityOptions} from "../io/file_system_entity.js" */
 import {msg, str} from "@lit/localize";
 import {Task} from "@lit/task";
 import {html} from "lit";
@@ -18,7 +15,7 @@ export class Listing extends Component {
 
 	/**
 	 * The reactive properties.
-	 * @type {PropertyDeclarations}
+	 * @type {import("lit").PropertyDeclarations}
 	 * @override
 	 */
 	static properties = {
@@ -43,7 +40,7 @@ export class Listing extends Component {
 		const response = await fetch("?listing");
 		if (!response.ok) throw Error(response.status.toString());
 
-		const list = /** @type {FileSystemEntityOptions[]} */ (await response.json());
+		const list = /** @type {import("../io/file_system_entity.js").FileSystemEntityOptions[]} */ (await response.json());
 		const items = list.map(item => new FileSystemEntity(item));
 		this.entities = Array.from(items);
 		this.#orderBy("path");
@@ -101,7 +98,7 @@ export class Listing extends Component {
 
 	/**
 	 * The view corresponding to the file listing.
-	 * @type {TemplateResult}
+	 * @type {import("lit").TemplateResult}
 	 */
 	get #listing() {
 		return !this.entities.length
@@ -192,7 +189,7 @@ export class Listing extends Component {
 
 	/**
 	 * Renders this component.
-	 * @returns {TemplateResult} The view template.
+	 * @returns {import("lit").TemplateResult} The view template.
 	 * @protected
 	 * @override
 	 */
@@ -264,7 +261,7 @@ export class Listing extends Component {
 		const entities = this.#entities.value ?? [];
 		const filter = this.filter.toLowerCase();
 		this.entities = Array.from(filter ? entities.filter(item => item.path.toLowerCase().includes(filter)) : entities);
-		const [attribute, order] = /** @type {SortEntry} */ (this.sort.at(0));
+		const [attribute, order] = /** @type {import("../data/sort.js").SortEntry} */ (this.sort.at(0));
 		this.#orderBy(attribute, order);
 	}
 

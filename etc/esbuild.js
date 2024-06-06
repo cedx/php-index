@@ -1,4 +1,3 @@
-/** @import {BuildOptions, Plugin} from "esbuild" */
 import {readFile} from "node:fs/promises";
 import {EOL} from "node:os";
 import {env} from "node:process";
@@ -6,7 +5,7 @@ import {minifyHTMLLiterals} from "minify-html-literals";
 
 /**
  * Returns the build options of the client application.
- * @returns {BuildOptions} The build options of the client application.
+ * @returns {import("esbuild").BuildOptions} The build options of the client application.
  */
 export default function buildOptions() {
 	const production = env.NODE_ENV == "production";
@@ -29,7 +28,7 @@ export default function buildOptions() {
 
 /**
  * Creates a plugin that minifies HTML markup inside template literal strings.
- * @returns {Plugin} The newly created plugin.
+ * @returns {import("esbuild").Plugin} The newly created plugin.
  */
 function minifyHtml() {
 	return {
