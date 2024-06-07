@@ -60,7 +60,7 @@ export function i18n() {
 // Performs the static analysis of source code.
 export async function lint() {
 	await $`tsc --project tsconfig.json`;
-	await $`eslint --config=etc/eslint.config.js gulpfile.js bin etc src`;
+	await $`eslint --config=etc/eslint.config.js gulpfile.js bin src`;
 	await $`lit-analyzer src/client/html/**/*.js`
 	await $`stylelint --config=etc/stylelint.js src/ui/**/*.scss`;
 	return $`php vendor/bin/phpstan analyse --configuration=etc/phpstan.php --memory-limit=256M --verbose`;
