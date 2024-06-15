@@ -1,4 +1,4 @@
-import {cp} from "node:fs/promises";
+import {cp, readFile, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
 import {setTimeout} from "node:timers/promises";
@@ -7,8 +7,6 @@ import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
-import replace from "gulp-replace";
-import phpMinifier from "@cedx/php-minifier";
 import pkg from "./package.json" with {type: "json"};
 import buildOptions from "./etc/esbuild.js";
 import compileSass from "./etc/sass.js";
@@ -28,24 +26,18 @@ export function clean() {
 }
 
 // Builds the command line interface.
-export const cli = gulp.series(
-	function cliPhp() {
-		const production = env.NODE_ENV == "production";
-		let stream = gulp.src("src/server/**/*.php", {read: !production});
-		if (production) stream = stream.pipe(phpMinifier({mode: "fast"}));
-		return stream.pipe(gulp.dest("lib"));
-	},
-	function cliConfig() {
-		return cp("src/server/config.json", "lib/config.json");
-	}
-);
+export async function cli() {
+	if (env.NODE_ENV == "production") await $`php_minifier --mode=fast src/server lib`;
+	else await cp("src/server", "lib", {recursive: true});
+	return cp("src/server/config.json", "lib/config.json");
+}
 
 // Packages the project.
-export const dist = gulp.series(
-	function init(done) { env.NODE_ENV = "production"; done(); },
-	build,
-	cli
-);
+export async function dist() {
+	env.NODE_ENV = "production";
+	await build();
+	return cli();
+}
 
 // Builds the documentation.
 export async function doc() {
@@ -79,10 +71,9 @@ export async function serve() {
 }
 
 // Updates the version number in the sources.
-export function version() {
-	return gulp.src(["composer.json", "src/server/config.json"], {base: "."})
-		.pipe(replace(/"version": "\d+(\.\d+){2}"/, `"version": "${pkg.version}"`))
-		.pipe(gulp.dest("."));
+export async function version() {
+	for (const file of ["composer.json", "src/server/config.json"])
+		await writeFile(file, (await readFile(file, "utf8")).replace(/"version": "\d+(\.\d+){2}"/, `"version": "${pkg.version}"`));
 }
 
 // Watches for file changes.
