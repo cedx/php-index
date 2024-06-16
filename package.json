@@ -1,12 +1,12 @@
 {
 	"bugs": "https://github.com/cedx/php-index/issues",
 	"description": "A PHP directory index generator.",
-	"homepage": "https://docs.belin.io/php-index",
+	"homepage": "https://github.com/cedx/php-index",
 	"license": "MIT",
 	"name": "@cedx/php-index",
 	"repository": "cedx/php-index",
 	"type": "module",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",

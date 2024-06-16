@@ -1,6 +1,5 @@
 /**/.DS_Store
 /.idea/
-/docs/api/
 /etc/http-client.private.env.json
 /lib/
 /node_modules/
@@ -8,6 +7,7 @@
 /src/client/i18n/
 /var/
 /vendor/
+/wiki/
 /www/css/
 /www/fonts/
 /www/js/

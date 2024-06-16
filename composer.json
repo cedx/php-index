@@ -1,10 +1,10 @@
 {
 	"description": "A PHP directory index generator.",
-	"homepage": "https://docs.belin.io/php-index",
+	"homepage": "https://github.com/cedx/php-index",
 	"license": "MIT",
 	"name": "cedx/php-index",
 	"type": "project",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"authors": [
 		{"email": "cedric@belin.io", "name": "Cédric Belin", "homepage": "https://belin.io"}
 	],

@@ -39,11 +39,6 @@ export async function dist() {
 	return cli();
 }
 
-// Builds the documentation.
-export async function doc() {
-	for (const file of ["CHANGELOG.md", "LICENSE.md"]) await cp(file, `docs/${file.toLowerCase()}`);
-}
-
 // Extracts the localizable strings.
 export function i18n() {
 	return $`lit-localize --config=etc/locale.json extract`;
@@ -62,12 +57,6 @@ export async function lint() {
 export async function publish() {
 	for (const registry of ["https://registry.npmjs.org", "https://npm.pkg.github.com"]) await $`npm publish --registry=${registry}`;
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
-}
-
-// Starts the development server.
-export async function serve() {
-	await doc();
-	return $({stdio: "inherit"})`mkdocs serve --config-file=etc/mkdocs.yaml`;
 }
 
 // Updates the version number in the sources.

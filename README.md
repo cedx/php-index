@@ -6,11 +6,10 @@ A [PHP](https://www.php.net) directory index generator, implemented in [JavaScri
 ![Screenshot](docs/screenshot.webp)
 
 ## Documentation
-- [User guide](https://docs.belin.io/php-index)
+- [User guide](https://github.com/cedx/php-index/wiki)
 
 ## Development
 - [Git repository](https://github.com/cedx/php-index)
-- [npm package](https://www.npmjs.com/package/@cedx/php-index)
 - [Submit an issue](https://github.com/cedx/php-index/issues)
 
 ## Licence
