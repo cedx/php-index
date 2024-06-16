@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.2.1](https://github.com/cedx/php-index/compare/v2.2.0...v2.2.1)
+- Migrated the documentation to the [GitHub wiki](https://github.com/cedx/php-index/wiki).
+
 ## Version [2.2.0](https://github.com/cedx/php-index/compare/v2.1.2...v2.2.0)
 - The output argument is now the path to the Phar archive and optional.
 
