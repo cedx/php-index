@@ -199,8 +199,8 @@ export class Sort {
 	}
 
 	/**
-	 * Converts this object to a string in JSON format.
-	 * @returns {string} The string in JSON format corresponding to this object.
+	 * Returns a JSON representation of this object.
+	 * @returns {string} The JSON representation of this object.
 	 */
 	toJSON() {
 		return this.toString();
