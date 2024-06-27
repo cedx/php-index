@@ -225,7 +225,7 @@ export class Listing extends Component {
 				</div>
 			</action-bar>
 
-			<article id="listing">
+			<article>
 				<section class="border-bottom">
 					<h4 class="mb-0">${msg(str`Index of ${this.#path}`)}</h4>
 				</section>
