@@ -1,7 +1,7 @@
 import {cp, readFile, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import {env} from "node:process";
-import {setTimeout} from "node:timers/promises";
+import {scheduler} from "node:timers/promises";
 import browserSync from "browser-sync";
 import {deleteAsync} from "del";
 import esbuild from "esbuild";
@@ -88,7 +88,7 @@ export async function watch() {
 
 	const host = "127.0.0.1:8000";
 	void $({stdio: "inherit"})`php -S ${host} -t www`;
-	await setTimeout(1_000);
+	await scheduler.wait(1_000);
 	browser.init({logLevel: "silent", notify: false, port: 8080, proxy: host});
 }
 
