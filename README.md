@@ -3,7 +3,7 @@
 
 A [PHP](https://www.php.net) directory index generator, implemented in [JavaScript](https://developer.mozilla.org/docs/Web/JavaScript).
 
-![Screenshot](docs/screenshot.webp)
+![Screenshot](res/screenshot.webp)
 
 ## Documentation
 - [User guide](https://github.com/cedx/php-index/wiki)
