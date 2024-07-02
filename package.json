@@ -30,10 +30,10 @@
 		"bootstrap": "^5.3.3",
 		"browser-sync": "^3.0.2",
 		"del": "^7.1.0",
-		"esbuild": "^0.21.5",
+		"esbuild": "^0.23.0",
 		"eslint": "^9.6.0",
 		"execa": "^9.3.0",
-		"globals": "^15.6.0",
+		"globals": "^15.8.0",
 		"gulp": "^5.0.0",
 		"lit": "^3.1.4",
 		"lit-analyzer": "^2.0.3",
@@ -42,7 +42,7 @@
 		"source-map-js": "^1.2.0",
 		"stylelint": "^16.6.1",
 		"stylelint-config-standard-scss": "^13.1.0",
-		"typescript": "^5.5.2"
+		"typescript": "^5.5.3"
 	},
 	"engines": {
 		"node": ">=22.0.0"
